@@ -15,7 +15,7 @@ for (var entry of Object.entries(TCDICT_orig)) {
     TCDICT[entry[0]] = {
         nodrop: parseInt(entry[1].NoDrop || 0),
         tcs: tcs
-    }
+    };
 }
 
 console.log(JSON.stringify(TCDICT));
