@@ -1,0 +1,18 @@
+{
+  "name": "d2r-dropplot",
+  "version": "0.1.0",
+  "description": "D2R Drop Visualizer",
+  "main": "main.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Yongquan Lu",
+  "license": "MIT",
+  "dependencies": {
+    "lodash-es": "^4.17.21"
+  },
+  "devDependencies": {
+    "typescript": "^4.6.4"
+  }
+}
