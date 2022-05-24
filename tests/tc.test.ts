@@ -1,8 +1,49 @@
-import { TCProbTuple, getAtomicTCs } from "../src/tc.js";
+import { TCProbTuple, getAtomicTCs, getAdjustedDenom } from "../src/tc.js";
 import Fraction from "fraction.js";
 import { filter } from "lodash-es";
 
 import { expect } from "chai";
+
+describe("getAdjustedDenom", () => {
+  it("works with base cases", () => {
+    expect(getAdjustedDenom(0, 15)).to.equal(15);
+    expect(getAdjustedDenom(50, 15)).to.equal(50 + 15);
+  });
+
+  it("works with increased party size", () => {
+    // Increase party count and total player count in tandem
+    // Mephisto test cases
+    expect(getAdjustedDenom(65, 15, 1, 1)).to.equal(80);
+    expect(getAdjustedDenom(65, 15, 2, 2)).to.equal(67);
+    expect(getAdjustedDenom(65, 15, 3, 3)).to.equal(65);
+
+    // Act 1 H2H A examples
+    expect(getAdjustedDenom(60, 100, 1, 1)).to.equal(160);
+    expect(getAdjustedDenom(60, 100, 2, 2)).to.equal(98);
+    expect(getAdjustedDenom(60, 100, 3, 3)).to.equal(79);
+    expect(getAdjustedDenom(60, 100, 4, 4)).to.equal(70);
+    expect(getAdjustedDenom(60, 100, 5, 5)).to.equal(66);
+    expect(getAdjustedDenom(60, 100, 6, 6)).to.equal(63);
+    expect(getAdjustedDenom(60, 100, 7, 7)).to.equal(62);
+    expect(getAdjustedDenom(60, 100, 8, 8)).to.equal(61);
+  });
+
+  it("works with increased total player count", () => {
+    // Hold party size const at 1
+    // Mephisto test cases
+    expect(getAdjustedDenom(65, 15, 2, 1)).to.equal(80);
+    expect(getAdjustedDenom(65, 15, 3, 1)).to.equal(67);
+
+    // Act 1 H2H A examples
+    expect(getAdjustedDenom(60, 100, 2, 1)).to.equal(160);
+    expect(getAdjustedDenom(60, 100, 3, 1)).to.equal(98);
+    expect(getAdjustedDenom(60, 100, 4, 1)).to.equal(98);
+    expect(getAdjustedDenom(60, 100, 5, 1)).to.equal(79);
+    expect(getAdjustedDenom(60, 100, 6, 1)).to.equal(79);
+    expect(getAdjustedDenom(60, 100, 7, 1)).to.equal(70);
+    expect(getAdjustedDenom(60, 100, 8, 1)).to.equal(70);
+  });
+});
 
 describe("getAtomicTCs", () => {
   function assertTCExistWithChance(
@@ -11,127 +52,88 @@ describe("getAtomicTCs", () => {
     chance: number
   ) {
     const tc = filter(tcs, (tcTuple) => tcTuple[0] == tcName);
-    console.log(tc);
     expect(tc.length).to.be.equal(1);
-    expect(tc[0][1].inverse().valueOf()).to.be.approximately(chance, 1e-3);
+    expect(tc[0][1].inverse().valueOf()).to.be.approximately(chance, 1);
     return;
   }
 
-  it("works on Act 1 H2H B", () => {
+  it("works on a basic TC with picks = 1", () => {
     const tcs = getAtomicTCs("Act 1 H2H B");
-    assertTCExistWithChance(tcs, "amu", 800.0);
-    assertTCExistWithChance(tcs, "aqv", 60.952381);
-    assertTCExistWithChance(tcs, "armo3", 66.666667);
-    assertTCExistWithChance(tcs, "armo6", 28.571429);
-    assertTCExistWithChance(tcs, "cm1", 1600.0);
-    assertTCExistWithChance(tcs, "cm2", 1600.0);
-    assertTCExistWithChance(tcs, "cm3", 1600.0);
-    assertTCExistWithChance(tcs, "cqv", 60.952381);
-    assertTCExistWithChance(tcs, "gcb", 1066.666667);
-    assertTCExistWithChance(tcs, "gcg", 1066.666667);
-    assertTCExistWithChance(tcs, "gcr", 1066.666667);
-    assertTCExistWithChance(tcs, "gcv", 1066.666667);
-    assertTCExistWithChance(tcs, "gcw", 1066.666667);
-    assertTCExistWithChance(tcs, "gcy", 1066.666667);
-    assertTCExistWithChance(tcs, "gld", 7.619048);
-    assertTCExistWithChance(tcs, "gpl", 198.095238);
-    assertTCExistWithChance(tcs, "hp1", 38.095238);
-    assertTCExistWithChance(tcs, "hp2", 114.285714);
-    assertTCExistWithChance(tcs, "isc", 132.063492);
-    assertTCExistWithChance(tcs, "jew", 1600.0);
-    assertTCExistWithChance(tcs, "key", 132.063492);
-    assertTCExistWithChance(tcs, "mp1", 91.428571);
-    assertTCExistWithChance(tcs, "mp2", 114.285714);
-    assertTCExistWithChance(tcs, "opl", 198.095238);
-    assertTCExistWithChance(tcs, "rin", 400.0);
-    assertTCExistWithChance(tcs, "rvs", 457.142857);
-    assertTCExistWithChance(tcs, "skc", 1600.0);
-    assertTCExistWithChance(tcs, "tsc", 132.063492);
-    assertTCExistWithChance(tcs, "vps", 114.285714);
-    assertTCExistWithChance(tcs, "weap3", 66.666667);
-    assertTCExistWithChance(tcs, "weap6", 28.571429);
+    assertTCExistWithChance(tcs, "amu", 800);
+    assertTCExistWithChance(tcs, "aqv", 61);
+    assertTCExistWithChance(tcs, "armo3", 67);
+    assertTCExistWithChance(tcs, "armo6", 29);
+    assertTCExistWithChance(tcs, "cm1", 1600);
+    assertTCExistWithChance(tcs, "cm2", 1600);
+    assertTCExistWithChance(tcs, "cm3", 1600);
+    assertTCExistWithChance(tcs, "cqv", 61);
+    assertTCExistWithChance(tcs, "gcb", 1067);
+    assertTCExistWithChance(tcs, "gcg", 1067);
+    assertTCExistWithChance(tcs, "gcr", 1067);
+    assertTCExistWithChance(tcs, "gcv", 1067);
+    assertTCExistWithChance(tcs, "gcw", 1067);
+    assertTCExistWithChance(tcs, "gcy", 1067);
+    assertTCExistWithChance(tcs, "gld", 8);
+    assertTCExistWithChance(tcs, "gpl", 198);
+    assertTCExistWithChance(tcs, "hp1", 38);
+    assertTCExistWithChance(tcs, "hp2", 114);
+    assertTCExistWithChance(tcs, "isc", 132);
+    assertTCExistWithChance(tcs, "jew", 1600);
+    assertTCExistWithChance(tcs, "key", 132);
+    assertTCExistWithChance(tcs, "mp1", 91);
+    assertTCExistWithChance(tcs, "mp2", 114);
+    assertTCExistWithChance(tcs, "opl", 198);
+    assertTCExistWithChance(tcs, "rin", 400);
+    assertTCExistWithChance(tcs, "rvs", 457);
+    assertTCExistWithChance(tcs, "skc", 1600);
+    assertTCExistWithChance(tcs, "tsc", 132);
+    assertTCExistWithChance(tcs, "vps", 114);
+    assertTCExistWithChance(tcs, "weap3", 67);
+    assertTCExistWithChance(tcs, "weap6", 29);
   });
 
-  it("works on Act 3 (H) Champ A", () => {
-    const tcs = getAtomicTCs("Act 1 (H) H2H B");
-    console.log(tcs);
-    assertTCExistWithChance(tcs, "armo3", 1823.934398);
-    assertTCExistWithChance(tcs, "armo6", 434.270095);
-    assertTCExistWithChance(tcs, "armo9", 153.014631);
-    assertTCExistWithChance(tcs, "armo12", 122.051285);
-    assertTCExistWithChance(tcs, "armo15", 107.104778);
-    assertTCExistWithChance(tcs, "armo18", 95.146344);
-    assertTCExistWithChance(tcs, "armo21", 95.685673);
-    assertTCExistWithChance(tcs, "armo24", 130.80586);
-    assertTCExistWithChance(tcs, "armo27", 167.462149);
-    assertTCExistWithChance(tcs, "armo30", 206.461938);
-    assertTCExistWithChance(tcs, "armo33", 239.677085);
-    assertTCExistWithChance(tcs, "armo36", 130.411582);
-    assertTCExistWithChance(tcs, "armo39", 208.816621);
-    assertTCExistWithChance(tcs, "armo42", 283.18059);
-    assertTCExistWithChance(tcs, "armo45", 264.909398);
-    assertTCExistWithChance(tcs, "armo48", 249.285062);
-    assertTCExistWithChance(tcs, "armo51", 312.662207);
-    assertTCExistWithChance(tcs, "armo54", 271.763213);
-    assertTCExistWithChance(tcs, "armo57", 228.737807);
-    assertTCExistWithChance(tcs, "armo60", 217.320219);
-    assertTCExistWithChance(tcs, "armo63", 264.616442);
-    assertTCExistWithChance(tcs, "armo66", 263.736386);
-    assertTCExistWithChance(tcs, "armo69", 447.078485);
-    assertTCExistWithChance(tcs, "armo72", 1645.945946);
-    assertTCExistWithChance(tcs, "r01", 1436.185419);
-    assertTCExistWithChance(tcs, "r02", 2154.278129);
-    assertTCExistWithChance(tcs, "r03", 2585.133754);
-    assertTCExistWithChance(tcs, "r04", 3877.700631);
-    assertTCExistWithChance(tcs, "r05", 3693.04822);
-    assertTCExistWithChance(tcs, "r06", 5539.572331);
-    assertTCExistWithChance(tcs, "r07", 4431.657865);
-    assertTCExistWithChance(tcs, "r08", 6647.486797);
-    assertTCExistWithChance(tcs, "r09", 6330.939806);
-    assertTCExistWithChance(tcs, "r10", 9496.40971);
-    assertTCExistWithChance(tcs, "r11", 10359.719683);
-    assertTCExistWithChance(tcs, "r12", 15539.579525);
-    assertTCExistWithChance(tcs, "r13", 19628.942558);
-    assertTCExistWithChance(tcs, "r14", 29443.413837);
-    assertTCExistWithChance(tcs, "r15", 38196.861194);
-    assertTCExistWithChance(tcs, "r16", 57295.29179);
-    assertTCExistWithChance(tcs, "r17", 75347.233039);
-    assertTCExistWithChance(tcs, "r18", 113020.84956);
-    assertTCExistWithChance(tcs, "r19", 149655.1939);
-    assertTCExistWithChance(tcs, "r20", 224482.790849);
-    assertTCExistWithChance(tcs, "r21", 298274.711716);
-    assertTCExistWithChance(tcs, "r22", 447412.067573);
-    assertTCExistWithChance(tcs, "r23", 521076.099499);
-    assertTCExistWithChance(tcs, "r24", 781614.149272);
-    assertTCExistWithChance(tcs, "r25", 910979.424674);
-    assertTCExistWithChance(tcs, "r26", 1366469.136942);
-    assertTCExistWithChance(tcs, "r27", 1593310.755935);
-    assertTCExistWithChance(tcs, "r28", 2389966.133902);
-    assertTCExistWithChance(tcs, "r29", 2787365.079379);
-    assertTCExistWithChance(tcs, "r30", 4181047.618422);
-    assertTCExistWithChance(tcs, "weap3", 911.967199);
-    assertTCExistWithChance(tcs, "weap6", 217.135047);
-    assertTCExistWithChance(tcs, "weap9", 76.507315);
-    assertTCExistWithChance(tcs, "weap12", 61.025642);
-    assertTCExistWithChance(tcs, "weap15", 53.552389);
-    assertTCExistWithChance(tcs, "weap18", 47.573172);
-    assertTCExistWithChance(tcs, "weap21", 47.842837);
-    assertTCExistWithChance(tcs, "weap24", 65.40293);
-    assertTCExistWithChance(tcs, "weap27", 83.731075);
-    assertTCExistWithChance(tcs, "weap30", 82.090311);
-    assertTCExistWithChance(tcs, "weap33", 65.89508);
-    assertTCExistWithChance(tcs, "weap36", 69.642043);
-    assertTCExistWithChance(tcs, "weap39", 104.40831);
-    assertTCExistWithChance(tcs, "weap42", 141.590295);
-    assertTCExistWithChance(tcs, "weap45", 132.454699);
-    assertTCExistWithChance(tcs, "weap48", 124.642531);
-    assertTCExistWithChance(tcs, "weap51", 156.331104);
-    assertTCExistWithChance(tcs, "weap54", 135.881606);
-    assertTCExistWithChance(tcs, "weap57", 114.368903);
-    assertTCExistWithChance(tcs, "weap60", 108.66011);
-    assertTCExistWithChance(tcs, "weap63", 132.308221);
-    assertTCExistWithChance(tcs, "weap66", 131.868193);
-    assertTCExistWithChance(tcs, "weap69", 223.539242);
-    assertTCExistWithChance(tcs, "weap72", 822.972973);
+  it("works on a basic TC with picks = 1 and increased player count", () => {
+    const tcs = getAtomicTCs("Act 1 H2H B", 4, 4);
+    assertTCExistWithChance(tcs, "amu", 350);
+    assertTCExistWithChance(tcs, "aqv", 27);
+    assertTCExistWithChance(tcs, "armo3", 29);
+    assertTCExistWithChance(tcs, "armo6", 13);
+    assertTCExistWithChance(tcs, "cm1", 700);
+    assertTCExistWithChance(tcs, "cm2", 700);
+    assertTCExistWithChance(tcs, "cm3", 700);
+    assertTCExistWithChance(tcs, "cqv", 27);
+    assertTCExistWithChance(tcs, "gcb", 467);
+    assertTCExistWithChance(tcs, "gcg", 467);
+    assertTCExistWithChance(tcs, "gcr", 467);
+    assertTCExistWithChance(tcs, "gcv", 467);
+    assertTCExistWithChance(tcs, "gcw", 467);
+    assertTCExistWithChance(tcs, "gcy", 467);
+    assertTCExistWithChance(tcs, "gld", 3);
+    assertTCExistWithChance(tcs, "gpl", 87);
+    assertTCExistWithChance(tcs, "hp1", 17);
+    assertTCExistWithChance(tcs, "hp2", 50);
+    assertTCExistWithChance(tcs, "isc", 58);
+    assertTCExistWithChance(tcs, "jew", 700);
+    assertTCExistWithChance(tcs, "key", 58);
+    assertTCExistWithChance(tcs, "mp1", 40);
+    assertTCExistWithChance(tcs, "mp2", 50);
+    assertTCExistWithChance(tcs, "opl", 87);
+    assertTCExistWithChance(tcs, "rin", 175);
+    assertTCExistWithChance(tcs, "rvs", 200);
+    assertTCExistWithChance(tcs, "skc", 700);
+    assertTCExistWithChance(tcs, "tsc", 58);
+    assertTCExistWithChance(tcs, "vps", 50);
+    assertTCExistWithChance(tcs, "weap3", 29);
+    assertTCExistWithChance(tcs, "weap6", 13);
+  });
+
+  it("works on a hell TC with picks = 1 and increased player count", () => {
+    const tcsP1 = getAtomicTCs("Act 5 (H) H2H C", 1, 1);
+    assertTCExistWithChance(tcsP1, "weap87", (92.308475 * 160) / 16);
+    assertTCExistWithChance(tcsP1, "armo87", (174.334187 * 160) / 16);
+
+    const tcsP8 = getAtomicTCs("Act 5 (H) H2H C", 8, 1);
+    assertTCExistWithChance(tcsP8, "weap87", (92.308475 * 70) / 16);
+    assertTCExistWithChance(tcsP8, "armo87", (174.334187 * 70) / 16);
   });
 });

@@ -1,6 +1,10 @@
 export type TCDictTuple = [string, number];
+// Magic, Rare, Set, Unique
+export type ItemQualityRatios = [number, number, number, number];
 export type TCDictType = {
   [key: string]: {
+    picks: number;
+    qualityRatios: ItemQualityRatios;
     nodrop: number;
     tcs: TCDictTuple[];
   };
@@ -8,9 +12,11 @@ export type TCDictType = {
 
 // produced by util/tc_cleanup.js
 export const TCDict: TCDictType = {
-  Gold: { nodrop: 0, tcs: [["gld", 1]] },
+  Gold: { nodrop: 0, picks: 1, qualityRatios: [0, 0, 0, 0], tcs: [["gld", 1]] },
   "Jewelry A": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["rin", 8],
       ["amu", 4],
@@ -22,6 +28,8 @@ export const TCDict: TCDictType = {
   },
   "Jewelry B": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["rin", 8],
       ["amu", 4],
@@ -33,6 +41,8 @@ export const TCDict: TCDictType = {
   },
   "Jewelry C": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["rin", 8],
       ["amu", 4],
@@ -44,6 +54,8 @@ export const TCDict: TCDictType = {
   },
   "Chipped Gem": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gcv", 3],
       ["gcy", 3],
@@ -56,6 +68,8 @@ export const TCDict: TCDictType = {
   },
   "Flawed Gem": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gfv", 3],
       ["gfy", 3],
@@ -68,6 +82,8 @@ export const TCDict: TCDictType = {
   },
   "Normal Gem": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gsv", 3],
       ["gsy", 3],
@@ -80,6 +96,8 @@ export const TCDict: TCDictType = {
   },
   "Flawless Gem": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gzv", 3],
       ["gly", 3],
@@ -92,6 +110,8 @@ export const TCDict: TCDictType = {
   },
   "Perfect Gem": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gpv", 3],
       ["gpy", 3],
@@ -104,6 +124,8 @@ export const TCDict: TCDictType = {
   },
   Ammo: {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["aqv", 1],
       ["cqv", 1],
@@ -111,6 +133,8 @@ export const TCDict: TCDictType = {
   },
   "Misc 0": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["key", 3],
       ["tsc", 3],
@@ -121,6 +145,8 @@ export const TCDict: TCDictType = {
   },
   "Misc 1": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["key", 3],
       ["tsc", 3],
@@ -131,6 +157,8 @@ export const TCDict: TCDictType = {
   },
   "Misc 2": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["key", 3],
       ["tsc", 3],
@@ -141,6 +169,8 @@ export const TCDict: TCDictType = {
   },
   "Hpotion 1": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["hp1", 8],
       ["hp2", 3],
@@ -151,6 +181,8 @@ export const TCDict: TCDictType = {
   },
   "Hpotion 2": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["hp1", 1],
       ["hp2", 4],
@@ -162,6 +194,8 @@ export const TCDict: TCDictType = {
   },
   "Hpotion 3": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["hp2", 1],
       ["hp3", 4],
@@ -173,6 +207,8 @@ export const TCDict: TCDictType = {
   },
   "Hpotion 4": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["hp3", 1],
       ["hp4", 4],
@@ -184,6 +220,8 @@ export const TCDict: TCDictType = {
   },
   "Hpotion 5": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["hp3", 1],
       ["hp4", 4],
@@ -194,6 +232,8 @@ export const TCDict: TCDictType = {
   },
   "Hpotion 6": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["hp4", 4],
       ["hp5", 6],
@@ -204,6 +244,8 @@ export const TCDict: TCDictType = {
   },
   "Potion 1": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["hp1", 12],
       ["hp2", 4],
@@ -215,6 +257,8 @@ export const TCDict: TCDictType = {
   },
   "Potion 2": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["hp1", 4],
       ["hp2", 8],
@@ -229,6 +273,8 @@ export const TCDict: TCDictType = {
   },
   "Potion 3": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["hp2", 6],
       ["hp3", 6],
@@ -243,6 +289,8 @@ export const TCDict: TCDictType = {
   },
   "Potion 4": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["hp3", 6],
       ["hp4", 6],
@@ -257,6 +305,8 @@ export const TCDict: TCDictType = {
   },
   "Potion 5": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["hp3", 4],
       ["hp4", 6],
@@ -270,6 +320,8 @@ export const TCDict: TCDictType = {
   },
   "Potion 6": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["hp4", 6],
       ["hp5", 8],
@@ -283,6 +335,8 @@ export const TCDict: TCDictType = {
   },
   "Runes 1": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["r01", 3],
       ["r02", 2],
@@ -290,6 +344,8 @@ export const TCDict: TCDictType = {
   },
   "Runes 2": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["r03", 3],
       ["r04", 2],
@@ -298,6 +354,8 @@ export const TCDict: TCDictType = {
   },
   "Runes 3": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["r05", 3],
       ["r06", 2],
@@ -306,6 +364,8 @@ export const TCDict: TCDictType = {
   },
   "Runes 4": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["r07", 3],
       ["r08", 2],
@@ -314,6 +374,8 @@ export const TCDict: TCDictType = {
   },
   "Runes 5": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["r09", 3],
       ["r10", 2],
@@ -322,6 +384,8 @@ export const TCDict: TCDictType = {
   },
   "Runes 6": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["r11", 3],
       ["r12", 2],
@@ -330,6 +394,8 @@ export const TCDict: TCDictType = {
   },
   "Runes 7": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["r13", 3],
       ["r14", 2],
@@ -338,6 +404,8 @@ export const TCDict: TCDictType = {
   },
   "Runes 8": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["r15", 3],
       ["r16", 2],
@@ -346,6 +414,8 @@ export const TCDict: TCDictType = {
   },
   "Runes 9": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["r17", 3],
       ["r18", 2],
@@ -354,6 +424,8 @@ export const TCDict: TCDictType = {
   },
   "Runes 10": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["r19", 3],
       ["r20", 2],
@@ -362,6 +434,8 @@ export const TCDict: TCDictType = {
   },
   "Runes 11": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["r21", 3],
       ["r22", 2],
@@ -370,6 +444,8 @@ export const TCDict: TCDictType = {
   },
   "Runes 12": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["r23", 3],
       ["r24", 2],
@@ -378,6 +454,8 @@ export const TCDict: TCDictType = {
   },
   "Runes 13": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["r25", 3],
       ["r26", 2],
@@ -386,6 +464,8 @@ export const TCDict: TCDictType = {
   },
   "Runes 14": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["r27", 3],
       ["r28", 2],
@@ -394,6 +474,8 @@ export const TCDict: TCDictType = {
   },
   "Runes 15": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["r29", 3],
       ["r30", 2],
@@ -402,6 +484,8 @@ export const TCDict: TCDictType = {
   },
   "Runes 16": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["r31", 3],
       ["r32", 2],
@@ -410,6 +494,8 @@ export const TCDict: TCDictType = {
   },
   "Runes 17": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["r33", 1],
       ["Runes 16", 5170],
@@ -417,6 +503,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 Junk": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Potion 1", 8],
       ["Misc 0", 4],
@@ -425,6 +513,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 Junk": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 1 Junk", 2],
       ["Potion 2", 8],
@@ -434,6 +524,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 Junk": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 2 Junk", 2],
       ["Potion 3", 8],
@@ -443,6 +535,8 @@ export const TCDict: TCDictType = {
   },
   "Act 4 Junk": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 3 Junk", 2],
       ["Potion 4", 8],
@@ -452,6 +546,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 Junk": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 4 Junk", 2],
       ["Potion 5", 8],
@@ -461,6 +557,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 (N) Junk": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 5 Junk", 2],
       ["Potion 6", 8],
@@ -470,6 +568,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 (N) Junk": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 5 Junk", 2],
       ["Potion 6", 8],
@@ -479,6 +579,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 (N) Junk": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 5 Junk", 2],
       ["Potion 6", 8],
@@ -488,6 +590,8 @@ export const TCDict: TCDictType = {
   },
   "Act 4 (N) Junk": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 5 Junk", 2],
       ["Potion 6", 8],
@@ -497,6 +601,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 (N) Junk": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 5 Junk", 2],
       ["Potion 6", 8],
@@ -506,6 +612,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 (H) Junk": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 5 Junk", 2],
       ["Potion 6", 8],
@@ -515,6 +623,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 (H) Junk": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 5 Junk", 2],
       ["Potion 6", 8],
@@ -524,6 +634,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 (H) Junk": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 5 Junk", 2],
       ["Potion 6", 8],
@@ -533,6 +645,8 @@ export const TCDict: TCDictType = {
   },
   "Act 4 (H) Junk": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 5 Junk", 2],
       ["Potion 6", 8],
@@ -542,6 +656,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 (H) Junk": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 5 Junk", 2],
       ["Potion 6", 8],
@@ -551,6 +667,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 Equip A": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["weap3", 7],
       ["armo3", 7],
@@ -558,6 +676,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 Equip B": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["weap3", 3],
       ["armo3", 3],
@@ -567,6 +687,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 Equip C": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["weap3", 2],
       ["armo3", 1],
@@ -580,6 +702,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 Equip A": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["weap6", 2],
       ["armo6", 1],
@@ -594,6 +718,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 Equip B": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["weap9", 2],
       ["armo9", 1],
@@ -608,6 +734,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 Equip C": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["weap12", 2],
       ["armo12", 1],
@@ -622,6 +750,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 Equip A": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["weap15", 2],
       ["armo15", 1],
@@ -636,6 +766,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 Equip B": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["weap18", 2],
       ["armo18", 1],
@@ -650,6 +782,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 Equip C": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["weap21", 2],
       ["armo21", 1],
@@ -664,6 +798,8 @@ export const TCDict: TCDictType = {
   },
   "Act 4 Equip A": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["weap24", 2],
       ["armo24", 1],
@@ -678,6 +814,8 @@ export const TCDict: TCDictType = {
   },
   "Act 4 Equip B": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["weap27", 2],
       ["armo27", 1],
@@ -692,6 +830,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 Equip A": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["weap27", 2],
       ["armo27", 1],
@@ -706,6 +846,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 Equip B": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["weap30", 2],
       ["armo30", 1],
@@ -720,6 +862,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 Equip C": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["weap30", 2],
       ["armo30", 1],
@@ -734,6 +878,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 (N) Equip A": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["weap33", 2],
       ["armo33", 1],
@@ -748,6 +894,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 (N) Equip B": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["weap33", 2],
       ["armo33", 1],
@@ -762,6 +910,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 (N) Equip C": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["weap36", 2],
       ["armo36", 1],
@@ -776,6 +926,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 (N) Equip A": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["weap36", 2],
       ["armo36", 1],
@@ -790,6 +942,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 (N) Equip B": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["weap39", 2],
       ["armo39", 1],
@@ -804,6 +958,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 (N) Equip C": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["weap39", 2],
       ["armo39", 1],
@@ -818,6 +974,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 (N) Equip A": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["weap42", 2],
       ["armo42", 1],
@@ -832,6 +990,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 (N) Equip B": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["weap42", 2],
       ["armo42", 1],
@@ -846,6 +1006,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 (N) Equip C": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["weap45", 2],
       ["armo45", 1],
@@ -860,6 +1022,8 @@ export const TCDict: TCDictType = {
   },
   "Act 4 (N) Equip A": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["weap45", 2],
       ["armo45", 1],
@@ -874,6 +1038,8 @@ export const TCDict: TCDictType = {
   },
   "Act 4 (N) Equip B": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["weap48", 2],
       ["armo48", 1],
@@ -888,6 +1054,8 @@ export const TCDict: TCDictType = {
   },
   "Act 4 (N) Equip C": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["weap48", 2],
       ["armo48", 1],
@@ -902,6 +1070,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 (N) Equip A": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["weap51", 2],
       ["armo51", 1],
@@ -916,6 +1086,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 (N) Equip B": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["weap51", 2],
       ["armo51", 1],
@@ -930,6 +1102,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 (N) Equip C": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["weap54", 2],
       ["armo54", 1],
@@ -944,6 +1118,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 (H) Equip A": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["weap54", 2],
       ["armo54", 1],
@@ -958,6 +1134,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 (H) Equip B": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["weap57", 2],
       ["armo57", 1],
@@ -972,6 +1150,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 (H) Equip C": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["weap57", 2],
       ["armo57", 1],
@@ -986,6 +1166,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 (H) Equip A": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["weap60", 2],
       ["armo60", 1],
@@ -1000,6 +1182,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 (H) Equip B": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["weap60", 2],
       ["armo60", 1],
@@ -1014,6 +1198,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 (H) Equip C": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["weap63", 2],
       ["armo63", 1],
@@ -1028,6 +1214,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 (H) Equip A": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["weap63", 2],
       ["armo63", 1],
@@ -1042,6 +1230,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 (H) Equip B": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["weap66", 2],
       ["armo66", 1],
@@ -1056,6 +1246,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 (H) Equip C": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["weap66", 2],
       ["armo66", 1],
@@ -1070,6 +1262,8 @@ export const TCDict: TCDictType = {
   },
   "Act 4 (H) Equip A": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["weap69", 2],
       ["armo69", 1],
@@ -1084,6 +1278,8 @@ export const TCDict: TCDictType = {
   },
   "Act 4 (H) Equip B": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["weap69", 2],
       ["armo69", 1],
@@ -1098,6 +1294,8 @@ export const TCDict: TCDictType = {
   },
   "Act 4 (H) Equip C": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["weap72", 2],
       ["armo72", 1],
@@ -1112,6 +1310,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 (H) Equip A": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["weap75", 2],
       ["armo75", 1],
@@ -1126,6 +1326,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 (H) Equip B": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["weap78", 2],
       ["armo78", 1],
@@ -1140,6 +1342,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 (H) Equip C": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["weap81", 2],
       ["armo81", 1],
@@ -1154,6 +1358,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 Melee A": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["mele3", 7],
       ["armo3", 7],
@@ -1161,6 +1367,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 Melee B": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["mele3", 3],
       ["armo3", 3],
@@ -1170,6 +1378,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 Melee C": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["mele3", 2],
       ["armo3", 1],
@@ -1183,6 +1393,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 Melee A": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["mele6", 2],
       ["armo6", 1],
@@ -1197,6 +1409,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 Melee B": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["mele9", 2],
       ["armo9", 1],
@@ -1211,6 +1425,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 Melee C": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["mele12", 2],
       ["armo12", 1],
@@ -1225,6 +1441,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 Melee A": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["mele15", 2],
       ["armo15", 1],
@@ -1239,6 +1457,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 Melee B": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["mele18", 2],
       ["armo18", 1],
@@ -1253,6 +1473,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 Melee C": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["mele21", 2],
       ["armo21", 1],
@@ -1267,6 +1489,8 @@ export const TCDict: TCDictType = {
   },
   "Act 4 Melee A": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["mele24", 2],
       ["armo24", 1],
@@ -1281,6 +1505,8 @@ export const TCDict: TCDictType = {
   },
   "Act 4 Melee B": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["mele27", 2],
       ["armo27", 1],
@@ -1295,6 +1521,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 Melee A": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["mele27", 2],
       ["armo27", 1],
@@ -1309,6 +1537,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 Melee B": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["mele30", 2],
       ["armo30", 1],
@@ -1323,6 +1553,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 Melee C": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["mele30", 2],
       ["armo30", 1],
@@ -1337,6 +1569,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 (N) Melee A": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["weap33", 2],
       ["armo33", 1],
@@ -1351,6 +1585,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 (N) Melee B": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["weap36", 2],
       ["armo36", 1],
@@ -1365,6 +1601,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 (N) Melee A": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["weap36", 2],
       ["armo36", 1],
@@ -1379,6 +1617,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 (N) Melee B": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["weap39", 2],
       ["armo39", 1],
@@ -1393,6 +1633,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 (N) Melee A": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["weap42", 2],
       ["armo42", 1],
@@ -1407,6 +1649,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 (N) Melee B": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["weap45", 2],
       ["armo45", 1],
@@ -1421,6 +1665,8 @@ export const TCDict: TCDictType = {
   },
   "Act 4 (N) Melee A": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["weap45", 2],
       ["armo45", 1],
@@ -1435,6 +1681,8 @@ export const TCDict: TCDictType = {
   },
   "Act 4 (N) Melee B": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["weap48", 2],
       ["armo48", 1],
@@ -1449,6 +1697,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 (N) Melee A": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["weap51", 2],
       ["armo51", 1],
@@ -1463,6 +1713,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 (N) Melee B": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["weap51", 2],
       ["armo51", 1],
@@ -1477,6 +1729,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 (N) Melee C": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["weap54", 2],
       ["armo54", 1],
@@ -1491,6 +1745,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 (H) Melee A": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["weap54", 2],
       ["armo54", 1],
@@ -1505,6 +1761,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 (H) Melee B": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["weap57", 2],
       ["armo57", 1],
@@ -1519,6 +1777,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 (H) Melee A": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["weap60", 2],
       ["armo60", 1],
@@ -1533,6 +1793,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 (H) Melee B": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["weap63", 2],
       ["armo63", 1],
@@ -1547,6 +1809,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 (H) Melee A": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["weap63", 2],
       ["armo63", 1],
@@ -1561,6 +1825,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 (H) Melee B": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["weap66", 2],
       ["armo66", 1],
@@ -1575,6 +1841,8 @@ export const TCDict: TCDictType = {
   },
   "Act 4 (H) Melee A": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["weap69", 2],
       ["armo69", 1],
@@ -1589,6 +1857,8 @@ export const TCDict: TCDictType = {
   },
   "Act 4 (H) Melee B": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["weap72", 2],
       ["armo72", 1],
@@ -1603,6 +1873,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 (H) Melee A": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["weap75", 2],
       ["armo75", 1],
@@ -1617,6 +1889,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 (H) Melee B": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["weap78", 2],
       ["armo78", 1],
@@ -1631,6 +1905,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 (H) Melee C": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["weap81", 2],
       ["armo81", 1],
@@ -1643,9 +1919,16 @@ export const TCDict: TCDictType = {
       ["Act 5 (H) Melee B", 1530],
     ],
   },
-  "Act 1 Bow A": { nodrop: 0, tcs: [["bow3", 36]] },
+  "Act 1 Bow A": {
+    nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [["bow3", 36]],
+  },
   "Act 1 Bow B": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["bow3", 20],
       ["bow6", 16],
@@ -1653,6 +1936,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 Bow C": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["bow3", 10],
       ["bow6", 16],
@@ -1661,6 +1946,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 Bow A": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["bow3", 3],
       ["bow6", 15],
@@ -1670,6 +1957,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 Bow B": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["bow3", 1],
       ["bow6", 7],
@@ -1680,6 +1969,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 Bow C": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["bow3", 1],
       ["bow6", 3],
@@ -1691,6 +1982,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 Bow A": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["bow3", 1],
       ["bow6", 3],
@@ -1703,6 +1996,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 Bow B": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["bow3", 1],
       ["bow6", 3],
@@ -1716,6 +2011,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 Bow C": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["bow3", 1],
       ["bow6", 2],
@@ -1729,6 +2026,8 @@ export const TCDict: TCDictType = {
   },
   "Act 4 Bow A": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["bow6", 1],
       ["bow9", 3],
@@ -1743,6 +2042,8 @@ export const TCDict: TCDictType = {
   },
   "Act 4 Bow B": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["bow6", 1],
       ["bow9", 2],
@@ -1757,6 +2058,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 Bow A": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["bow9", 1],
       ["bow12", 3],
@@ -1771,6 +2074,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 Bow B": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["bow9", 1],
       ["bow12", 2],
@@ -1785,6 +2090,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 Bow C": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["bow9", 1],
       ["bow12", 2],
@@ -1799,6 +2106,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 (N) Bow A": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["bow12", 1],
       ["bow15", 2],
@@ -1813,6 +2122,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 (N) Bow B": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["bow15", 1],
       ["bow18", 2],
@@ -1827,6 +2138,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 (N) Bow A": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["bow18", 1],
       ["bow21", 2],
@@ -1841,6 +2154,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 (N) Bow B": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["bow21", 1],
       ["bow24", 2],
@@ -1855,6 +2170,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 (N) Bow A": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["bow24", 1],
       ["bow27", 2],
@@ -1869,6 +2186,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 (N) Bow B": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["bow27", 1],
       ["bow30", 2],
@@ -1883,6 +2202,8 @@ export const TCDict: TCDictType = {
   },
   "Act 4 (N) Bow A": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["bow30", 1],
       ["bow33", 2],
@@ -1897,6 +2218,8 @@ export const TCDict: TCDictType = {
   },
   "Act 4 (N) Bow B": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["bow33", 1],
       ["bow36", 2],
@@ -1911,6 +2234,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 (N) Bow A": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["bow36", 1],
       ["bow39", 2],
@@ -1925,6 +2250,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 (N) Bow B": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["bow39", 1],
       ["bow42", 2],
@@ -1939,6 +2266,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 (N) Bow C": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["bow42", 1],
       ["bow45", 2],
@@ -1953,6 +2282,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 (H) Bow A": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["bow45", 1],
       ["bow48", 2],
@@ -1967,6 +2298,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 (H) Bow B": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["bow48", 1],
       ["bow51", 2],
@@ -1981,6 +2314,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 (H) Bow A": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["bow51", 1],
       ["bow54", 2],
@@ -1995,6 +2330,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 (H) Bow B": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["bow54", 1],
       ["bow57", 2],
@@ -2009,6 +2346,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 (H) Bow A": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["bow57", 1],
       ["bow60", 2],
@@ -2023,6 +2362,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 (H) Bow B": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["bow60", 1],
       ["bow63", 2],
@@ -2037,6 +2378,8 @@ export const TCDict: TCDictType = {
   },
   "Act 4 (H) Bow A": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["bow63", 1],
       ["bow66", 2],
@@ -2051,6 +2394,8 @@ export const TCDict: TCDictType = {
   },
   "Act 4 (H) Bow B": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["bow66", 1],
       ["bow69", 2],
@@ -2065,6 +2410,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 (H) Bow A": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["bow69", 1],
       ["bow72", 2],
@@ -2079,6 +2426,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 (H) Bow B": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["bow72", 1],
       ["bow75", 2],
@@ -2093,6 +2442,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 (H) Bow C": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["bow75", 1],
       ["bow78", 2],
@@ -2107,6 +2458,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 Magic A": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["tsc", 2],
       ["isc", 4],
@@ -2115,6 +2468,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 Magic B": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["tsc", 2],
       ["isc", 4],
@@ -2124,6 +2479,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 Magic C": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["tsc", 2],
       ["isc", 4],
@@ -2133,6 +2490,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 Magic A": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["tsc", 2],
       ["isc", 4],
@@ -2143,6 +2502,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 Magic B": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["tsc", 2],
       ["isc", 4],
@@ -2153,6 +2514,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 Magic C": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["tsc", 2],
       ["isc", 4],
@@ -2163,6 +2526,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 Magic A": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["tsc", 2],
       ["isc", 4],
@@ -2172,6 +2537,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 Magic B": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["tsc", 2],
       ["isc", 4],
@@ -2181,6 +2548,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 Magic C": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["tsc", 2],
       ["isc", 4],
@@ -2191,6 +2560,8 @@ export const TCDict: TCDictType = {
   },
   "Act 4 Magic A": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["tsc", 2],
       ["isc", 4],
@@ -2201,6 +2572,8 @@ export const TCDict: TCDictType = {
   },
   "Act 4 Magic B": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["tsc", 2],
       ["isc", 4],
@@ -2210,6 +2583,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 Magic A": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["tsc", 2],
       ["isc", 4],
@@ -2219,6 +2594,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 Magic B": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["tsc", 2],
       ["isc", 4],
@@ -2228,6 +2605,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 Magic C": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["tsc", 2],
       ["isc", 4],
@@ -2237,6 +2616,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 (N) Magic A": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["tsc", 2],
       ["isc", 4],
@@ -2246,6 +2627,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 (N) Magic B": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["tsc", 2],
       ["isc", 4],
@@ -2255,6 +2638,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 (N) Magic A": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["tsc", 2],
       ["isc", 4],
@@ -2264,6 +2649,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 (N) Magic B": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["tsc", 2],
       ["isc", 4],
@@ -2273,6 +2660,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 (N) Magic A": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["tsc", 2],
       ["isc", 4],
@@ -2282,6 +2671,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 (N) Magic B": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["tsc", 2],
       ["isc", 4],
@@ -2291,6 +2682,8 @@ export const TCDict: TCDictType = {
   },
   "Act 4 (N) Magic A": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["tsc", 2],
       ["isc", 4],
@@ -2300,6 +2693,8 @@ export const TCDict: TCDictType = {
   },
   "Act 4 (N) Magic B": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["tsc", 2],
       ["isc", 4],
@@ -2309,6 +2704,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 (N) Magic A": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["tsc", 2],
       ["isc", 4],
@@ -2318,6 +2715,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 (N) Magic B": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["tsc", 2],
       ["isc", 4],
@@ -2327,6 +2726,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 (N) Magic C": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["tsc", 2],
       ["isc", 4],
@@ -2336,6 +2737,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 (H) Magic A": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["tsc", 2],
       ["isc", 4],
@@ -2345,6 +2748,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 (H) Magic B": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["tsc", 2],
       ["isc", 4],
@@ -2354,6 +2759,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 (H) Magic A": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["tsc", 2],
       ["isc", 4],
@@ -2363,6 +2770,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 (H) Magic B": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["tsc", 2],
       ["isc", 4],
@@ -2372,6 +2781,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 (H) Magic A": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["tsc", 2],
       ["isc", 4],
@@ -2381,6 +2792,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 (H) Magic B": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["tsc", 2],
       ["isc", 4],
@@ -2390,6 +2803,8 @@ export const TCDict: TCDictType = {
   },
   "Act 4 (H) Magic A": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["tsc", 2],
       ["isc", 4],
@@ -2399,6 +2814,8 @@ export const TCDict: TCDictType = {
   },
   "Act 4 (H) Magic B": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["tsc", 2],
       ["isc", 4],
@@ -2408,6 +2825,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 (H) Magic A": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["tsc", 2],
       ["isc", 4],
@@ -2417,6 +2836,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 (H) Magic B": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["tsc", 2],
       ["isc", 4],
@@ -2426,6 +2847,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 (H) Magic C": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["tsc", 2],
       ["isc", 4],
@@ -2435,6 +2858,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 Good": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Jewelry A", 5],
       ["Chipped Gem", 5],
@@ -2442,6 +2867,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 Good": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Jewelry B", 20],
       ["Chipped Gem", 12],
@@ -2452,6 +2879,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 Good": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Jewelry C", 20],
       ["Chipped Gem", 8],
@@ -2462,6 +2891,8 @@ export const TCDict: TCDictType = {
   },
   "Act 4 Good": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Jewelry C", 50],
       ["Chipped Gem", 14],
@@ -2473,6 +2904,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 Good": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Jewelry C", 50],
       ["Chipped Gem", 6],
@@ -2484,6 +2917,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 (N) Good": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Jewelry C", 60],
       ["Chipped Gem", 6],
@@ -2495,6 +2930,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 (N) Good": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Jewelry C", 60],
       ["Chipped Gem", 4],
@@ -2506,6 +2943,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 (N) Good": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Jewelry C", 60],
       ["Chipped Gem", 4],
@@ -2517,6 +2956,8 @@ export const TCDict: TCDictType = {
   },
   "Act 4 (N) Good": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Jewelry C", 60],
       ["Chipped Gem", 4],
@@ -2528,6 +2969,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 (N) Good": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Jewelry C", 60],
       ["Chipped Gem", 4],
@@ -2539,6 +2982,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 (H) Good": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Jewelry C", 60],
       ["Chipped Gem", 4],
@@ -2550,6 +2995,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 (H) Good": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Jewelry C", 60],
       ["Chipped Gem", 4],
@@ -2561,6 +3008,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 (H) Good": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Jewelry C", 60],
       ["Chipped Gem", 4],
@@ -2572,6 +3021,8 @@ export const TCDict: TCDictType = {
   },
   "Act 4 (H) Good": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Jewelry C", 60],
       ["Chipped Gem", 4],
@@ -2583,6 +3034,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 (H) Good": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Jewelry C", 60],
       ["Chipped Gem", 4],
@@ -2594,6 +3047,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 Chest A": {
     nodrop: 100,
+    picks: 4,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 15],
       ["Act 1 Junk", 15],
@@ -2603,6 +3058,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 Chest B": {
     nodrop: 100,
+    picks: 4,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 15],
       ["Act 1 Junk", 15],
@@ -2612,6 +3069,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 Chest C": {
     nodrop: 100,
+    picks: 4,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 15],
       ["Act 1 Junk", 12],
@@ -2622,6 +3081,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 Chest A": {
     nodrop: 100,
+    picks: 4,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 15],
       ["Act 2 Junk", 15],
@@ -2631,6 +3092,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 Chest B": {
     nodrop: 100,
+    picks: 4,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 15],
       ["Act 2 Junk", 15],
@@ -2640,6 +3103,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 Chest C": {
     nodrop: 100,
+    picks: 4,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 15],
       ["Act 2 Junk", 12],
@@ -2650,6 +3115,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 Chest A": {
     nodrop: 100,
+    picks: 4,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 15],
       ["Act 3 Junk", 15],
@@ -2659,6 +3126,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 Chest B": {
     nodrop: 100,
+    picks: 4,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 15],
       ["Act 3 Junk", 15],
@@ -2668,6 +3137,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 Chest C": {
     nodrop: 100,
+    picks: 4,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 15],
       ["Act 3 Junk", 15],
@@ -2677,6 +3148,8 @@ export const TCDict: TCDictType = {
   },
   "Act 4 Chest A": {
     nodrop: 100,
+    picks: 4,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 15],
       ["Act 4 Junk", 15],
@@ -2686,6 +3159,8 @@ export const TCDict: TCDictType = {
   },
   "Act 4 Chest B": {
     nodrop: 100,
+    picks: 4,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 15],
       ["Act 4 Junk", 15],
@@ -2695,6 +3170,8 @@ export const TCDict: TCDictType = {
   },
   "Act 4 Chest C": {
     nodrop: 100,
+    picks: 4,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 15],
       ["Act 4 Junk", 15],
@@ -2704,6 +3181,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 Chest A": {
     nodrop: 100,
+    picks: 4,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 15],
       ["Act 5 Junk", 15],
@@ -2713,6 +3192,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 Chest B": {
     nodrop: 100,
+    picks: 4,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 15],
       ["Act 5 Junk", 15],
@@ -2722,6 +3203,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 Chest C": {
     nodrop: 100,
+    picks: 4,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 15],
       ["Act 5 Junk", 15],
@@ -2731,6 +3214,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 (N) Chest A": {
     nodrop: 100,
+    picks: 4,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 15],
       ["Act 1 (N) Junk", 15],
@@ -2740,6 +3225,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 (N) Chest B": {
     nodrop: 100,
+    picks: 4,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 15],
       ["Act 1 (N) Junk", 15],
@@ -2749,6 +3236,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 (N) Chest C": {
     nodrop: 100,
+    picks: 4,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 15],
       ["Act 1 (N) Junk", 15],
@@ -2758,6 +3247,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 (N) Chest A": {
     nodrop: 100,
+    picks: 4,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 15],
       ["Act 2 (N) Junk", 15],
@@ -2767,6 +3258,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 (N) Chest B": {
     nodrop: 100,
+    picks: 4,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 15],
       ["Act 2 (N) Junk", 15],
@@ -2776,6 +3269,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 (N) Chest C": {
     nodrop: 100,
+    picks: 4,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 15],
       ["Act 2 (N) Junk", 15],
@@ -2785,6 +3280,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 (N) Chest A": {
     nodrop: 100,
+    picks: 4,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 15],
       ["Act 3 (N) Junk", 15],
@@ -2794,6 +3291,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 (N) Chest B": {
     nodrop: 100,
+    picks: 4,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 15],
       ["Act 3 (N) Junk", 15],
@@ -2803,6 +3302,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 (N) Chest C": {
     nodrop: 100,
+    picks: 4,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 15],
       ["Act 3 (N) Junk", 15],
@@ -2812,6 +3313,8 @@ export const TCDict: TCDictType = {
   },
   "Act 4 (N) Chest A": {
     nodrop: 100,
+    picks: 4,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 15],
       ["Act 4 (N) Junk", 15],
@@ -2821,6 +3324,8 @@ export const TCDict: TCDictType = {
   },
   "Act 4 (N) Chest B": {
     nodrop: 100,
+    picks: 4,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 15],
       ["Act 4 (N) Junk", 15],
@@ -2830,6 +3335,8 @@ export const TCDict: TCDictType = {
   },
   "Act 4 (N) Chest C": {
     nodrop: 100,
+    picks: 4,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 15],
       ["Act 4 (N) Junk", 15],
@@ -2839,6 +3346,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 (N) Chest A": {
     nodrop: 100,
+    picks: 4,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 15],
       ["Act 5 (N) Junk", 15],
@@ -2848,6 +3357,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 (N) Chest B": {
     nodrop: 100,
+    picks: 4,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 15],
       ["Act 5 (N) Junk", 15],
@@ -2857,6 +3368,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 (N) Chest C": {
     nodrop: 100,
+    picks: 4,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 15],
       ["Act 5 (N) Junk", 15],
@@ -2866,6 +3379,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 (H) Chest A": {
     nodrop: 100,
+    picks: 4,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 15],
       ["Act 1 (H) Junk", 15],
@@ -2875,6 +3390,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 (H) Chest B": {
     nodrop: 100,
+    picks: 4,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 15],
       ["Act 1 (H) Junk", 15],
@@ -2884,6 +3401,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 (H) Chest C": {
     nodrop: 100,
+    picks: 4,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 15],
       ["Act 1 (H) Junk", 15],
@@ -2893,6 +3412,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 (H) Chest A": {
     nodrop: 100,
+    picks: 4,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 15],
       ["Act 2 (H) Junk", 15],
@@ -2902,6 +3423,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 (H) Chest B": {
     nodrop: 100,
+    picks: 4,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 15],
       ["Act 2 (H) Junk", 15],
@@ -2911,6 +3434,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 (H) Chest C": {
     nodrop: 100,
+    picks: 4,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 15],
       ["Act 2 (H) Junk", 15],
@@ -2920,6 +3445,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 (H) Chest A": {
     nodrop: 100,
+    picks: 4,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 15],
       ["Act 3 (H) Junk", 15],
@@ -2929,6 +3456,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 (H) Chest B": {
     nodrop: 100,
+    picks: 4,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 15],
       ["Act 3 (H) Junk", 15],
@@ -2938,6 +3467,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 (H) Chest C": {
     nodrop: 100,
+    picks: 4,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 15],
       ["Act 3 (H) Junk", 15],
@@ -2947,6 +3478,8 @@ export const TCDict: TCDictType = {
   },
   "Act 4 (H) Chest A": {
     nodrop: 100,
+    picks: 4,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 15],
       ["Act 4 (H) Junk", 15],
@@ -2956,6 +3489,8 @@ export const TCDict: TCDictType = {
   },
   "Act 4 (H) Chest B": {
     nodrop: 100,
+    picks: 4,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 15],
       ["Act 4 (H) Junk", 15],
@@ -2965,6 +3500,8 @@ export const TCDict: TCDictType = {
   },
   "Act 4 (H) Chest C": {
     nodrop: 100,
+    picks: 4,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 15],
       ["Act 4 (H) Junk", 15],
@@ -2974,6 +3511,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 (H) Chest A": {
     nodrop: 100,
+    picks: 4,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 15],
       ["Act 5 (H) Junk", 15],
@@ -2983,6 +3522,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 (H) Chest B": {
     nodrop: 100,
+    picks: 4,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 15],
       ["Act 5 (H) Junk", 15],
@@ -2992,6 +3533,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 (H) Chest C": {
     nodrop: 100,
+    picks: 4,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 15],
       ["Act 5 (H) Junk", 15],
@@ -3001,6 +3544,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 H2H A": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 21],
       ["Act 1 Equip A", 16],
@@ -3010,6 +3555,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 H2H B": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 21],
       ["Act 1 Equip B", 16],
@@ -3019,6 +3566,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 H2H C": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 21],
       ["Act 1 Equip C", 16],
@@ -3028,6 +3577,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 H2H A": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 21],
       ["Act 2 Equip A", 16],
@@ -3037,6 +3588,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 H2H B": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 21],
       ["Act 2 Equip B", 16],
@@ -3046,6 +3599,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 H2H C": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 21],
       ["Act 2 Equip C", 16],
@@ -3055,6 +3610,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 H2H A": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 21],
       ["Act 3 Equip A", 16],
@@ -3064,6 +3621,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 H2H B": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 21],
       ["Act 3 Equip B", 16],
@@ -3073,6 +3632,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 H2H C": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 21],
       ["Act 3 Equip C", 16],
@@ -3082,6 +3643,8 @@ export const TCDict: TCDictType = {
   },
   "Act 4 H2H A": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 21],
       ["Act 4 Equip A", 16],
@@ -3091,6 +3654,8 @@ export const TCDict: TCDictType = {
   },
   "Act 4 H2H B": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 21],
       ["Act 4 Equip B", 16],
@@ -3100,6 +3665,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 H2H A": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 21],
       ["Act 5 Equip A", 16],
@@ -3109,6 +3676,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 H2H B": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 21],
       ["Act 5 Equip B", 16],
@@ -3118,6 +3687,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 H2H C": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 21],
       ["Act 5 Equip C", 16],
@@ -3127,6 +3698,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 (N) H2H A": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 21],
       ["Act 1 (N) Equip A", 16],
@@ -3136,6 +3709,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 (N) H2H B": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 21],
       ["Act 1 (N) Equip B", 16],
@@ -3145,6 +3720,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 (N) H2H C": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 21],
       ["Act 1 (N) Equip B", 16],
@@ -3154,6 +3731,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 (N) H2H A": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 21],
       ["Act 2 (N) Equip A", 16],
@@ -3163,6 +3742,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 (N) H2H B": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 21],
       ["Act 2 (N) Equip B", 16],
@@ -3172,6 +3753,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 (N) H2H C": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 21],
       ["Act 2 (N) Equip B", 16],
@@ -3181,6 +3764,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 (N) H2H A": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 21],
       ["Act 3 (N) Equip A", 16],
@@ -3190,6 +3775,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 (N) H2H B": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 21],
       ["Act 3 (N) Equip B", 16],
@@ -3199,6 +3786,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 (N) H2H C": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 21],
       ["Act 3 (N) Equip B", 16],
@@ -3208,6 +3797,8 @@ export const TCDict: TCDictType = {
   },
   "Act 4 (N) H2H A": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 21],
       ["Act 4 (N) Equip A", 16],
@@ -3217,6 +3808,8 @@ export const TCDict: TCDictType = {
   },
   "Act 4 (N) H2H B": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 21],
       ["Act 4 (N) Equip B", 16],
@@ -3226,6 +3819,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 (N) H2H A": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 21],
       ["Act 5 (N) Equip A", 16],
@@ -3235,6 +3830,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 (N) H2H B": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 21],
       ["Act 5 (N) Equip B", 16],
@@ -3244,6 +3841,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 (N) H2H C": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 21],
       ["Act 5 (N) Equip C", 16],
@@ -3253,6 +3852,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 (H) H2H A": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 21],
       ["Act 1 (H) Equip A", 16],
@@ -3262,6 +3863,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 (H) H2H B": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 21],
       ["Act 1 (H) Equip B", 16],
@@ -3271,6 +3874,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 (H) H2H C": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 21],
       ["Act 1 (H) Equip B", 16],
@@ -3280,6 +3885,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 (H) H2H A": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 21],
       ["Act 2 (H) Equip A", 16],
@@ -3289,6 +3896,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 (H) H2H B": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 21],
       ["Act 2 (H) Equip B", 16],
@@ -3298,6 +3907,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 (H) H2H C": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 21],
       ["Act 2 (H) Equip B", 16],
@@ -3307,6 +3918,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 (H) H2H A": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 21],
       ["Act 3 (H) Equip A", 16],
@@ -3316,6 +3929,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 (H) H2H B": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 21],
       ["Act 3 (H) Equip B", 16],
@@ -3325,6 +3940,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 (H) H2H C": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 21],
       ["Act 3 (H) Equip B", 16],
@@ -3334,6 +3951,8 @@ export const TCDict: TCDictType = {
   },
   "Act 4 (H) H2H A": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 21],
       ["Act 4 (H) Equip A", 16],
@@ -3343,6 +3962,8 @@ export const TCDict: TCDictType = {
   },
   "Act 4 (H) H2H B": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 21],
       ["Act 4 (H) Equip B", 16],
@@ -3352,6 +3973,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 (H) H2H A": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 21],
       ["Act 5 (H) Equip A", 16],
@@ -3361,6 +3984,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 (H) H2H B": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 21],
       ["Act 5 (H) Equip B", 16],
@@ -3370,6 +3995,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 (H) H2H C": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 21],
       ["Act 5 (H) Equip C", 16],
@@ -3379,6 +4006,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 Cast A": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 18],
       ["Act 1 Equip A", 15],
@@ -3389,6 +4018,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 Cast B": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 18],
       ["Act 1 Equip B", 15],
@@ -3399,6 +4030,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 Cast C": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 18],
       ["Act 1 Equip C", 15],
@@ -3409,6 +4042,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 Cast A": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 18],
       ["Act 2 Equip A", 15],
@@ -3419,6 +4054,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 Cast B": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 18],
       ["Act 2 Equip B", 15],
@@ -3429,6 +4066,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 Cast C": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 18],
       ["Act 2 Equip C", 15],
@@ -3439,6 +4078,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 Cast A": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 18],
       ["Act 3 Equip A", 15],
@@ -3449,6 +4090,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 Cast B": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 18],
       ["Act 3 Equip B", 15],
@@ -3459,6 +4102,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 Cast C": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 18],
       ["Act 3 Equip C", 15],
@@ -3469,6 +4114,8 @@ export const TCDict: TCDictType = {
   },
   "Act 4 Cast A": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 18],
       ["Act 4 Equip A", 15],
@@ -3479,6 +4126,8 @@ export const TCDict: TCDictType = {
   },
   "Act 4 Cast B": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 18],
       ["Act 4 Equip B", 15],
@@ -3489,6 +4138,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 Cast A": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 18],
       ["Act 5 Equip A", 15],
@@ -3499,6 +4150,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 Cast B": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 18],
       ["Act 5 Equip B", 15],
@@ -3509,6 +4162,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 Cast C": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 18],
       ["Act 5 Equip C", 15],
@@ -3519,6 +4174,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 (N) Cast A": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 18],
       ["Act 1 (N) Equip A", 15],
@@ -3529,6 +4186,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 (N) Cast B": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 18],
       ["Act 1 (N) Equip B", 15],
@@ -3539,6 +4198,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 (N) Cast C": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 18],
       ["Act 1 (N) Equip B", 15],
@@ -3549,6 +4210,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 (N) Cast A": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 18],
       ["Act 2 (N) Equip A", 15],
@@ -3559,6 +4222,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 (N) Cast B": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 18],
       ["Act 2 (N) Equip B", 15],
@@ -3569,6 +4234,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 (N) Cast C": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 18],
       ["Act 2 (N) Equip B", 15],
@@ -3579,6 +4246,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 (N) Cast A": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 18],
       ["Act 3 (N) Equip A", 15],
@@ -3589,6 +4258,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 (N) Cast B": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 18],
       ["Act 3 (N) Equip B", 15],
@@ -3599,6 +4270,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 (N) Cast C": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 18],
       ["Act 3 (N) Equip B", 15],
@@ -3609,6 +4282,8 @@ export const TCDict: TCDictType = {
   },
   "Act 4 (N) Cast A": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 18],
       ["Act 4 (N) Equip A", 15],
@@ -3619,6 +4294,8 @@ export const TCDict: TCDictType = {
   },
   "Act 4 (N) Cast B": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 18],
       ["Act 4 (N) Equip B", 15],
@@ -3629,6 +4306,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 (N) Cast A": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 18],
       ["Act 5 (N) Equip A", 15],
@@ -3639,6 +4318,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 (N) Cast B": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 18],
       ["Act 5 (N) Equip B", 15],
@@ -3649,6 +4330,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 (N) Cast C": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 18],
       ["Act 5 (N) Equip C", 15],
@@ -3659,6 +4342,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 (H) Cast A": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 18],
       ["Act 1 (H) Equip A", 15],
@@ -3669,6 +4354,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 (H) Cast B": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 18],
       ["Act 1 (H) Equip B", 15],
@@ -3679,6 +4366,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 (H) Cast C": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 18],
       ["Act 1 (H) Equip B", 15],
@@ -3689,6 +4378,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 (H) Cast A": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 18],
       ["Act 2 (H) Equip A", 15],
@@ -3699,6 +4390,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 (H) Cast B": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 18],
       ["Act 2 (H) Equip B", 15],
@@ -3709,6 +4402,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 (H) Cast C": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 18],
       ["Act 2 (H) Equip B", 15],
@@ -3719,6 +4414,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 (H) Cast A": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 18],
       ["Act 3 (H) Equip A", 15],
@@ -3729,6 +4426,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 (H) Cast B": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 18],
       ["Act 3 (H) Equip B", 15],
@@ -3739,6 +4438,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 (H) Cast C": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 18],
       ["Act 3 (H) Equip B", 15],
@@ -3749,6 +4450,8 @@ export const TCDict: TCDictType = {
   },
   "Act 4 (H) Cast A": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 18],
       ["Act 4 (H) Equip A", 15],
@@ -3759,6 +4462,8 @@ export const TCDict: TCDictType = {
   },
   "Act 4 (H) Cast B": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 18],
       ["Act 4 (H) Equip B", 15],
@@ -3769,6 +4474,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 (H) Cast A": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 18],
       ["Act 5 (H) Equip A", 15],
@@ -3779,6 +4486,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 (H) Cast B": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 18],
       ["Act 5 (H) Equip B", 15],
@@ -3789,6 +4498,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 (H) Cast C": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 18],
       ["Act 5 (H) Equip C", 15],
@@ -3799,6 +4510,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 Miss A": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 18],
       ["Act 1 Equip A", 13],
@@ -3810,6 +4523,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 Miss B": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 18],
       ["Act 1 Equip B", 13],
@@ -3821,6 +4536,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 Miss C": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 18],
       ["Act 1 Equip C", 13],
@@ -3832,6 +4549,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 Miss A": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 18],
       ["Act 2 Equip A", 13],
@@ -3843,6 +4562,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 Miss B": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 18],
       ["Act 2 Equip B", 13],
@@ -3854,6 +4575,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 Miss C": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 18],
       ["Act 2 Equip C", 13],
@@ -3865,6 +4588,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 Miss A": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 18],
       ["Act 3 Equip A", 13],
@@ -3876,6 +4601,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 Miss B": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 18],
       ["Act 3 Equip B", 13],
@@ -3887,6 +4614,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 Miss C": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 18],
       ["Act 3 Equip C", 13],
@@ -3898,6 +4627,8 @@ export const TCDict: TCDictType = {
   },
   "Act 4 Miss A": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 18],
       ["Act 4 Equip A", 13],
@@ -3909,6 +4640,8 @@ export const TCDict: TCDictType = {
   },
   "Act 4 Miss B": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 18],
       ["Act 4 Equip B", 13],
@@ -3920,6 +4653,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 Miss A": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 18],
       ["Act 5 Equip A", 13],
@@ -3931,6 +4666,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 Miss B": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 18],
       ["Act 5 Equip B", 13],
@@ -3942,6 +4679,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 Miss C": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 18],
       ["Act 5 Equip C", 13],
@@ -3953,6 +4692,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 (N) Miss A": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 18],
       ["Act 1 (N) Equip A", 13],
@@ -3964,6 +4705,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 (N) Miss B": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 18],
       ["Act 1 (N) Equip B", 13],
@@ -3975,6 +4718,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 (N) Miss C": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 18],
       ["Act 1 (N) Equip B", 13],
@@ -3986,6 +4731,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 (N) Miss A": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 18],
       ["Act 2 (N) Equip A", 13],
@@ -3997,6 +4744,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 (N) Miss B": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 18],
       ["Act 2 (N) Equip B", 13],
@@ -4008,6 +4757,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 (N) Miss C": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 18],
       ["Act 2 (N) Equip B", 13],
@@ -4019,6 +4770,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 (N) Miss A": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 18],
       ["Act 3 (N) Equip A", 13],
@@ -4030,6 +4783,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 (N) Miss B": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 18],
       ["Act 3 (N) Equip B", 13],
@@ -4041,6 +4796,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 (N) Miss C": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 18],
       ["Act 3 (N) Equip B", 13],
@@ -4052,6 +4809,8 @@ export const TCDict: TCDictType = {
   },
   "Act 4 (N) Miss A": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 18],
       ["Act 4 (N) Equip A", 13],
@@ -4063,6 +4822,8 @@ export const TCDict: TCDictType = {
   },
   "Act 4 (N) Miss B": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 18],
       ["Act 4 (N) Equip B", 13],
@@ -4074,6 +4835,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 (N) Miss A": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 18],
       ["Act 5 (N) Equip A", 13],
@@ -4085,6 +4848,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 (N) Miss B": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 18],
       ["Act 5 (N) Equip B", 13],
@@ -4096,6 +4861,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 (N) Miss C": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 18],
       ["Act 5 (N) Equip C", 13],
@@ -4107,6 +4874,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 (H) Miss A": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 18],
       ["Act 1 (H) Equip A", 13],
@@ -4118,6 +4887,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 (H) Miss B": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 18],
       ["Act 1 (H) Equip B", 13],
@@ -4129,6 +4900,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 (H) Miss C": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 18],
       ["Act 1 (H) Equip B", 13],
@@ -4140,6 +4913,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 (H) Miss A": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 18],
       ["Act 2 (H) Equip A", 13],
@@ -4151,6 +4926,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 (H) Miss B": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 18],
       ["Act 2 (H) Equip B", 13],
@@ -4162,6 +4939,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 (H) Miss C": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 18],
       ["Act 2 (H) Equip B", 13],
@@ -4173,6 +4952,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 (H) Miss A": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 18],
       ["Act 3 (H) Equip A", 13],
@@ -4184,6 +4965,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 (H) Miss B": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 18],
       ["Act 3 (H) Equip B", 13],
@@ -4195,6 +4978,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 (H) Miss C": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 18],
       ["Act 3 (H) Equip B", 13],
@@ -4206,6 +4991,8 @@ export const TCDict: TCDictType = {
   },
   "Act 4 (H) Miss A": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 18],
       ["Act 4 (H) Equip A", 13],
@@ -4217,6 +5004,8 @@ export const TCDict: TCDictType = {
   },
   "Act 4 (H) Miss B": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 18],
       ["Act 4 (H) Equip B", 13],
@@ -4228,6 +5017,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 (H) Miss A": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 18],
       ["Act 5 (H) Equip A", 13],
@@ -4239,6 +5030,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 (H) Miss B": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 18],
       ["Act 5 (H) Equip B", 13],
@@ -4250,6 +5043,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 (H) Miss C": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 18],
       ["Act 5 (H) Equip C", 13],
@@ -4261,6 +5056,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 Wraith A": {
     nodrop: 75,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 1 Good", 4],
       ["Act 1 Magic A", 25],
@@ -4268,6 +5065,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 Wraith B": {
     nodrop: 75,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 1 Good", 4],
       ["Act 1 Magic B", 25],
@@ -4275,6 +5074,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 Wraith C": {
     nodrop: 75,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 1 Good", 4],
       ["Act 1 Magic C", 25],
@@ -4282,6 +5083,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 Wraith A": {
     nodrop: 75,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 2 Good", 4],
       ["Act 2 Magic A", 25],
@@ -4289,6 +5092,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 Wraith B": {
     nodrop: 75,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 2 Good", 4],
       ["Act 2 Magic B", 25],
@@ -4296,6 +5101,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 Wraith C": {
     nodrop: 75,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 3 Good", 4],
       ["Act 2 Magic C", 25],
@@ -4303,6 +5110,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 Wraith A": {
     nodrop: 75,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 3 Good", 4],
       ["Act 3 Magic A", 25],
@@ -4310,6 +5119,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 Wraith B": {
     nodrop: 75,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 3 Good", 4],
       ["Act 3 Magic B", 25],
@@ -4317,6 +5128,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 Wraith C": {
     nodrop: 75,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 3 Good", 4],
       ["Act 3 Magic C", 25],
@@ -4324,6 +5137,8 @@ export const TCDict: TCDictType = {
   },
   "Act 4 Wraith A": {
     nodrop: 75,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 4 Good", 4],
       ["Act 4 Magic A", 25],
@@ -4331,6 +5146,8 @@ export const TCDict: TCDictType = {
   },
   "Act 4 Wraith B": {
     nodrop: 75,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 4 Good", 4],
       ["Act 4 Magic B", 25],
@@ -4338,6 +5155,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 Wraith A": {
     nodrop: 75,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 5 Good", 4],
       ["Act 5 Magic A", 25],
@@ -4345,6 +5164,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 Wraith B": {
     nodrop: 75,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 5 Good", 4],
       ["Act 5 Magic B", 25],
@@ -4352,6 +5173,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 Wraith C": {
     nodrop: 75,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 5 Good", 4],
       ["Act 5 Magic C", 25],
@@ -4359,6 +5182,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 (N) Wraith A": {
     nodrop: 75,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 1 (N) Good", 4],
       ["Act 1 (N) Magic A", 25],
@@ -4366,6 +5191,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 (N) Wraith B": {
     nodrop: 75,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 1 (N) Good", 4],
       ["Act 1 (N) Magic B", 25],
@@ -4373,6 +5200,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 (N) Wraith C": {
     nodrop: 75,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 1 (N) Good", 4],
       ["Act 1 (N) Magic B", 25],
@@ -4380,6 +5209,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 (N) Wraith A": {
     nodrop: 75,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 2 (N) Good", 4],
       ["Act 2 (N) Magic A", 25],
@@ -4387,6 +5218,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 (N) Wraith B": {
     nodrop: 75,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 2 (N) Good", 4],
       ["Act 2 (N) Magic B", 25],
@@ -4394,6 +5227,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 (N) Wraith C": {
     nodrop: 75,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 2 (N) Good", 4],
       ["Act 2 (N) Magic B", 25],
@@ -4401,6 +5236,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 (N) Wraith A": {
     nodrop: 75,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 3 (N) Good", 4],
       ["Act 3 (N) Magic A", 25],
@@ -4408,6 +5245,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 (N) Wraith B": {
     nodrop: 75,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 3 (N) Good", 4],
       ["Act 3 (N) Magic B", 25],
@@ -4415,6 +5254,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 (N) Wraith C": {
     nodrop: 75,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 3 (N) Good", 4],
       ["Act 3 (N) Magic B", 25],
@@ -4422,6 +5263,8 @@ export const TCDict: TCDictType = {
   },
   "Act 4 (N) Wraith A": {
     nodrop: 75,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 4 (N) Good", 4],
       ["Act 4 (N) Magic A", 25],
@@ -4429,6 +5272,8 @@ export const TCDict: TCDictType = {
   },
   "Act 4 (N) Wraith B": {
     nodrop: 75,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 4 (N) Good", 4],
       ["Act 4 (N) Magic B", 25],
@@ -4436,6 +5281,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 (N) Wraith A": {
     nodrop: 75,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 5 (N) Good", 4],
       ["Act 5 (N) Magic A", 25],
@@ -4443,6 +5290,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 (N) Wraith B": {
     nodrop: 75,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 5 (N) Good", 4],
       ["Act 5 (N) Magic B", 25],
@@ -4450,6 +5299,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 (N) Wraith C": {
     nodrop: 75,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 5 (N) Good", 4],
       ["Act 5 (N) Magic C", 25],
@@ -4457,6 +5308,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 (H) Wraith A": {
     nodrop: 75,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 1 (H) Good", 4],
       ["Act 1 (H) Magic A", 25],
@@ -4464,6 +5317,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 (H) Wraith B": {
     nodrop: 75,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 1 (H) Good", 4],
       ["Act 1 (H) Magic B", 25],
@@ -4471,6 +5326,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 (H) Wraith C": {
     nodrop: 75,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 1 (H) Good", 4],
       ["Act 1 (H) Magic B", 25],
@@ -4478,6 +5335,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 (H) Wraith A": {
     nodrop: 75,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 2 (H) Good", 4],
       ["Act 2 (H) Magic A", 25],
@@ -4485,6 +5344,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 (H) Wraith B": {
     nodrop: 75,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 2 (H) Good", 4],
       ["Act 2 (H) Magic B", 25],
@@ -4492,6 +5353,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 (H) Wraith C": {
     nodrop: 75,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 2 (H) Good", 4],
       ["Act 2 (H) Magic B", 25],
@@ -4499,6 +5362,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 (H) Wraith A": {
     nodrop: 75,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 3 (H) Good", 4],
       ["Act 3 (H) Magic A", 25],
@@ -4506,6 +5371,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 (H) Wraith B": {
     nodrop: 75,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 3 (H) Good", 4],
       ["Act 3 (H) Magic B", 25],
@@ -4513,6 +5380,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 (H) Wraith C": {
     nodrop: 75,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 3 (H) Good", 4],
       ["Act 3 (H) Magic B", 25],
@@ -4520,6 +5389,8 @@ export const TCDict: TCDictType = {
   },
   "Act 4 (H) Wraith A": {
     nodrop: 75,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 4 (H) Good", 4],
       ["Act 4 (H) Magic A", 25],
@@ -4527,6 +5398,8 @@ export const TCDict: TCDictType = {
   },
   "Act 4 (H) Wraith B": {
     nodrop: 75,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 4 (H) Good", 4],
       ["Act 4 (H) Magic B", 25],
@@ -4534,6 +5407,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 (H) Wraith A": {
     nodrop: 75,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 5 (H) Good", 4],
       ["Act 5 (H) Magic A", 25],
@@ -4541,6 +5416,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 (H) Wraith B": {
     nodrop: 75,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 5 (H) Good", 4],
       ["Act 5 (H) Magic B", 25],
@@ -4548,6 +5425,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 (H) Wraith C": {
     nodrop: 75,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 5 (H) Good", 4],
       ["Act 5 (H) Magic C", 25],
@@ -4555,6 +5434,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 Citem A": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [1024, 800, 800, 800],
     tcs: [
       ["gld,mul=1280", 60],
       ["Act 1 Equip A", 37],
@@ -4563,6 +5444,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 Citem B": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [1024, 800, 800, 800],
     tcs: [
       ["gld,mul=1280", 60],
       ["Act 1 Equip B", 37],
@@ -4571,6 +5454,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 Citem C": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [1024, 800, 800, 800],
     tcs: [
       ["gld,mul=1280", 60],
       ["Act 1 Equip C", 37],
@@ -4579,6 +5464,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 Citem A": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [1024, 800, 800, 800],
     tcs: [
       ["gld,mul=1280", 60],
       ["Act 2 Equip A", 37],
@@ -4587,6 +5474,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 Citem B": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [1024, 800, 800, 800],
     tcs: [
       ["gld,mul=1280", 60],
       ["Act 2 Equip B", 37],
@@ -4595,6 +5484,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 Citem C": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [1024, 800, 800, 800],
     tcs: [
       ["gld,mul=1280", 60],
       ["Act 2 Equip C", 37],
@@ -4603,6 +5494,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 Citem A": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [1024, 800, 800, 800],
     tcs: [
       ["gld,mul=1280", 60],
       ["Act 3 Equip A", 37],
@@ -4611,6 +5504,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 Citem B": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [1024, 800, 800, 800],
     tcs: [
       ["gld,mul=1280", 60],
       ["Act 3 Equip B", 37],
@@ -4619,6 +5514,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 Citem C": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [1024, 800, 800, 800],
     tcs: [
       ["gld,mul=1280", 60],
       ["Act 3 Equip C", 37],
@@ -4627,6 +5524,8 @@ export const TCDict: TCDictType = {
   },
   "Act 4 Citem A": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [1024, 800, 800, 800],
     tcs: [
       ["gld,mul=1280", 60],
       ["Act 4 Equip A", 37],
@@ -4635,6 +5534,8 @@ export const TCDict: TCDictType = {
   },
   "Act 4 Citem B": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [1024, 800, 800, 800],
     tcs: [
       ["gld,mul=1280", 60],
       ["Act 4 Equip B", 37],
@@ -4643,6 +5544,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 Citem A": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [1024, 800, 800, 800],
     tcs: [
       ["gld,mul=1280", 60],
       ["Act 5 Equip A", 37],
@@ -4651,6 +5554,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 Citem B": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [1024, 800, 800, 800],
     tcs: [
       ["gld,mul=1280", 60],
       ["Act 5 Equip B", 37],
@@ -4659,6 +5564,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 Citem C": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [1024, 800, 800, 800],
     tcs: [
       ["gld,mul=1280", 60],
       ["Act 5 Equip C", 37],
@@ -4667,6 +5574,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 (N) Citem A": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [1024, 800, 800, 800],
     tcs: [
       ["gld,mul=1280", 60],
       ["Act 1 (N) Equip A", 37],
@@ -4675,6 +5584,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 (N) Citem B": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [1024, 800, 800, 800],
     tcs: [
       ["gld,mul=1280", 60],
       ["Act 1 (N) Equip B", 37],
@@ -4683,6 +5594,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 (N) Citem C": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [1024, 800, 800, 800],
     tcs: [
       ["gld,mul=1280", 60],
       ["Act 1 (N) Equip B", 37],
@@ -4691,6 +5604,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 (N) Citem A": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [1024, 800, 800, 800],
     tcs: [
       ["gld,mul=1280", 60],
       ["Act 2 (N) Equip A", 37],
@@ -4699,6 +5614,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 (N) Citem B": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [1024, 800, 800, 800],
     tcs: [
       ["gld,mul=1280", 60],
       ["Act 2 (N) Equip B", 37],
@@ -4707,6 +5624,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 (N) Citem C": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [1024, 800, 800, 800],
     tcs: [
       ["gld,mul=1280", 60],
       ["Act 2 (N) Equip B", 37],
@@ -4715,6 +5634,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 (N) Citem A": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [1024, 800, 800, 800],
     tcs: [
       ["gld,mul=1280", 60],
       ["Act 3 (N) Equip A", 37],
@@ -4723,6 +5644,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 (N) Citem B": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [1024, 800, 800, 800],
     tcs: [
       ["gld,mul=1280", 60],
       ["Act 3 (N) Equip B", 37],
@@ -4731,6 +5654,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 (N) Citem C": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [1024, 800, 800, 800],
     tcs: [
       ["gld,mul=1280", 60],
       ["Act 3 (N) Equip B", 37],
@@ -4739,6 +5664,8 @@ export const TCDict: TCDictType = {
   },
   "Act 4 (N) Citem A": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [1024, 800, 800, 800],
     tcs: [
       ["gld,mul=1280", 60],
       ["Act 4 (N) Equip A", 37],
@@ -4747,6 +5674,8 @@ export const TCDict: TCDictType = {
   },
   "Act 4 (N) Citem B": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [1024, 800, 800, 800],
     tcs: [
       ["gld,mul=1280", 60],
       ["Act 4 (N) Equip B", 37],
@@ -4755,6 +5684,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 (N) Citem A": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [1024, 800, 800, 800],
     tcs: [
       ["gld,mul=1280", 60],
       ["Act 5 (N) Equip A", 37],
@@ -4763,6 +5694,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 (N) Citem B": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [1024, 800, 800, 800],
     tcs: [
       ["gld,mul=1280", 60],
       ["Act 5 (N) Equip B", 37],
@@ -4771,6 +5704,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 (N) Citem C": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [1024, 800, 800, 800],
     tcs: [
       ["gld,mul=1280", 60],
       ["Act 5 (N) Equip C", 37],
@@ -4779,6 +5714,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 (H) Citem A": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [1024, 800, 800, 800],
     tcs: [
       ["gld,mul=1280", 60],
       ["Act 1 (H) Equip A", 37],
@@ -4787,6 +5724,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 (H) Citem B": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [1024, 800, 800, 800],
     tcs: [
       ["gld,mul=1280", 60],
       ["Act 1 (H) Equip B", 37],
@@ -4795,6 +5734,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 (H) Citem C": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [1024, 800, 800, 800],
     tcs: [
       ["gld,mul=1280", 60],
       ["Act 1 (H) Equip B", 37],
@@ -4803,6 +5744,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 (H) Citem A": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [1024, 800, 800, 800],
     tcs: [
       ["gld,mul=1280", 60],
       ["Act 2 (H) Equip A", 37],
@@ -4811,6 +5754,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 (H) Citem B": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [1024, 800, 800, 800],
     tcs: [
       ["gld,mul=1280", 60],
       ["Act 2 (H) Equip B", 37],
@@ -4819,6 +5764,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 (H) Citem C": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [1024, 800, 800, 800],
     tcs: [
       ["gld,mul=1280", 60],
       ["Act 2 (H) Equip B", 37],
@@ -4827,6 +5774,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 (H) Citem A": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [1024, 800, 800, 800],
     tcs: [
       ["gld,mul=1280", 60],
       ["Act 3 (H) Equip A", 37],
@@ -4835,6 +5784,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 (H) Citem B": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [1024, 800, 800, 800],
     tcs: [
       ["gld,mul=1280", 60],
       ["Act 3 (H) Equip B", 37],
@@ -4843,6 +5794,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 (H) Citem C": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [1024, 800, 800, 800],
     tcs: [
       ["gld,mul=1280", 60],
       ["Act 3 (H) Equip B", 37],
@@ -4851,6 +5804,8 @@ export const TCDict: TCDictType = {
   },
   "Act 4 (H) Citem A": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [1024, 800, 800, 800],
     tcs: [
       ["gld,mul=1280", 60],
       ["Act 4 (H) Equip A", 37],
@@ -4859,6 +5814,8 @@ export const TCDict: TCDictType = {
   },
   "Act 4 (H) Citem B": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [1024, 800, 800, 800],
     tcs: [
       ["gld,mul=1280", 60],
       ["Act 4 (H) Equip B", 37],
@@ -4867,6 +5824,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 (H) Citem A": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [1024, 800, 800, 800],
     tcs: [
       ["gld,mul=1280", 60],
       ["Act 5 (H) Equip A", 37],
@@ -4875,6 +5834,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 (H) Citem B": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [1024, 800, 800, 800],
     tcs: [
       ["gld,mul=1280", 60],
       ["Act 5 (H) Equip B", 37],
@@ -4883,23 +5844,72 @@ export const TCDict: TCDictType = {
   },
   "Act 5 (H) Citem C": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [1024, 800, 800, 800],
     tcs: [
       ["gld,mul=1280", 60],
       ["Act 5 (H) Equip C", 37],
       ["Act 5 (H) Good", 3],
     ],
   },
-  "Act 1 Cpot A": { nodrop: 0, tcs: [["Hpotion 1", 1]] },
-  "Act 1 Cpot B": { nodrop: 0, tcs: [["Hpotion 1", 1]] },
-  "Act 1 Cpot C": { nodrop: 0, tcs: [["Hpotion 1", 1]] },
-  "Act 2 Cpot A": { nodrop: 0, tcs: [["Hpotion 2", 1]] },
-  "Act 2 Cpot B": { nodrop: 0, tcs: [["Hpotion 2", 1]] },
-  "Act 2 Cpot C": { nodrop: 0, tcs: [["Hpotion 2", 1]] },
-  "Act 3 Cpot A": { nodrop: 0, tcs: [["Hpotion 3", 1]] },
-  "Act 3 Cpot B": { nodrop: 0, tcs: [["Hpotion 3", 1]] },
-  "Act 3 Cpot C": { nodrop: 0, tcs: [["Hpotion 3", 1]] },
+  "Act 1 Cpot A": {
+    nodrop: 0,
+    picks: 2,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [["Hpotion 1", 1]],
+  },
+  "Act 1 Cpot B": {
+    nodrop: 0,
+    picks: 2,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [["Hpotion 1", 1]],
+  },
+  "Act 1 Cpot C": {
+    nodrop: 0,
+    picks: 2,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [["Hpotion 1", 1]],
+  },
+  "Act 2 Cpot A": {
+    nodrop: 0,
+    picks: 2,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [["Hpotion 2", 1]],
+  },
+  "Act 2 Cpot B": {
+    nodrop: 0,
+    picks: 2,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [["Hpotion 2", 1]],
+  },
+  "Act 2 Cpot C": {
+    nodrop: 0,
+    picks: 2,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [["Hpotion 2", 1]],
+  },
+  "Act 3 Cpot A": {
+    nodrop: 0,
+    picks: 2,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [["Hpotion 3", 1]],
+  },
+  "Act 3 Cpot B": {
+    nodrop: 0,
+    picks: 2,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [["Hpotion 3", 1]],
+  },
+  "Act 3 Cpot C": {
+    nodrop: 0,
+    picks: 2,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [["Hpotion 3", 1]],
+  },
   "Act 4 Cpot A": {
     nodrop: 0,
+    picks: 2,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Hpotion 3", 1],
       ["Hpotion 4", 2],
@@ -4907,6 +5917,8 @@ export const TCDict: TCDictType = {
   },
   "Act 4 Cpot B": {
     nodrop: 0,
+    picks: 2,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Hpotion 3", 1],
       ["Hpotion 4", 2],
@@ -4914,6 +5926,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 Cpot A": {
     nodrop: 0,
+    picks: 2,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Hpotion 4", 1],
       ["Hpotion 5", 2],
@@ -4921,6 +5935,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 Cpot B": {
     nodrop: 0,
+    picks: 2,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Hpotion 4", 1],
       ["Hpotion 5", 2],
@@ -4928,6 +5944,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 Cpot C": {
     nodrop: 0,
+    picks: 2,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Hpotion 4", 1],
       ["Hpotion 5", 2],
@@ -4935,6 +5953,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 (N) Cpot A": {
     nodrop: 0,
+    picks: 2,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Hpotion 4", 1],
       ["Hpotion 5", 2],
@@ -4943,6 +5963,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 (N) Cpot B": {
     nodrop: 0,
+    picks: 2,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Hpotion 4", 1],
       ["Hpotion 5", 2],
@@ -4951,6 +5973,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 (N) Cpot C": {
     nodrop: 0,
+    picks: 2,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Hpotion 4", 1],
       ["Hpotion 5", 2],
@@ -4959,6 +5983,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 (N) Cpot A": {
     nodrop: 0,
+    picks: 2,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Hpotion 4", 1],
       ["Hpotion 5", 2],
@@ -4967,6 +5993,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 (N) Cpot B": {
     nodrop: 0,
+    picks: 2,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Hpotion 4", 1],
       ["Hpotion 5", 2],
@@ -4975,6 +6003,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 (N) Cpot C": {
     nodrop: 0,
+    picks: 2,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Hpotion 4", 1],
       ["Hpotion 5", 2],
@@ -4983,6 +6013,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 (N) Cpot A": {
     nodrop: 0,
+    picks: 2,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["rvs", 1],
       ["Hpotion 4", 2],
@@ -4992,6 +6024,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 (N) Cpot B": {
     nodrop: 0,
+    picks: 2,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["rvs", 1],
       ["Hpotion 4", 2],
@@ -5001,6 +6035,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 (N) Cpot C": {
     nodrop: 0,
+    picks: 2,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["rvs", 1],
       ["Hpotion 4", 2],
@@ -5010,6 +6046,8 @@ export const TCDict: TCDictType = {
   },
   "Act 4 (N) Cpot A": {
     nodrop: 0,
+    picks: 2,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["rvs", 1],
       ["Hpotion 4", 2],
@@ -5019,6 +6057,8 @@ export const TCDict: TCDictType = {
   },
   "Act 4 (N) Cpot B": {
     nodrop: 0,
+    picks: 2,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["rvs", 1],
       ["Hpotion 4", 2],
@@ -5028,6 +6068,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 (N) Cpot A": {
     nodrop: 0,
+    picks: 2,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["rvs", 1],
       ["Hpotion 4", 2],
@@ -5037,6 +6079,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 (N) Cpot B": {
     nodrop: 0,
+    picks: 2,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["rvs", 1],
       ["Hpotion 4", 2],
@@ -5046,6 +6090,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 (N) Cpot C": {
     nodrop: 0,
+    picks: 2,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["rvs", 1],
       ["Hpotion 4", 2],
@@ -5055,6 +6101,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 (H) Cpot A": {
     nodrop: 0,
+    picks: 2,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["rvl", 1],
       ["Hpotion 4", 2],
@@ -5064,6 +6112,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 (H) Cpot B": {
     nodrop: 0,
+    picks: 2,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["rvl", 1],
       ["Hpotion 4", 2],
@@ -5073,6 +6123,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 (H) Cpot C": {
     nodrop: 0,
+    picks: 2,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["rvl", 1],
       ["Hpotion 4", 2],
@@ -5082,6 +6134,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 (H) Cpot A": {
     nodrop: 0,
+    picks: 2,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["rvl", 1],
       ["Hpotion 4", 2],
@@ -5091,6 +6145,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 (H) Cpot B": {
     nodrop: 0,
+    picks: 2,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["rvl", 1],
       ["Hpotion 4", 2],
@@ -5100,6 +6156,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 (H) Cpot C": {
     nodrop: 0,
+    picks: 2,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["rvl", 1],
       ["Hpotion 4", 2],
@@ -5109,6 +6167,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 (H) Cpot A": {
     nodrop: 0,
+    picks: 2,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["rvl", 1],
       ["Hpotion 4", 2],
@@ -5118,6 +6178,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 (H) Cpot B": {
     nodrop: 0,
+    picks: 2,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["rvl", 1],
       ["Hpotion 4", 2],
@@ -5127,6 +6189,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 (H) Cpot C": {
     nodrop: 0,
+    picks: 2,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["rvl", 1],
       ["Hpotion 4", 2],
@@ -5136,6 +6200,8 @@ export const TCDict: TCDictType = {
   },
   "Act 4 (H) Cpot A": {
     nodrop: 0,
+    picks: 2,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["rvl", 1],
       ["Hpotion 4", 2],
@@ -5145,6 +6211,8 @@ export const TCDict: TCDictType = {
   },
   "Act 4 (H) Cpot B": {
     nodrop: 0,
+    picks: 2,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["rvl", 1],
       ["Hpotion 4", 2],
@@ -5154,6 +6222,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 (H) Cpot A": {
     nodrop: 0,
+    picks: 2,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["rvl", 1],
       ["Hpotion 4", 2],
@@ -5163,6 +6233,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 (H) Cpot B": {
     nodrop: 0,
+    picks: 2,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["rvl", 1],
       ["Hpotion 4", 2],
@@ -5172,6 +6244,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 (H) Cpot C": {
     nodrop: 0,
+    picks: 2,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["rvl", 1],
       ["Hpotion 4", 2],
@@ -5181,6 +6255,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 Champ A": {
     nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 1 Citem A", 1],
       ["Act 1 Cpot A", 2],
@@ -5188,6 +6264,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 Champ B": {
     nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 1 Citem B", 1],
       ["Act 1 Cpot B", 1],
@@ -5195,6 +6273,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 Champ C": {
     nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 1 Citem C", 1],
       ["Act 1 Cpot C", 1],
@@ -5202,6 +6282,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 Champ A": {
     nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 2 Citem A", 1],
       ["Act 2 Cpot A", 1],
@@ -5209,6 +6291,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 Champ B": {
     nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 2 Citem B", 1],
       ["Act 2 Cpot B", 1],
@@ -5216,6 +6300,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 Champ C": {
     nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 2 Citem C", 1],
       ["Act 2 Cpot C", 1],
@@ -5223,6 +6309,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 Champ A": {
     nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 3 Citem A", 1],
       ["Act 3 Cpot A", 1],
@@ -5230,6 +6318,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 Champ B": {
     nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 3 Citem B", 1],
       ["Act 3 Cpot B", 1],
@@ -5237,6 +6327,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 Champ C": {
     nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 3 Citem C", 1],
       ["Act 3 Cpot C", 1],
@@ -5244,6 +6336,8 @@ export const TCDict: TCDictType = {
   },
   "Act 4 Champ A": {
     nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 4 Citem A", 1],
       ["Act 4 Cpot A", 1],
@@ -5251,6 +6345,8 @@ export const TCDict: TCDictType = {
   },
   "Act 4 Champ B": {
     nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 4 Citem B", 1],
       ["Act 4 Cpot B", 1],
@@ -5258,6 +6354,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 Champ A": {
     nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 5 Citem A", 1],
       ["Act 5 Cpot A", 1],
@@ -5265,6 +6363,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 Champ B": {
     nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 5 Citem B", 1],
       ["Act 5 Cpot B", 1],
@@ -5272,6 +6372,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 Champ C": {
     nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 5 Citem C", 1],
       ["Act 5 Cpot C", 1],
@@ -5279,6 +6381,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 (N) Champ A": {
     nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 1 (N) Citem A", 1],
       ["Act 1 (N) Cpot A", 2],
@@ -5286,6 +6390,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 (N) Champ B": {
     nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 1 (N) Citem B", 1],
       ["Act 1 (N) Cpot B", 2],
@@ -5293,6 +6399,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 (N) Champ C": {
     nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 1 (N) Citem C", 1],
       ["Act 1 (N) Cpot C", 2],
@@ -5300,6 +6408,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 (N) Champ A": {
     nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 2 (N) Citem A", 1],
       ["Act 2 (N) Cpot A", 2],
@@ -5307,6 +6417,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 (N) Champ B": {
     nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 2 (N) Citem B", 1],
       ["Act 2 (N) Cpot B", 2],
@@ -5314,6 +6426,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 (N) Champ C": {
     nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 2 (N) Citem C", 1],
       ["Act 2 (N) Cpot C", 2],
@@ -5321,6 +6435,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 (N) Champ A": {
     nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 3 (N) Citem A", 1],
       ["Act 3 (N) Cpot A", 2],
@@ -5328,6 +6444,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 (N) Champ B": {
     nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 3 (N) Citem B", 1],
       ["Act 3 (N) Cpot B", 2],
@@ -5335,6 +6453,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 (N) Champ C": {
     nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 3 (N) Citem C", 1],
       ["Act 3 (N) Cpot C", 2],
@@ -5342,6 +6462,8 @@ export const TCDict: TCDictType = {
   },
   "Act 4 (N) Champ A": {
     nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 4 (N) Citem A", 1],
       ["Act 4 (N) Cpot A", 2],
@@ -5349,6 +6471,8 @@ export const TCDict: TCDictType = {
   },
   "Act 4 (N) Champ B": {
     nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 4 (N) Citem B", 1],
       ["Act 4 (N) Cpot B", 2],
@@ -5356,6 +6480,8 @@ export const TCDict: TCDictType = {
   },
   "Act 4 (N) Champ C": {
     nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 4 (N) Citem B", 1],
       ["Act 4 (N) Cpot B", 2],
@@ -5363,6 +6489,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 (N) Champ A": {
     nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 5 (N) Citem A", 1],
       ["Act 5 (N) Cpot A", 2],
@@ -5370,6 +6498,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 (N) Champ B": {
     nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 5 (N) Citem B", 1],
       ["Act 5 (N) Cpot B", 2],
@@ -5377,6 +6507,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 (N) Champ C": {
     nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 5 (N) Citem C", 1],
       ["Act 5 (N) Cpot C", 2],
@@ -5384,6 +6516,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 (H) Champ A": {
     nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 1 (H) Citem A", 1],
       ["Act 1 (H) Cpot A", 3],
@@ -5391,6 +6525,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 (H) Champ B": {
     nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 1 (H) Citem B", 1],
       ["Act 1 (H) Cpot B", 3],
@@ -5398,6 +6534,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 (H) Champ C": {
     nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 1 (H) Citem C", 1],
       ["Act 1 (H) Cpot C", 3],
@@ -5405,6 +6543,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 (H) Champ A": {
     nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 2 (H) Citem A", 1],
       ["Act 2 (H) Cpot A", 3],
@@ -5412,6 +6552,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 (H) Champ B": {
     nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 2 (H) Citem B", 1],
       ["Act 2 (H) Cpot B", 3],
@@ -5419,6 +6561,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 (H) Champ C": {
     nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 2 (H) Citem C", 1],
       ["Act 2 (H) Cpot C", 3],
@@ -5426,6 +6570,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 (H) Champ A": {
     nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 3 (H) Citem A", 1],
       ["Act 3 (H) Cpot A", 3],
@@ -5433,6 +6579,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 (H) Champ B": {
     nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 3 (H) Citem B", 1],
       ["Act 3 (H) Cpot B", 3],
@@ -5440,6 +6588,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 (H) Champ C": {
     nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 3 (H) Citem C", 1],
       ["Act 3 (H) Cpot C", 3],
@@ -5447,6 +6597,8 @@ export const TCDict: TCDictType = {
   },
   "Act 4 (H) Champ A": {
     nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 4 (H) Citem A", 1],
       ["Act 4 (H) Cpot A", 3],
@@ -5454,6 +6606,8 @@ export const TCDict: TCDictType = {
   },
   "Act 4 (H) Champ B": {
     nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 4 (H) Citem B", 1],
       ["Act 4 (H) Cpot B", 3],
@@ -5461,6 +6615,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 (H) Champ A": {
     nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 5 (H) Citem A", 1],
       ["Act 5 (H) Cpot A", 3],
@@ -5468,6 +6624,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 (H) Champ B": {
     nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 5 (H) Citem B", 1],
       ["Act 5 (H) Cpot B", 3],
@@ -5475,6 +6633,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 (H) Champ C": {
     nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 5 (H) Citem C", 1],
       ["Act 5 (H) Cpot C", 3],
@@ -5482,6 +6642,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 Uitem A": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [1024, 800, 800, 800],
     tcs: [
       ["Act 1 Equip A", 58],
       ["Act 1 Good", 4],
@@ -5489,6 +6651,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 Uitem B": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [1024, 800, 800, 800],
     tcs: [
       ["Act 1 Equip B", 58],
       ["Act 1 Good", 4],
@@ -5496,6 +6660,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 Uitem C": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [1024, 800, 800, 800],
     tcs: [
       ["Act 1 Equip C", 58],
       ["Act 1 Good", 4],
@@ -5503,6 +6669,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 Uitem A": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [1024, 800, 800, 800],
     tcs: [
       ["Act 2 Equip A", 58],
       ["Act 2 Good", 4],
@@ -5510,6 +6678,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 Uitem B": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [1024, 800, 800, 800],
     tcs: [
       ["Act 2 Equip B", 58],
       ["Act 2 Good", 4],
@@ -5517,6 +6687,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 Uitem C": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [1024, 800, 800, 800],
     tcs: [
       ["Act 2 Equip C", 58],
       ["Act 3 Good", 4],
@@ -5524,6 +6696,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 Uitem A": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [1024, 800, 800, 800],
     tcs: [
       ["Act 3 Equip A", 58],
       ["Act 3 Good", 4],
@@ -5531,6 +6705,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 Uitem B": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [1024, 800, 800, 800],
     tcs: [
       ["Act 3 Equip B", 58],
       ["Act 3 Good", 4],
@@ -5538,6 +6714,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 Uitem C": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [1024, 800, 800, 800],
     tcs: [
       ["Act 3 Equip C", 58],
       ["Act 3 Good", 4],
@@ -5545,6 +6723,8 @@ export const TCDict: TCDictType = {
   },
   "Act 4 Uitem A": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [1024, 800, 800, 800],
     tcs: [
       ["Act 4 Equip A", 58],
       ["Act 4 Good", 4],
@@ -5552,6 +6732,8 @@ export const TCDict: TCDictType = {
   },
   "Act 4 Uitem B": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [1024, 800, 800, 800],
     tcs: [
       ["Act 4 Equip B", 58],
       ["Act 4 Good", 4],
@@ -5559,6 +6741,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 Uitem A": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [1024, 800, 800, 800],
     tcs: [
       ["Act 5 Equip A", 58],
       ["Act 5 Good", 4],
@@ -5566,6 +6750,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 Uitem B": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [1024, 800, 800, 800],
     tcs: [
       ["Act 5 Equip B", 58],
       ["Act 5 Good", 4],
@@ -5573,6 +6759,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 Uitem C": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [1024, 800, 800, 800],
     tcs: [
       ["Act 5 Equip C", 58],
       ["Act 5 Good", 4],
@@ -5580,6 +6768,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 (N) Uitem A": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [1024, 800, 800, 800],
     tcs: [
       ["Act 1 (N) Equip A", 58],
       ["Act 1 (N) Good", 4],
@@ -5587,6 +6777,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 (N) Uitem B": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [1024, 800, 800, 800],
     tcs: [
       ["Act 1 (N) Equip B", 58],
       ["Act 1 (N) Good", 4],
@@ -5594,6 +6786,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 (N) Uitem C": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [1024, 800, 800, 800],
     tcs: [
       ["Act 1 (N) Equip B", 58],
       ["Act 1 (N) Good", 4],
@@ -5601,6 +6795,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 (N) Uitem A": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [1024, 800, 800, 800],
     tcs: [
       ["Act 2 (N) Equip A", 58],
       ["Act 2 (N) Good", 4],
@@ -5608,6 +6804,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 (N) Uitem B": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [1024, 800, 800, 800],
     tcs: [
       ["Act 2 (N) Equip B", 58],
       ["Act 2 (N) Good", 4],
@@ -5615,6 +6813,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 (N) Uitem C": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [1024, 800, 800, 800],
     tcs: [
       ["Act 2 (N) Equip B", 58],
       ["Act 2 (N) Good", 4],
@@ -5622,6 +6822,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 (N) Uitem A": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [1024, 800, 800, 800],
     tcs: [
       ["Act 3 (N) Equip A", 58],
       ["Act 3 (N) Good", 4],
@@ -5629,6 +6831,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 (N) Uitem B": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [1024, 800, 800, 800],
     tcs: [
       ["Act 3 (N) Equip B", 58],
       ["Act 3 (N) Good", 4],
@@ -5636,6 +6840,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 (N) Uitem C": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [1024, 800, 800, 800],
     tcs: [
       ["Act 3 (N) Equip B", 58],
       ["Act 3 (N) Good", 4],
@@ -5643,6 +6849,8 @@ export const TCDict: TCDictType = {
   },
   "Act 4 (N) Uitem A": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [1024, 800, 800, 800],
     tcs: [
       ["Act 4 (N) Equip A", 58],
       ["Act 4 (N) Good", 4],
@@ -5650,6 +6858,8 @@ export const TCDict: TCDictType = {
   },
   "Act 4 (N) Uitem B": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [1024, 800, 800, 800],
     tcs: [
       ["Act 4 (N) Equip B", 58],
       ["Act 4 (N) Good", 4],
@@ -5657,6 +6867,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 (N) Uitem A": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [1024, 800, 800, 800],
     tcs: [
       ["Act 5 (N) Equip A", 58],
       ["Act 5 (N) Good", 4],
@@ -5664,6 +6876,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 (N) Uitem B": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [1024, 800, 800, 800],
     tcs: [
       ["Act 5 (N) Equip B", 58],
       ["Act 5 (N) Good", 4],
@@ -5671,6 +6885,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 (N) Uitem C": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [1024, 800, 800, 800],
     tcs: [
       ["Act 5 (N) Equip C", 58],
       ["Act 5 (N) Good", 4],
@@ -5678,6 +6894,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 (H) Uitem A": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [1024, 800, 800, 800],
     tcs: [
       ["Act 1 (H) Equip A", 58],
       ["Act 1 (H) Good", 4],
@@ -5685,6 +6903,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 (H) Uitem B": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [1024, 800, 800, 800],
     tcs: [
       ["Act 1 (H) Equip B", 58],
       ["Act 1 (H) Good", 4],
@@ -5692,6 +6912,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 (H) Uitem C": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [1024, 800, 800, 800],
     tcs: [
       ["Act 1 (H) Equip B", 58],
       ["Act 1 (H) Good", 4],
@@ -5699,6 +6921,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 (H) Uitem A": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [1024, 800, 800, 800],
     tcs: [
       ["Act 2 (H) Equip A", 58],
       ["Act 2 (H) Good", 4],
@@ -5706,6 +6930,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 (H) Uitem B": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [1024, 800, 800, 800],
     tcs: [
       ["Act 2 (H) Equip B", 58],
       ["Act 2 (H) Good", 4],
@@ -5713,6 +6939,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 (H) Uitem C": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [1024, 800, 800, 800],
     tcs: [
       ["Act 2 (H) Equip B", 58],
       ["Act 2 (H) Good", 4],
@@ -5720,6 +6948,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 (H) Uitem A": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [1024, 800, 800, 800],
     tcs: [
       ["Act 3 (H) Equip A", 58],
       ["Act 3 (H) Good", 4],
@@ -5727,6 +6957,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 (H) Uitem B": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [1024, 800, 800, 800],
     tcs: [
       ["Act 3 (H) Equip B", 58],
       ["Act 3 (H) Good", 4],
@@ -5734,6 +6966,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 (H) Uitem C": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [1024, 800, 800, 800],
     tcs: [
       ["Act 3 (H) Equip B", 58],
       ["Act 3 (H) Good", 4],
@@ -5741,6 +6975,8 @@ export const TCDict: TCDictType = {
   },
   "Act 4 (H) Uitem A": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [1024, 800, 800, 800],
     tcs: [
       ["Act 4 (H) Equip A", 58],
       ["Act 4 (H) Good", 4],
@@ -5748,6 +6984,8 @@ export const TCDict: TCDictType = {
   },
   "Act 4 (H) Uitem B": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [1024, 800, 800, 800],
     tcs: [
       ["Act 4 (H) Equip B", 58],
       ["Act 4 (H) Good", 4],
@@ -5755,6 +6993,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 (H) Uitem A": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [1024, 800, 800, 800],
     tcs: [
       ["Act 5 (H) Equip A", 58],
       ["Act 5 (H) Good", 4],
@@ -5762,6 +7002,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 (H) Uitem B": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [1024, 800, 800, 800],
     tcs: [
       ["Act 5 (H) Equip B", 58],
       ["Act 5 (H) Good", 4],
@@ -5769,6 +7011,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 (H) Uitem C": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [1024, 800, 800, 800],
     tcs: [
       ["Act 5 (H) Equip C", 58],
       ["Act 5 (H) Good", 4],
@@ -5776,6 +7020,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 Unique A": {
     nodrop: 0,
+    picks: -3,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 1 Uitem A", 1],
       ["Act 1 Cpot A", 2],
@@ -5783,6 +7029,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 Unique B": {
     nodrop: 0,
+    picks: -3,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 1 Uitem B", 1],
       ["Act 1 Cpot B", 2],
@@ -5790,6 +7038,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 Unique C": {
     nodrop: 0,
+    picks: -3,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 1 Uitem C", 1],
       ["Act 1 Cpot C", 2],
@@ -5797,6 +7047,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 Unique A": {
     nodrop: 0,
+    picks: -3,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 2 Uitem A", 1],
       ["Act 2 Cpot A", 2],
@@ -5804,6 +7056,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 Unique B": {
     nodrop: 0,
+    picks: -3,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 2 Uitem B", 1],
       ["Act 2 Cpot B", 2],
@@ -5811,6 +7065,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 Unique C": {
     nodrop: 0,
+    picks: -3,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 2 Uitem C", 1],
       ["Act 2 Cpot C", 2],
@@ -5818,6 +7074,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 Unique A": {
     nodrop: 0,
+    picks: -3,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 3 Uitem A", 1],
       ["Act 3 Cpot A", 2],
@@ -5825,6 +7083,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 Unique B": {
     nodrop: 0,
+    picks: -3,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 3 Uitem B", 1],
       ["Act 3 Cpot B", 2],
@@ -5832,6 +7092,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 Unique C": {
     nodrop: 0,
+    picks: -3,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 3 Uitem C", 1],
       ["Act 3 Cpot C", 2],
@@ -5839,6 +7101,8 @@ export const TCDict: TCDictType = {
   },
   "Act 4 Unique A": {
     nodrop: 0,
+    picks: -3,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 4 Uitem A", 1],
       ["Act 4 Cpot A", 2],
@@ -5846,6 +7110,8 @@ export const TCDict: TCDictType = {
   },
   "Act 4 Unique B": {
     nodrop: 0,
+    picks: -3,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 4 Uitem B", 1],
       ["Act 4 Cpot B", 2],
@@ -5853,6 +7119,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 Unique A": {
     nodrop: 0,
+    picks: -3,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 5 Uitem A", 1],
       ["Act 5 Cpot A", 2],
@@ -5860,6 +7128,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 Unique B": {
     nodrop: 0,
+    picks: -3,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 5 Uitem B", 1],
       ["Act 5 Cpot B", 2],
@@ -5867,6 +7137,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 Unique C": {
     nodrop: 0,
+    picks: -3,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 5 Uitem C", 1],
       ["Act 5 Cpot C", 2],
@@ -5874,6 +7146,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 (N) Unique A": {
     nodrop: 0,
+    picks: -3,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 1 (N) Uitem A", 1],
       ["Act 1 (N) Cpot A", 2],
@@ -5881,6 +7155,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 (N) Unique B": {
     nodrop: 0,
+    picks: -3,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 1 (N) Uitem B", 1],
       ["Act 1 (N) Cpot B", 2],
@@ -5888,6 +7164,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 (N) Unique C": {
     nodrop: 0,
+    picks: -3,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 1 (N) Uitem C", 1],
       ["Act 1 (N) Cpot C", 2],
@@ -5895,6 +7173,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 (N) Unique A": {
     nodrop: 0,
+    picks: -3,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 2 (N) Uitem A", 1],
       ["Act 2 (N) Cpot A", 2],
@@ -5902,6 +7182,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 (N) Unique B": {
     nodrop: 0,
+    picks: -3,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 2 (N) Uitem B", 1],
       ["Act 2 (N) Cpot B", 2],
@@ -5909,6 +7191,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 (N) Unique C": {
     nodrop: 0,
+    picks: -3,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 2 (N) Uitem C", 1],
       ["Act 2 (N) Cpot C", 2],
@@ -5916,6 +7200,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 (N) Unique A": {
     nodrop: 0,
+    picks: -3,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 3 (N) Uitem A", 1],
       ["Act 3 (N) Cpot A", 2],
@@ -5923,6 +7209,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 (N) Unique B": {
     nodrop: 0,
+    picks: -3,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 3 (N) Uitem B", 1],
       ["Act 3 (N) Cpot B", 2],
@@ -5930,6 +7218,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 (N) Unique C": {
     nodrop: 0,
+    picks: -3,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 3 (N) Uitem C", 1],
       ["Act 3 (N) Cpot C", 2],
@@ -5937,6 +7227,8 @@ export const TCDict: TCDictType = {
   },
   "Act 4 (N) Unique A": {
     nodrop: 0,
+    picks: -3,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 4 (N) Uitem A", 1],
       ["Act 4 (N) Cpot A", 2],
@@ -5944,6 +7236,8 @@ export const TCDict: TCDictType = {
   },
   "Act 4 (N) Unique B": {
     nodrop: 0,
+    picks: -3,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 4 (N) Uitem B", 1],
       ["Act 4 (N) Cpot B", 2],
@@ -5951,6 +7245,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 (N) Unique A": {
     nodrop: 0,
+    picks: -3,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 5 (N) Uitem A", 1],
       ["Act 5 (N) Cpot A", 2],
@@ -5958,6 +7254,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 (N) Unique B": {
     nodrop: 0,
+    picks: -3,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 5 (N) Uitem B", 1],
       ["Act 5 (N) Cpot B", 2],
@@ -5965,6 +7263,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 (N) Unique C": {
     nodrop: 0,
+    picks: -3,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 5 (N) Uitem C", 1],
       ["Act 5 (N) Cpot C", 2],
@@ -5972,6 +7272,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 (H) Unique A": {
     nodrop: 0,
+    picks: -3,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 1 (H) Uitem A", 1],
       ["Act 1 (H) Cpot A", 2],
@@ -5979,6 +7281,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 (H) Unique B": {
     nodrop: 0,
+    picks: -3,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 1 (H) Uitem B", 1],
       ["Act 1 (H) Cpot B", 2],
@@ -5986,6 +7290,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 (H) Unique C": {
     nodrop: 0,
+    picks: -3,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 1 (H) Uitem C", 1],
       ["Act 1 (H) Cpot C", 2],
@@ -5993,6 +7299,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 (H) Unique A": {
     nodrop: 0,
+    picks: -3,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 2 (H) Uitem A", 1],
       ["Act 2 (H) Cpot A", 2],
@@ -6000,6 +7308,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 (H) Unique B": {
     nodrop: 0,
+    picks: -3,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 2 (H) Uitem B", 1],
       ["Act 2 (H) Cpot B", 2],
@@ -6007,6 +7317,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 (H) Unique C": {
     nodrop: 0,
+    picks: -3,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 2 (H) Uitem C", 1],
       ["Act 2 (H) Cpot C", 2],
@@ -6014,6 +7326,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 (H) Unique A": {
     nodrop: 0,
+    picks: -3,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 3 (H) Uitem A", 1],
       ["Act 3 (H) Cpot A", 2],
@@ -6021,6 +7335,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 (H) Unique B": {
     nodrop: 0,
+    picks: -3,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 3 (H) Uitem B", 1],
       ["Act 3 (H) Cpot B", 2],
@@ -6028,6 +7344,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 (H) Unique C": {
     nodrop: 0,
+    picks: -3,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 3 (H) Uitem C", 1],
       ["Act 3 (H) Cpot C", 2],
@@ -6035,6 +7353,8 @@ export const TCDict: TCDictType = {
   },
   "Act 4 (H) Unique A": {
     nodrop: 0,
+    picks: -3,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 4 (H) Uitem A", 1],
       ["Act 4 (H) Cpot A", 2],
@@ -6042,6 +7362,8 @@ export const TCDict: TCDictType = {
   },
   "Act 4 (H) Unique B": {
     nodrop: 0,
+    picks: -3,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 4 (H) Uitem B", 1],
       ["Act 4 (H) Cpot B", 2],
@@ -6049,6 +7371,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 (H) Unique A": {
     nodrop: 0,
+    picks: -3,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 5 (H) Uitem A", 1],
       ["Act 5 (H) Cpot A", 2],
@@ -6056,6 +7380,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 (H) Unique B": {
     nodrop: 0,
+    picks: -3,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 5 (H) Uitem B", 1],
       ["Act 5 (H) Cpot B", 2],
@@ -6063,6 +7389,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 (H) Unique C": {
     nodrop: 0,
+    picks: -3,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 5 (H) Uitem C", 1],
       ["Act 5 (H) Cpot C", 2],
@@ -6070,6 +7398,8 @@ export const TCDict: TCDictType = {
   },
   "Quill 1": {
     nodrop: 125,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 19],
       ["Act 1 Junk", 19],
@@ -6077,6 +7407,8 @@ export const TCDict: TCDictType = {
   },
   "Quill 2": {
     nodrop: 125,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 19],
       ["Act 1 Junk", 19],
@@ -6084,6 +7416,8 @@ export const TCDict: TCDictType = {
   },
   "Quill 3": {
     nodrop: 125,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 19],
       ["Act 1 Junk", 19],
@@ -6092,6 +7426,8 @@ export const TCDict: TCDictType = {
   },
   "Quill 4": {
     nodrop: 125,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 19],
       ["Act 1 Junk", 19],
@@ -6100,6 +7436,8 @@ export const TCDict: TCDictType = {
   },
   "Quill 5": {
     nodrop: 125,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 19],
       ["Act 3 Junk", 19],
@@ -6108,6 +7446,8 @@ export const TCDict: TCDictType = {
   },
   "Quill 1 (N)": {
     nodrop: 125,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 19],
       ["Act 1 (N) Junk", 19],
@@ -6115,6 +7455,8 @@ export const TCDict: TCDictType = {
   },
   "Quill 2 (N)": {
     nodrop: 125,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 19],
       ["Act 1 (N) Junk", 19],
@@ -6123,6 +7465,8 @@ export const TCDict: TCDictType = {
   },
   "Quill 3 (N)": {
     nodrop: 125,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 19],
       ["Act 1 (N) Junk", 19],
@@ -6131,6 +7475,8 @@ export const TCDict: TCDictType = {
   },
   "Quill 4 (N)": {
     nodrop: 125,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 19],
       ["Act 1 (N) Junk", 19],
@@ -6139,6 +7485,8 @@ export const TCDict: TCDictType = {
   },
   "Quill 5 (N)": {
     nodrop: 125,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 19],
       ["Act 3 (N) Junk", 19],
@@ -6147,6 +7495,8 @@ export const TCDict: TCDictType = {
   },
   "Quill 1 (H)": {
     nodrop: 125,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 19],
       ["Act 1 (H) Junk", 19],
@@ -6154,6 +7504,8 @@ export const TCDict: TCDictType = {
   },
   "Quill 2 (H)": {
     nodrop: 125,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 19],
       ["Act 1 (H) Junk", 19],
@@ -6162,6 +7514,8 @@ export const TCDict: TCDictType = {
   },
   "Quill 3 (H)": {
     nodrop: 125,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 19],
       ["Act 1 (H) Junk", 19],
@@ -6170,6 +7524,8 @@ export const TCDict: TCDictType = {
   },
   "Quill 4 (H)": {
     nodrop: 125,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 19],
       ["Act 1 (H) Junk", 19],
@@ -6178,6 +7534,8 @@ export const TCDict: TCDictType = {
   },
   "Quill 5 (H)": {
     nodrop: 125,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 19],
       ["Act 3 (H) Junk", 19],
@@ -6186,6 +7544,8 @@ export const TCDict: TCDictType = {
   },
   "Swarm 1": {
     nodrop: 125,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Potion 2", 12],
       ["Misc 1", 6],
@@ -6195,6 +7555,8 @@ export const TCDict: TCDictType = {
   },
   "Swarm 2": {
     nodrop: 125,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Potion 3", 12],
       ["Misc 2", 6],
@@ -6204,6 +7566,8 @@ export const TCDict: TCDictType = {
   },
   "Swarm 1 (N)": {
     nodrop: 125,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Potion 6", 12],
       ["Misc 2", 6],
@@ -6213,6 +7577,8 @@ export const TCDict: TCDictType = {
   },
   "Swarm 2 (N)": {
     nodrop: 125,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Potion 6", 12],
       ["Misc 2", 6],
@@ -6222,6 +7588,8 @@ export const TCDict: TCDictType = {
   },
   "Swarm 1 (H)": {
     nodrop: 125,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Potion 6", 12],
       ["Misc 2", 6],
@@ -6231,6 +7599,8 @@ export const TCDict: TCDictType = {
   },
   "Swarm 2 (H)": {
     nodrop: 125,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Potion 6", 12],
       ["Misc 2", 6],
@@ -6240,6 +7610,8 @@ export const TCDict: TCDictType = {
   },
   Andariel: {
     nodrop: 19,
+    picks: 7,
+    qualityRatios: [1024, 983, 983, 983],
     tcs: [
       ["gld,mul=1280", 11],
       ["Act 2 Equip A", 19],
@@ -6249,6 +7621,8 @@ export const TCDict: TCDictType = {
   },
   "Andariel (N)": {
     nodrop: 19,
+    picks: 7,
+    qualityRatios: [1024, 983, 983, 983],
     tcs: [
       ["gld,mul=1536", 11],
       ["Act 2 (N) Equip A", 19],
@@ -6258,6 +7632,8 @@ export const TCDict: TCDictType = {
   },
   "Andariel (H)": {
     nodrop: 19,
+    picks: 7,
+    qualityRatios: [1024, 983, 983, 983],
     tcs: [
       ["gld,mul=2048", 11],
       ["Act 2 (H) Equip A", 19],
@@ -6268,6 +7644,8 @@ export const TCDict: TCDictType = {
   },
   Andarielq: {
     nodrop: 19,
+    picks: 7,
+    qualityRatios: [1024, 1024, 995, 995],
     tcs: [
       ["Act 2 Equip A", 19],
       ["Act 2 Good", 3],
@@ -6275,6 +7653,8 @@ export const TCDict: TCDictType = {
   },
   "Andarielq (N)": {
     nodrop: 19,
+    picks: 7,
+    qualityRatios: [1024, 1024, 995, 995],
     tcs: [
       ["Act 2 (N) Equip A", 19],
       ["Act 2 (N) Good", 3],
@@ -6282,6 +7662,8 @@ export const TCDict: TCDictType = {
   },
   "Andarielq (H)": {
     nodrop: 19,
+    picks: 7,
+    qualityRatios: [1024, 1024, 995, 995],
     tcs: [
       ["Act 2 (H) Equip A", 19],
       ["Act 2 (H) Good", 3],
@@ -6290,6 +7672,8 @@ export const TCDict: TCDictType = {
   },
   "Duriel - Base": {
     nodrop: 19,
+    picks: 7,
+    qualityRatios: [1024, 983, 983, 983],
     tcs: [
       ["gld,mul=1280", 11],
       ["Act 3 Equip A", 19],
@@ -6299,6 +7683,8 @@ export const TCDict: TCDictType = {
   },
   "Duriel (N) - Base": {
     nodrop: 19,
+    picks: 7,
+    qualityRatios: [1024, 983, 983, 983],
     tcs: [
       ["gld,mul=1536", 11],
       ["Act 3 (N) Equip A", 19],
@@ -6308,6 +7694,8 @@ export const TCDict: TCDictType = {
   },
   "Duriel (H) - Base": {
     nodrop: 19,
+    picks: 7,
+    qualityRatios: [1024, 983, 983, 983],
     tcs: [
       ["gld,mul=2048", 11],
       ["Act 3 (H) Equip A", 19],
@@ -6318,6 +7706,8 @@ export const TCDict: TCDictType = {
   },
   "Durielq - Base": {
     nodrop: 19,
+    picks: 7,
+    qualityRatios: [1024, 1024, 993, 993],
     tcs: [
       ["Act 3 Equip A", 19],
       ["Act 3 Good", 3],
@@ -6325,6 +7715,8 @@ export const TCDict: TCDictType = {
   },
   "Durielq (N) - Base": {
     nodrop: 19,
+    picks: 7,
+    qualityRatios: [1024, 1024, 993, 993],
     tcs: [
       ["Act 3 (N) Equip A", 19],
       ["Act 3 (N) Good", 3],
@@ -6332,6 +7724,8 @@ export const TCDict: TCDictType = {
   },
   "Durielq (H) - Base": {
     nodrop: 19,
+    picks: 7,
+    qualityRatios: [1024, 1024, 993, 993],
     tcs: [
       ["Act 3 (H) Equip A", 19],
       ["Act 3 (H) Good", 3],
@@ -6340,6 +7734,8 @@ export const TCDict: TCDictType = {
   },
   Radament: {
     nodrop: 19,
+    picks: 5,
+    qualityRatios: [1024, 900, 900, 900],
     tcs: [
       ["gld,mul=1280", 11],
       ["Act 3 Equip B", 19],
@@ -6349,6 +7745,8 @@ export const TCDict: TCDictType = {
   },
   "Radament (N)": {
     nodrop: 19,
+    picks: 5,
+    qualityRatios: [1024, 900, 900, 900],
     tcs: [
       ["gld,mul=1536", 11],
       ["Act 3 (N) Equip B", 19],
@@ -6358,6 +7756,8 @@ export const TCDict: TCDictType = {
   },
   "Radament (H)": {
     nodrop: 19,
+    picks: 5,
+    qualityRatios: [1024, 900, 900, 900],
     tcs: [
       ["gld,mul=2048", 11],
       ["Act 3 (H) Equip C", 19],
@@ -6367,6 +7767,8 @@ export const TCDict: TCDictType = {
   },
   "Flying Scimitar": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 2 Good", 3],
       ["scm", 57],
@@ -6374,6 +7776,8 @@ export const TCDict: TCDictType = {
   },
   "Flying Scimitar (N)": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 2 (N) Good", 3],
       ["scm", 25],
@@ -6382,6 +7786,8 @@ export const TCDict: TCDictType = {
   },
   "Flying Scimitar (H)": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 2 (H) Good", 3],
       ["scm", 7],
@@ -6391,6 +7797,8 @@ export const TCDict: TCDictType = {
   },
   Mephisto: {
     nodrop: 15,
+    picks: 7,
+    qualityRatios: [1024, 983, 983, 983],
     tcs: [
       ["gld,mul=1280", 5],
       ["Act 4 Equip A", 52],
@@ -6400,6 +7808,8 @@ export const TCDict: TCDictType = {
   },
   "Mephisto (N)": {
     nodrop: 15,
+    picks: 7,
+    qualityRatios: [1024, 983, 983, 983],
     tcs: [
       ["gld,mul=1536", 5],
       ["Act 4 (N) Equip A", 52],
@@ -6409,6 +7819,8 @@ export const TCDict: TCDictType = {
   },
   "Mephisto (H)": {
     nodrop: 15,
+    picks: 7,
+    qualityRatios: [1024, 983, 983, 983],
     tcs: [
       ["gld,mul=2048", 5],
       ["Act 4 (H) Equip A", 52],
@@ -6419,6 +7831,8 @@ export const TCDict: TCDictType = {
   },
   Mephistoq: {
     nodrop: 15,
+    picks: 7,
+    qualityRatios: [1024, 1024, 993, 993],
     tcs: [
       ["Act 4 Equip A", 52],
       ["Act 4 Good", 3],
@@ -6426,6 +7840,8 @@ export const TCDict: TCDictType = {
   },
   "Mephistoq (N)": {
     nodrop: 15,
+    picks: 7,
+    qualityRatios: [1024, 1024, 993, 993],
     tcs: [
       ["Act 4 (N) Equip A", 52],
       ["Act 4 (N) Good", 3],
@@ -6433,6 +7849,8 @@ export const TCDict: TCDictType = {
   },
   "Mephistoq (H)": {
     nodrop: 15,
+    picks: 7,
+    qualityRatios: [1024, 1024, 993, 993],
     tcs: [
       ["Act 4 (H) Equip A", 52],
       ["Act 4 (H) Good", 3],
@@ -6441,6 +7859,8 @@ export const TCDict: TCDictType = {
   },
   Diablo: {
     nodrop: 15,
+    picks: 7,
+    qualityRatios: [1024, 983, 983, 983],
     tcs: [
       ["gld,mul=1280", 5],
       ["Act 5 Equip A", 52],
@@ -6450,6 +7870,8 @@ export const TCDict: TCDictType = {
   },
   "Diablo (N)": {
     nodrop: 15,
+    picks: 7,
+    qualityRatios: [1024, 983, 983, 983],
     tcs: [
       ["gld,mul=1536", 5],
       ["Act 5 (N) Equip A", 52],
@@ -6459,6 +7881,8 @@ export const TCDict: TCDictType = {
   },
   "Diablo (H)": {
     nodrop: 15,
+    picks: 7,
+    qualityRatios: [1024, 983, 983, 983],
     tcs: [
       ["gld,mul=2048", 5],
       ["Act 5 (H) Equip A", 52],
@@ -6469,6 +7893,8 @@ export const TCDict: TCDictType = {
   },
   Diabloq: {
     nodrop: 15,
+    picks: 7,
+    qualityRatios: [1024, 1024, 993, 993],
     tcs: [
       ["Act 5 Equip A", 52],
       ["Act 5 Good", 3],
@@ -6476,6 +7902,8 @@ export const TCDict: TCDictType = {
   },
   "Diabloq (N)": {
     nodrop: 15,
+    picks: 7,
+    qualityRatios: [1024, 1024, 993, 993],
     tcs: [
       ["Act 5 (N) Equip A", 52],
       ["Act 5 (N) Good", 3],
@@ -6483,6 +7911,8 @@ export const TCDict: TCDictType = {
   },
   "Diabloq (H)": {
     nodrop: 15,
+    picks: 7,
+    qualityRatios: [1024, 1024, 993, 993],
     tcs: [
       ["Act 5 (H) Equip A", 52],
       ["Act 5 (H) Good", 3],
@@ -6491,6 +7921,8 @@ export const TCDict: TCDictType = {
   },
   Summoner: {
     nodrop: 19,
+    picks: 5,
+    qualityRatios: [1024, 972, 900, 900],
     tcs: [
       ["gld,mul=1280", 9],
       ["Act 2 Equip C", 15],
@@ -6501,6 +7933,8 @@ export const TCDict: TCDictType = {
   },
   "Summoner (N)": {
     nodrop: 19,
+    picks: 5,
+    qualityRatios: [1024, 972, 900, 900],
     tcs: [
       ["gld,mul=1536", 9],
       ["Act 2 (N) Equip C", 15],
@@ -6511,6 +7945,8 @@ export const TCDict: TCDictType = {
   },
   "Summoner (H)": {
     nodrop: 19,
+    picks: 5,
+    qualityRatios: [1024, 972, 900, 900],
     tcs: [
       ["gld,mul=2048", 9],
       ["Act 2 (H) Equip C", 15],
@@ -6522,6 +7958,8 @@ export const TCDict: TCDictType = {
   },
   Council: {
     nodrop: 19,
+    picks: 3,
+    qualityRatios: [1024, 800, 800, 650],
     tcs: [
       ["gld,mul=1280", 9],
       ["Act 4 Equip A", 15],
@@ -6532,6 +7970,8 @@ export const TCDict: TCDictType = {
   },
   "Council (N)": {
     nodrop: 19,
+    picks: 3,
+    qualityRatios: [1024, 800, 800, 650],
     tcs: [
       ["gld,mul=1536", 9],
       ["Act 4 (N) Equip A", 15],
@@ -6542,6 +7982,8 @@ export const TCDict: TCDictType = {
   },
   "Council (H)": {
     nodrop: 19,
+    picks: 3,
+    qualityRatios: [1024, 800, 800, 650],
     tcs: [
       ["gld,mul=2048", 9],
       ["Act 4 (H) Equip A", 15],
@@ -6552,6 +7994,8 @@ export const TCDict: TCDictType = {
   },
   Griswold: {
     nodrop: 0,
+    picks: -3,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 1 Uitem C", 1],
       ["Act 1 Melee B", 2],
@@ -6559,6 +8003,8 @@ export const TCDict: TCDictType = {
   },
   "Griswold (N)": {
     nodrop: 0,
+    picks: -3,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 1 (H) Uitem C", 1],
       ["Act 1 (N) Melee B", 2],
@@ -6566,6 +8012,8 @@ export const TCDict: TCDictType = {
   },
   "Griswold (H)": {
     nodrop: 0,
+    picks: -3,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 1 (H) Uitem C", 1],
       ["Act 1 (H) Melee B", 2],
@@ -6573,6 +8021,8 @@ export const TCDict: TCDictType = {
   },
   Cow: {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 19],
       ["Act 5 Equip A", 19],
@@ -6582,6 +8032,8 @@ export const TCDict: TCDictType = {
   },
   "Cow (N)": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 19],
       ["Act 5 (N) Equip A", 19],
@@ -6591,6 +8043,8 @@ export const TCDict: TCDictType = {
   },
   "Cow (H)": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 19],
       ["Act 5 (H) Equip B", 19],
@@ -6600,6 +8054,8 @@ export const TCDict: TCDictType = {
   },
   "Trapped Soul": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 19],
       ["Act 4 Equip A", 8],
@@ -6608,6 +8064,8 @@ export const TCDict: TCDictType = {
   },
   "Trapped Soul (N)": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 19],
       ["Act 4 (N) Equip A", 8],
@@ -6616,6 +8074,8 @@ export const TCDict: TCDictType = {
   },
   "Trapped Soul (H)": {
     nodrop: 100,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld", 19],
       ["Act 4 (H) Equip A", 8],
@@ -6624,6 +8084,8 @@ export const TCDict: TCDictType = {
   },
   Haphesto: {
     nodrop: 19,
+    picks: 5,
+    qualityRatios: [1024, 900, 800, 800],
     tcs: [
       ["gld,mul=1280", 14],
       ["Act 5 Equip A", 19],
@@ -6633,6 +8095,8 @@ export const TCDict: TCDictType = {
   },
   "Haphesto (N)": {
     nodrop: 19,
+    picks: 5,
+    qualityRatios: [1024, 900, 800, 800],
     tcs: [
       ["gld,mul=1536", 14],
       ["Act 5 (N) Equip A", 19],
@@ -6642,6 +8106,8 @@ export const TCDict: TCDictType = {
   },
   "Haphesto (H)": {
     nodrop: 19,
+    picks: 5,
+    qualityRatios: [1024, 900, 800, 800],
     tcs: [
       ["gld,mul=2048", 14],
       ["Act 5 (H) Equip A", 19],
@@ -6651,6 +8117,8 @@ export const TCDict: TCDictType = {
   },
   Nihlathak: {
     nodrop: 19,
+    picks: 5,
+    qualityRatios: [1024, 900, 900, 900],
     tcs: [
       ["gld,mul=1280", 14],
       ["Act 5 Equip B", 19],
@@ -6660,6 +8128,8 @@ export const TCDict: TCDictType = {
   },
   "Nihlathak (N)": {
     nodrop: 19,
+    picks: 5,
+    qualityRatios: [1024, 900, 900, 900],
     tcs: [
       ["gld,mul=1536", 14],
       ["Act 5 (N) Equip B", 19],
@@ -6669,6 +8139,8 @@ export const TCDict: TCDictType = {
   },
   "Nihlathak (H)": {
     nodrop: 19,
+    picks: 5,
+    qualityRatios: [1024, 900, 900, 900],
     tcs: [
       ["gld,mul=2048", 14],
       ["Act 5 (H) Equip B", 19],
@@ -6679,6 +8151,8 @@ export const TCDict: TCDictType = {
   },
   Baal: {
     nodrop: 15,
+    picks: 7,
+    qualityRatios: [1024, 983, 983, 983],
     tcs: [
       ["gld,mul=1280", 5],
       ["Act 1 (N) Equip A", 52],
@@ -6688,6 +8162,8 @@ export const TCDict: TCDictType = {
   },
   "Baal (N)": {
     nodrop: 15,
+    picks: 7,
+    qualityRatios: [1024, 983, 983, 983],
     tcs: [
       ["gld,mul=1536", 5],
       ["Act 1 (H) Equip A", 52],
@@ -6697,6 +8173,8 @@ export const TCDict: TCDictType = {
   },
   "Baal (H)": {
     nodrop: 15,
+    picks: 7,
+    qualityRatios: [1024, 983, 983, 983],
     tcs: [
       ["gld,mul=2048", 5],
       ["Act 5 (H) Equip B", 52],
@@ -6707,6 +8185,8 @@ export const TCDict: TCDictType = {
   },
   Baalq: {
     nodrop: 15,
+    picks: 7,
+    qualityRatios: [1024, 1024, 993, 993],
     tcs: [
       ["Act 1 (N) Equip A", 52],
       ["Act 1 (N) Good", 3],
@@ -6714,6 +8194,8 @@ export const TCDict: TCDictType = {
   },
   "Baalq (N)": {
     nodrop: 15,
+    picks: 7,
+    qualityRatios: [1024, 1024, 993, 993],
     tcs: [
       ["Act 1 (H) Equip A", 52],
       ["Act 1 (H) Good", 3],
@@ -6721,6 +8203,8 @@ export const TCDict: TCDictType = {
   },
   "Baalq (H)": {
     nodrop: 15,
+    picks: 7,
+    qualityRatios: [1024, 1024, 993, 993],
     tcs: [
       ["Act 5 (H) Equip B", 52],
       ["Act 5 (H) Good", 3],
@@ -6729,6 +8213,8 @@ export const TCDict: TCDictType = {
   },
   "Blood Raven": {
     nodrop: 19,
+    picks: 5,
+    qualityRatios: [1024, 972, 800, 800],
     tcs: [
       ["gld,mul=1280", 14],
       ["Act 1 Equip B", 19],
@@ -6738,6 +8224,8 @@ export const TCDict: TCDictType = {
   },
   "Blood Raven (N)": {
     nodrop: 19,
+    picks: 5,
+    qualityRatios: [1024, 972, 800, 800],
     tcs: [
       ["gld,mul=1536", 14],
       ["Act 1 (N) Equip B", 19],
@@ -6747,6 +8235,8 @@ export const TCDict: TCDictType = {
   },
   "Blood Raven (H)": {
     nodrop: 19,
+    picks: 5,
+    qualityRatios: [1024, 972, 800, 800],
     tcs: [
       ["gld,mul=2048", 14],
       ["Act 1 (H) Equip B", 19],
@@ -6756,6 +8246,8 @@ export const TCDict: TCDictType = {
   },
   Smith: {
     nodrop: 0,
+    picks: -3,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 1 Uitem C", 1],
       ["Act 1 Melee B", 2],
@@ -6763,6 +8255,8 @@ export const TCDict: TCDictType = {
   },
   "Smith (N)": {
     nodrop: 0,
+    picks: -3,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 1 (H) Uitem C", 1],
       ["Act 1 (N) Melee B", 2],
@@ -6770,6 +8264,8 @@ export const TCDict: TCDictType = {
   },
   "Smith (H)": {
     nodrop: 0,
+    picks: -3,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Act 1 (H) Uitem C", 1],
       ["Act 1 (H) Melee B", 2],
@@ -6777,6 +8273,8 @@ export const TCDict: TCDictType = {
   },
   Izual: {
     nodrop: 19,
+    picks: 5,
+    qualityRatios: [1024, 972, 800, 800],
     tcs: [
       ["gld,mul=1280", 14],
       ["Act 4 Equip B", 19],
@@ -6786,6 +8284,8 @@ export const TCDict: TCDictType = {
   },
   "Izual (N)": {
     nodrop: 19,
+    picks: 5,
+    qualityRatios: [1024, 972, 800, 800],
     tcs: [
       ["gld,mul=1536", 14],
       ["Act 4 (N) Equip B", 19],
@@ -6795,6 +8295,8 @@ export const TCDict: TCDictType = {
   },
   "Izual (H)": {
     nodrop: 19,
+    picks: 5,
+    qualityRatios: [1024, 972, 800, 800],
     tcs: [
       ["gld,mul=2048", 14],
       ["Act 4 (H) Equip B", 19],
@@ -6804,6 +8306,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 Super A": {
     nodrop: 0,
+    picks: -4,
+    qualityRatios: [1024, 972, 800, 800],
     tcs: [
       ["Act 1 Uitem A", 2],
       ["Act 1 Cpot A", 2],
@@ -6811,6 +8315,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 Super B": {
     nodrop: 0,
+    picks: -4,
+    qualityRatios: [1024, 972, 800, 800],
     tcs: [
       ["Act 1 Uitem B", 2],
       ["Act 1 Cpot B", 2],
@@ -6818,6 +8324,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 Super C": {
     nodrop: 0,
+    picks: -4,
+    qualityRatios: [1024, 972, 800, 800],
     tcs: [
       ["Act 1 Uitem C", 2],
       ["Act 1 Cpot C", 2],
@@ -6825,6 +8333,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 Super A": {
     nodrop: 0,
+    picks: -4,
+    qualityRatios: [1024, 972, 800, 800],
     tcs: [
       ["Act 2 Uitem A", 2],
       ["Act 2 Cpot A", 2],
@@ -6832,6 +8342,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 Super B": {
     nodrop: 0,
+    picks: -4,
+    qualityRatios: [1024, 972, 800, 800],
     tcs: [
       ["Act 2 Uitem B", 2],
       ["Act 2 Cpot B", 2],
@@ -6839,6 +8351,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 Super C": {
     nodrop: 0,
+    picks: -4,
+    qualityRatios: [1024, 972, 800, 800],
     tcs: [
       ["Act 2 Uitem C", 2],
       ["Act 2 Cpot C", 2],
@@ -6846,6 +8360,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 Super A": {
     nodrop: 0,
+    picks: -4,
+    qualityRatios: [1024, 972, 800, 800],
     tcs: [
       ["Act 3 Uitem A", 2],
       ["Act 3 Cpot A", 2],
@@ -6853,6 +8369,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 Super B": {
     nodrop: 0,
+    picks: -4,
+    qualityRatios: [1024, 972, 800, 800],
     tcs: [
       ["Act 3 Uitem B", 2],
       ["Act 3 Cpot B", 2],
@@ -6860,6 +8378,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 Super C": {
     nodrop: 0,
+    picks: -4,
+    qualityRatios: [1024, 972, 800, 800],
     tcs: [
       ["Act 3 Uitem C", 2],
       ["Act 3 Cpot C", 2],
@@ -6867,6 +8387,8 @@ export const TCDict: TCDictType = {
   },
   "Act 4 Super A": {
     nodrop: 0,
+    picks: -4,
+    qualityRatios: [1024, 972, 800, 800],
     tcs: [
       ["Act 4 Uitem A", 2],
       ["Act 4 Cpot A", 2],
@@ -6874,6 +8396,8 @@ export const TCDict: TCDictType = {
   },
   "Act 4 Super B": {
     nodrop: 0,
+    picks: -4,
+    qualityRatios: [1024, 972, 800, 800],
     tcs: [
       ["Act 4 Uitem B", 2],
       ["Act 4 Cpot B", 2],
@@ -6881,6 +8405,8 @@ export const TCDict: TCDictType = {
   },
   "Act 4 Super C": {
     nodrop: 0,
+    picks: -4,
+    qualityRatios: [1024, 972, 800, 800],
     tcs: [
       ["Act 4 Uitem B", 2],
       ["Act 4 Cpot B", 2],
@@ -6888,6 +8414,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 Super A": {
     nodrop: 0,
+    picks: -4,
+    qualityRatios: [1024, 972, 800, 800],
     tcs: [
       ["Act 5 Uitem A", 2],
       ["Act 5 Cpot A", 2],
@@ -6895,6 +8423,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 Super B": {
     nodrop: 0,
+    picks: -4,
+    qualityRatios: [1024, 972, 800, 800],
     tcs: [
       ["Act 5 Uitem B", 2],
       ["Act 5 Cpot B", 2],
@@ -6902,6 +8432,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 Super C": {
     nodrop: 0,
+    picks: -4,
+    qualityRatios: [1024, 972, 800, 800],
     tcs: [
       ["Act 5 Uitem C", 2],
       ["Act 5 Cpot C", 2],
@@ -6909,6 +8441,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 (N) Super A": {
     nodrop: 0,
+    picks: -4,
+    qualityRatios: [1024, 972, 800, 800],
     tcs: [
       ["Act 1 (N) Uitem A", 2],
       ["Act 1 (N) Cpot A", 2],
@@ -6916,6 +8450,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 (N) Super B": {
     nodrop: 0,
+    picks: -4,
+    qualityRatios: [1024, 972, 800, 800],
     tcs: [
       ["Act 1 (N) Uitem B", 2],
       ["Act 1 (N) Cpot B", 2],
@@ -6923,6 +8459,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 (N) Super C": {
     nodrop: 0,
+    picks: -4,
+    qualityRatios: [1024, 972, 800, 800],
     tcs: [
       ["Act 1 (N) Uitem C", 2],
       ["Act 1 (N) Cpot C", 2],
@@ -6930,6 +8468,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 (N) Super A": {
     nodrop: 0,
+    picks: -4,
+    qualityRatios: [1024, 972, 800, 800],
     tcs: [
       ["Act 2 (N) Uitem A", 2],
       ["Act 2 (N) Cpot A", 2],
@@ -6937,6 +8477,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 (N) Super B": {
     nodrop: 0,
+    picks: -4,
+    qualityRatios: [1024, 972, 800, 800],
     tcs: [
       ["Act 2 (N) Uitem B", 2],
       ["Act 2 (N) Cpot B", 2],
@@ -6944,6 +8486,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 (N) Super C": {
     nodrop: 0,
+    picks: -4,
+    qualityRatios: [1024, 972, 800, 800],
     tcs: [
       ["Act 2 (N) Uitem C", 2],
       ["Act 2 (N) Cpot C", 2],
@@ -6951,6 +8495,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 (N) Super A": {
     nodrop: 0,
+    picks: -4,
+    qualityRatios: [1024, 972, 800, 800],
     tcs: [
       ["Act 3 (N) Uitem A", 2],
       ["Act 3 (N) Cpot A", 2],
@@ -6958,6 +8504,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 (N) Super B": {
     nodrop: 0,
+    picks: -4,
+    qualityRatios: [1024, 972, 800, 800],
     tcs: [
       ["Act 3 (N) Uitem B", 2],
       ["Act 3 (N) Cpot B", 2],
@@ -6965,6 +8513,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 (N) Super C": {
     nodrop: 0,
+    picks: -4,
+    qualityRatios: [1024, 972, 800, 800],
     tcs: [
       ["Act 3 (N) Uitem C", 2],
       ["Act 3 (N) Cpot C", 2],
@@ -6972,6 +8522,8 @@ export const TCDict: TCDictType = {
   },
   "Act 4 (N) Super A": {
     nodrop: 0,
+    picks: -4,
+    qualityRatios: [1024, 972, 800, 800],
     tcs: [
       ["Act 4 (N) Uitem A", 2],
       ["Act 4 (N) Cpot A", 2],
@@ -6979,6 +8531,8 @@ export const TCDict: TCDictType = {
   },
   "Act 4 (N) Super B": {
     nodrop: 0,
+    picks: -4,
+    qualityRatios: [1024, 972, 800, 800],
     tcs: [
       ["Act 4 (N) Uitem B", 2],
       ["Act 4 (N) Cpot B", 2],
@@ -6986,6 +8540,8 @@ export const TCDict: TCDictType = {
   },
   "Act 4 (N) Super C": {
     nodrop: 0,
+    picks: -4,
+    qualityRatios: [1024, 972, 800, 800],
     tcs: [
       ["Act 4 (N) Uitem B", 2],
       ["Act 4 (N) Cpot B", 2],
@@ -6993,6 +8549,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 (N) Super A": {
     nodrop: 0,
+    picks: -4,
+    qualityRatios: [1024, 972, 800, 800],
     tcs: [
       ["Act 5 (N) Uitem A", 2],
       ["Act 5 (N) Cpot A", 2],
@@ -7000,6 +8558,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 (N) Super B": {
     nodrop: 0,
+    picks: -4,
+    qualityRatios: [1024, 972, 800, 800],
     tcs: [
       ["Act 5 (N) Uitem B", 2],
       ["Act 5 (N) Cpot B", 2],
@@ -7007,6 +8567,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 (N) Super C": {
     nodrop: 0,
+    picks: -4,
+    qualityRatios: [1024, 972, 800, 800],
     tcs: [
       ["Act 5 (N) Uitem C", 2],
       ["Act 5 (N) Cpot C", 2],
@@ -7014,6 +8576,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 (H) Super A": {
     nodrop: 0,
+    picks: -4,
+    qualityRatios: [1024, 972, 800, 800],
     tcs: [
       ["Act 1 (H) Uitem A", 2],
       ["Act 1 (H) Cpot A", 2],
@@ -7021,6 +8585,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 (H) Super B": {
     nodrop: 0,
+    picks: -4,
+    qualityRatios: [1024, 972, 800, 800],
     tcs: [
       ["Act 1 (H) Uitem B", 2],
       ["Act 1 (H) Cpot B", 2],
@@ -7028,6 +8594,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 (H) Super C": {
     nodrop: 0,
+    picks: -4,
+    qualityRatios: [1024, 972, 800, 800],
     tcs: [
       ["Act 1 (H) Uitem C", 2],
       ["Act 1 (H) Cpot C", 2],
@@ -7035,6 +8603,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 (H) Super A": {
     nodrop: 0,
+    picks: -4,
+    qualityRatios: [1024, 972, 800, 800],
     tcs: [
       ["Act 2 (H) Uitem A", 2],
       ["Act 2 (H) Cpot A", 2],
@@ -7042,6 +8612,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 (H) Super B": {
     nodrop: 0,
+    picks: -4,
+    qualityRatios: [1024, 972, 800, 800],
     tcs: [
       ["Act 2 (H) Uitem B", 2],
       ["Act 2 (H) Cpot B", 2],
@@ -7049,6 +8621,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 (H) Super C": {
     nodrop: 0,
+    picks: -4,
+    qualityRatios: [1024, 972, 800, 800],
     tcs: [
       ["Act 2 (H) Uitem C", 2],
       ["Act 2 (H) Cpot C", 2],
@@ -7056,6 +8630,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 (H) Super A": {
     nodrop: 0,
+    picks: -4,
+    qualityRatios: [1024, 972, 800, 800],
     tcs: [
       ["Act 3 (H) Uitem A", 2],
       ["Act 3 (H) Cpot A", 2],
@@ -7063,6 +8639,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 (H) Super B": {
     nodrop: 0,
+    picks: -4,
+    qualityRatios: [1024, 972, 800, 800],
     tcs: [
       ["Act 3 (H) Uitem B", 2],
       ["Act 3 (H) Cpot B", 2],
@@ -7070,6 +8648,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 (H) Super C": {
     nodrop: 0,
+    picks: -4,
+    qualityRatios: [1024, 972, 800, 800],
     tcs: [
       ["Act 3 (H) Uitem C", 2],
       ["Act 3 (H) Cpot C", 2],
@@ -7077,6 +8657,8 @@ export const TCDict: TCDictType = {
   },
   "Act 4 (H) Super A": {
     nodrop: 0,
+    picks: -4,
+    qualityRatios: [1024, 972, 800, 800],
     tcs: [
       ["Act 4 (H) Uitem A", 2],
       ["Act 4 (H) Cpot A", 2],
@@ -7084,6 +8666,8 @@ export const TCDict: TCDictType = {
   },
   "Act 4 (H) Super B": {
     nodrop: 0,
+    picks: -4,
+    qualityRatios: [1024, 972, 800, 800],
     tcs: [
       ["Act 4 (H) Uitem B", 2],
       ["Act 4 (H) Cpot B", 2],
@@ -7091,6 +8675,8 @@ export const TCDict: TCDictType = {
   },
   "Act 4 (H) Super C": {
     nodrop: 0,
+    picks: -4,
+    qualityRatios: [1024, 972, 800, 800],
     tcs: [
       ["Act 4 (H) Uitem B", 2],
       ["Act 4 (H) Cpot B", 2],
@@ -7098,6 +8684,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 (H) Super A": {
     nodrop: 0,
+    picks: -4,
+    qualityRatios: [1024, 972, 800, 800],
     tcs: [
       ["Act 5 (H) Uitem A", 2],
       ["Act 5 (H) Cpot A", 2],
@@ -7105,6 +8693,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 (H) Super B": {
     nodrop: 0,
+    picks: -4,
+    qualityRatios: [1024, 972, 800, 800],
     tcs: [
       ["Act 5 (H) Uitem B", 2],
       ["Act 5 (H) Cpot B", 2],
@@ -7112,6 +8702,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 (H) Super C": {
     nodrop: 0,
+    picks: -4,
+    qualityRatios: [1024, 972, 800, 800],
     tcs: [
       ["Act 5 (H) Uitem C", 2],
       ["Act 5 (H) Cpot C", 2],
@@ -7119,6 +8711,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 Super Ax": {
     nodrop: 0,
+    picks: -4,
+    qualityRatios: [1024, 972, 654, 512],
     tcs: [
       ["Act 1 Uitem A", 2],
       ["Act 1 Cpot A", 2],
@@ -7126,6 +8720,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 Super Bx": {
     nodrop: 0,
+    picks: -4,
+    qualityRatios: [1024, 972, 654, 512],
     tcs: [
       ["Act 1 Uitem B", 2],
       ["Act 1 Cpot B", 2],
@@ -7133,6 +8729,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 Super Cx": {
     nodrop: 0,
+    picks: -4,
+    qualityRatios: [1024, 972, 654, 512],
     tcs: [
       ["Act 1 Uitem C", 2],
       ["Act 1 Cpot C", 2],
@@ -7140,6 +8738,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 Super Ax": {
     nodrop: 0,
+    picks: -4,
+    qualityRatios: [1024, 972, 654, 512],
     tcs: [
       ["Act 2 Uitem A", 2],
       ["Act 2 Cpot A", 2],
@@ -7147,6 +8747,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 Super Bx": {
     nodrop: 0,
+    picks: -4,
+    qualityRatios: [1024, 972, 654, 512],
     tcs: [
       ["Act 2 Uitem B", 2],
       ["Act 2 Cpot B", 2],
@@ -7154,6 +8756,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 Super Cx": {
     nodrop: 0,
+    picks: -4,
+    qualityRatios: [1024, 972, 654, 512],
     tcs: [
       ["Act 2 Uitem C", 2],
       ["Act 2 Cpot C", 2],
@@ -7161,6 +8765,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 Super Ax": {
     nodrop: 0,
+    picks: -4,
+    qualityRatios: [1024, 972, 654, 512],
     tcs: [
       ["Act 3 Uitem A", 2],
       ["Act 3 Cpot A", 2],
@@ -7168,6 +8774,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 Super Bx": {
     nodrop: 0,
+    picks: -4,
+    qualityRatios: [1024, 972, 654, 512],
     tcs: [
       ["Act 3 Uitem B", 2],
       ["Act 3 Cpot B", 2],
@@ -7175,6 +8783,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 Super Cx": {
     nodrop: 0,
+    picks: -4,
+    qualityRatios: [1024, 972, 654, 512],
     tcs: [
       ["Act 3 Uitem C", 2],
       ["Act 3 Cpot C", 2],
@@ -7182,6 +8792,8 @@ export const TCDict: TCDictType = {
   },
   "Act 4 Super Ax": {
     nodrop: 0,
+    picks: -4,
+    qualityRatios: [1024, 972, 654, 512],
     tcs: [
       ["Act 4 Uitem A", 2],
       ["Act 4 Cpot A", 2],
@@ -7189,6 +8801,8 @@ export const TCDict: TCDictType = {
   },
   "Act 4 Super Bx": {
     nodrop: 0,
+    picks: -4,
+    qualityRatios: [1024, 972, 654, 512],
     tcs: [
       ["Act 4 Uitem B", 2],
       ["Act 4 Cpot B", 2],
@@ -7196,6 +8810,8 @@ export const TCDict: TCDictType = {
   },
   "Act 4 Super Cx": {
     nodrop: 0,
+    picks: -4,
+    qualityRatios: [1024, 972, 654, 512],
     tcs: [
       ["Act 4 Uitem B", 2],
       ["Act 4 Cpot B", 2],
@@ -7203,6 +8819,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 Super Ax": {
     nodrop: 0,
+    picks: -4,
+    qualityRatios: [1024, 972, 654, 512],
     tcs: [
       ["Act 5 Uitem A", 2],
       ["Act 5 Cpot A", 2],
@@ -7210,6 +8828,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 Super Bx": {
     nodrop: 0,
+    picks: -4,
+    qualityRatios: [1024, 972, 654, 512],
     tcs: [
       ["Act 5 Uitem B", 2],
       ["Act 5 Cpot B", 2],
@@ -7217,6 +8837,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 Super Cx": {
     nodrop: 0,
+    picks: -4,
+    qualityRatios: [1024, 972, 654, 512],
     tcs: [
       ["Act 5 Uitem C", 2],
       ["Act 5 Cpot C", 2],
@@ -7224,6 +8846,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 (N) Super Ax": {
     nodrop: 0,
+    picks: -4,
+    qualityRatios: [1024, 972, 654, 512],
     tcs: [
       ["Act 1 (N) Uitem A", 2],
       ["Act 1 (N) Cpot A", 2],
@@ -7231,6 +8855,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 (N) Super Bx": {
     nodrop: 0,
+    picks: -4,
+    qualityRatios: [1024, 972, 654, 512],
     tcs: [
       ["Act 1 (N) Uitem B", 2],
       ["Act 1 (N) Cpot B", 2],
@@ -7238,6 +8864,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 (N) Super Cx": {
     nodrop: 0,
+    picks: -4,
+    qualityRatios: [1024, 972, 654, 512],
     tcs: [
       ["Act 1 (N) Uitem C", 2],
       ["Act 1 (N) Cpot C", 2],
@@ -7245,6 +8873,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 (N) Super Ax": {
     nodrop: 0,
+    picks: -4,
+    qualityRatios: [1024, 972, 654, 512],
     tcs: [
       ["Act 2 (N) Uitem A", 2],
       ["Act 2 (N) Cpot A", 2],
@@ -7252,6 +8882,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 (N) Super Bx": {
     nodrop: 0,
+    picks: -4,
+    qualityRatios: [1024, 972, 654, 512],
     tcs: [
       ["Act 2 (N) Uitem B", 2],
       ["Act 2 (N) Cpot B", 2],
@@ -7259,6 +8891,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 (N) Super Cx": {
     nodrop: 0,
+    picks: -4,
+    qualityRatios: [1024, 972, 654, 512],
     tcs: [
       ["Act 2 (N) Uitem C", 2],
       ["Act 2 (N) Cpot C", 2],
@@ -7266,6 +8900,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 (N) Super Ax": {
     nodrop: 0,
+    picks: -4,
+    qualityRatios: [1024, 972, 654, 512],
     tcs: [
       ["Act 3 (N) Uitem A", 2],
       ["Act 3 (N) Cpot A", 2],
@@ -7273,6 +8909,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 (N) Super Bx": {
     nodrop: 0,
+    picks: -4,
+    qualityRatios: [1024, 972, 654, 512],
     tcs: [
       ["Act 3 (N) Uitem B", 2],
       ["Act 3 (N) Cpot B", 2],
@@ -7280,6 +8918,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 (N) Super Cx": {
     nodrop: 0,
+    picks: -4,
+    qualityRatios: [1024, 972, 654, 512],
     tcs: [
       ["Act 3 (N) Uitem C", 2],
       ["Act 3 (N) Cpot C", 2],
@@ -7287,6 +8927,8 @@ export const TCDict: TCDictType = {
   },
   "Act 4 (N) Super Ax": {
     nodrop: 0,
+    picks: -4,
+    qualityRatios: [1024, 972, 654, 512],
     tcs: [
       ["Act 4 (N) Uitem A", 2],
       ["Act 4 (N) Cpot A", 2],
@@ -7294,6 +8936,8 @@ export const TCDict: TCDictType = {
   },
   "Act 4 (N) Super Bx": {
     nodrop: 0,
+    picks: -4,
+    qualityRatios: [1024, 972, 654, 512],
     tcs: [
       ["Act 4 (N) Uitem B", 2],
       ["Act 4 (N) Cpot B", 2],
@@ -7301,6 +8945,8 @@ export const TCDict: TCDictType = {
   },
   "Act 4 (N) Super Cx": {
     nodrop: 0,
+    picks: -4,
+    qualityRatios: [1024, 972, 654, 512],
     tcs: [
       ["Act 4 (N) Uitem B", 2],
       ["Act 4 (N) Cpot B", 2],
@@ -7308,6 +8954,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 (N) Super Ax": {
     nodrop: 0,
+    picks: -4,
+    qualityRatios: [1024, 972, 654, 512],
     tcs: [
       ["Act 5 (N) Uitem A", 2],
       ["Act 5 (N) Cpot A", 2],
@@ -7315,6 +8963,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 (N) Super Bx": {
     nodrop: 0,
+    picks: -4,
+    qualityRatios: [1024, 972, 654, 512],
     tcs: [
       ["Act 5 (N) Uitem B", 2],
       ["Act 5 (N) Cpot B", 2],
@@ -7322,6 +8972,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 (N) Super Cx": {
     nodrop: 0,
+    picks: -4,
+    qualityRatios: [1024, 972, 654, 512],
     tcs: [
       ["Act 5 (N) Uitem C", 2],
       ["Act 5 (N) Cpot C", 2],
@@ -7329,6 +8981,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 (H) Super Ax": {
     nodrop: 0,
+    picks: -4,
+    qualityRatios: [1024, 972, 654, 512],
     tcs: [
       ["Act 1 (H) Uitem A", 2],
       ["Act 1 (H) Cpot A", 2],
@@ -7336,6 +8990,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 (H) Super Bx": {
     nodrop: 0,
+    picks: -4,
+    qualityRatios: [1024, 972, 654, 512],
     tcs: [
       ["Act 1 (H) Uitem B", 2],
       ["Act 1 (H) Cpot B", 2],
@@ -7343,6 +8999,8 @@ export const TCDict: TCDictType = {
   },
   "Act 1 (H) Super Cx": {
     nodrop: 0,
+    picks: -4,
+    qualityRatios: [1024, 972, 654, 512],
     tcs: [
       ["Act 1 (H) Uitem C", 2],
       ["Act 1 (H) Cpot C", 2],
@@ -7350,6 +9008,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 (H) Super Ax": {
     nodrop: 0,
+    picks: -4,
+    qualityRatios: [1024, 972, 654, 512],
     tcs: [
       ["Act 2 (H) Uitem A", 2],
       ["Act 2 (H) Cpot A", 2],
@@ -7357,6 +9017,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 (H) Super Bx": {
     nodrop: 0,
+    picks: -4,
+    qualityRatios: [1024, 972, 654, 512],
     tcs: [
       ["Act 2 (H) Uitem B", 2],
       ["Act 2 (H) Cpot B", 2],
@@ -7364,6 +9026,8 @@ export const TCDict: TCDictType = {
   },
   "Act 2 (H) Super Cx": {
     nodrop: 0,
+    picks: -4,
+    qualityRatios: [1024, 972, 654, 512],
     tcs: [
       ["Act 2 (H) Uitem C", 2],
       ["Act 2 (H) Cpot C", 2],
@@ -7371,6 +9035,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 (H) Super Ax": {
     nodrop: 0,
+    picks: -4,
+    qualityRatios: [1024, 972, 654, 512],
     tcs: [
       ["Act 3 (H) Uitem A", 2],
       ["Act 3 (H) Cpot A", 2],
@@ -7378,6 +9044,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 (H) Super Bx": {
     nodrop: 0,
+    picks: -4,
+    qualityRatios: [1024, 972, 654, 512],
     tcs: [
       ["Act 3 (H) Uitem B", 2],
       ["Act 3 (H) Cpot B", 2],
@@ -7385,6 +9053,8 @@ export const TCDict: TCDictType = {
   },
   "Act 3 (H) Super Cx": {
     nodrop: 0,
+    picks: -4,
+    qualityRatios: [1024, 972, 654, 512],
     tcs: [
       ["Act 3 (H) Uitem C", 2],
       ["Act 3 (H) Cpot C", 2],
@@ -7392,6 +9062,8 @@ export const TCDict: TCDictType = {
   },
   "Act 4 (H) Super Ax": {
     nodrop: 0,
+    picks: -4,
+    qualityRatios: [1024, 972, 654, 512],
     tcs: [
       ["Act 4 (H) Uitem A", 2],
       ["Act 4 (H) Cpot A", 2],
@@ -7399,6 +9071,8 @@ export const TCDict: TCDictType = {
   },
   "Act 4 (H) Super Bx": {
     nodrop: 0,
+    picks: -4,
+    qualityRatios: [1024, 972, 654, 512],
     tcs: [
       ["Act 4 (H) Uitem B", 2],
       ["Act 4 (H) Cpot B", 2],
@@ -7406,6 +9080,8 @@ export const TCDict: TCDictType = {
   },
   "Act 4 (H) Super Cx": {
     nodrop: 0,
+    picks: -4,
+    qualityRatios: [1024, 972, 654, 512],
     tcs: [
       ["Act 4 (H) Uitem B", 2],
       ["Act 4 (H) Cpot B", 2],
@@ -7413,6 +9089,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 (H) Super Ax": {
     nodrop: 0,
+    picks: -4,
+    qualityRatios: [1024, 972, 654, 512],
     tcs: [
       ["Act 5 (H) Uitem A", 2],
       ["Act 5 (H) Cpot A", 2],
@@ -7420,6 +9098,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 (H) Super Bx": {
     nodrop: 0,
+    picks: -4,
+    qualityRatios: [1024, 972, 654, 512],
     tcs: [
       ["Act 5 (H) Uitem B", 2],
       ["Act 5 (H) Cpot B", 2],
@@ -7427,6 +9107,8 @@ export const TCDict: TCDictType = {
   },
   "Act 5 (H) Super Cx": {
     nodrop: 0,
+    picks: -4,
+    qualityRatios: [1024, 972, 654, 512],
     tcs: [
       ["Act 5 (H) Uitem C", 2],
       ["Act 5 (H) Cpot C", 2],
@@ -7434,6 +9116,8 @@ export const TCDict: TCDictType = {
   },
   "Cow King": {
     nodrop: 0,
+    picks: 5,
+    qualityRatios: [1024, 983, 983, 850],
     tcs: [
       ["Act 1 Uitem C", 1],
       ["Act 1 Melee B", 2],
@@ -7441,6 +9125,8 @@ export const TCDict: TCDictType = {
   },
   "Cow King (N)": {
     nodrop: 0,
+    picks: 5,
+    qualityRatios: [1024, 983, 983, 850],
     tcs: [
       ["Act 1 (H) Uitem C", 1],
       ["Act 1 (N) Melee B", 2],
@@ -7448,6 +9134,8 @@ export const TCDict: TCDictType = {
   },
   "Cow King (H)": {
     nodrop: 0,
+    picks: 5,
+    qualityRatios: [1024, 983, 983, 850],
     tcs: [
       ["Act 1 (H) Uitem C", 1],
       ["Act 1 (H) Melee B", 2],
@@ -7455,6 +9143,8 @@ export const TCDict: TCDictType = {
   },
   Duriel: {
     nodrop: 0,
+    picks: 5,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["tsc", 1],
       ["Duriel - Base", 2],
@@ -7462,6 +9152,8 @@ export const TCDict: TCDictType = {
   },
   "Duriel (N)": {
     nodrop: 0,
+    picks: 5,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["tsc", 1],
       ["Duriel (N) - Base", 2],
@@ -7469,6 +9161,8 @@ export const TCDict: TCDictType = {
   },
   "Duriel (H)": {
     nodrop: 0,
+    picks: 5,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["tsc", 1],
       ["Duriel (H) - Base", 2],
@@ -7476,6 +9170,8 @@ export const TCDict: TCDictType = {
   },
   Durielq: {
     nodrop: 0,
+    picks: 5,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["tsc", 1],
       ["Durielq - Base", 2],
@@ -7483,6 +9179,8 @@ export const TCDict: TCDictType = {
   },
   "Durielq (N)": {
     nodrop: 0,
+    picks: 5,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["tsc", 1],
       ["Durielq (N) - Base", 2],
@@ -7490,25 +9188,56 @@ export const TCDict: TCDictType = {
   },
   "Durielq (H)": {
     nodrop: 0,
+    picks: 5,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["tsc", 1],
       ["Durielq (H) - Base", 2],
     ],
   },
-  ROP: { nodrop: 0, tcs: [["Diablo", 1]] },
+  ROP: {
+    nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 1024],
+    tcs: [["Diablo", 1]],
+  },
   "ROP (N)": {
     nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 1024],
     tcs: [
       ["Diablo (N)", 4],
       ["Annihilus", 1],
     ],
   },
-  "ROP (H)": { nodrop: 0, tcs: [["Annihilus", 1]] },
-  "Countess Rune": { nodrop: 5, tcs: [["Runes 4", 15]] },
-  "Countess Rune (N)": { nodrop: 5, tcs: [["Runes 8", 15]] },
-  "Countess Rune (H)": { nodrop: 5, tcs: [["Runes 12", 15]] },
+  "ROP (H)": {
+    nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 1024],
+    tcs: [["Annihilus", 1]],
+  },
+  "Countess Rune": {
+    nodrop: 5,
+    picks: 3,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [["Runes 4", 15]],
+  },
+  "Countess Rune (N)": {
+    nodrop: 5,
+    picks: 3,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [["Runes 8", 15]],
+  },
+  "Countess Rune (H)": {
+    nodrop: 5,
+    picks: 3,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [["Runes 12", 15]],
+  },
   "Countess Item": {
     nodrop: 19,
+    picks: 5,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld,mul=1280", 11],
       ["Act 1 Equip C", 19],
@@ -7518,6 +9247,8 @@ export const TCDict: TCDictType = {
   },
   "Countess Item (N)": {
     nodrop: 19,
+    picks: 5,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld,mul=1536", 11],
       ["Act 1 (N) Equip C", 19],
@@ -7527,6 +9258,8 @@ export const TCDict: TCDictType = {
   },
   "Countess Item (H)": {
     nodrop: 19,
+    picks: 5,
+    qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["gld,mul=2048", 11],
       ["Act 1 (H) Equip C", 19],
@@ -7537,6 +9270,8 @@ export const TCDict: TCDictType = {
   },
   Countess: {
     nodrop: 0,
+    picks: -2,
+    qualityRatios: [1024, 883, 883, 883],
     tcs: [
       ["Countess Item", 1],
       ["Countess Rune", 1],
@@ -7544,6 +9279,8 @@ export const TCDict: TCDictType = {
   },
   "Countess (N)": {
     nodrop: 0,
+    picks: -2,
+    qualityRatios: [1024, 983, 883, 883],
     tcs: [
       ["Countess Item (N)", 1],
       ["Countess Rune (N)", 1],
@@ -7551,19 +9288,53 @@ export const TCDict: TCDictType = {
   },
   "Countess (H)": {
     nodrop: 0,
+    picks: -2,
+    qualityRatios: [1024, 983, 883, 883],
     tcs: [
       ["Countess Item (H)", 1],
       ["Countess Rune (H)", 1],
     ],
   },
-  "Uber Andariel": { nodrop: 0, tcs: [["dhn", 1]] },
-  "Uber Duriel": { nodrop: 0, tcs: [["bey", 1]] },
-  "Uber Izual": { nodrop: 0, tcs: [["mbr", 1]] },
-  "Pandemonium Key A": { nodrop: 0, tcs: [["pk1", 1]] },
-  "Pandemonium Key B": { nodrop: 0, tcs: [["pk2", 1]] },
-  "Pandemonium Key C": { nodrop: 0, tcs: [["pk3", 1]] },
+  "Uber Andariel": {
+    nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 1024],
+    tcs: [["dhn", 1]],
+  },
+  "Uber Duriel": {
+    nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 1024],
+    tcs: [["bey", 1]],
+  },
+  "Uber Izual": {
+    nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 1024],
+    tcs: [["mbr", 1]],
+  },
+  "Pandemonium Key A": {
+    nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 1024],
+    tcs: [["pk1", 1]],
+  },
+  "Pandemonium Key B": {
+    nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 1024],
+    tcs: [["pk2", 1]],
+  },
+  "Pandemonium Key C": {
+    nodrop: 0,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 1024],
+    tcs: [["pk3", 1]],
+  },
   Eldritch: {
     nodrop: 0,
+    picks: -4,
+    qualityRatios: [1024, 972, 800, 800],
     tcs: [
       ["Act 5 Uitem A", 2],
       ["Act 5 Cpot A", 2],
@@ -7571,6 +9342,8 @@ export const TCDict: TCDictType = {
   },
   "Eldritch (N)": {
     nodrop: 0,
+    picks: -4,
+    qualityRatios: [1024, 972, 800, 800],
     tcs: [
       ["Act 5 (N) Uitem A", 2],
       ["Act 5 (N) Cpot A", 2],
@@ -7578,6 +9351,8 @@ export const TCDict: TCDictType = {
   },
   "Eldritch (H)": {
     nodrop: 0,
+    picks: -4,
+    qualityRatios: [1024, 972, 800, 800],
     tcs: [
       ["Act 5 (H) Uitem A", 2],
       ["Act 5 (H) Cpot A", 2],
@@ -7585,6 +9360,8 @@ export const TCDict: TCDictType = {
   },
   Pindleskin: {
     nodrop: 0,
+    picks: -4,
+    qualityRatios: [1024, 972, 654, 512],
     tcs: [
       ["Act 5 Uitem C", 2],
       ["Act 5 Cpot C", 2],
@@ -7592,6 +9369,8 @@ export const TCDict: TCDictType = {
   },
   "Pindleskin (N)": {
     nodrop: 0,
+    picks: -4,
+    qualityRatios: [1024, 972, 654, 512],
     tcs: [
       ["Act 5 (N) Uitem C", 2],
       ["Act 5 (N) Cpot C", 2],
@@ -7599,6 +9378,8 @@ export const TCDict: TCDictType = {
   },
   "Pindleskin (H)": {
     nodrop: 0,
+    picks: -4,
+    qualityRatios: [1024, 972, 654, 512],
     tcs: [
       ["Act 5 (H) Uitem C", 2],
       ["Act 5 (H) Cpot C", 2],

@@ -26604,15 +26604,25 @@ var TCDICT_orig = {
 const TCDICT = {};
 
 for (var entry of Object.entries(TCDICT_orig)) {
+  const tcName = entry[0];
+  const tcObject = entry[1];
   var tcs = [];
   for (var i in range(0, 10)) {
-    if (entry[1]["Item" + i]) {
-      tcs.push([entry[1]["Item" + i], parseInt(entry[1]["Prob" + i])]);
+    if (tcObject["Item" + i]) {
+      tcs.push([tcObject["Item" + i], parseInt(tcObject["Prob" + i])]);
     }
   }
 
-  TCDICT[entry[0]] = {
-    nodrop: parseInt(entry[1].NoDrop || 0),
+  const qualityRatios = [
+    parseInt(tcObject.Magic || 0),
+    parseInt(tcObject.Rare || 0),
+    parseInt(tcObject.Set || 0),
+    parseInt(tcObject.Unique || 0),
+  ];
+  TCDICT[tcName] = {
+    nodrop: parseInt(tcObject.NoDrop || 0),
+    picks: parseInt(tcObject.Picks),
+    qualityRatios: qualityRatios,
     tcs: tcs,
   };
 }
