@@ -1,14 +1,15 @@
 {
   "compilerOptions": {
-    "module": "es6",
+    "module": "esnext",
     "noImplicitAny": true,
     "removeComments": true,
     "preserveConstEnums": true,
     "sourceMap": true,
     "lib": ["es2017", "dom"],
     "moduleResolution": "node",
-    "outDir": "dist"
+    "outDir": "dist",
+    "esModuleInterop": true
   },
-  "include": ["src/**/*"],
-  "exclude": ["node_modules", "**/*.spec.ts"]
+  "include": ["src/**/*", "tests/**/*"],
+  "exclude": ["node_modules"]
 }
