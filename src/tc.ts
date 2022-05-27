@@ -35,33 +35,67 @@ export function getAdjustedDenom(
   const adjustedNoDrop = Math.floor(
     (adjustedNoDropRate / (1 - adjustedNoDropRate)) * tcDenom
   );
-  console.log(
-    tcDenom,
-    tcNoDrop,
-    totalPlayers,
-    partyCount,
-    n,
-    adjustedNoDropRate,
-    adjustedNoDrop
-  );
   return adjustedNoDrop + tcDenom;
 }
 
 // Take a TC name and player count and return a list of TCProbTuples
 // reflecting the probability of hitting each atomic TC
 export function getAtomicTCs(
-  tc: string,
+  tcName: string,
   totalPlayers = 1,
   partyCount = 1
 ): TCProbTuple[] {
-  const tcObject = TCDict[tc];
+  const tcObject = TCDict[tcName];
+
+  let tcs: TCProbTuple[];
+  if (tcObject.picks >= 1) {
+    const atomicTCsOnePick = _getAtomicTCsOnePick(
+      tcName,
+      totalPlayers,
+      partyCount
+    );
+    tcs = adjustProbabilityByPicks(atomicTCsOnePick, tcObject.picks);
+  } else {
+    // negative picks
+    tcs = [];
+  }
+
+  // Up till now we've preserved exact fractional precision
+  // Now simplify with an eps
+  for (var tc of tcs) {
+    tc[1] = tc[1].simplify(1e-15);
+  }
+  return tcs;
+}
+
+function adjustProbabilityByPicks(
+  tcs: TCProbTuple[],
+  picks: number
+): TCProbTuple[] {
+  if (picks == 1) {
+    return tcs;
+  }
+  return tcs.map((tcTuple: TCProbTuple) => {
+    const [tcName, probability] = tcTuple;
+    const one = new Fraction(1);
+    const adjProbability = one.sub(one.sub(probability).pow(picks));
+    return [tcTuple[0], adjProbability];
+  });
+}
+
+// TODO: positive picks > 1
+// TODO: negative picks (HARD)
+// TODO: track max over item quality ratios
+
+function _getAtomicTCsOnePick(
+  tcName: string,
+  totalPlayers = 1,
+  partyCount = 1
+): TCProbTuple[] {
+  const tcObject = TCDict[tcName];
   if (!tcObject) {
     return [];
   }
-
-  // TODO: positive picks > 1
-  // TODO: negative picks (HARD)
-  // TODO: track max over item quality ratios
 
   // TCDict gives relative probability
   const tcDenom = sum(map(tcObject.tcs, 1));
@@ -103,13 +137,5 @@ export function getAtomicTCs(
     }
   }
 
-  const dedupedTCs = Object.values(dedupedMap);
-
-  // Up till now we've preserved exact fractional precision
-  // Now simplify with an eps
-  for (var dedupedTC of dedupedTCs) {
-    dedupedTC[1] = dedupedTC[1].simplify(1e-15);
-  }
-
-  return dedupedTCs;
+  return Object.values(dedupedMap);
 }

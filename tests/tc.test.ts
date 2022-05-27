@@ -53,11 +53,16 @@ describe("getAtomicTCs", () => {
   ) {
     const tc = filter(tcs, (tcTuple) => tcTuple[0] == tcName);
     expect(tc.length).to.be.equal(1);
-    expect(tc[0][1].inverse().valueOf()).to.be.approximately(chance, 1);
+    expect(tc[0][1].inverse().valueOf()).to.be.approximately(
+      chance,
+      1,
+      `${tc[0][0]} ${tc[0][1]}`
+    );
     return;
   }
 
   it("works on a basic TC with picks = 1", () => {
+    // Check against Amazon Basin
     const tcs = getAtomicTCs("Act 1 H2H B");
     assertTCExistWithChance(tcs, "amu", 800);
     assertTCExistWithChance(tcs, "aqv", 61);
@@ -93,6 +98,7 @@ describe("getAtomicTCs", () => {
   });
 
   it("works on a basic TC with picks = 1 and increased player count", () => {
+    // Check against Silospen
     const tcs = getAtomicTCs("Act 1 H2H B", 4, 4);
     assertTCExistWithChance(tcs, "amu", 350);
     assertTCExistWithChance(tcs, "aqv", 27);
@@ -127,7 +133,28 @@ describe("getAtomicTCs", () => {
     assertTCExistWithChance(tcs, "weap6", 13);
   });
 
+  it("works on a TC with >1 picks", () => {
+    const tcs1 = getAtomicTCs("Act 1 Cpot A");
+    assertTCExistWithChance(tcs1, "hp1", 289 / 208);
+    assertTCExistWithChance(tcs1, "hp2", 289 / 93);
+    assertTCExistWithChance(tcs1, "mp1", 289 / 93);
+    assertTCExistWithChance(tcs1, "mp2", 289 / 64);
+    assertTCExistWithChance(tcs1, "rvs", 289 / 33);
+
+    // Radament rune drop rates are Act 3 Good rune rates amplified by 5 picks
+    const tcs2 = getAtomicTCs("Radament");
+    assertTCExistWithChance(tcs2, "r01", 461);
+    assertTCExistWithChance(tcs2, "r02", 692);
+    assertTCExistWithChance(tcs2, "r03", 185);
+    assertTCExistWithChance(tcs2, "r04", 277);
+    assertTCExistWithChance(tcs2, "r05", 132);
+    assertTCExistWithChance(tcs2, "r06", 198);
+    assertTCExistWithChance(tcs2, "r07", 251);
+    assertTCExistWithChance(tcs2, "r08", 376);
+  });
+
   it("works on a hell TC with picks = 1 and increased player count", () => {
+    // Check against Item Generation Guide working example
     const tcsP1 = getAtomicTCs("Act 5 (H) H2H C", 1, 1);
     assertTCExistWithChance(tcsP1, "weap87", (92.308475 * 160) / 16);
     assertTCExistWithChance(tcsP1, "armo87", (174.334187 * 160) / 16);
