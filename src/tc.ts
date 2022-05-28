@@ -1,7 +1,9 @@
-import { range, sum, map, clone } from "lodash-es";
+import { range, sum, map, clone, reduce } from "lodash-es";
 import Fraction from "fraction.js";
 
 import { TCDict, TCObject } from "./tc_dict.js";
+
+const ONE = new Fraction(1);
 
 export type TCProbTuple = [string, Fraction];
 export type TCProbMap = {
@@ -74,10 +76,29 @@ function adjustProbabilityByPicks(
   if (picks == 1) {
     return tcs;
   }
+  let adjProbFunction: (p: Fraction) => Fraction;
+  if (picks <= 6) {
+    // if p is probability of getting X in 1 pick
+    // probability of at least 1 X in picks pick is 1 - (1 - X)^picks
+    adjProbFunction = (p) => ONE.sub(ONE.sub(p).pow(picks));
+  } else {
+    // Act bosses have 7 drops, and we can assume that is the max because we enforce it in tests
+    const yesdrop = reduce(
+      tcs,
+      (acc, tcTuple) => acc.add(tcTuple[1]),
+      new Fraction(0)
+    );
+    adjProbFunction = function (p) {
+      const naive = ONE.sub(ONE.sub(p).pow(picks));
+      const probDropSomethingElse = yesdrop.sub(p);
+      return naive.sub(probDropSomethingElse.pow(6).mul(p));
+    };
+    // Monsters can never drop more than 6 items, so discount the chance that 7 items dropped,
+    // the first 6 items were not the TC but the 7th was
+  }
   return tcs.map((tcTuple: TCProbTuple) => {
     const [tcName, probability] = tcTuple;
-    const one = new Fraction(1);
-    const adjProbability = one.sub(one.sub(probability).pow(picks));
+    const adjProbability = adjProbFunction(probability);
     return [tcTuple[0], adjProbability];
   });
 }
@@ -109,10 +130,9 @@ function getAtomicTCsNegativePicks(
         atomicTcMap[atomicSubTc[0]] = atomicSubTc;
       } else {
         // Coalesce probability into map
-        const one = new Fraction(1);
         // If item X has chance A of dropping from TCA and B of dropping from TCB
         // Combined chance to drop is 1 - (1 - A)(1 - B)
-        entry[1] = one.sub(one.sub(entry[1]).mul(one.sub(atomicSubTc[1])));
+        entry[1] = ONE.sub(ONE.sub(entry[1]).mul(ONE.sub(atomicSubTc[1])));
       }
     }
     cumulativePickCount += tcTuple[1];

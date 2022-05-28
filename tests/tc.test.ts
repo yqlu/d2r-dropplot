@@ -1,7 +1,7 @@
 import { TCProbTuple, getAtomicTCs, getAdjustedDenom } from "../src/tc.js";
 import { TCDict } from "../src/tc_dict.js";
 import Fraction from "fraction.js";
-import { filter, sum, map } from "lodash-es";
+import { filter, sum, map, isTypedArray } from "lodash-es";
 
 import { expect } from "chai";
 
@@ -228,8 +228,50 @@ describe("getAtomicTCs", () => {
     assertTCExistWithChance(tcs, "mp2", 289 / 64);
   });
 
-  it.only("works on Countess", () => {
-    const tcs = getAtomicTCs("Countess (H)", 8, 8);
-    console.log(tcs);
+  // it("works on Countess", () => {
+  //   const tcs = getAtomicTCs("Countess (H)", 8, 8);
+  // });
+
+  it("works on boss TCs with picks = 7", () => {
+    const tcs = getAtomicTCs("Andarielq", 8, 8);
+    // Without the special picks == 7 calculation, these numbers would have been
+    // 19 / 28 / 34 / 51 instead (more likely to drop).
+    assertTCExistWithChance(tcs, "r01", 22);
+    assertTCExistWithChance(tcs, "r02", 33);
+    assertTCExistWithChance(tcs, "r03", 40);
+    assertTCExistWithChance(tcs, "r04", 60);
+  });
+
+  it("works on Hell boss TCs with picks = 7", () => {
+    // Same check on above, just on a more complex TC for sanity checking
+    // These numbers match Silospen, but not maxroll...
+    const tcs = getAtomicTCs("Mephistoq (H)", 8, 8);
+    assertTCExistWithChance(tcs, "r01", 1253);
+    assertTCExistWithChance(tcs, "r02", 1879);
+    assertTCExistWithChance(tcs, "r03", 501);
+    assertTCExistWithChance(tcs, "r04", 752);
+    assertTCExistWithChance(tcs, "r05", 358);
+    assertTCExistWithChance(tcs, "r06", 537);
+    assertTCExistWithChance(tcs, "r07", 251);
+    assertTCExistWithChance(tcs, "r08", 376);
+    assertTCExistWithChance(tcs, "r09", 251);
+    assertTCExistWithChance(tcs, "r10", 376);
+    assertTCExistWithChance(tcs, "r11", 325);
+    assertTCExistWithChance(tcs, "r12", 487);
+    assertTCExistWithChance(tcs, "r13", 541);
+    assertTCExistWithChance(tcs, "r14", 811);
+    assertTCExistWithChance(tcs, "r15", 973);
+    assertTCExistWithChance(tcs, "r16", 1459);
+    assertTCExistWithChance(tcs, "r17", 1843);
+    assertTCExistWithChance(tcs, "r18", 2765);
+    assertTCExistWithChance(tcs, "r19", 3587);
   });
 });
+
+function debug(tcs: TCProbTuple[]) {
+  for (var tc of tcs) {
+    if (tc[0].substring(0, 1) == "r" && "01".indexOf(tc[0][1]) > -1) {
+      console.log(tc[0], tc[1].inverse().valueOf());
+    }
+  }
+}
