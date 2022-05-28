@@ -1,4 +1,9 @@
-import { TCProbTuple, getAtomicTCs, getAdjustedDenom } from "../src/tc.js";
+import {
+  TCProbTuple,
+  getAtomicTCs,
+  getAdjustedDenom,
+  sortTCs,
+} from "../src/tc.js";
 import { TCDict } from "../src/tc_dict.js";
 import Fraction from "fraction.js";
 import { filter, sum, map, isTypedArray } from "lodash-es";
@@ -265,6 +270,24 @@ describe("getAtomicTCs", () => {
     assertTCExistWithChance(tcs, "r17", 1843);
     assertTCExistWithChance(tcs, "r18", 2765);
     assertTCExistWithChance(tcs, "r19", 3587);
+  });
+});
+
+describe("sortTCs", () => {
+  it("should sort TCs in their relative categories", () => {
+    const tcs = ["armo3", "r08", "rin", "weap60"].map(
+      (str) => [str, new Fraction(1)] as TCProbTuple
+    );
+    let sorted = sortTCs(tcs);
+    expect(map(sorted, 0)).to.eql(["r08", "weap60", "armo3", "rin"]);
+  });
+
+  it("should sort each category numerically, not lexicographically", () => {
+    const tcs = ["armo3", "armo30", "armo9", "armo6"].map(
+      (str) => [str, new Fraction(1)] as TCProbTuple
+    );
+    let sorted = sortTCs(tcs);
+    expect(map(sorted, 0)).to.eql(["armo3", "armo6", "armo9", "armo30"]);
   });
 });
 
