@@ -1,7 +1,7 @@
 import { range, sum, map, clone } from "lodash-es";
 import Fraction from "fraction.js";
 
-import { TCDict } from "./tc_dict.js";
+import { TCDict, TCObject } from "./tc_dict.js";
 
 export type TCProbTuple = [string, Fraction];
 export type TCProbMap = {
@@ -50,14 +50,13 @@ export function getAtomicTCs(
   let tcs: TCProbTuple[];
   if (tcObject.picks >= 1) {
     const atomicTCsOnePick = _getAtomicTCsOnePick(
-      tcName,
+      tcObject,
       totalPlayers,
       partyCount
     );
     tcs = adjustProbabilityByPicks(atomicTCsOnePick, tcObject.picks);
   } else {
-    // negative picks
-    tcs = [];
+    tcs = getAtomicTCsNegativePicks(tcObject, totalPlayers, partyCount);
   }
 
   // Up till now we've preserved exact fractional precision
@@ -83,20 +82,53 @@ function adjustProbabilityByPicks(
   });
 }
 
-// TODO: positive picks > 1
-// TODO: negative picks (HARD)
-// TODO: track max over item quality ratios
-
-function _getAtomicTCsOnePick(
-  tcName: string,
+function getAtomicTCsNegativePicks(
+  tcObject: TCObject,
   totalPlayers = 1,
   partyCount = 1
 ): TCProbTuple[] {
-  const tcObject = TCDict[tcName];
-  if (!tcObject) {
-    return [];
-  }
+  const atomicTcMap: { [key: string]: TCProbTuple } = {};
+  let cumulativePickCount = 0;
+  // Picks = -4, with [TCA, 2], [TCB, 2]
+  // means drawing 2 picks from TCA and 2 picks from TCB
+  for (var tcTuple of tcObject.tcs) {
+    let [subTC, subPicks] = tcTuple;
+    subPicks = Math.min(
+      subPicks,
+      Math.abs(tcObject.picks) - cumulativePickCount
+    );
+    const atomicTcsOfSubTc = adjustProbabilityByPicks(
+      getAtomicTCs(subTC, totalPlayers, partyCount),
+      subPicks
+    );
 
+    for (var atomicSubTc of atomicTcsOfSubTc) {
+      const entry = atomicTcMap[atomicSubTc[0]];
+      // Insert into map if it doesn't exist
+      if (!entry) {
+        atomicTcMap[atomicSubTc[0]] = atomicSubTc;
+      } else {
+        // Coalesce probability into map
+        const one = new Fraction(1);
+        // If item X has chance A of dropping from TCA and B of dropping from TCB
+        // Combined chance to drop is 1 - (1 - A)(1 - B)
+        entry[1] = one.sub(one.sub(entry[1]).mul(one.sub(atomicSubTc[1])));
+      }
+    }
+    cumulativePickCount += tcTuple[1];
+  }
+  return Object.values(atomicTcMap);
+}
+
+// TODO: cap at 6 (for bosses)
+// TODO: handle countess rune rate
+// TODO: handle Duriel drop rate
+
+function _getAtomicTCsOnePick(
+  tcObject: TCObject,
+  totalPlayers = 1,
+  partyCount = 1
+): TCProbTuple[] {
   // TCDict gives relative probability
   const tcDenom = sum(map(tcObject.tcs, 1));
   // Actual probability is derived by dividing by the sum over all sub TCs (and nodrop)

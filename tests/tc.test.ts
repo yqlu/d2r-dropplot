@@ -1,6 +1,7 @@
 import { TCProbTuple, getAtomicTCs, getAdjustedDenom } from "../src/tc.js";
+import { TCDict } from "../src/tc_dict.js";
 import Fraction from "fraction.js";
-import { filter } from "lodash-es";
+import { filter, sum, map } from "lodash-es";
 
 import { expect } from "chai";
 
@@ -42,6 +43,29 @@ describe("getAdjustedDenom", () => {
     expect(getAdjustedDenom(60, 100, 6, 1)).to.equal(79);
     expect(getAdjustedDenom(60, 100, 7, 1)).to.equal(70);
     expect(getAdjustedDenom(60, 100, 8, 1)).to.equal(70);
+  });
+});
+
+describe("TCDict invariants", () => {
+  it("Negative pick TCs properties", () => {
+    for (var [tcName, tcObject] of Object.entries(TCDict)) {
+      if (tcObject.picks < 0) {
+        // Negative TCs always have 0 nodrop and only two immediate child TCs
+        // Assert as an invariant here so that code can safely assume this
+        expect(tcObject.nodrop).to.equal(0);
+        expect(tcObject.tcs.length).to.equal(2);
+
+        // if (TCDict[tcObject.tcs[0][0]].nodrop > 0) {
+        //   console.log(tcName, tcObject.tcs);
+        // }
+
+        // // For some champ packs, sum of probabilities exceeds the number of picks
+        // // so some of the TCs are effectively "dead"
+        // if (sum(map(tcObject.tcs, 1)) != -tcObject.picks) {
+        //   console.log(tcName, -tcObject.picks, sum(map(tcObject.tcs, 1)));
+        // }
+      }
+    }
   });
 });
 
@@ -162,5 +186,50 @@ describe("getAtomicTCs", () => {
     const tcsP8 = getAtomicTCs("Act 5 (H) H2H C", 8, 1);
     assertTCExistWithChance(tcsP8, "weap87", (92.308475 * 70) / 16);
     assertTCExistWithChance(tcsP8, "armo87", (174.334187 * 70) / 16);
+  });
+
+  it("works on TCs with negative picks", () => {
+    const tcs = getAtomicTCs("Act 1 Super A", 1, 1);
+    // Act 1 Super A gets 2 picks from Act 1 Uitem A
+    assertTCExistWithChance(tcs, "weap3", 3844 / 2755);
+    assertTCExistWithChance(tcs, "armo3", 3844 / 2755);
+    assertTCExistWithChance(tcs, "rin", 24025 / 616);
+    assertTCExistWithChance(tcs, "amu", 24025 / 309);
+    assertTCExistWithChance(tcs, "jew", 96100 / 619);
+    // Act 1 Super A also gets 2 picks from Act 1 Cpot A (aka 4 potions in total)
+    assertTCExistWithChance(tcs, "hp1", 83521 / 76960);
+    assertTCExistWithChance(tcs, "hp2", 83521 / 45105);
+    assertTCExistWithChance(tcs, "mp1", 83521 / 45105);
+    assertTCExistWithChance(tcs, "mp2", 83521 / 32896);
+  });
+
+  it("works on TCs with negative picks and different player counts", () => {
+    // Copy of test above -- since negative pick TCs don't have nodrop, player counts don't affect droprates
+    const tcs = getAtomicTCs("Act 1 Super A", 4, 4);
+    // Act 1 Super A gets 2 picks from Act 1 Uitem A
+    assertTCExistWithChance(tcs, "weap3", 3844 / 2755);
+    assertTCExistWithChance(tcs, "armo3", 3844 / 2755);
+    assertTCExistWithChance(tcs, "rin", 24025 / 616);
+    assertTCExistWithChance(tcs, "amu", 24025 / 309);
+    assertTCExistWithChance(tcs, "jew", 96100 / 619);
+    // Act 1 Super A also gets 2 picks from Act 1 Cpot A (aka 4 potions in total)
+    assertTCExistWithChance(tcs, "hp1", 83521 / 76960);
+    assertTCExistWithChance(tcs, "hp2", 83521 / 45105);
+    assertTCExistWithChance(tcs, "mp1", 83521 / 45105);
+    assertTCExistWithChance(tcs, "mp2", 83521 / 32896);
+  });
+
+  it("works on TCs with negative picks and inconsistent sums", () => {
+    const tcs = getAtomicTCs("Act 1 Champ A", 1, 1);
+    // Act 1 Champ A should only get 1 pick from Act 1 Cpot A (aka 2 potions in total)
+    assertTCExistWithChance(tcs, "hp1", 289 / 208);
+    assertTCExistWithChance(tcs, "hp2", 289 / 93);
+    assertTCExistWithChance(tcs, "mp1", 289 / 93);
+    assertTCExistWithChance(tcs, "mp2", 289 / 64);
+  });
+
+  it.only("works on Countess", () => {
+    const tcs = getAtomicTCs("Countess (H)", 8, 8);
+    console.log(tcs);
   });
 });

@@ -1,13 +1,14 @@
 export type TCDictTuple = [string, number];
 // Magic, Rare, Set, Unique
 export type ItemQualityRatios = [number, number, number, number];
+export type TCObject = {
+  picks: number;
+  qualityRatios: ItemQualityRatios;
+  nodrop: number;
+  tcs: TCDictTuple[];
+};
 export type TCDictType = {
-  [key: string]: {
-    picks: number;
-    qualityRatios: ItemQualityRatios;
-    nodrop: number;
-    tcs: TCDictTuple[];
-  };
+  [key: string]: TCObject;
 };
 
 // produced by util/tc_cleanup.js
