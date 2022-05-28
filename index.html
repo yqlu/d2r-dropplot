@@ -1,5 +1,30 @@
 <html>
-    <body>
-        <script src="data_util.js"></script>
-    </body>
+  <head>
+    <title>D2R Drop Plot</title>
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.js"
+      integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+      crossorigin="anonymous"
+    ></script>
+    <style>
+      #result {
+        font-family: monospace;
+      }
+      .tcName {
+        width: 100px;
+        display: inline-block;
+      }
+    </style>
+  </head>
+  <body>
+    <span>TC</span>
+    <select id="tcs"></select>
+    <span>Player Count</span>
+    <input type="text" id="playerCount" value="1" />
+    <span>Party Count</span>
+    <input type="text" id="partyCount" value="1" />
+    <button id="compute">Compute</button>
+    <div id="result"></div>
+    <script type="module" src="./dist/index.js"></script>
+  </body>
 </html>

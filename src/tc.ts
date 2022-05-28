@@ -1,7 +1,10 @@
 import { range, sum, map, clone, reduce } from "lodash-es";
 import Fraction from "fraction.js";
 
-import { TCDict, TCObject } from "./tc_dict.js";
+import { TCDict, TCObject } from "./tc_dict";
+
+// TODO: handle countess rune rate
+// TODO: handle Duriel drop rate
 
 const ONE = new Fraction(1);
 
@@ -69,6 +72,53 @@ export function getAtomicTCs(
   return tcs;
 }
 
+export function sortTCs(tcs: TCProbTuple[]): TCProbTuple[] {
+  let runeTCs: TCProbTuple[] = [];
+  let weapTCs: TCProbTuple[] = [];
+  let armoTCs: TCProbTuple[] = [];
+  let bowTCs: TCProbTuple[] = [];
+  let meleTCs: TCProbTuple[] = [];
+  let others: TCProbTuple[] = [];
+
+  for (var tcTuple of tcs) {
+    if (/^r[0-9]{2}$/.exec(tcTuple[0])) {
+      runeTCs.push(tcTuple);
+    } else if (/^weap[0-9]+$/.exec(tcTuple[0])) {
+      weapTCs.push(tcTuple);
+    } else if (/^armo[0-9]+$/.exec(tcTuple[0])) {
+      armoTCs.push(tcTuple);
+    } else if (/^bow[0-9]+$/.exec(tcTuple[0])) {
+      bowTCs.push(tcTuple);
+    } else if (/^mele[0-9]+$/.exec(tcTuple[0])) {
+      meleTCs.push(tcTuple);
+    } else {
+      others.push(tcTuple);
+    }
+  }
+  runeTCs.sort(
+    (a, b) => parseInt(a[0].substring(1)) - parseInt(b[0].substring(1))
+  );
+  weapTCs.sort(
+    (a, b) => parseInt(a[0].substring(4)) - parseInt(b[0].substring(4))
+  );
+  armoTCs.sort(
+    (a, b) => parseInt(a[0].substring(4)) - parseInt(b[0].substring(4))
+  );
+  bowTCs.sort(
+    (a, b) => parseInt(a[0].substring(3)) - parseInt(b[0].substring(3))
+  );
+  meleTCs.sort(
+    (a, b) => parseInt(a[0].substring(4)) - parseInt(b[0].substring(4))
+  );
+  others.sort((a, b) => a[0].localeCompare(b[0]));
+  return runeTCs
+    .concat(weapTCs)
+    .concat(armoTCs)
+    .concat(bowTCs)
+    .concat(meleTCs)
+    .concat(others);
+}
+
 function adjustProbabilityByPicks(
   tcs: TCProbTuple[],
   picks: number
@@ -82,19 +132,19 @@ function adjustProbabilityByPicks(
     // probability of at least 1 X in picks pick is 1 - (1 - X)^picks
     adjProbFunction = (p) => ONE.sub(ONE.sub(p).pow(picks));
   } else {
-    // Act bosses have 7 drops, and we can assume that is the max because we enforce it in tests
+    // Act bosses have 7 drops, and we can assume that is the max because we verify it in tests
     const yesdrop = reduce(
       tcs,
       (acc, tcTuple) => acc.add(tcTuple[1]),
       new Fraction(0)
     );
+    // Monsters can never drop more than 6 items, so discount the chance that 7 items dropped,
+    // the first 6 items were not the TC but the 7th was
     adjProbFunction = function (p) {
       const naive = ONE.sub(ONE.sub(p).pow(picks));
       const probDropSomethingElse = yesdrop.sub(p);
       return naive.sub(probDropSomethingElse.pow(6).mul(p));
     };
-    // Monsters can never drop more than 6 items, so discount the chance that 7 items dropped,
-    // the first 6 items were not the TC but the 7th was
   }
   return tcs.map((tcTuple: TCProbTuple) => {
     const [tcName, probability] = tcTuple;
@@ -140,10 +190,6 @@ function getAtomicTCsNegativePicks(
   return Object.values(atomicTcMap);
 }
 
-// TODO: cap at 6 (for bosses)
-// TODO: handle countess rune rate
-// TODO: handle Duriel drop rate
-
 function _getAtomicTCsOnePick(
   tcObject: TCObject,
   totalPlayers = 1,
@@ -188,6 +234,5 @@ function _getAtomicTCsOnePick(
       dedupedMap[atomicTC[0]][1] = dedupedMap[atomicTC[0]][1].add(atomicTC[1]);
     }
   }
-
   return Object.values(dedupedMap);
 }
