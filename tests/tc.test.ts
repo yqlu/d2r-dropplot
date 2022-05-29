@@ -4,7 +4,7 @@ import {
   getAdjustedDenom,
   sortTCs,
 } from "../src/tc.js";
-import { TCDict } from "../src/tc_dict.js";
+import { TCDict, TCObject } from "../src/tc-dict.js";
 import Fraction from "fraction.js";
 import { filter, sum, map, isTypedArray } from "lodash-es";
 

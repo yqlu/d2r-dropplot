@@ -1,7 +1,7 @@
 import { range, sum, map, clone, reduce } from "lodash-es";
 import Fraction from "fraction.js";
 
-import { TCDict, TCObject } from "./tc_dict.js";
+import { TCDict, TCObject } from "./tc-dict.js";
 
 // TODO: handle countess rune rate
 // TODO: handle Duriel drop rate

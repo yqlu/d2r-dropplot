@@ -1,6 +1,7 @@
 import { range, sum, map, clone, reduce } from "lodash-es";
 import Fraction from "fraction.js";
-import { TCDict, TCObject } from "./tc_dict";
+import { TCDict, TCObject } from "./tc-dict";
+import { ItemDict } from "./item-dict";
 import { getAtomicTCs, sortTCs } from "./tc";
 
 function compute() {
@@ -14,8 +15,11 @@ function compute() {
   let result = $("#result");
   result.html("");
   for (var tcTuple of tcs) {
+    if (ItemDict[tcTuple[0]]) {
+      tcTuple[0] = ItemDict[tcTuple[0]].name;
+    }
     var f = tcTuple[1].inverse().valueOf();
-    if (f < 10) {
+    if (f < 50) {
       f = Math.round(f * 10) / 10;
     } else {
       f = Math.round(f);

@@ -1,4 +1,5 @@
 const path = require("path");
+const ResolveTypeScriptPlugin = require("resolve-typescript-plugin");
 
 module.exports = {
   entry: "./src/index.ts",
@@ -18,6 +19,7 @@ module.exports = {
   },
   resolve: {
     extensions: [".tsx", ".ts", ".js"],
+    plugins: [new ResolveTypeScriptPlugin()],
   },
   output: {
     filename: "index.js",
