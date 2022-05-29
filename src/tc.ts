@@ -48,7 +48,8 @@ export function getAdjustedDenom(
 export function getAtomicTCs(
   tcName: string,
   totalPlayers = 1,
-  partyCount = 1
+  partyCount = 1,
+  filter = new Set()
 ): TCProbTuple[] {
   const tcObject = TCDict[tcName];
 
@@ -57,11 +58,12 @@ export function getAtomicTCs(
     const atomicTCsOnePick = _getAtomicTCsOnePick(
       tcObject,
       totalPlayers,
-      partyCount
+      partyCount,
+      filter
     );
     tcs = adjustProbabilityByPicks(atomicTCsOnePick, tcObject.picks);
   } else {
-    tcs = getAtomicTCsNegativePicks(tcObject, totalPlayers, partyCount);
+    tcs = getAtomicTCsNegativePicks(tcObject, totalPlayers, partyCount, filter);
   }
 
   // Up till now we've preserved exact fractional precision
@@ -156,7 +158,8 @@ function adjustProbabilityByPicks(
 function getAtomicTCsNegativePicks(
   tcObject: TCObject,
   totalPlayers = 1,
-  partyCount = 1
+  partyCount = 1,
+  filter = new Set()
 ): TCProbTuple[] {
   const atomicTcMap: { [key: string]: TCProbTuple } = {};
   let cumulativePickCount = 0;
@@ -168,21 +171,29 @@ function getAtomicTCsNegativePicks(
       subPicks,
       Math.abs(tcObject.picks) - cumulativePickCount
     );
-    const atomicTcsOfSubTc = adjustProbabilityByPicks(
-      getAtomicTCs(subTC, totalPlayers, partyCount),
-      subPicks
-    );
-
-    for (var atomicSubTc of atomicTcsOfSubTc) {
-      const entry = atomicTcMap[atomicSubTc[0]];
-      // Insert into map if it doesn't exist
-      if (!entry) {
-        atomicTcMap[atomicSubTc[0]] = atomicSubTc;
-      } else {
-        // Coalesce probability into map
-        // If item X has chance A of dropping from TCA and B of dropping from TCB
-        // Combined chance to drop is 1 - (1 - A)(1 - B)
-        entry[1] = ONE.sub(ONE.sub(entry[1]).mul(ONE.sub(atomicSubTc[1])));
+    // Only recursively expand subTC and push to atomicTcMap if...
+    // it is not atomic, or
+    // it is atomic and there is no filter or it belongs in the filter
+    if (TCDict.hasOwnProperty(subTC) || filter.size == 0 || filter.has(subTC)) {
+      const atomicTcsOfSubTc = adjustProbabilityByPicks(
+        getAtomicTCs(subTC, totalPlayers, partyCount),
+        subPicks
+      );
+      for (var atomicSubTc of atomicTcsOfSubTc) {
+        // atomicSubTC is atomic, but again apply the filter check
+        if (filter.size > 0 && !filter.has(atomicSubTc[0])) {
+          continue;
+        }
+        const entry = atomicTcMap[atomicSubTc[0]];
+        // Insert into map if it doesn't exist
+        if (!entry) {
+          atomicTcMap[atomicSubTc[0]] = atomicSubTc;
+        } else {
+          // Coalesce probability into map
+          // If item X has chance A of dropping from TCA and B of dropping from TCB
+          // Combined chance to drop is 1 - (1 - A)(1 - B)
+          entry[1] = ONE.sub(ONE.sub(entry[1]).mul(ONE.sub(atomicSubTc[1])));
+        }
       }
     }
     cumulativePickCount += tcTuple[1];
@@ -193,7 +204,8 @@ function getAtomicTCsNegativePicks(
 function _getAtomicTCsOnePick(
   tcObject: TCObject,
   totalPlayers = 1,
-  partyCount = 1
+  partyCount = 1,
+  filter = new Set()
 ): TCProbTuple[] {
   // TCDict gives relative probability
   const tcDenom = sum(map(tcObject.tcs, 1));
@@ -210,12 +222,22 @@ function _getAtomicTCsOnePick(
   for (var tcTuple of tcObject.tcs) {
     const [subTC, subNum] = tcTuple;
     const subProb = new Fraction(subNum, tcDenomAdjustedNoDrop);
-    // If subTC is not present in TCDict, it is atomic - pass it over to atomicBreakdown
-    if (!TCDict[subTC]) {
-      atomicBreakdown.push([subTC, subProb]);
+    // If subTC is not present in TCDict, it is atomic
+    if (!TCDict.hasOwnProperty(subTC)) {
+      // If there is a filter, only track if it is in the filter
+      if (filter.size == 0 || filter.has(subTC)) {
+        atomicBreakdown.push([subTC, subProb]);
+      }
     } else {
       // Call getAtomicTCs recursively
-      const atomicTCsOfSub = getAtomicTCs(subTC);
+      // TODO: if there is a filter and we know subTC expanded doesn't contain anything in the filter
+      // we can afford to early exit.
+      const atomicTCsOfSub = getAtomicTCs(
+        subTC,
+        totalPlayers,
+        partyCount,
+        filter
+      );
       for (var atomicTC of atomicTCsOfSub) {
         atomicTC[1] = atomicTC[1].mul(subProb);
         atomicBreakdown.push(atomicTC);

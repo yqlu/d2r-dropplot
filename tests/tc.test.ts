@@ -271,6 +271,50 @@ describe("getAtomicTCs", () => {
     assertTCExistWithChance(tcs, "r18", 2765);
     assertTCExistWithChance(tcs, "r19", 3587);
   });
+
+  describe("getAtomicTCs filtering", () => {
+    it("works on a basic TC with picks = 1", () => {
+      const tcs = getAtomicTCs(
+        "Act 1 H2H B",
+        1,
+        1,
+        new Set(["amu", "tsc", "vps", "weap3"])
+      );
+      expect(tcs.length).to.equal(4);
+      assertTCExistWithChance(tcs, "amu", 800);
+      assertTCExistWithChance(tcs, "tsc", 132);
+      assertTCExistWithChance(tcs, "vps", 114);
+      assertTCExistWithChance(tcs, "weap3", 67);
+    });
+
+    it("works on a basic TC with picks = 1 and increased player count", () => {
+      const tcs = getAtomicTCs(
+        "Act 1 H2H B",
+        4,
+        4,
+        new Set(["amu", "tsc", "vps", "weap3"])
+      );
+      expect(tcs.length).to.equal(4);
+      assertTCExistWithChance(tcs, "amu", 350);
+      assertTCExistWithChance(tcs, "tsc", 58);
+      assertTCExistWithChance(tcs, "vps", 50);
+      assertTCExistWithChance(tcs, "weap3", 29);
+    });
+
+    it("works on a TC with >1 picks", () => {
+      const tcs = getAtomicTCs("Radament", 1, 1, new Set(["r03", "r04"]));
+      expect(tcs.length).to.equal(2);
+      assertTCExistWithChance(tcs, "r03", 185);
+      assertTCExistWithChance(tcs, "r04", 277);
+    });
+
+    it("works on a TC with negative picks", () => {
+      const tcs = getAtomicTCs("Act 1 Super A", 4, 4, new Set(["rin", "amu"]));
+      expect(tcs.length).to.equal(2);
+      assertTCExistWithChance(tcs, "rin", 24025 / 616);
+      assertTCExistWithChance(tcs, "amu", 24025 / 309);
+    });
+  });
 });
 
 describe("sortTCs", () => {
@@ -293,8 +337,6 @@ describe("sortTCs", () => {
 
 function debug(tcs: TCProbTuple[]) {
   for (var tc of tcs) {
-    if (tc[0].substring(0, 1) == "r" && "01".indexOf(tc[0][1]) > -1) {
-      console.log(tc[0], tc[1].inverse().valueOf());
-    }
+    console.log(tc[0], tc[1].inverse().valueOf());
   }
 }

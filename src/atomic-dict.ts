@@ -1,4 +1,4 @@
-export const ATOMIC_DICT = {
+export const ATOMIC_DIST = {
   abow12: {},
   abow15: {},
   abow18: { am1: { s: 1, n: 1, d: 1 } },
