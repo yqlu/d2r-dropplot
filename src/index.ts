@@ -1,16 +1,19 @@
 import { range, sum, map, clone, reduce } from "lodash-es";
 import Fraction from "fraction.js";
-import { TCDict, TCObject } from "./tc-dict";
+import { TCDict, TCDictType, TCObject } from "./tc-dict";
+import { AtomicDict } from "./atomic-dict";
 import { ItemDict } from "./item-dict";
-import { getAtomicTCs, sortTCs } from "./tc";
+import { makeLookupTcFunction, getTcCalculator } from "./tc";
 
 function compute() {
   const tcName = $("#tcs option:selected").text();
   const partyCount = parseInt($("#partyCount").val() as string);
   const playerCount = parseInt($("#playerCount").val() as string);
 
-  let tcs = getAtomicTCs(tcName, partyCount, playerCount);
-  tcs = sortTCs(tcs);
+  // const tcLookup = makeLookupTcFunction(TCDict, {} as TCDictType);
+  const tcLookup = makeLookupTcFunction(TCDict, AtomicDict);
+  const calculateTc = getTcCalculator(tcLookup);
+  let tcs = calculateTc(tcName, partyCount, playerCount);
 
   let result = $("#result");
   result.html("");
@@ -35,6 +38,5 @@ $(document).ready(function () {
   for (var tcName of Object.keys(TCDict)) {
     dropdown.append($("<option />").val(tcName).text(tcName));
   }
-
   $("#compute").on("click", compute);
 });

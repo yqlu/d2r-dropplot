@@ -1,14 +1,16 @@
 import {
   TCProbTuple,
-  getAtomicTCs,
+  makeLookupTcFunction,
+  getTcCalculator,
   getAdjustedDenom,
   sortTCs,
 } from "../src/tc.js";
-import { TCDict, TCObject } from "../src/tc-dict.js";
+import { TCDict, TCDictType, TCObject } from "../src/tc-dict.js";
 import Fraction from "fraction.js";
 import { filter, sum, map, isTypedArray } from "lodash-es";
 
-import { expect } from "chai";
+import { assert, expect } from "chai";
+import { AtomicDict } from "../src/atomic-dict.js";
 
 describe("getAdjustedDenom", () => {
   it("works with base cases", () => {
@@ -52,29 +54,50 @@ describe("getAdjustedDenom", () => {
 });
 
 describe("TCDict invariants", () => {
-  it("Negative pick TCs properties", () => {
+  it("Duriel* are the only >1 pick TCs with sub TCs with picks > 1", () => {
+    for (var [tcName, tcObject] of Object.entries(TCDict)) {
+      if (tcObject.picks > 1) {
+        for (var subTCObj of tcObject.tcs) {
+          if (
+            TCDict.hasOwnProperty(subTCObj[0]) &&
+            TCDict[subTCObj[0]].picks != 1
+          ) {
+            expect(tcName.substring(0, 6)).eql("Duriel");
+          }
+        }
+      }
+    }
+  });
+
+  it("Negative TCs always have zero nodrop and two children", () => {
     for (var [tcName, tcObject] of Object.entries(TCDict)) {
       if (tcObject.picks < 0) {
-        // Negative TCs always have 0 nodrop and only two immediate child TCs
-        // Assert as an invariant here so that code can safely assume this
         expect(tcObject.nodrop).to.equal(0);
         expect(tcObject.tcs.length).to.equal(2);
+      }
+    }
+  });
 
-        // if (TCDict[tcObject.tcs[0][0]].nodrop > 0) {
-        //   console.log(tcName, tcObject.tcs);
-        // }
-
-        // // For some champ packs, sum of probabilities exceeds the number of picks
-        // // so some of the TCs are effectively "dead"
-        // if (sum(map(tcObject.tcs, 1)) != -tcObject.picks) {
-        //   console.log(tcName, -tcObject.picks, sum(map(tcObject.tcs, 1)));
-        // }
+  it("Countess* are the only <0 pick TCs with variable drops", () => {
+    for (var [tcName, tcObject] of Object.entries(TCDict)) {
+      if (tcObject.picks < 0) {
+        // Countess* are the only TCs with negative picks where
+        // - the first TC has a positive number of picks
+        // - the first TC has a non-zero nodrop
+        // (aka variable number of items can drop from the first TC)
+        const firstSubTc = tcObject.tcs[0][0];
+        if (TCDict[firstSubTc].nodrop > 0) {
+          expect(tcName.substring(0, 8)).eql("Countess");
+        }
+        if (TCDict[firstSubTc].picks != 1) {
+          expect(tcName.substring(0, 8)).eql("Countess");
+        }
       }
     }
   });
 });
 
-describe("getAtomicTCs", () => {
+describe("calculateTc", () => {
   function assertTCExistWithChance(
     tcs: TCProbTuple[],
     tcName: string,
@@ -90,9 +113,15 @@ describe("getAtomicTCs", () => {
     return;
   }
 
+  const tcLookupNoAtomic = makeLookupTcFunction(TCDict, {} as TCDictType);
+  const calculateTcNoAtomic = getTcCalculator(tcLookupNoAtomic);
+
+  const tcLookupWithAtomic = makeLookupTcFunction(TCDict, AtomicDict);
+  const calculateTcWithAtomic = getTcCalculator(tcLookupWithAtomic);
+
   it("works on a basic TC with picks = 1", () => {
     // Check against Amazon Basin
-    const tcs = getAtomicTCs("Act 1 H2H B");
+    const tcs = calculateTcNoAtomic("Act 1 H2H B");
     assertTCExistWithChance(tcs, "amu", 800);
     assertTCExistWithChance(tcs, "aqv", 61);
     assertTCExistWithChance(tcs, "armo3", 67);
@@ -128,7 +157,7 @@ describe("getAtomicTCs", () => {
 
   it("works on a basic TC with picks = 1 and increased player count", () => {
     // Check against Silospen
-    const tcs = getAtomicTCs("Act 1 H2H B", 4, 4);
+    const tcs = calculateTcNoAtomic("Act 1 H2H B", 4, 4);
     assertTCExistWithChance(tcs, "amu", 350);
     assertTCExistWithChance(tcs, "aqv", 27);
     assertTCExistWithChance(tcs, "armo3", 29);
@@ -163,7 +192,7 @@ describe("getAtomicTCs", () => {
   });
 
   it("works on a TC with >1 picks", () => {
-    const tcs1 = getAtomicTCs("Act 1 Cpot A");
+    const tcs1 = calculateTcNoAtomic("Act 1 Cpot A");
     assertTCExistWithChance(tcs1, "hp1", 289 / 208);
     assertTCExistWithChance(tcs1, "hp2", 289 / 93);
     assertTCExistWithChance(tcs1, "mp1", 289 / 93);
@@ -171,7 +200,7 @@ describe("getAtomicTCs", () => {
     assertTCExistWithChance(tcs1, "rvs", 289 / 33);
 
     // Radament rune drop rates are Act 3 Good rune rates amplified by 5 picks
-    const tcs2 = getAtomicTCs("Radament");
+    const tcs2 = calculateTcNoAtomic("Radament");
     assertTCExistWithChance(tcs2, "r01", 461);
     assertTCExistWithChance(tcs2, "r02", 692);
     assertTCExistWithChance(tcs2, "r03", 185);
@@ -184,17 +213,17 @@ describe("getAtomicTCs", () => {
 
   it("works on a hell TC with picks = 1 and increased player count", () => {
     // Check against Item Generation Guide working example
-    const tcsP1 = getAtomicTCs("Act 5 (H) H2H C", 1, 1);
+    const tcsP1 = calculateTcNoAtomic("Act 5 (H) H2H C", 1, 1);
     assertTCExistWithChance(tcsP1, "weap87", (92.308475 * 160) / 16);
     assertTCExistWithChance(tcsP1, "armo87", (174.334187 * 160) / 16);
 
-    const tcsP8 = getAtomicTCs("Act 5 (H) H2H C", 8, 1);
+    const tcsP8 = calculateTcNoAtomic("Act 5 (H) H2H C", 8, 1);
     assertTCExistWithChance(tcsP8, "weap87", (92.308475 * 70) / 16);
     assertTCExistWithChance(tcsP8, "armo87", (174.334187 * 70) / 16);
   });
 
   it("works on TCs with negative picks", () => {
-    const tcs = getAtomicTCs("Act 1 Super A", 1, 1);
+    const tcs = calculateTcNoAtomic("Act 1 Super A", 1, 1);
     // Act 1 Super A gets 2 picks from Act 1 Uitem A
     assertTCExistWithChance(tcs, "weap3", 3844 / 2755);
     assertTCExistWithChance(tcs, "armo3", 3844 / 2755);
@@ -208,9 +237,14 @@ describe("getAtomicTCs", () => {
     assertTCExistWithChance(tcs, "mp2", 83521 / 32896);
   });
 
+  // it("works on a TC with >1 picks", () => {
+  //   const tcs = getAtomicTCs("Griswold");
+  //   debug(tcs);
+  // });
+
   it("works on TCs with negative picks and different player counts", () => {
     // Copy of test above -- since negative pick TCs don't have nodrop, player counts don't affect droprates
-    const tcs = getAtomicTCs("Act 1 Super A", 4, 4);
+    const tcs = calculateTcNoAtomic("Act 1 Super A", 4, 4);
     // Act 1 Super A gets 2 picks from Act 1 Uitem A
     assertTCExistWithChance(tcs, "weap3", 3844 / 2755);
     assertTCExistWithChance(tcs, "armo3", 3844 / 2755);
@@ -225,7 +259,7 @@ describe("getAtomicTCs", () => {
   });
 
   it("works on TCs with negative picks and inconsistent sums", () => {
-    const tcs = getAtomicTCs("Act 1 Champ A", 1, 1);
+    const tcs = calculateTcNoAtomic("Act 1 Champ A", 1, 1);
     // Act 1 Champ A should only get 1 pick from Act 1 Cpot A (aka 2 potions in total)
     assertTCExistWithChance(tcs, "hp1", 289 / 208);
     assertTCExistWithChance(tcs, "hp2", 289 / 93);
@@ -238,7 +272,17 @@ describe("getAtomicTCs", () => {
   // });
 
   it("works on boss TCs with picks = 7", () => {
-    const tcs = getAtomicTCs("Andarielq", 8, 8);
+    const tcs = calculateTcNoAtomic("Andarielq", 8, 8);
+    // Without the special picks == 7 calculation, these numbers would have been
+    // 19 / 28 / 34 / 51 instead (more likely to drop).
+    assertTCExistWithChance(tcs, "r01", 22);
+    assertTCExistWithChance(tcs, "r02", 33);
+    assertTCExistWithChance(tcs, "r03", 40);
+    assertTCExistWithChance(tcs, "r04", 60);
+  });
+
+  it("works on boss TCs with picks = 7", () => {
+    const tcs = calculateTcNoAtomic("Andarielq", 8, 8);
     // Without the special picks == 7 calculation, these numbers would have been
     // 19 / 28 / 34 / 51 instead (more likely to drop).
     assertTCExistWithChance(tcs, "r01", 22);
@@ -250,7 +294,7 @@ describe("getAtomicTCs", () => {
   it("works on Hell boss TCs with picks = 7", () => {
     // Same check on above, just on a more complex TC for sanity checking
     // These numbers match Silospen, but not maxroll...
-    const tcs = getAtomicTCs("Mephistoq (H)", 8, 8);
+    const tcs = calculateTcNoAtomic("Mephistoq (H)", 8, 8);
     assertTCExistWithChance(tcs, "r01", 1253);
     assertTCExistWithChance(tcs, "r02", 1879);
     assertTCExistWithChance(tcs, "r03", 501);
@@ -274,7 +318,7 @@ describe("getAtomicTCs", () => {
 
   describe("getAtomicTCs filtering", () => {
     it("works on a basic TC with picks = 1", () => {
-      const tcs = getAtomicTCs(
+      const tcs = calculateTcNoAtomic(
         "Act 1 H2H B",
         1,
         1,
@@ -288,7 +332,7 @@ describe("getAtomicTCs", () => {
     });
 
     it("works on a basic TC with picks = 1 and increased player count", () => {
-      const tcs = getAtomicTCs(
+      const tcs = calculateTcNoAtomic(
         "Act 1 H2H B",
         4,
         4,
@@ -302,14 +346,24 @@ describe("getAtomicTCs", () => {
     });
 
     it("works on a TC with >1 picks", () => {
-      const tcs = getAtomicTCs("Radament", 1, 1, new Set(["r03", "r04"]));
+      const tcs = calculateTcNoAtomic(
+        "Radament",
+        1,
+        1,
+        new Set(["r03", "r04"])
+      );
       expect(tcs.length).to.equal(2);
       assertTCExistWithChance(tcs, "r03", 185);
       assertTCExistWithChance(tcs, "r04", 277);
     });
 
     it("works on a TC with negative picks", () => {
-      const tcs = getAtomicTCs("Act 1 Super A", 4, 4, new Set(["rin", "amu"]));
+      const tcs = calculateTcNoAtomic(
+        "Act 1 Super A",
+        4,
+        4,
+        new Set(["rin", "amu"])
+      );
       expect(tcs.length).to.equal(2);
       assertTCExistWithChance(tcs, "rin", 24025 / 616);
       assertTCExistWithChance(tcs, "amu", 24025 / 309);
