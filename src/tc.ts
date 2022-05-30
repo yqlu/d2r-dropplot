@@ -1,8 +1,8 @@
 import { range, sum, map, clone, reduce } from "lodash-es";
 import Fraction from "fraction.js";
 
-import { TCDict, TCDictType, TCObject } from "./tc-dict.js";
-import { AtomicDict } from "./atomic-dict.js";
+import { TCDictType, TCObject } from "./tc-dict.js";
+import { ItemDict } from "./item-dict.js";
 
 // TODO: handle Griswold quality rate
 // TODO: handle countess rune rate
@@ -93,53 +93,6 @@ export function makeLookupTcFunction(
       return null;
     }
   };
-}
-
-export function sortTCs(tcs: TCProbTuple[]): TCProbTuple[] {
-  let runeTCs: TCProbTuple[] = [];
-  let weapTCs: TCProbTuple[] = [];
-  let armoTCs: TCProbTuple[] = [];
-  let bowTCs: TCProbTuple[] = [];
-  let meleTCs: TCProbTuple[] = [];
-  let others: TCProbTuple[] = [];
-
-  for (var tcTuple of tcs) {
-    if (/^r[0-9]{2}$/.exec(tcTuple[0])) {
-      runeTCs.push(tcTuple);
-    } else if (/^weap[0-9]+$/.exec(tcTuple[0])) {
-      weapTCs.push(tcTuple);
-    } else if (/^armo[0-9]+$/.exec(tcTuple[0])) {
-      armoTCs.push(tcTuple);
-    } else if (/^bow[0-9]+$/.exec(tcTuple[0])) {
-      bowTCs.push(tcTuple);
-    } else if (/^mele[0-9]+$/.exec(tcTuple[0])) {
-      meleTCs.push(tcTuple);
-    } else {
-      others.push(tcTuple);
-    }
-  }
-  runeTCs.sort(
-    (a, b) => parseInt(a[0].substring(1)) - parseInt(b[0].substring(1))
-  );
-  weapTCs.sort(
-    (a, b) => parseInt(a[0].substring(4)) - parseInt(b[0].substring(4))
-  );
-  armoTCs.sort(
-    (a, b) => parseInt(a[0].substring(4)) - parseInt(b[0].substring(4))
-  );
-  bowTCs.sort(
-    (a, b) => parseInt(a[0].substring(3)) - parseInt(b[0].substring(3))
-  );
-  meleTCs.sort(
-    (a, b) => parseInt(a[0].substring(4)) - parseInt(b[0].substring(4))
-  );
-  others.sort((a, b) => a[0].localeCompare(b[0]));
-  return runeTCs
-    .concat(weapTCs)
-    .concat(armoTCs)
-    .concat(bowTCs)
-    .concat(meleTCs)
-    .concat(others);
 }
 
 export function getTcCalculator(lookupTcFunction: TCLookupFunction) {

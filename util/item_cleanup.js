@@ -1,4 +1,4 @@
-import { range, sum, map, clone } from "lodash-es";
+import { range, sum, map, clone, pick } from "lodash-es";
 import { readFile } from "fs/promises";
 const json = JSON.parse(
   await readFile(
@@ -11,12 +11,8 @@ const ITEM_DICT = {};
 for (var entry of Object.entries(json)) {
   const itemCode = entry[0];
   const itemObj = entry[1];
-  ITEM_DICT[itemCode] = {
-    name: itemObj.name,
-    type: itemObj.type,
-    code: itemObj.code,
-  };
+  ITEM_DICT[itemCode] = pick(itemObj, ["name", "type", "code", "level"]);
 }
 
-// This becomes src/tc-dict.ts
+// This becomes src/item-dict.ts
 console.log(JSON.stringify(ITEM_DICT));
