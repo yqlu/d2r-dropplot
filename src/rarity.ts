@@ -28,10 +28,15 @@ export function mergeRatios(
   ) as ItemQualityRatios;
 }
 
-export function getItemTier(itemEntry: WeaponArmorDictEntryType) {
-  return [ITEMTIER.NORMAL, ITEMTIER.EXCEPTIONAL, ITEMTIER.ELITE][
-    itemEntry.tier
-  ];
+export function getItemTier(itemCode: string): ITEMTIER {
+  // Unlike the other characteristics, item tier lives solely in WeaponsDict and ArmorDict
+  let tier = 0; // Normal by default (e.g. for rings, amulets, jewels, charms)
+  if (WeaponsDict.hasOwnProperty(itemCode)) {
+    tier = WeaponsDict[itemCode].tier;
+  } else if (ArmorDict.hasOwnProperty(itemCode)) {
+    tier = ArmorDict[itemCode].tier;
+  }
+  return [ITEMTIER.NORMAL, ITEMTIER.EXCEPTIONAL, ITEMTIER.ELITE][tier];
 }
 
 const mfFactor: { [key in RARITY]: number } = {
@@ -50,16 +55,6 @@ export function getEffectiveMf(mf: number, rarity: RARITY) {
   return Math.trunc((mf * factor) / (mf + factor));
 }
 
-function getItemEntry(code: string) {
-  if (WeaponsDict.hasOwnProperty(code)) {
-    return WeaponsDict[code];
-  } else if (ArmorDict.hasOwnProperty(code)) {
-    return ArmorDict[code];
-  }
-  // TODO: handle jewels, rings, amulets, charms
-  throw new Error("Could not find item");
-}
-
 // Does not take into account whether unique / set item exists and can be dropped
 export function computeQualityProb(
   itemCode: string,
@@ -68,16 +63,15 @@ export function computeQualityProb(
   magicFind: number, // from character
   qualityFactor: number // from ItemRarityRatios from TC,
 ): Fraction {
-  const itemEntry = getItemEntry(itemCode);
+  const itemEntry = ItemDict[itemCode];
   const qlvl = itemEntry.level;
-  const itemTier = getItemTier(itemEntry);
-  const classSpecific = ClassSpecificSet.has(ItemDict[itemCode].type); // TODO: look up itemEntry.class in itemTypes
+  const itemTier = getItemTier(itemCode);
+  const classSpecific = ClassSpecificSet.has(ItemDict[itemCode].type);
   const [baseChance, chanceDivisor, chanceMin] = getRarityConstants(
     itemTier,
     classSpecific,
     rarity
   );
-
   let chance = (baseChance - Math.trunc((ilvl - qlvl) / chanceDivisor)) * 128;
 
   // Apply MF

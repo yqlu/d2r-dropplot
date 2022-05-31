@@ -27,7 +27,7 @@ function compute() {
     }
   }
 
-  tcs = tcs.sort((a, b) => a[0].localeCompare(b[0]));
+  // tcs = tcs.sort((a, b) => a[0].localeCompare(b[0]));
 
   for (var tcTuple of tcs) {
     var f = tcTuple[1].inverse().valueOf();

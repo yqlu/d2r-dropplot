@@ -1,6 +1,7 @@
 import { assert, expect } from "chai";
 import Fraction from "fraction.js";
 import { map } from "lodash-es";
+import { ItemDict } from "../src/item-dict.js";
 
 import { RARITY, ITEMTIER } from "../src/itemratio-dict.js";
 import {
@@ -8,6 +9,7 @@ import {
   computeQualityProbsHelper,
   computeQualityProbs,
 } from "../src/rarity.js";
+import { ArmorDict, WeaponsDict } from "../src/weapon-armor-dict.js";
 
 describe("computeQualityProb", () => {
   it("should work for Hell Baal / Tyrael's Might example", () => {
@@ -33,6 +35,24 @@ describe("computeQualityProb", () => {
   it("should work for Mephisto / Bverrit's Keep example", () => {
     const prob = computeQualityProb("tow", RARITY.UNIQUE, 26, 50, 983);
     expect(prob.valueOf()).to.be.approximately(0.0889, 1e-4);
+  });
+
+  it("should work for for set / unique rings / ammys which have qlvl = 1", () => {
+    // Act 2 Champ A, mlvl = 16
+    expect(
+      computeQualityProb("rin", RARITY.UNIQUE, 16, 0, 800).valueOf()
+    ).to.be.approximately(0.011874, 1e-5);
+    expect(
+      computeQualityProb("rin", RARITY.SET, 16, 0, 800).valueOf()
+    ).to.be.approximately(0.029878, 1e-5);
+
+    // Act 5 (H) Champ A, mlvl = 82
+    expect(
+      computeQualityProb("rin", RARITY.UNIQUE, 82, 0, 800).valueOf()
+    ).to.be.approximately(0.014330498, 1e-5);
+    expect(
+      computeQualityProb("rin", RARITY.SET, 82, 0, 800).valueOf()
+    ).to.be.approximately(0.0380952, 1e-5);
   });
 });
 

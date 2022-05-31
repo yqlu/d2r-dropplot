@@ -1,3 +1,4 @@
+import { ItemDict } from "./item-dict.js";
 import { TCProbTuple } from "./tc.js";
 import { WeaponsDict, ArmorDict } from "./weapon-armor-dict.js";
 
@@ -51,14 +52,14 @@ export function sortTCs(tcs: TCProbTuple[]): TCProbTuple[] {
     (a, b) => parseInt(a[0].substring(4)) - parseInt(b[0].substring(4))
   );
   baseWeapTCs.sort(function (a, b) {
-    const [aObj, bObj] = [WeaponsDict[a[0]], WeaponsDict[b[0]]];
+    const [aObj, bObj] = [ItemDict[a[0]], ItemDict[b[0]]];
     if (aObj.level != bObj.level) {
       return aObj.level - bObj.level;
     }
     return aObj.name.localeCompare(bObj.name);
   });
   baseArmoTCs.sort(function (a, b) {
-    const [aObj, bObj] = [ArmorDict[a[0]], ArmorDict[b[0]]];
+    const [aObj, bObj] = [ItemDict[a[0]], ItemDict[b[0]]];
     if (aObj.level != bObj.level) {
       return aObj.level - bObj.level;
     }
