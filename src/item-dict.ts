@@ -9,6 +9,27 @@ export type ItemDictType = {
   [key: string]: ItemObject;
 };
 
+export const ClassSpecificSet = new Set([
+  "abow",
+  "ajav",
+  "amaz",
+  "ashd",
+  "aspe",
+  "assn",
+  "barb",
+  "cloa",
+  "drui",
+  "h2h",
+  "h2h2",
+  "head",
+  "necr",
+  "orb",
+  "pala",
+  "pelt",
+  "phlm",
+  "sorc",
+]);
+
 export const ItemDict: ItemDictType = {
   hax: { name: "Hand Axe", type: "axe", code: "hax", level: 3 },
   axe: { name: "Axe", type: "axe", code: "axe", level: 7 },

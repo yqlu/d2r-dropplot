@@ -29,5 +29,5 @@ for (var entry of Object.entries(json)) {
   WEAPONS_DICT[itemCode].tier = tier;
 }
 
-// This becomes src/tc-dict.ts
+// This becomes src/weapon-armor-dict.ts
 console.log(JSON.stringify(WEAPONS_DICT));

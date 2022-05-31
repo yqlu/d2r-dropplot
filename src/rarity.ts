@@ -1,16 +1,23 @@
 import Fraction from "fraction.js";
-import { range } from "lodash-es";
+import { sum, range, map } from "lodash-es";
 
 import { ItemQualityRatios } from "./tc-dict.js";
-import { ItemDict } from "./item-dict.js";
+import { ItemDict, ClassSpecificSet } from "./item-dict.js";
 import {
   WeaponsDict,
   ArmorDict,
   WeaponArmorDictEntryType,
 } from "./weapon-armor-dict.js";
 import { RARITY, ITEMTIER, getRarityConstants } from "./itemratio-dict.js";
+import {
+  UNIQUE_BASE_LOOKUP,
+  SET_BASE_LOOKUP,
+  UniqueSetBaseLookupType,
+} from "./unique-set-dict.js";
 
 export type ItemRarityProb = [Fraction, Fraction, Fraction, Fraction];
+
+export type UniqueSetProbTuple = [string, Fraction];
 
 export function mergeRatios(
   ratioA: ItemQualityRatios,
@@ -64,7 +71,7 @@ export function computeQualityProb(
   const itemEntry = getItemEntry(itemCode);
   const qlvl = itemEntry.level;
   const itemTier = getItemTier(itemEntry);
-  const classSpecific = false; // TODO: look up itemEntry.class in itemTypes
+  const classSpecific = ClassSpecificSet.has(ItemDict[itemCode].type); // TODO: look up itemEntry.class in itemTypes
   const [baseChance, chanceDivisor, chanceMin] = getRarityConstants(
     itemTier,
     classSpecific,
@@ -87,7 +94,7 @@ export function computeQualityProb(
   return new Fraction(128, chance);
 }
 
-export function computeAllQualityProb(
+export function computeQualityProbsHelper(
   itemCode: string,
   ilvl: number,
   magicFind: number,
@@ -102,6 +109,9 @@ export function computeAllQualityProb(
     magicFind,
     qualityFactors[3]
   );
+  // computeQualityProb returns probability of rolling set
+  // conditional on it having failed the unique roll...
+  // so normalize this
   const setProb = computeQualityProb(
     itemCode,
     RARITY.SET,
@@ -124,4 +134,58 @@ export function computeAllQualityProb(
     qualityFactors[0]
   ).mul(ONE.sub(uniqProb.add(setProb).add(rareProb)));
   return [magicProb, rareProb, setProb, uniqProb];
+}
+
+export function findCandidates(
+  itemCode: string,
+  ilvl: number,
+  dict: UniqueSetBaseLookupType
+): UniqueSetProbTuple[] {
+  if (!dict.hasOwnProperty(itemCode)) {
+    return [];
+  }
+  const candidates = dict[itemCode].filter(
+    (candidates) => candidates.lvl <= ilvl
+  );
+  const denom = sum(map(candidates, (candidate) => candidate.rarity));
+  return map(candidates, (candidate) => [
+    candidate.index,
+    new Fraction(candidate.rarity, denom),
+  ]);
+}
+
+export function computeQualityProbs(
+  itemCode: string,
+  ilvl: number,
+  magicFind: number,
+  qualityFactors: ItemQualityRatios
+) {
+  let [magicProb, rareProb, setProb, uniqProb] = computeQualityProbsHelper(
+    itemCode,
+    ilvl,
+    magicFind,
+    qualityFactors
+  );
+  const candidateUniques = findCandidates(itemCode, ilvl, UNIQUE_BASE_LOOKUP);
+  const candidateSets = findCandidates(itemCode, ilvl, SET_BASE_LOOKUP);
+
+  // If there are no uniques that can be generated,
+  // Generate a triple-durability rare in its place
+  if (candidateUniques.length == 0) {
+    rareProb = rareProb.add(uniqProb);
+    uniqProb = new Fraction(0);
+  }
+
+  // If there are no uniques that can be generated,
+  // Generate a triple-durability rare in its place
+  if (candidateSets.length == 0) {
+    magicProb = magicProb.add(setProb);
+    setProb = new Fraction(0);
+  }
+
+  return {
+    quality: [magicProb, rareProb, setProb, uniqProb],
+    sets: candidateSets,
+    uniques: candidateUniques,
+  };
 }
