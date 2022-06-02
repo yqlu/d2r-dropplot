@@ -19,6 +19,12 @@ export type ItemRarityProb = [Fraction, Fraction, Fraction, Fraction];
 
 export type UniqueSetProbTuple = [string, Fraction];
 
+export type QualityProbabilityObject = {
+  quality: ItemRarityProb;
+  sets: UniqueSetProbTuple[];
+  uniques: UniqueSetProbTuple[];
+};
+
 export function mergeRatios(
   ratioA: ItemQualityRatios,
   ratioB: ItemQualityRatios
@@ -153,7 +159,7 @@ export function computeQualityProbs(
   ilvl: number,
   magicFind: number,
   qualityFactors: ItemQualityRatios
-) {
+): QualityProbabilityObject {
   let [magicProb, rareProb, setProb, uniqProb] = computeQualityProbsHelper(
     itemCode,
     ilvl,

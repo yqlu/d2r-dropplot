@@ -1,7 +1,7 @@
 import {
   TCProbTuple,
   makeLookupTcFunction,
-  getTcCalculator,
+  TcCalculator,
   getAdjustedDenom,
 } from "../src/tc.js";
 import { TCDict, TCDictType, TCObject } from "../src/tc-dict.js";
@@ -10,6 +10,7 @@ import { filter, sum, map, isTypedArray } from "lodash-es";
 
 import { assert, expect } from "chai";
 import { AtomicDict } from "../src/atomic-dict.js";
+import { TCResultAggregator } from "../src/resultAggregator.js";
 
 describe("getAdjustedDenom", () => {
   it("works with base cases", () => {
@@ -96,7 +97,7 @@ describe("TCDict invariants", () => {
   });
 });
 
-describe("calculateTc", () => {
+describe("TcCalculator", () => {
   function assertTCExistWithChance(
     tcs: TCProbTuple[],
     tcName: string,
@@ -112,11 +113,24 @@ describe("calculateTc", () => {
     return;
   }
 
+  const aggregatorFactory = () => new TCResultAggregator();
   const tcLookupNoAtomic = makeLookupTcFunction(TCDict, {} as TCDictType);
-  const calculateTcNoAtomic = getTcCalculator(tcLookupNoAtomic);
-
-  const tcLookupWithAtomic = makeLookupTcFunction(TCDict, AtomicDict);
-  const calculateTcWithAtomic = getTcCalculator(tcLookupWithAtomic);
+  const tcCalculatorNoAtomic = new TcCalculator(
+    tcLookupNoAtomic,
+    aggregatorFactory
+  );
+  const calculateTcNoAtomic = function (
+    tc: string,
+    totalPlayers?: number,
+    playerCount?: number,
+    filter?: Set<string>
+  ) {
+    const resultAggregator = tcCalculatorNoAtomic.getAtomicTCs.apply(
+      tcCalculatorNoAtomic,
+      arguments
+    );
+    return resultAggregator.result();
+  };
 
   it("works on a basic TC with picks = 1", () => {
     // Check against Amazon Basin

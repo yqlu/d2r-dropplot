@@ -1,9 +1,8 @@
-import { range, sum, map, clone, reduce } from "lodash-es";
-import Fraction from "fraction.js";
-import { TCDict, TCDictType, TCObject } from "./tc-dict";
+import { TCDict } from "./tc-dict";
 import { AtomicDict } from "./atomic-dict";
 import { ItemDict } from "./item-dict";
-import { makeLookupTcFunction, getTcCalculator } from "./tc";
+import { makeLookupTcFunction, TcCalculator } from "./tc";
+import { TCResultAggregator } from "./resultAggregator";
 import { sortTCs } from "./display";
 
 function compute() {
@@ -13,8 +12,11 @@ function compute() {
 
   // const tcLookup = makeLookupTcFunction(TCDict, {} as TCDictType);
   const tcLookup = makeLookupTcFunction(TCDict, AtomicDict);
-  const calculateTc = getTcCalculator(tcLookup);
-  let tcs = calculateTc(tcName, partyCount, playerCount);
+  const tcCalculator = new TcCalculator(
+    tcLookup,
+    () => new TCResultAggregator()
+  );
+  let tcs = tcCalculator.getAtomicTCs(tcName, partyCount, playerCount).result();
   tcs = sortTCs(tcs);
 
   let result = $("#result");
@@ -26,8 +28,6 @@ function compute() {
       })`;
     }
   }
-
-  // tcs = tcs.sort((a, b) => a[0].localeCompare(b[0]));
 
   for (var tcTuple of tcs) {
     var f = tcTuple[1].inverse().valueOf();

@@ -34,6 +34,5 @@ for (var entry of Object.entries(json)) {
     tcs: tcs,
   };
 }
-
 // This becomes src/tc-dict.ts
 console.log(JSON.stringify(TCDICT));
