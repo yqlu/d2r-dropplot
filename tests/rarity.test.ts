@@ -203,26 +203,8 @@ describe("computeQualityProbs", () => {
     // TODO: relative chance of Gheed's doesn't match existing drop calculators
   });
 
-  it("should handle throwing potions properly", () => {
-    // Small charms
+  it("should handle normal-only items", () => {
     let res = computeQualityProbs("opl", 99, 300, [1024, 983, 983, 983]);
-    console.log(res);
-    // // Check that it can only be magical
-    // expect(res.quality[0].valueOf()).to.equal(1);
-    // expect(sum(map(res.quality, (p) => p.valueOf()))).to.equal(1);
-
-    // // Large charms
-    // res = computeQualityProbs("cm2", 99, 300, [1024, 983, 983, 983]);
-    // // Check that it can only be magical
-    // expect(res.quality[0].valueOf()).to.equal(1);
-    // expect(sum(map(res.quality, (p) => p.valueOf()))).to.equal(1);
-
-    // // Grand charms
-    // res = computeQualityProbs("cm3", 99, 300, [1024, 983, 983, 983]);
-    // // Check that it can only be magical or unique
-    // expect(res.quality[0].add(res.quality[3]).valueOf()).to.equal(1);
-    // expect(sum(map(res.quality, (p) => p.valueOf()))).to.equal(1);
-    // expect(res.uniques[0][0]).to.equal("Gheed's Fortune");
-    // // TODO: relative chance of Gheed's doesn't match existing drop calculators
+    res.quality.forEach((p) => expect(p.valueOf()).to.equal(0));
   });
 });

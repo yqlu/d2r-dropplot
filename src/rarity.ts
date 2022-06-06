@@ -2,7 +2,13 @@ import Fraction from "fraction.js";
 import { sum, range, map } from "lodash-es";
 
 import { ItemQualityRatios } from "./tc-dict.js";
-import { ItemDict, ClassSpecificSet } from "./item-dict.js";
+import {
+  ItemDict,
+  ClassSpecificSet,
+  OnlyNormalSet,
+  AtLeastMagicSet,
+  RareableSet,
+} from "./item-dict.js";
 import {
   WeaponsDict,
   ArmorDict,
@@ -14,12 +20,6 @@ import {
   SET_BASE_LOOKUP,
   UniqueSetBaseLookupType,
 } from "./unique-set-dict.js";
-
-// Items that are not weapons nor armor
-// and are minimum magic in quality
-// TODO: these should use magic / rare / charm columns in item-types.txt instead of being hardcoded
-const magicItems = new Set(["rin", "amu", "cm1", "cm2", "cm3", "jew"]);
-const noRareItems = new Set(["cm1", "cm2", "cm3"]);
 
 export type ItemRarityProb = [Fraction, Fraction, Fraction, Fraction];
 
@@ -75,10 +75,11 @@ export function computeQualityProb(
   magicFind: number, // from character
   qualityFactor: number // from ItemRarityRatios from TC,
 ): Fraction {
-  // Special case: these items are always at least magical and cannot be white
-  if (rarity == RARITY.MAGIC && magicItems.has(itemCode)) {
+  // Special case: these items are always at least magical
+  if (rarity == RARITY.MAGIC && AtLeastMagicSet.has(ItemDict[itemCode].type)) {
     return new Fraction(1);
   }
+
   const itemEntry = ItemDict[itemCode];
   const qlvl = itemEntry.level;
   const itemTier = getItemTier(itemCode);
@@ -170,16 +171,8 @@ function qualityNotApplicable(itemCode: string) {
   if (!ItemDict.hasOwnProperty(itemCode)) {
     return true;
   }
-  // Otherwise, only attempt calculating quality for weapons, armors
-  // or magic items (rings, amulets, jewels, charms)
-  if (
-    WeaponsDict.hasOwnProperty(itemCode) ||
-    ArmorDict.hasOwnProperty(itemCode) ||
-    magicItems.has(itemCode)
-  ) {
-    return false;
-  }
-  return true;
+  // Otherwise, only attempt calculating quality if not in OnlyNormalSet
+  return OnlyNormalSet.has(ItemDict[itemCode].type);
 }
 
 export function computeQualityProbs(
@@ -220,7 +213,7 @@ export function computeQualityProbs(
   }
 
   // If item cannot be rare, generate a magic item in its place
-  if (noRareItems.has(itemCode)) {
+  if (!RareableSet.has(ItemDict[itemCode].type)) {
     magicProb = magicProb.add(rareProb);
     rareProb = new Fraction(0);
   }
