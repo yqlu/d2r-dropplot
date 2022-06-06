@@ -1,6 +1,6 @@
 import { assert, expect } from "chai";
 import Fraction from "fraction.js";
-import { map } from "lodash-es";
+import { map, sum } from "lodash-es";
 import { ItemDict } from "../src/item-dict.js";
 
 import { RARITY, ITEMTIER } from "../src/itemratio-dict.js";
@@ -146,5 +146,83 @@ describe("computeQualityProbs", () => {
 
     // No unique candidates
     expect(res.uniques.length).to.equal(0);
+  });
+
+  it("should handle rings and amulets properly", () => {
+    // Rings
+    let res = computeQualityProbs("rin", 49, 300, [0, 0, 0, 0]);
+    // Check that magic / rare / set / unique are all possible, and that
+    // since rings must be at least magic, all quality probabilities add up to 1
+    res.quality.forEach((p) => expect(p.valueOf()).to.be.greaterThan(0));
+    expect(sum(map(res.quality, (p) => p.valueOf()))).to.equal(1);
+
+    // Check eligible set rings and relative probabilities
+    expect(res.sets).to.have.length(2);
+    expect(map(res.sets, 0)).to.eql(["Angelic Halo", "Cathan's Seal"]);
+    expect(res.sets[0][1].valueOf()).to.be.approximately(3 / 10, 1e-3);
+    expect(res.sets[1][1].valueOf()).to.be.approximately(7 / 10, 1e-3);
+
+    // Check eligible unique rings and relative probabilities
+    expect(res.uniques).to.have.length(3);
+    expect(map(res.uniques, 0)).to.eql([
+      "Nagelring",
+      "Manald Heal",
+      "The Stone of Jordan",
+    ]);
+    expect(res.uniques[0][1].valueOf()).to.be.approximately(15 / 31, 1e-3);
+    expect(res.uniques[1][1].valueOf()).to.be.approximately(15 / 31, 1e-3);
+    expect(res.uniques[2][1].valueOf()).to.be.approximately(1 / 31, 1e-3);
+
+    // Amulets
+    res = computeQualityProbs("amu", 49, 300, [0, 0, 0, 0]);
+    // Check that magic / rare / set / unique are all possible, and that
+    // since rings must be at least magic, all quality probabilities add up to 1
+    res.quality.forEach((p) => expect(p.valueOf()).to.be.greaterThan(0));
+    expect(sum(map(res.quality, (p) => p.valueOf()))).to.equal(1);
+  });
+
+  it("should handle charms properly", () => {
+    // Small charms
+    let res = computeQualityProbs("cm1", 99, 300, [1024, 983, 983, 983]);
+    // Check that it can only be magical
+    expect(res.quality[0].valueOf()).to.equal(1);
+    expect(sum(map(res.quality, (p) => p.valueOf()))).to.equal(1);
+
+    // Large charms
+    res = computeQualityProbs("cm2", 99, 300, [1024, 983, 983, 983]);
+    // Check that it can only be magical
+    expect(res.quality[0].valueOf()).to.equal(1);
+    expect(sum(map(res.quality, (p) => p.valueOf()))).to.equal(1);
+
+    // Grand charms
+    res = computeQualityProbs("cm3", 99, 300, [1024, 983, 983, 983]);
+    // Check that it can only be magical or unique
+    expect(res.quality[0].add(res.quality[3]).valueOf()).to.equal(1);
+    expect(sum(map(res.quality, (p) => p.valueOf()))).to.equal(1);
+    expect(res.uniques[0][0]).to.equal("Gheed's Fortune");
+    // TODO: relative chance of Gheed's doesn't match existing drop calculators
+  });
+
+  it("should handle throwing potions properly", () => {
+    // Small charms
+    let res = computeQualityProbs("opl", 99, 300, [1024, 983, 983, 983]);
+    console.log(res);
+    // // Check that it can only be magical
+    // expect(res.quality[0].valueOf()).to.equal(1);
+    // expect(sum(map(res.quality, (p) => p.valueOf()))).to.equal(1);
+
+    // // Large charms
+    // res = computeQualityProbs("cm2", 99, 300, [1024, 983, 983, 983]);
+    // // Check that it can only be magical
+    // expect(res.quality[0].valueOf()).to.equal(1);
+    // expect(sum(map(res.quality, (p) => p.valueOf()))).to.equal(1);
+
+    // // Grand charms
+    // res = computeQualityProbs("cm3", 99, 300, [1024, 983, 983, 983]);
+    // // Check that it can only be magical or unique
+    // expect(res.quality[0].add(res.quality[3]).valueOf()).to.equal(1);
+    // expect(sum(map(res.quality, (p) => p.valueOf()))).to.equal(1);
+    // expect(res.uniques[0][0]).to.equal("Gheed's Fortune");
+    // // TODO: relative chance of Gheed's doesn't match existing drop calculators
   });
 });

@@ -15,6 +15,12 @@ import {
   UniqueSetBaseLookupType,
 } from "./unique-set-dict.js";
 
+// Items that are not weapons nor armor
+// and are minimum magic in quality
+// TODO: these should use magic / rare / charm columns in item-types.txt instead of being hardcoded
+const magicItems = new Set(["rin", "amu", "cm1", "cm2", "cm3", "jew"]);
+const noRareItems = new Set(["cm1", "cm2", "cm3"]);
+
 export type ItemRarityProb = [Fraction, Fraction, Fraction, Fraction];
 
 export type UniqueSetProbTuple = [string, Fraction];
@@ -69,6 +75,10 @@ export function computeQualityProb(
   magicFind: number, // from character
   qualityFactor: number // from ItemRarityRatios from TC,
 ): Fraction {
+  // Special case: these items are always at least magical and cannot be white
+  if (rarity == RARITY.MAGIC && magicItems.has(itemCode)) {
+    return new Fraction(1);
+  }
   const itemEntry = ItemDict[itemCode];
   const qlvl = itemEntry.level;
   const itemTier = getItemTier(itemCode);
@@ -82,6 +92,7 @@ export function computeQualityProb(
 
   // Apply MF
   const effectiveMf = getEffectiveMf(magicFind, rarity);
+
   // This reduces chance, a good thing because chance is the denom of the final RNG
   chance = Math.trunc((chance * 100) / (100 + effectiveMf));
   chance = Math.max(chance, chanceMin);
@@ -154,12 +165,37 @@ export function findCandidates(
   ]);
 }
 
+function qualityNotApplicable(itemCode: string) {
+  // If itemCode is not in itemDict, don't attempt to calculate quality
+  if (!ItemDict.hasOwnProperty(itemCode)) {
+    return true;
+  }
+  // Otherwise, only attempt calculating quality for weapons, armors
+  // or magic items (rings, amulets, jewels, charms)
+  if (
+    WeaponsDict.hasOwnProperty(itemCode) ||
+    ArmorDict.hasOwnProperty(itemCode) ||
+    magicItems.has(itemCode)
+  ) {
+    return false;
+  }
+  return true;
+}
+
 export function computeQualityProbs(
   itemCode: string,
   ilvl: number,
-  magicFind: number,
+  magicFind: number = 0,
   qualityFactors: ItemQualityRatios
 ): QualityProbabilityObject {
+  if (qualityNotApplicable(itemCode)) {
+    const ZERO = new Fraction(0);
+    return {
+      quality: [ZERO, ZERO, ZERO, ZERO],
+      sets: [],
+      uniques: [],
+    };
+  }
   let [magicProb, rareProb, setProb, uniqProb] = computeQualityProbsHelper(
     itemCode,
     ilvl,
@@ -176,11 +212,17 @@ export function computeQualityProbs(
     uniqProb = new Fraction(0);
   }
 
-  // If there are no uniques that can be generated,
-  // Generate a triple-durability rare in its place
+  // If there are no sets that can be generated,
+  // Generate a double-durability magic in its place
   if (candidateSets.length == 0) {
     magicProb = magicProb.add(setProb);
     setProb = new Fraction(0);
+  }
+
+  // If item cannot be rare, generate a magic item in its place
+  if (noRareItems.has(itemCode)) {
+    magicProb = magicProb.add(rareProb);
+    rareProb = new Fraction(0);
   }
 
   return {

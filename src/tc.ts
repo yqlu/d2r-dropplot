@@ -1,20 +1,15 @@
 import { range, sum, map, clone, reduce } from "lodash-es";
 import Fraction from "fraction.js";
 
-import { TCResultAggregator } from "./resultAggregator.js";
+import { ResultAggregator, TCProbTuple } from "./resultAggregator.js";
 import { TCDictType, TCObject } from "./tc-dict.js";
-import { ItemDict } from "./item-dict.js";
+import { ItemQualityRatios } from "./tc-dict";
 
 // TODO: handle Griswold quality rate
 // TODO: handle countess rune rate
 // TODO: handle Duriel drop rate
 
 const ONE = new Fraction(1);
-
-export type TCProbTuple = [string, Fraction];
-export type TCProbMap = {
-  [key: string]: TCProbTuple;
-};
 export type TCLookupFunction = (name: string) => TCObject;
 
 export function getAdjustedDenom(
@@ -62,13 +57,13 @@ export function makeLookupTcFunction(
   };
 }
 
-export class TcCalculator {
+export class TcCalculator<T> {
   lookupTcFunction: TCLookupFunction;
-  aggregatorFactory: () => TCResultAggregator;
+  aggregatorFactory: () => ResultAggregator<T>;
 
   constructor(
     lookupTcFunction: TCLookupFunction,
-    aggregatorFactory: () => TCResultAggregator
+    aggregatorFactory: () => ResultAggregator<T>
   ) {
     this.lookupTcFunction = lookupTcFunction;
     this.aggregatorFactory = aggregatorFactory;
@@ -82,7 +77,7 @@ export class TcCalculator {
     totalPlayers = 1,
     partyCount = 1,
     filter = new Set() as Set<string>
-  ): TCResultAggregator {
+  ): ResultAggregator<T> {
     const aggregator = this.aggregatorFactory();
     const tcObject = this.lookupTcFunction(tcName);
     return this._getAtomicTCs(
@@ -101,8 +96,8 @@ export class TcCalculator {
     partyCount: number,
     filter: Set<string>,
     cumuProb: Fraction,
-    aggregator: TCResultAggregator
-  ): TCResultAggregator {
+    aggregator: ResultAggregator<T>
+  ): ResultAggregator<T> {
     if (tcObject.picks >= 1) {
       return this.getAtomicTCsOnePick(
         tcObject,
@@ -130,8 +125,8 @@ export class TcCalculator {
     partyCount: number,
     filter: Set<string>,
     cumuProb: Fraction,
-    parentAggregator: TCResultAggregator
-  ): TCResultAggregator {
+    parentAggregator: ResultAggregator<T>
+  ): ResultAggregator<T> {
     const atomicTcMap: { [key: string]: TCProbTuple } = {};
     let cumulativePickCount = 0;
     // Picks = -4, with [TCA, 2], [TCB, 2]
@@ -172,8 +167,8 @@ export class TcCalculator {
     partyCount: number,
     filter: Set<string>,
     cumuProb: Fraction,
-    aggregator: TCResultAggregator
-  ): TCResultAggregator {
+    aggregator: ResultAggregator<T>
+  ): ResultAggregator<T> {
     // tcs gives relative probability
     const tcDenom = sum(map(tcObject.tcs, 1));
     // Actual probability is derived by dividing by the sum over all sub TCs (and nodrop)
@@ -192,7 +187,7 @@ export class TcCalculator {
       if (!this.lookupTcFunction(subTC)) {
         // If there is a filter, only track if it is in the filter
         if (filter.size == 0 || filter.has(subTC)) {
-          aggregator.add(subTC, subProb);
+          aggregator.add(subTC, subProb, [0, 0, 0, 0]);
         }
       } else {
         // Call getAtomicTCs recursively

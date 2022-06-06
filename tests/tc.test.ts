@@ -1,5 +1,4 @@
 import {
-  TCProbTuple,
   makeLookupTcFunction,
   TcCalculator,
   getAdjustedDenom,
@@ -10,7 +9,13 @@ import { filter, sum, map, isTypedArray } from "lodash-es";
 
 import { assert, expect } from "chai";
 import { AtomicDict } from "../src/atomic-dict.js";
-import { TCResultAggregator } from "../src/resultAggregator.js";
+import {
+  BaseItemProbTuple,
+  BaseItemResultAggregator,
+  TCProbTuple,
+  TCResultAggregator,
+} from "../src/resultAggregator.js";
+import { ItemDict } from "../src/item-dict.js";
 
 describe("getAdjustedDenom", () => {
   it("works with base cases", () => {
@@ -104,7 +109,7 @@ describe("TcCalculator", () => {
     chance: number
   ) {
     const tc = filter(tcs, (tcTuple) => tcTuple[0] == tcName);
-    expect(tc.length).to.be.equal(1);
+    expect(tc.length).to.be.equal(1, tcName);
     expect(tc[0][1].inverse().valueOf()).to.be.approximately(
       chance,
       1,
@@ -115,7 +120,7 @@ describe("TcCalculator", () => {
 
   const aggregatorFactory = () => new TCResultAggregator();
   const tcLookupNoAtomic = makeLookupTcFunction(TCDict, {} as TCDictType);
-  const tcCalculatorNoAtomic = new TcCalculator(
+  const tcCalculatorNoAtomic = new TcCalculator<TCProbTuple[]>(
     tcLookupNoAtomic,
     aggregatorFactory
   );
@@ -125,9 +130,11 @@ describe("TcCalculator", () => {
     playerCount?: number,
     filter?: Set<string>
   ) {
-    const resultAggregator = tcCalculatorNoAtomic.getAtomicTCs.apply(
-      tcCalculatorNoAtomic,
-      arguments
+    const resultAggregator = tcCalculatorNoAtomic.getAtomicTCs(
+      tc,
+      totalPlayers,
+      playerCount,
+      filter
     );
     return resultAggregator.result();
   };

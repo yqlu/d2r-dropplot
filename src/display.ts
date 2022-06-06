@@ -1,5 +1,5 @@
 import { ItemDict } from "./item-dict.js";
-import { TCProbTuple } from "./tc.js";
+import { TCProbTuple } from "./resultAggregator";
 import { WeaponsDict, ArmorDict } from "./weapon-armor-dict.js";
 
 export function sortTCs(tcs: TCProbTuple[]): TCProbTuple[] {
