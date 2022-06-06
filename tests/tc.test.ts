@@ -257,9 +257,8 @@ describe("TcCalculator", () => {
     assertTCExistWithChance(tcs, "mp2", 83521 / 32896);
   });
 
-  // it("works on a TC with >1 picks", () => {
-  //   const tcs = getAtomicTCs("Griswold");
-  //   debug(tcs);
+  // it.only("works on Griswold", () => {
+  //   const tcs = calculateTcNoAtomic("Griswold", 1, 1);
   // });
 
   it("works on TCs with negative picks and different player counts", () => {

@@ -1,16 +1,23 @@
-import { range, sum, map, clone, reduce } from "lodash-es";
+import { range, sum, map, clone, reduce, zip } from "lodash-es";
 import Fraction from "fraction.js";
 
 import { ResultAggregator, TCProbTuple } from "./resultAggregator.js";
 import { TCDictType, TCObject } from "./tc-dict.js";
 import { ItemQualityRatios } from "./tc-dict";
 
+// TODO: Act 4 (N) H2H Barbed Club drop rate
 // TODO: handle Griswold quality rate
 // TODO: handle countess rune rate
 // TODO: handle Duriel drop rate
 
 const ONE = new Fraction(1);
 export type TCLookupFunction = (name: string) => TCObject;
+
+export function maxQualityRatios(a: ItemQualityRatios, b: ItemQualityRatios) {
+  return map(zip(a, b), ([ratioA, ratioB]) =>
+    Math.max(ratioA, ratioB)
+  ) as ItemQualityRatios;
+}
 
 export function getAdjustedDenom(
   tcDenom: number,
@@ -86,6 +93,7 @@ export class TcCalculator<T> {
       partyCount,
       filter,
       ONE,
+      [0, 0, 0, 0],
       aggregator
     ).finalize();
   }
@@ -96,6 +104,7 @@ export class TcCalculator<T> {
     partyCount: number,
     filter: Set<string>,
     cumuProb: Fraction,
+    cumuQualityRatios: ItemQualityRatios,
     aggregator: ResultAggregator<T>
   ): ResultAggregator<T> {
     if (tcObject.picks >= 1) {
@@ -105,6 +114,7 @@ export class TcCalculator<T> {
         partyCount,
         filter,
         cumuProb,
+        cumuQualityRatios,
         aggregator
       ).withPositivePicks(tcObject.picks);
     } else {
@@ -152,6 +162,7 @@ export class TcCalculator<T> {
           partyCount,
           filter,
           cumuProb,
+          [0, 0, 0, 0],
           subAggregator
         ).withPositivePicks(subPicks);
         parentAggregator.combineNegativePicks(subAggregator);
@@ -167,6 +178,7 @@ export class TcCalculator<T> {
     partyCount: number,
     filter: Set<string>,
     cumuProb: Fraction,
+    cumuQualityRatios: ItemQualityRatios,
     aggregator: ResultAggregator<T>
   ): ResultAggregator<T> {
     // tcs gives relative probability
@@ -179,6 +191,11 @@ export class TcCalculator<T> {
       partyCount
     );
 
+    cumuQualityRatios = maxQualityRatios(
+      cumuQualityRatios,
+      tcObject.qualityRatios
+    );
+
     // Some of these TCs are recursively defined, so break them down to their terminal nodes only
     for (var tcTuple of tcObject.tcs) {
       const [subTC, subNum] = tcTuple;
@@ -187,7 +204,7 @@ export class TcCalculator<T> {
       if (!this.lookupTcFunction(subTC)) {
         // If there is a filter, only track if it is in the filter
         if (filter.size == 0 || filter.has(subTC)) {
-          aggregator.add(subTC, subProb, [0, 0, 0, 0]);
+          aggregator.add(subTC, subProb, cumuQualityRatios);
         }
       } else {
         // Call getAtomicTCs recursively
@@ -199,11 +216,11 @@ export class TcCalculator<T> {
           partyCount,
           filter,
           subProb,
+          cumuQualityRatios,
           aggregator
         );
       }
     }
-
     return aggregator;
   }
 }
