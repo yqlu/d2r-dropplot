@@ -5,8 +5,6 @@ import { ResultAggregator, TCProbTuple } from "./resultAggregator.js";
 import { TCDictType, TCObject } from "./tc-dict.js";
 import { ItemQualityRatios } from "./tc-dict";
 
-// TODO: Act 4 (N) H2H Barbed Club drop rate
-// TODO: handle Griswold quality rate
 // TODO: handle countess rune rate
 // TODO: handle Duriel drop rate
 

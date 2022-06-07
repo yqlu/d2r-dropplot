@@ -7,7 +7,6 @@ import {
   QualityProbabilityObject,
 } from "./rarity.js";
 
-// TODO test baseItem e2e
 // TODO: test griswold rarity
 // TODO abstract out common parts of TCResultAggregator and BaseItemResultAggregator
 // TODO build out E2E web framework

@@ -9,7 +9,7 @@ import {
   BaseItemResultAggregator,
   TCProbTuple,
 } from "./resultAggregator";
-import { sortTCs } from "./display";
+import { sortTCs, sortAlphabetical } from "./display";
 
 function format(percent: Fraction) {
   return Math.round(percent.valueOf() * 10000) / 100;
@@ -29,7 +29,7 @@ function compute() {
     () => new BaseItemResultAggregator(mlvl, magicFind)
   );
   let tcs = tcCalculator.getAtomicTCs(tcName, partyCount, playerCount).result();
-  tcs = sortTCs(
+  tcs = sortAlphabetical(
     tcs as unknown as TCProbTuple[]
   ) as unknown as BaseItemProbTuple[];
 

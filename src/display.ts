@@ -75,3 +75,16 @@ export function sortTCs(tcs: TCProbTuple[]): TCProbTuple[] {
     .concat(meleTCs)
     .concat(others);
 }
+
+export function sortAlphabetical(tcs: TCProbTuple[]) {
+  tcs.sort(function (a, b) {
+    if (!ItemDict[a[0]]) {
+      return 1;
+    } else if (!ItemDict[b[0]]) {
+      return -1;
+    }
+    return ItemDict[a[0]].name.localeCompare(ItemDict[b[0]].name);
+  });
+
+  return tcs;
+}
