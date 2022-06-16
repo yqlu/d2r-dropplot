@@ -214,16 +214,32 @@ export class BaseItemResultAggregator
       if (!this.dict.hasOwnProperty(key)) {
         this.dict[key] = value;
       } else {
+        let baseItemProb: Fraction;
+
         // Coalesce probability into map
         // If item X has chance A of dropping from TCA and B of dropping from TCB
         // Combined chance to drop is 1 - (1 - A)(1 - B) = 1 - (1 - A - B + AB) = A + B - AB
         if (this.aggregationStyle == ProbabilityAggregation.CHANCE_OF_FIRST) {
-          this.dict[key][0] = ONE.sub(
+          baseItemProb = ONE.sub(
             ONE.sub(other.dict[key][0]).mul(ONE.sub(this.dict[key][0]))
           );
         } else {
-          this.dict[key][0] = this.dict[key][0].add(other.dict[key][0]);
+          baseItemProb = this.dict[key][0].add(other.dict[key][0]);
         }
+        const rarityCombined = range(4).map((idx) =>
+          value[1].quality[idx]
+            .mul(value[0])
+            .add(this.dict[key][1].quality[idx].mul(this.dict[key][0]))
+            .div(baseItemProb)
+        ) as ItemRarityProb;
+        this.dict[key] = [
+          baseItemProb,
+          {
+            quality: rarityCombined,
+            sets: this.dict[key][1].sets,
+            uniques: this.dict[key][1].uniques,
+          },
+        ];
       }
     }
   }

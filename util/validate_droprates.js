@@ -29,15 +29,14 @@ const items = JSON.parse(
 Test accuracy of package against github.com/realmonster/diablo2_drop_calc
 Caveats:
 - need to use expected value
-- need to ignore set / uniques bumping down if non-existence
+- need to ignore set / uniques bumping down if they don't exist
 
 If so, validated consistency for P1 0MF except for
 - Andariel, Mephisto, Diablo, Baal
 - Countess
 - Duriel
-- Griswold, Smith
 - Super
-- ROP (N) (H)
+- ROP (N) / (H) --> need to account for Annihilus
 */
 
 const ERROR = 1.001;
@@ -149,7 +148,7 @@ function compute(tc, mlvl) {
 function test(tc, mlvl) {
   let res = compute(tc, mlvl);
   if (res.errors.length > 0) {
-    console.log(tc, res.errors.length);
+    console.log(tc, res.errors);
   } else {
     console.log(`${tc} passed`);
   }

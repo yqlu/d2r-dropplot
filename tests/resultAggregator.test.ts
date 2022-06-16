@@ -226,6 +226,29 @@ describe("BaseItemResultAggregator", () => {
     expect(res[2][1].valueOf()).to.eql(1 / 6);
   });
 
+  it("should track rarity correctly when combining negative picks", () => {
+    const a1 = new BaseItemResultAggregator(99);
+    a1.add("buc", new Fraction(1, 2), [1024, 1024, 1024, 1024]);
+    const res1 = a1.result()[0];
+    const prob1 = res1[1];
+    const uniq1 = res1[2].quality[3];
+
+    const a2 = new BaseItemResultAggregator(99);
+    a2.add("buc", new Fraction(1, 5));
+    const res2 = a2.result()[0];
+    const prob2 = res2[1];
+    const uniq2 = res2[2].quality[3];
+
+    a1.combineNegativePicks(a2);
+    const res = a1.result();
+    expect(res).to.have.length(1);
+    expect(res[0][0]).to.eql("buc");
+    expect(res[0][1].valueOf()).to.eql(1 / 2 + 1 / 5 - 1 / 10);
+    expect(res[0][2].quality[3].valueOf()).to.eql(
+      prob1.mul(uniq1).add(prob2.mul(uniq2)).div(res[0][1]).valueOf()
+    );
+  });
+
   it("should simplify upon finalize", () => {
     const aggregator = new BaseItemResultAggregator(99);
     aggregator.add("foo", new Fraction(1000000000000001, 2000000000000000));

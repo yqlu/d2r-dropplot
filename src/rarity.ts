@@ -100,7 +100,7 @@ export function computeQualityProb(
 
   // Apply drop factor from TC
   chance -= Math.trunc((chance * qualityFactor) / 1024);
-  if (chance < 128) {
+  if (chance <= 128) {
     return new Fraction(1);
   }
   return new Fraction(128, chance);
