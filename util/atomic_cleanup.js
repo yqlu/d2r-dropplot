@@ -12,9 +12,6 @@ const atomicDict = {};
 for (var entry of Object.entries(json)) {
   const atomicTc = entry[0];
   const items = entry[1];
-  if (Object.entries(items).length == 0) {
-    continue;
-  }
   for (var [itemCode, itemProb] of Object.entries(items)) {
     items[itemCode] = new Fraction(itemProb).simplify(1e-5);
   }

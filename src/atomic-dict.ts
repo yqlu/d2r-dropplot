@@ -1,42 +1,65 @@
 import { TCDictType } from "./tc-dict.js";
 
 export const AtomicDict: TCDictType = {
+  abow12: { nodrop: 0, picks: 1, qualityRatios: [0, 0, 0, 0], tcs: [] },
+  abow15: { nodrop: 0, picks: 1, qualityRatios: [0, 0, 0, 0], tcs: [] },
   abow18: {
     nodrop: 0,
     picks: 1,
     qualityRatios: [0, 0, 0, 0],
     tcs: [["am1", 1]],
   },
+  abow21: { nodrop: 0, picks: 1, qualityRatios: [0, 0, 0, 0], tcs: [] },
+  abow24: { nodrop: 0, picks: 1, qualityRatios: [0, 0, 0, 0], tcs: [] },
   abow27: {
     nodrop: 0,
     picks: 1,
     qualityRatios: [0, 0, 0, 0],
     tcs: [["am2", 1]],
   },
+  abow3: { nodrop: 0, picks: 1, qualityRatios: [0, 0, 0, 0], tcs: [] },
+  abow30: { nodrop: 0, picks: 1, qualityRatios: [0, 0, 0, 0], tcs: [] },
+  abow33: { nodrop: 0, picks: 1, qualityRatios: [0, 0, 0, 0], tcs: [] },
+  abow36: { nodrop: 0, picks: 1, qualityRatios: [0, 0, 0, 0], tcs: [] },
   abow39: {
     nodrop: 0,
     picks: 1,
     qualityRatios: [0, 0, 0, 0],
     tcs: [["am6", 1]],
   },
+  abow42: { nodrop: 0, picks: 1, qualityRatios: [0, 0, 0, 0], tcs: [] },
+  abow45: { nodrop: 0, picks: 1, qualityRatios: [0, 0, 0, 0], tcs: [] },
   abow48: {
     nodrop: 0,
     picks: 1,
     qualityRatios: [0, 0, 0, 0],
     tcs: [["am7", 1]],
   },
+  abow51: { nodrop: 0, picks: 1, qualityRatios: [0, 0, 0, 0], tcs: [] },
   abow54: {
     nodrop: 0,
     picks: 1,
     qualityRatios: [0, 0, 0, 0],
     tcs: [["amb", 1]],
   },
+  abow57: { nodrop: 0, picks: 1, qualityRatios: [0, 0, 0, 0], tcs: [] },
+  abow6: { nodrop: 0, picks: 1, qualityRatios: [0, 0, 0, 0], tcs: [] },
+  abow60: { nodrop: 0, picks: 1, qualityRatios: [0, 0, 0, 0], tcs: [] },
+  abow63: { nodrop: 0, picks: 1, qualityRatios: [0, 0, 0, 0], tcs: [] },
+  abow66: { nodrop: 0, picks: 1, qualityRatios: [0, 0, 0, 0], tcs: [] },
+  abow69: { nodrop: 0, picks: 1, qualityRatios: [0, 0, 0, 0], tcs: [] },
+  abow72: { nodrop: 0, picks: 1, qualityRatios: [0, 0, 0, 0], tcs: [] },
+  abow75: { nodrop: 0, picks: 1, qualityRatios: [0, 0, 0, 0], tcs: [] },
   abow78: {
     nodrop: 0,
     picks: 1,
     qualityRatios: [0, 0, 0, 0],
     tcs: [["amc", 1]],
   },
+  abow81: { nodrop: 0, picks: 1, qualityRatios: [0, 0, 0, 0], tcs: [] },
+  abow84: { nodrop: 0, picks: 1, qualityRatios: [0, 0, 0, 0], tcs: [] },
+  abow87: { nodrop: 0, picks: 1, qualityRatios: [0, 0, 0, 0], tcs: [] },
+  abow9: { nodrop: 0, picks: 1, qualityRatios: [0, 0, 0, 0], tcs: [] },
   armo12: {
     nodrop: 0,
     picks: 1,
@@ -448,6 +471,7 @@ export const AtomicDict: TCDictType = {
     qualityRatios: [0, 0, 0, 0],
     tcs: [["cbw", 1]],
   },
+  bow15: { nodrop: 0, picks: 1, qualityRatios: [0, 0, 0, 0], tcs: [] },
   bow18: {
     nodrop: 0,
     picks: 1,
@@ -457,6 +481,7 @@ export const AtomicDict: TCDictType = {
       ["am1", 1],
     ],
   },
+  bow21: { nodrop: 0, picks: 1, qualityRatios: [0, 0, 0, 0], tcs: [] },
   bow24: {
     nodrop: 0,
     picks: 1,
@@ -503,6 +528,7 @@ export const AtomicDict: TCDictType = {
       ["am6", 1],
     ],
   },
+  bow42: { nodrop: 0, picks: 1, qualityRatios: [0, 0, 0, 0], tcs: [] },
   bow45: {
     nodrop: 0,
     picks: 1,
@@ -552,6 +578,7 @@ export const AtomicDict: TCDictType = {
     qualityRatios: [0, 0, 0, 0],
     tcs: [["6lb", 1]],
   },
+  bow66: { nodrop: 0, picks: 1, qualityRatios: [0, 0, 0, 0], tcs: [] },
   bow69: {
     nodrop: 0,
     picks: 1,
@@ -564,6 +591,7 @@ export const AtomicDict: TCDictType = {
     qualityRatios: [0, 0, 0, 0],
     tcs: [["6s7", 1]],
   },
+  bow75: { nodrop: 0, picks: 1, qualityRatios: [0, 0, 0, 0], tcs: [] },
   bow78: {
     nodrop: 0,
     picks: 1,
@@ -579,6 +607,7 @@ export const AtomicDict: TCDictType = {
     qualityRatios: [0, 0, 0, 0],
     tcs: [["6sw", 1]],
   },
+  bow84: { nodrop: 0, picks: 1, qualityRatios: [0, 0, 0, 0], tcs: [] },
   bow87: {
     nodrop: 0,
     picks: 1,
