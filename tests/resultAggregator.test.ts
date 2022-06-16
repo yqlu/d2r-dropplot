@@ -6,6 +6,7 @@ import { ItemRarityProb, QualityProbabilityObject } from "../src/rarity.js";
 import {
   TCResultAggregator,
   BaseItemResultAggregator,
+  ProbabilityAggregation,
 } from "../src/resultAggregator.js";
 
 describe("TCResultAggregator", () => {
@@ -160,6 +161,23 @@ describe("BaseItemResultAggregator", () => {
     expect(res[1][1].valueOf()).to.eql(131047 / 139968);
   });
 
+  it("should amplify expected values for positive picks", () => {
+    const aggregator = new BaseItemResultAggregator(
+      99,
+      0,
+      ProbabilityAggregation.EXPECTED_VALUE
+    );
+    aggregator.add("foo", new Fraction(1, 2));
+    aggregator.add("bar", new Fraction(1, 3));
+    aggregator.withPositivePicks(3);
+    const res = aggregator.result();
+    expect(res).to.have.length(2);
+    expect(res[0][0]).to.eql("foo");
+    expect(res[0][1].valueOf()).to.eql(3 / 2);
+    expect(res[1][0]).to.eql("bar");
+    expect(res[1][1].valueOf()).to.eql(1);
+  });
+
   it("should combine negative picks", () => {
     const a1 = new BaseItemResultAggregator(99);
     a1.add("foo", new Fraction(1, 2));
@@ -174,6 +192,34 @@ describe("BaseItemResultAggregator", () => {
     expect(res).to.have.length(3);
     expect(res[0][0]).to.eql("foo");
     expect(res[0][1].valueOf()).to.eql(1 / 2 + 1 / 5 - 1 / 10);
+    expect(res[1][0]).to.eql("bar");
+    expect(res[1][1].valueOf()).to.eql(1 / 3);
+    expect(res[2][0]).to.eql("baz");
+    expect(res[2][1].valueOf()).to.eql(1 / 6);
+  });
+
+  it("should add up expected values for negative picks", () => {
+    const a1 = new BaseItemResultAggregator(
+      99,
+      0,
+      ProbabilityAggregation.EXPECTED_VALUE
+    );
+    a1.add("foo", new Fraction(1, 2));
+    a1.add("bar", new Fraction(1, 3));
+
+    const a2 = new BaseItemResultAggregator(
+      99,
+      0,
+      ProbabilityAggregation.EXPECTED_VALUE
+    );
+    a2.add("foo", new Fraction(1, 5));
+    a2.add("baz", new Fraction(1, 6));
+
+    a1.combineNegativePicks(a2);
+    const res = a1.result();
+    expect(res).to.have.length(3);
+    expect(res[0][0]).to.eql("foo");
+    expect(res[0][1].valueOf()).to.eql(1 / 2 + 1 / 5);
     expect(res[1][0]).to.eql("bar");
     expect(res[1][1].valueOf()).to.eql(1 / 3);
     expect(res[2][0]).to.eql("baz");

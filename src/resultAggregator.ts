@@ -7,7 +7,11 @@ import {
   QualityProbabilityObject,
 } from "./rarity.js";
 
-// TODO: test griswold rarity
+export enum ProbabilityAggregation {
+  EXPECTED_VALUE,
+  CHANCE_OF_FIRST,
+}
+
 // TODO abstract out common parts of TCResultAggregator and BaseItemResultAggregator
 // TODO build out E2E web framework
 
@@ -115,11 +119,17 @@ export class BaseItemResultAggregator
   mlvl: number;
   magicFind: number;
   dict: BaseItemProbDict;
+  aggregationStyle: ProbabilityAggregation;
 
-  constructor(mlvl: number, magicFind: number = 0) {
+  constructor(
+    mlvl: number,
+    magicFind: number = 0,
+    aggregationStyle: ProbabilityAggregation = ProbabilityAggregation.CHANCE_OF_FIRST
+  ) {
     this.mlvl = mlvl;
     this.magicFind = magicFind;
     this.dict = {};
+    this.aggregationStyle = aggregationStyle;
   }
 
   add(
@@ -185,7 +195,11 @@ export class BaseItemResultAggregator
       Object.keys(this.dict),
       (accum: BaseItemProbDict, tc: string) => {
         const dictEntry = this.dict[tc];
-        dictEntry[0] = adjProbFunction(dictEntry[0]);
+        if (this.aggregationStyle == ProbabilityAggregation.CHANCE_OF_FIRST) {
+          dictEntry[0] = adjProbFunction(dictEntry[0]);
+        } else {
+          dictEntry[0] = dictEntry[0].mul(picks);
+        }
         accum[tc] = dictEntry;
         return accum;
       },
@@ -203,9 +217,13 @@ export class BaseItemResultAggregator
         // Coalesce probability into map
         // If item X has chance A of dropping from TCA and B of dropping from TCB
         // Combined chance to drop is 1 - (1 - A)(1 - B) = 1 - (1 - A - B + AB) = A + B - AB
-        this.dict[key][0] = ONE.sub(
-          ONE.sub(other.dict[key][0]).mul(ONE.sub(this.dict[key][0]))
-        );
+        if (this.aggregationStyle == ProbabilityAggregation.CHANCE_OF_FIRST) {
+          this.dict[key][0] = ONE.sub(
+            ONE.sub(other.dict[key][0]).mul(ONE.sub(this.dict[key][0]))
+          );
+        } else {
+          this.dict[key][0] = this.dict[key][0].add(other.dict[key][0]);
+        }
       }
     }
   }
