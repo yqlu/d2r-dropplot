@@ -160,7 +160,7 @@ export class TcCalculator<T> {
           partyCount,
           filter,
           cumuProb,
-          [0, 0, 0, 0],
+          tcObject.qualityRatios,
           subAggregator
         ).withPositivePicks(subPicks);
         parentAggregator.combineNegativePicks(subAggregator);

@@ -335,6 +335,11 @@ describe("TcCalculator", () => {
     assertTCExistWithChance(tcs, "r19", 3587);
   });
 
+  it("takes the max over quality ratios when recursing", () => {
+    const tcs = calculateTcNoAtomic("Act 1 Super A", 1, 1);
+    // TODO -- this should use 1024, 972, 800, 800
+  });
+
   describe("getAtomicTCs filtering", () => {
     it("works on a basic TC with picks = 1", () => {
       const tcs = calculateTcNoAtomic(

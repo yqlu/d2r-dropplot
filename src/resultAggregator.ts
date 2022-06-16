@@ -40,7 +40,7 @@ export class TCResultAggregator implements ResultAggregator<TCProbTuple[]> {
     this.dict = {};
   }
 
-  add(tc: string, prob: Fraction): void {
+  add(tc: string, prob: Fraction, qual: ItemQualityRatios): void {
     if (!this.dict.hasOwnProperty(tc)) {
       this.dict[tc] = prob;
     } else {
