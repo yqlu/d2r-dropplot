@@ -2,8 +2,8 @@ import { assert, expect } from "chai";
 import Fraction from "fraction.js";
 import { map } from "lodash-es";
 
-import { TCProbTuple } from "../src/resultAggregator.js";
-import { sortTCs } from "../src/display.js";
+import { TCProbTuple } from "./resultAggregator";
+import { sortTCs } from "./display";
 
 describe("sortTCs", () => {
   it("should sort TCs in their relative categories", () => {

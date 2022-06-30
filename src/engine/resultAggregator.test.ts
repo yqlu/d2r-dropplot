@@ -1,13 +1,13 @@
 import { assert, expect } from "chai";
 import Fraction from "fraction.js";
 import { sum, map } from "lodash-es";
-import { ItemRarityProb, QualityProbabilityObject } from "../src/rarity.js";
+import { ItemRarityProb, QualityProbabilityObject } from "./rarity";
 
 import {
   TCResultAggregator,
   BaseItemResultAggregator,
   ProbabilityAggregation,
-} from "../src/resultAggregator.js";
+} from "./resultAggregator";
 
 describe("TCResultAggregator", () => {
   it("should track individual probabilities", () => {

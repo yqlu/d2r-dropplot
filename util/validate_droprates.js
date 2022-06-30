@@ -154,6 +154,11 @@ function test(tc, mlvl) {
   }
 }
 
-for (var tc of Object.keys(TCDict)) {
-  test(tc, 99);
-}
+test("Duriel - Base", 99);
+
+// Object.keys(TCDict).forEach(function (tc, idx) {
+//   if (tc.substring(0, 3) == "Act") {
+//     return;
+//   }
+//   test(tc, 99);
+// });

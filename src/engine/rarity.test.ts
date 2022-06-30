@@ -1,15 +1,15 @@
-import { assert, expect } from "chai";
 import Fraction from "fraction.js";
 import { map, sum } from "lodash-es";
-import { ItemDict } from "../src/item-dict.js";
+import { expect } from "chai";
 
-import { RARITY, ITEMTIER } from "../src/itemratio-dict.js";
+import { ItemDict } from "./item-dict";
+import { RARITY, ITEMTIER } from "./itemratio-dict";
 import {
   computeQualityProb,
   computeQualityProbsHelper,
   computeQualityProbs,
-} from "../src/rarity.js";
-import { ArmorDict, WeaponsDict } from "../src/weapon-armor-dict.js";
+} from "./rarity";
+import { ArmorDict, WeaponsDict } from "./weapon-armor-dict";
 
 describe("computeQualityProb", () => {
   it("should work for Hell Baal / Tyrael's Might example", () => {

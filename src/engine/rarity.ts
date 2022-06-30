@@ -1,25 +1,25 @@
 import Fraction from "fraction.js";
 import { sum, range, map } from "lodash-es";
 
-import { ItemQualityRatios } from "./tc-dict.js";
+import { ItemQualityRatios } from "./tc-dict";
 import {
   ItemDict,
   ClassSpecificSet,
   OnlyNormalSet,
   AtLeastMagicSet,
   RareableSet,
-} from "./item-dict.js";
+} from "./item-dict";
 import {
   WeaponsDict,
   ArmorDict,
   WeaponArmorDictEntryType,
-} from "./weapon-armor-dict.js";
-import { RARITY, ITEMTIER, getRarityConstants } from "./itemratio-dict.js";
+} from "./weapon-armor-dict";
+import { RARITY, ITEMTIER, getRarityConstants } from "./itemratio-dict";
 import {
   UNIQUE_BASE_LOOKUP,
   SET_BASE_LOOKUP,
   UniqueSetBaseLookupType,
-} from "./unique-set-dict.js";
+} from "./unique-set-dict";
 
 export type ItemRarityProb = [Fraction, Fraction, Fraction, Fraction];
 

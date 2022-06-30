@@ -1,9 +1,8 @@
 import { range, sum, map, clone, reduce, zip } from "lodash-es";
 import Fraction from "fraction.js";
 
-import { ResultAggregator, TCProbTuple } from "./resultAggregator.js";
-import { TCDictType, TCObject } from "./tc-dict.js";
-import { ItemQualityRatios } from "./tc-dict";
+import { ResultAggregator, TCProbTuple } from "./resultAggregator";
+import { TCDictType, TCObject, ItemQualityRatios } from "./tc-dict";
 
 // TODO: handle countess rune rate
 // TODO: handle Duriel drop rate
@@ -85,6 +84,7 @@ export class TcCalculator<T> {
   ): ResultAggregator<T> {
     const aggregator = this.aggregatorFactory();
     const tcObject = this.lookupTcFunction(tcName);
+    console.log(tcName, tcObject);
     return this._getAtomicTCs(
       tcObject,
       totalPlayers,

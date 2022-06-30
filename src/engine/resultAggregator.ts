@@ -1,11 +1,12 @@
 import Fraction from "fraction.js";
 import { reduce, range, map } from "lodash-es";
-import { ItemQualityRatios } from "./tc-dict.js";
+
+import { ItemQualityRatios } from "./tc-dict";
 import {
   computeQualityProbs,
   ItemRarityProb,
   QualityProbabilityObject,
-} from "./rarity.js";
+} from "./rarity";
 
 export enum ProbabilityAggregation {
   EXPECTED_VALUE,
@@ -26,7 +27,7 @@ export type BaseItemProbDict = {
 };
 
 export interface ResultAggregator<T> {
-  add(tc: string, prob: Fraction, qualityRatio: ItemQualityRatios): void;
+  add(tc: string, prob: Fraction, qualityRatio?: ItemQualityRatios): void;
   withPositivePicks(picks: number): this;
   combineNegativePicks(other: this): void;
   finalize(): this;
@@ -40,7 +41,7 @@ export class TCResultAggregator implements ResultAggregator<TCProbTuple[]> {
     this.dict = {};
   }
 
-  add(tc: string, prob: Fraction, qual: ItemQualityRatios): void {
+  add(tc: string, prob: Fraction, qual?: ItemQualityRatios): void {
     if (!this.dict.hasOwnProperty(tc)) {
       this.dict[tc] = prob;
     } else {

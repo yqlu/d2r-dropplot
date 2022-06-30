@@ -1,7 +1,7 @@
 import { assert, expect } from "chai";
 import { map } from "lodash-es";
 
-import { RARITY, ITEMTIER, getRarityConstants } from "../src/itemratio-dict.js";
+import { RARITY, ITEMTIER, getRarityConstants } from "./itemratio-dict";
 
 describe("getRarityConstants", () => {
   it("should return the correct numbers from the underlying data", () => {

@@ -1,4 +1,4 @@
-import { TCDictType } from "./tc-dict.js";
+import { TCDictType } from "./tc-dict";
 
 export const AtomicDict: TCDictType = {
   abow12: { nodrop: 0, picks: 1, qualityRatios: [0, 0, 0, 0], tcs: [] },
