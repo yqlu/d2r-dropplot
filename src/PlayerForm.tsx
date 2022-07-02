@@ -11,7 +11,7 @@ export type PlayerFormState = {
 };
 
 export type PlayerFormProps = PlayerFormState & {
-  errors: any;
+  errors: { [key: string]: boolean };
   onChange: (
     event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => void;
@@ -73,6 +73,7 @@ export class PlayerForm extends React.Component<PlayerFormProps> {
           <input
             type="text"
             id="mlvl"
+            className={this.props.errors.mlvl ? "error" : ""}
             value={this.props.mlvl}
             onChange={this.props.onChange}
           />
@@ -82,6 +83,7 @@ export class PlayerForm extends React.Component<PlayerFormProps> {
           <input
             type="text"
             id="magicFind"
+            className={this.props.errors.magicFind ? "error" : ""}
             value={this.props.magicFind}
             onChange={this.props.onChange}
           />
