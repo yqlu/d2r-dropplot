@@ -4,7 +4,8 @@ import Fraction from "fraction.js";
 import "./App.css";
 import "./engine/tc";
 
-import { PlayerForm, PlayerFormProps, PlayerFormState } from "./PlayerForm";
+import { PlayerForm, PlayerFormState } from "./PlayerForm";
+import { MonsterForm, MonsterFormState } from "./MonsterForm";
 import { Result } from "./Result";
 
 import { TCDict } from "./engine/tc-dict";
@@ -16,11 +17,14 @@ import {
   TCProbTuple,
 } from "./engine/resultAggregator";
 import { sortTCs, sortAlphabetical } from "./engine/display";
+import { Difficulty, MonsterType } from "./engine/monstats-dict";
+import { getTcAndMlvlFromMonster } from "./engine/monster";
 
-type IAppPropType = PlayerFormState & {
-  errors: { [key: string]: boolean };
-  results: BaseItemProbTuple[];
-};
+type IAppPropType = PlayerFormState &
+  MonsterFormState & {
+    errors: { [key: string]: boolean };
+    results: BaseItemProbTuple[];
+  };
 
 class App extends React.Component<{}, IAppPropType> {
   constructor(props: {}) {
@@ -31,6 +35,12 @@ class App extends React.Component<{}, IAppPropType> {
       mlvl: "99",
       magicFind: "0",
       tc: "Gold",
+      difficulty: Difficulty.HELL,
+      monsterType: MonsterType.BOSS,
+      levelId: 2, // Blood Moor
+      monster: "zombie1",
+      superunique: "Bishibosh",
+      boss: "diablo",
       errors: {},
       results: [],
     };
@@ -47,6 +57,16 @@ class App extends React.Component<{}, IAppPropType> {
           tc={this.state.tc}
           errors={this.state.errors}
           onChange={this.onPlayerFormChange.bind(this)}
+        />
+        <MonsterForm
+          difficulty={this.state.difficulty}
+          monsterType={this.state.monsterType}
+          levelId={this.state.levelId}
+          monster={this.state.monster}
+          superunique={this.state.superunique}
+          boss={this.state.boss}
+          errors={this.state.errors}
+          onChange={this.onMonsterFormChange.bind(this)}
         />
         <Result results={this.state.results} />
       </div>
@@ -86,6 +106,33 @@ class App extends React.Component<{}, IAppPropType> {
     }
     this.setState({ errors: errors });
     return Object.keys(errors).length > 0;
+  }
+
+  onMonsterFormChange(event: React.ChangeEvent<HTMLSelectElement>) {
+    const name = event.target.id;
+    let value: string | number = event.target.value;
+    if (name == "difficulty" || name == "level" || name == "monsterType") {
+      value = parseInt(value);
+    }
+    this.setState<never>(
+      {
+        [name]: value,
+      },
+      () => {
+        const [tc, mlvl] = getTcAndMlvlFromMonster(
+          this.state.difficulty,
+          this.state.monsterType,
+          this.state.levelId,
+          this.state.monster,
+          this.state.superunique,
+          this.state.boss
+        );
+        this.setState({
+          tc: tc,
+          mlvl: `${mlvl}`,
+        });
+      }
+    );
   }
 
   compute(

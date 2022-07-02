@@ -51,8 +51,8 @@ export class Result extends React.Component<IAppPropType, null> {
         );
       }
       return (
-        <>
-          <tr key={name}>
+        <React.Fragment key={name}>
+          <tr>
             <td>{name}</td>
             <td>{formatReciprocal(tcTuple[1])}</td>
             <td>{format(tcTuple[2].quality[0])}</td>
@@ -61,7 +61,7 @@ export class Result extends React.Component<IAppPropType, null> {
             <td>{format(tcTuple[2].quality[3])}</td>
           </tr>
           {children}
-        </>
+        </React.Fragment>
       );
     });
     return (

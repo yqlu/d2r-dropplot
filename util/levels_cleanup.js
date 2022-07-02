@@ -12,6 +12,7 @@ for (var entry of Object.entries(json)) {
   const id = entry[0];
   const obj = entry[1];
   const cleaned = {
+    id: parseInt(id),
     name: obj["*StringName"],
     act: obj.Act + 1,
     levels: [obj.MonLvlEx, obj["MonLvlEx(N)"], obj["MonLvlEx(H)"]],
@@ -25,7 +26,10 @@ for (var entry of Object.entries(json)) {
       .map((i) => obj[`nmon${i + 1}`])
       .filter((e) => e),
   };
-  if (cleaned.levels.filter((e) => e).length > 0 && cleaned.mon.length > 0) {
+  if (
+    (cleaned.levels.filter((e) => e).length > 0 && cleaned.mon.length > 0) ||
+    cleaned.id == 121 // Nithlathak's Temple
+  ) {
     Levels[id] = cleaned;
   }
 }
