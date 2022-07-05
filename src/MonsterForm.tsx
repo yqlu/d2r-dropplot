@@ -4,7 +4,7 @@ import { groupBy, sortBy } from "lodash-es";
 import { Difficulty, MonsterDict, MonsterType } from "./engine/monstats-dict";
 import { LevelsDict } from "./engine/levels-dict";
 import { SuperuniqueDict } from "./engine/superunique-dict";
-import { BossDict } from "./engine/boss-dict";
+import { BossHierarchy } from "./engine/boss-dict";
 
 export type MonsterFormState = {
   difficulty: Difficulty;
@@ -63,18 +63,20 @@ export class MonsterForm extends React.Component<MonsterFormProps> {
       }
     );
 
-    this.bossElements = Object.entries(BossDict).map(([category, bosses]) => {
-      const bossElements = Object.values(bosses).map((boss) => (
-        <option key={boss.id} value={boss.id}>
-          {boss.id}
-        </option>
-      ));
-      return (
-        <optgroup key={category} label={category}>
-          {bossElements}
-        </optgroup>
-      );
-    });
+    this.bossElements = Object.entries(BossHierarchy).map(
+      ([category, bosses]) => {
+        const bossElements = bosses.map((boss) => (
+          <option key={boss} value={boss}>
+            {boss}
+          </option>
+        ));
+        return (
+          <optgroup key={category} label={category}>
+            {bossElements}
+          </optgroup>
+        );
+      }
+    );
   }
 
   monsterApplicable() {
@@ -91,6 +93,7 @@ export class MonsterForm extends React.Component<MonsterFormProps> {
   render() {
     let monsterOptions: JSX.Element[] = [];
     if (this.monsterApplicable()) {
+      // TODO: use umon or nmon as appropriate
       monsterOptions = LevelsDict[this.props.levelId].mon.map((id) => {
         const monster = MonsterDict[id];
         return (
