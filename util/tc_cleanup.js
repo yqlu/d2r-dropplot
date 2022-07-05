@@ -28,6 +28,8 @@ for (var entry of Object.entries(json)) {
     parseInt(tcObject.Unique || 0),
   ];
   TCDICT[tcName] = {
+    group: tcObject.group || -1,
+    level: tcObject.level,
     nodrop: parseInt(tcObject.NoDrop || 0),
     picks: parseInt(tcObject.Picks),
     qualityRatios: qualityRatios,

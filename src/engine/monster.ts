@@ -2,6 +2,9 @@ import { Difficulty, MonsterType, MonsterDict } from "./monstats-dict";
 import { SuperuniqueDict } from "./superunique-dict";
 import { FlatBossDict } from "./boss-dict";
 import { LevelsDict } from "./levels-dict";
+import { TCDict } from "./tc-dict";
+import { TcGroupDict } from "./tcgroup-dict";
+import { max } from "lodash-es";
 
 export function getTcAndMlvlFromMonster(
   difficulty: Difficulty,
@@ -35,8 +38,16 @@ function getStandardTCMlvl(
   // TC is read from MonsterDict
   const monsterEntry = MonsterDict[monster];
   const idx = 3 * difficulty + getTcOffset(monsterType);
-  const tc = monsterEntry.tcs[idx];
-  // TODO: if nightmare and hell, need to upgrade TC
+  let tc = monsterEntry.tcs[idx];
+  if (difficulty !== Difficulty.NORMAL && mlvl > TCDict[tc].level) {
+    const tcGroup = TCDict[tc].group;
+    if (tcGroup != null && TcGroupDict[tcGroup]) {
+      const eligibleKeys = Object.keys(TcGroupDict[tcGroup])
+        .map((x) => parseInt(x))
+        .filter((x) => x <= mlvl);
+      tc = TcGroupDict[tcGroup][max(eligibleKeys)];
+    }
+  }
   return [tc, mlvl];
 }
 
