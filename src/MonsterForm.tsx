@@ -90,11 +90,27 @@ export class MonsterForm extends React.Component<MonsterFormProps> {
     );
   }
 
+  getMonList() {
+    const levelEntry = LevelsDict[this.props.levelId];
+    let monList: string[];
+    if (this.props.difficulty == Difficulty.NORMAL) {
+      if (this.props.monsterType != MonsterType.UNIQUE) {
+        monList = levelEntry.mon;
+      } else {
+        monList = levelEntry.umon;
+      }
+    } else {
+      monList = levelEntry.nmon;
+    }
+    // Some of the monster entries might not be defined in MonsterDict (see levels-dict.test)
+    // Filter down to the ones which are
+    return monList.filter((mon) => MonsterDict[mon]);
+  }
+
   render() {
     let monsterOptions: JSX.Element[] = [];
     if (this.monsterApplicable()) {
-      // TODO: use umon or nmon as appropriate
-      monsterOptions = LevelsDict[this.props.levelId].mon.map((id) => {
+      monsterOptions = this.getMonList().map((id) => {
         const monster = MonsterDict[id];
         return (
           <option key={id} value={id}>

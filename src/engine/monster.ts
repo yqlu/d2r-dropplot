@@ -39,6 +39,10 @@ function getStandardTCMlvl(
   const monsterEntry = MonsterDict[monster];
   const idx = 3 * difficulty + getTcOffset(monsterType);
   let tc = monsterEntry.tcs[idx];
+  // If this is an invalid TC, just propagate it up and rely on downstream error handling
+  if (!tc || !TCDict[tc]) {
+    return [tc, mlvl];
+  }
   if (difficulty !== Difficulty.NORMAL && mlvl > TCDict[tc].level) {
     const tcGroup = TCDict[tc].group;
     if (tcGroup != null && TcGroupDict[tcGroup]) {

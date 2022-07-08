@@ -84,13 +84,7 @@ class App extends React.Component<{}, IAppPropType> {
       () => {
         const errors = this.hasPlayerFormErrors();
         if (!errors) {
-          this.compute(
-            this.state.tc,
-            this.state.partyCount,
-            this.state.playerCount,
-            parseInt(this.state.mlvl),
-            parseInt(this.state.magicFind)
-          );
+          this.compute();
         }
       }
     );
@@ -119,7 +113,7 @@ class App extends React.Component<{}, IAppPropType> {
         [name]: value,
       },
       () => {
-        const [tc, mlvl] = getTcAndMlvlFromMonster(
+        let [tc, mlvl] = getTcAndMlvlFromMonster(
           this.state.difficulty,
           this.state.monsterType,
           this.state.levelId,
@@ -127,15 +121,33 @@ class App extends React.Component<{}, IAppPropType> {
           this.state.superunique,
           this.state.boss
         );
-        this.setState({
-          tc: tc,
-          mlvl: `${mlvl}`,
-        });
+        if (!tc) {
+          tc = "None";
+        }
+        this.setState(
+          {
+            tc: tc,
+            mlvl: `${mlvl}`,
+          },
+          () => {
+            this.compute();
+          }
+        );
       }
     );
   }
 
-  compute(
+  compute() {
+    this._compute(
+      this.state.tc,
+      this.state.partyCount,
+      this.state.playerCount,
+      parseInt(this.state.mlvl),
+      parseInt(this.state.magicFind)
+    );
+  }
+
+  _compute(
     tc: string,
     partyCount: number,
     playerCount: number,

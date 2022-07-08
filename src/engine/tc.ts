@@ -84,6 +84,10 @@ export class TcCalculator<T> {
   ): ResultAggregator<T> {
     const aggregator = this.aggregatorFactory();
     const tcObject = this.lookupTcFunction(tcName);
+    if (!tcObject) {
+      console.error(`${tcName} not a valid TC`);
+      return this.aggregatorFactory().finalize();
+    }
     return this._getAtomicTCs(
       tcObject,
       totalPlayers,
