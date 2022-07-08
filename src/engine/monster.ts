@@ -76,8 +76,13 @@ function getBossTCMlvl(
   difficulty: Difficulty,
   boss: string
 ): [tc: string, mlvl: number] {
-  const bossEntry = FlatBossDict[boss];
-  const quest = 0; // TODO fix
+  let bossName = boss;
+  let quest = 0;
+  if (boss.substring(0, 5) == "quest") {
+    bossName = boss.substring(5);
+    quest = 1;
+  }
+  const bossEntry = FlatBossDict[bossName];
   const tc = bossEntry.tcs[difficulty * 2 + quest];
   const mlvl = bossEntry.levels[difficulty];
   return [tc, mlvl];

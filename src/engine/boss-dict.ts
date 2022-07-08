@@ -1,3 +1,5 @@
+import { Difficulty } from "./monstats-dict";
+
 export type BossEntry = {
   id: string;
   nameStr: string;
@@ -11,30 +13,36 @@ type BossHierarchyType = {
   pandemonium: string[];
 };
 
-export const BossHierarchy: BossHierarchyType = {
-  minor: [
-    "bloodraven",
-    "griswold",
-    "radament",
-    "summoner",
-    "izual",
-    "nihlathakboss",
-    "putriddefiler1",
-    "putriddefiler2",
-    "putriddefiler3",
-    "putriddefiler4",
-    "putriddefiler5",
-  ],
-  actbosses: ["andariel", "duriel", "mephisto", "diablo", "baalcrab"],
-  pandemonium: [
-    "uberandariel",
-    "uberizual",
-    "uberduriel",
-    "ubermephisto",
-    "uberdiablo",
-    "uberbaal",
-  ],
-};
+export function getBossHierarchy(difficulty: Difficulty): BossHierarchyType {
+  let bossHierarchy = {
+    minor: [
+      "bloodraven",
+      "griswold",
+      "radament",
+      "summoner",
+      "izual",
+      "nihlathakboss",
+      "putriddefiler1",
+      "putriddefiler2",
+      "putriddefiler3",
+      "putriddefiler4",
+      "putriddefiler5",
+    ],
+    actbosses: ["andariel", "duriel", "mephisto", "diablo", "baalcrab"],
+    pandemonium: [
+      "uberandariel",
+      "uberizual",
+      "uberduriel",
+      "ubermephisto",
+      "uberdiablo",
+      "uberbaal",
+    ],
+  };
+  if (difficulty != Difficulty.HELL) {
+    bossHierarchy.pandemonium = [];
+  }
+  return bossHierarchy;
+}
 
 export const FlatBossDict: { [key: string]: BossEntry } = {
   bloodraven: {

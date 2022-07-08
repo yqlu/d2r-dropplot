@@ -4,7 +4,8 @@ import { groupBy, sortBy } from "lodash-es";
 import { Difficulty, MonsterDict, MonsterType } from "./engine/monstats-dict";
 import { LevelsDict } from "./engine/levels-dict";
 import { SuperuniqueDict } from "./engine/superunique-dict";
-import { BossHierarchy } from "./engine/boss-dict";
+import { getBossHierarchy } from "./engine/boss-dict";
+import { JsxElement } from "typescript";
 
 export type MonsterFormState = {
   difficulty: Difficulty;
@@ -24,7 +25,6 @@ export class MonsterForm extends React.Component<MonsterFormProps> {
   levelsOptions: JSX.Element[];
   monsterElements: JSX.Element[];
   superuniqueElements: JSX.Element[];
-  bossElements: JSX.Element[];
 
   constructor(props: MonsterFormProps) {
     super(props);
@@ -62,21 +62,6 @@ export class MonsterForm extends React.Component<MonsterFormProps> {
         );
       }
     );
-
-    this.bossElements = Object.entries(BossHierarchy).map(
-      ([category, bosses]) => {
-        const bossElements = bosses.map((boss) => (
-          <option key={boss} value={boss}>
-            {boss}
-          </option>
-        ));
-        return (
-          <optgroup key={category} label={category}>
-            {bossElements}
-          </optgroup>
-        );
-      }
-    );
   }
 
   monsterApplicable() {
@@ -109,6 +94,7 @@ export class MonsterForm extends React.Component<MonsterFormProps> {
 
   render() {
     let monsterOptions: JSX.Element[] = [];
+    let bossElements: JSX.Element[] = [];
     if (this.monsterApplicable()) {
       monsterOptions = this.getMonList().map((id) => {
         const monster = MonsterDict[id];
@@ -118,7 +104,40 @@ export class MonsterForm extends React.Component<MonsterFormProps> {
           </option>
         );
       });
+    } else if (this.props.monsterType == MonsterType.BOSS) {
+      bossElements = Object.entries(
+        getBossHierarchy(this.props.difficulty)
+      ).map(([category, bosses]) => {
+        if (bosses.length == 0) {
+          return;
+        }
+        let innerBossElements: JSX.Element[];
+        if (category == "actbosses") {
+          innerBossElements = bosses.map((boss) => (
+            <React.Fragment key={boss}>
+              <option key={boss} value={boss}>
+                {boss}
+              </option>
+              <option key={`quest${boss}`} value={`quest${boss}`}>
+                {boss} (Q)
+              </option>
+            </React.Fragment>
+          ));
+        } else {
+          innerBossElements = bosses.map((boss) => (
+            <option key={boss} value={boss}>
+              {boss}
+            </option>
+          ));
+        }
+        return (
+          <optgroup key={category} label={category}>
+            {innerBossElements}
+          </optgroup>
+        );
+      });
     }
+
     return (
       <div>
         <p>
@@ -213,7 +232,7 @@ export class MonsterForm extends React.Component<MonsterFormProps> {
               value={this.props.boss}
               onChange={this.props.onChange}
             >
-              {this.bossElements}
+              {bossElements}
             </select>
           </p>
         )}

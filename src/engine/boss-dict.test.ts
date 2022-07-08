@@ -1,13 +1,15 @@
 import { expect } from "chai";
 
-import { BossHierarchy, FlatBossDict } from "./boss-dict";
+import { getBossHierarchy, FlatBossDict } from "./boss-dict";
+import { Difficulty } from "./monstats-dict";
 import { TCDict } from "./tc-dict";
 
 describe("BossDict structure", () => {
   it("should contain a defined BossFlatDict entry for every monster in the hierarchy", () => {
-    for (let mon of BossHierarchy.actbosses
-      .concat(BossHierarchy.minor)
-      .concat(BossHierarchy.pandemonium)) {
+    const hierarchy = getBossHierarchy(Difficulty.HELL);
+    for (let mon of hierarchy.actbosses
+      .concat(hierarchy.minor)
+      .concat(hierarchy.pandemonium)) {
       expect(FlatBossDict[mon], mon).to.not.be.undefined;
     }
   });
