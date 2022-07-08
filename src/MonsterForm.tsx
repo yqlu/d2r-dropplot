@@ -1,11 +1,11 @@
 import React from "react";
-import { groupBy, sortBy } from "lodash-es";
+import { groupBy, sortBy, uniq } from "lodash-es";
 
 import { Difficulty, MonsterDict, MonsterType } from "./engine/monstats-dict";
 import { LevelsDict } from "./engine/levels-dict";
 import { SuperuniqueDict } from "./engine/superunique-dict";
-import { getBossHierarchy } from "./engine/boss-dict";
-import { JsxElement } from "typescript";
+import { FlatBossDict, getBossHierarchy } from "./engine/boss-dict";
+import { Locale } from "./engine/locale-dict";
 
 export type MonsterFormState = {
   difficulty: Difficulty;
@@ -33,7 +33,7 @@ export class MonsterForm extends React.Component<MonsterFormProps> {
     this.levelsOptions = Object.entries(groupedLevels).map(([act, levels]) => {
       const levelElements = levels.map((level) => (
         <option key={level.id} value={level.id}>
-          {level.name}
+          {Locale(level.name)}
         </option>
       ));
       return (
@@ -51,7 +51,7 @@ export class MonsterForm extends React.Component<MonsterFormProps> {
         const superuniqueElements = sortBy(superunique, "areaId", "id").map(
           (superunique) => (
             <option key={superunique.id} value={superunique.id}>
-              {superunique.id}
+              {Locale(superunique.id)}
             </option>
           )
         );
@@ -89,7 +89,7 @@ export class MonsterForm extends React.Component<MonsterFormProps> {
     }
     // Some of the monster entries might not be defined in MonsterDict (see levels-dict.test)
     // Filter down to the ones which are
-    return monList.filter((mon) => MonsterDict[mon]);
+    return uniq(monList.filter((mon) => MonsterDict[mon]));
   }
 
   render() {
@@ -100,7 +100,7 @@ export class MonsterForm extends React.Component<MonsterFormProps> {
         const monster = MonsterDict[id];
         return (
           <option key={id} value={id}>
-            {id}
+            {Locale(monster.nameStr)}
           </option>
         );
       });
@@ -113,20 +113,23 @@ export class MonsterForm extends React.Component<MonsterFormProps> {
         }
         let innerBossElements: JSX.Element[];
         if (category == "actbosses") {
-          innerBossElements = bosses.map((boss) => (
-            <React.Fragment key={boss}>
-              <option key={boss} value={boss}>
-                {boss}
-              </option>
-              <option key={`quest${boss}`} value={`quest${boss}`}>
-                {boss} (Q)
-              </option>
-            </React.Fragment>
-          ));
+          innerBossElements = bosses.map((boss) => {
+            const localized = Locale(FlatBossDict[boss].nameStr);
+            return (
+              <React.Fragment key={boss}>
+                <option key={boss} value={boss}>
+                  {localized}
+                </option>
+                <option key={`quest${boss}`} value={`quest${boss}`}>
+                  {localized} (Q)
+                </option>
+              </React.Fragment>
+            );
+          });
         } else {
           innerBossElements = bosses.map((boss) => (
             <option key={boss} value={boss}>
-              {boss}
+              {Locale(FlatBossDict[boss].nameStr)}
             </option>
           ));
         }

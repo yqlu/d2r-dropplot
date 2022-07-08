@@ -1175,7 +1175,7 @@ export const LevelsDict: { [key: string]: LevelsObj } = {
   },
   "84": {
     id: 84,
-    name: "Arachnid Lair",
+    name: "Spider Cave",
     act: 3,
     levels: [21, 50, 85],
     mon: ["arach3", "arach4", "batdemon2", "sandmaggot4", "arach3"],
@@ -1553,7 +1553,7 @@ export const LevelsDict: { [key: string]: LevelsObj } = {
   },
   "108": {
     id: 108,
-    name: "The Chaos Sanctuary",
+    name: "Chaos Sanctum",
     act: 4,
     levels: [28, 58, 85],
     mon: ["fingermage3", "doomknight3", "megademon3"],
@@ -1590,7 +1590,7 @@ export const LevelsDict: { [key: string]: LevelsObj } = {
   },
   "111": {
     id: 111,
-    name: "Frigid Highlands",
+    name: "Rigid Highlands",
     act: 5,
     levels: [25, 59, 81],
     mon: ["imp1", "siegebeast2"],
@@ -1630,7 +1630,7 @@ export const LevelsDict: { [key: string]: LevelsObj } = {
   },
   "113": {
     id: 113,
-    name: "Crystalline Passage",
+    name: "Crystalized Cavern Level 1",
     act: 5,
     levels: [29, 61, 82],
     mon: ["frozenhorror1", "succubus3", "bloodlord1"],
@@ -1650,7 +1650,7 @@ export const LevelsDict: { [key: string]: LevelsObj } = {
   },
   "114": {
     id: 114,
-    name: "Frozen River",
+    name: "Cellar of Pity",
     act: 5,
     levels: [29, 61, 83],
     mon: ["snowyeti2", "succubus5", "reanimatedhorde1"],
@@ -1670,7 +1670,7 @@ export const LevelsDict: { [key: string]: LevelsObj } = {
   },
   "115": {
     id: 115,
-    name: "Glacial Trail",
+    name: "Crystalized Cavern Level 2",
     act: 5,
     levels: [29, 61, 83],
     mon: ["deathmauler3", "reanimatedhorde2", "frozenhorror2"],
@@ -1690,7 +1690,7 @@ export const LevelsDict: { [key: string]: LevelsObj } = {
   },
   "116": {
     id: 116,
-    name: "Drifter Cavern",
+    name: "Echo Chamber",
     act: 5,
     levels: [29, 61, 85],
     mon: ["snowyeti1", "succubus2"],
@@ -1710,7 +1710,7 @@ export const LevelsDict: { [key: string]: LevelsObj } = {
   },
   "117": {
     id: 117,
-    name: "Frozen Tundra",
+    name: "Tundra Wastelands",
     act: 5,
     levels: [27, 60, 81],
     mon: ["siegebeast2", "imp4"],
@@ -1730,7 +1730,7 @@ export const LevelsDict: { [key: string]: LevelsObj } = {
   },
   "118": {
     id: 118,
-    name: "The Ancients' Way",
+    name: "Glacial Caves Level 1",
     act: 5,
     levels: [29, 62, 82],
     mon: ["frozenhorror3", "deathmauler3", "bloodlord1"],
@@ -1750,7 +1750,7 @@ export const LevelsDict: { [key: string]: LevelsObj } = {
   },
   "119": {
     id: 119,
-    name: "Icy Cellar",
+    name: "Glacial Caves Level 2",
     act: 5,
     levels: [29, 62, 85],
     mon: ["snowyeti4", "succubus3", "reanimatedhorde3"],
@@ -1770,7 +1770,7 @@ export const LevelsDict: { [key: string]: LevelsObj } = {
   },
   "121": {
     id: 121,
-    name: "Nihlathak's Temple",
+    name: "Nihlathaks Temple",
     act: 5,
     levels: [32, 63, 83],
     mon: [],
@@ -1799,7 +1799,7 @@ export const LevelsDict: { [key: string]: LevelsObj } = {
   },
   "123": {
     id: 123,
-    name: "Halls of Pain",
+    name: "Halls of Death's Calling",
     act: 5,
     levels: [34, 64, 84],
     mon: ["reanimatedhorde4", "deathmauler2", "putriddefiler1"],
@@ -1839,7 +1839,7 @@ export const LevelsDict: { [key: string]: LevelsObj } = {
   },
   "125": {
     id: 125,
-    name: "Abaddon",
+    name: "Hell1",
     act: 5,
     levels: [39, 60, 85],
     mon: ["bloodlord3", "imp2"],
@@ -1859,7 +1859,7 @@ export const LevelsDict: { [key: string]: LevelsObj } = {
   },
   "126": {
     id: 126,
-    name: "Pit of Acheron",
+    name: "Hell2",
     act: 5,
     levels: [39, 61, 85],
     mon: ["bloodlord2", "overseer3"],
@@ -1879,7 +1879,7 @@ export const LevelsDict: { [key: string]: LevelsObj } = {
   },
   "127": {
     id: 127,
-    name: "Infernal Pit",
+    name: "Hell3",
     act: 5,
     levels: [39, 62, 85],
     mon: ["imp4", "overseer4"],
@@ -1979,7 +1979,7 @@ export const LevelsDict: { [key: string]: LevelsObj } = {
   },
   "133": {
     id: 133,
-    name: "Matron's Den",
+    name: "Pandemonium Run 1",
     act: 5,
     levels: [50, 75, 83],
     mon: [
@@ -2006,7 +2006,7 @@ export const LevelsDict: { [key: string]: LevelsObj } = {
   },
   "134": {
     id: 134,
-    name: "Forgotten Sands",
+    name: "Pandemonium Run 2",
     act: 5,
     levels: [50, 75, 83],
     mon: ["swarm5", "sandmaggot7", "arach7", "scarab8"],
@@ -2015,7 +2015,7 @@ export const LevelsDict: { [key: string]: LevelsObj } = {
   },
   "135": {
     id: 135,
-    name: "Furnace of Pain",
+    name: "Pandemonium Run 3",
     act: 5,
     levels: [50, 75, 83],
     mon: ["overseer6", "dkmag3", "megademon6", "imp8"],

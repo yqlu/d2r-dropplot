@@ -13,7 +13,7 @@ export type UniqueSetBaseLookupType = {
   [key: string]: UniqueSetDictEntry[];
 };
 
-export const UNIQUE_DICT: UniqueSetDictType = {
+export const UniqueDict: UniqueSetDictType = {
   "The Gnasher": { index: "The Gnasher", rarity: 1, lvl: 7, code: "hax" },
   Deathspade: { index: "Deathspade", rarity: 1, lvl: 12, code: "axe" },
   Bladebone: { index: "Bladebone", rarity: 1, lvl: 20, code: "2ax" },
@@ -964,7 +964,7 @@ export const UNIQUE_DICT: UniqueSetDictType = {
   },
 };
 
-export const SET_DICT: UniqueSetDictType = {
+export const SetDict: UniqueSetDictType = {
   "Aldur's Advance": {
     index: "Aldur's Advance",
     rarity: 7,
@@ -1082,7 +1082,7 @@ export const SET_DICT: UniqueSetDictType = {
     lvl: 13,
     code: "gsc",
   },
-  "Civerb'sIcon": { index: "Civerb's Icon", rarity: 7, lvl: 13, code: "amu" },
+  "Civerb's Icon": { index: "Civerb's Icon", rarity: 7, lvl: 13, code: "amu" },
   "Civerb's Ward": { index: "Civerb's Ward", rarity: 7, lvl: 13, code: "lrg" },
   "Cleglaw's Claw": { index: "Cleglaw's Claw", rarity: 7, lvl: 6, code: "sml" },
   "Cleglaw's Pincers": {
@@ -1574,7 +1574,7 @@ export const SET_DICT: UniqueSetDictType = {
   },
 };
 
-export const UNIQUE_BASE_LOOKUP: UniqueSetBaseLookupType = {
+export const UniqueBaseLookup: UniqueSetBaseLookupType = {
   hax: [{ index: "The Gnasher", rarity: 1, lvl: 7, code: "hax" }],
   axe: [{ index: "Deathspade", rarity: 1, lvl: 12, code: "axe" }],
   "2ax": [{ index: "Bladebone", rarity: 1, lvl: 20, code: "2ax" }],
@@ -1984,7 +1984,7 @@ export const UNIQUE_BASE_LOOKUP: UniqueSetBaseLookupType = {
   cm2: [{ index: "Hellfire Torch", rarity: 1, lvl: 110, code: "cm2" }],
 };
 
-export const SET_BASE_LOOKUP: UniqueSetBaseLookupType = {
+export const SetBaseLookup: UniqueSetBaseLookupType = {
   xtb: [{ index: "Aldur's Advance", rarity: 7, lvl: 29, code: "xtb" }],
   uul: [{ index: "Aldur's Deception", rarity: 7, lvl: 29, code: "uul" }],
   "9mt": [{ index: "Aldur's Gauntlet", rarity: 7, lvl: 29, code: "9mt" }],
@@ -1994,7 +1994,7 @@ export const SET_BASE_LOOKUP: UniqueSetBaseLookupType = {
     { index: "Cathan's Seal", rarity: 7, lvl: 15, code: "rin" },
   ],
   rng: [{ index: "Angelic Mantle", rarity: 7, lvl: 17, code: "rng" }],
-  sbr: [{ index: "AngelicSickle", rarity: 7, lvl: 17, code: "sbr" }],
+  sbr: [{ index: "Angelic Sickle", rarity: 7, lvl: 17, code: "sbr" }],
   amu: [
     { index: "Angelic Wings", rarity: 7, lvl: 17, code: "amu" },
     { index: "Arcanna's Sign", rarity: 1, lvl: 20, code: "amu" },
@@ -2003,7 +2003,7 @@ export const SET_BASE_LOOKUP: UniqueSetBaseLookupType = {
     { index: "Iratha's Collar", rarity: 7, lvl: 21, code: "amu" },
     { index: "Tal Rasha's Adjudication", rarity: 1, lvl: 26, code: "amu" },
     { index: "Tancred's Weird", rarity: 7, lvl: 27, code: "amu" },
-    { index: "Telling ofBeads", rarity: 1, lvl: 39, code: "amu" },
+    { index: "Telling of Beads", rarity: 1, lvl: 39, code: "amu" },
     { index: "Vidala's Snare", rarity: 7, lvl: 19, code: "amu" },
   ],
   wst: [{ index: "Arcanna's Deathwand", rarity: 7, lvl: 20, code: "wst" }],

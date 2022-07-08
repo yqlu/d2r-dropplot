@@ -3,6 +3,7 @@ import Fraction from "fraction.js";
 
 import { BaseItemProbTuple } from "./engine/resultAggregator";
 import { ItemDict } from "./engine/item-dict";
+import { Locale } from "./engine/locale-dict";
 
 type IAppPropType = { results: BaseItemProbTuple[] };
 
@@ -29,7 +30,7 @@ export class Result extends React.Component<IAppPropType, null> {
     const tableRows = this.props.results.map((tcTuple) => {
       let name;
       if (ItemDict[tcTuple[0]]) {
-        name = `${ItemDict[tcTuple[0]].name} (${ItemDict[tcTuple[0]].level})`;
+        name = `${Locale(tcTuple[0])} (${ItemDict[tcTuple[0]].level})`;
       } else {
         name = tcTuple[0];
       }
@@ -37,7 +38,7 @@ export class Result extends React.Component<IAppPropType, null> {
       for (const item of tcTuple[2].uniques) {
         children.push(
           <tr key={item[0]}>
-            <td>{item[0]} (U)</td>
+            <td>{Locale(item[0])} (U)</td>
             <td>{formatReciprocal(item[1].mul(tcTuple[2].quality[3]))}</td>
           </tr>
         );
@@ -45,13 +46,13 @@ export class Result extends React.Component<IAppPropType, null> {
       for (const item of tcTuple[2].sets) {
         children.push(
           <tr key={item[0]}>
-            <td>{item[0]} (S)</td>
+            <td>{Locale(item[0])} (S)</td>
             <td>{formatReciprocal(item[1].mul(tcTuple[2].quality[2]))}</td>
           </tr>
         );
       }
       return (
-        <React.Fragment key={name}>
+        <React.Fragment key={tcTuple[0]}>
           <tr>
             <td>{name}</td>
             <td>{formatReciprocal(tcTuple[1])}</td>

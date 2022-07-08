@@ -13,7 +13,7 @@ for (var entry of Object.entries(json)) {
   const obj = entry[1];
   const cleaned = {
     id: parseInt(id),
-    name: obj["*StringName"],
+    name: obj["LevelName"],
     act: obj.Act + 1,
     levels: [obj.MonLvlEx, obj["MonLvlEx(N)"], obj["MonLvlEx(H)"]],
     mon: range(10)

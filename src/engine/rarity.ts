@@ -16,8 +16,8 @@ import {
 } from "./weapon-armor-dict";
 import { RARITY, ITEMTIER, getRarityConstants } from "./itemratio-dict";
 import {
-  UNIQUE_BASE_LOOKUP,
-  SET_BASE_LOOKUP,
+  UniqueBaseLookup,
+  SetBaseLookup,
   UniqueSetBaseLookupType,
 } from "./unique-set-dict";
 
@@ -195,8 +195,8 @@ export function computeQualityProbs(
     magicFind,
     qualityFactors
   );
-  const candidateUniques = findCandidates(itemCode, ilvl, UNIQUE_BASE_LOOKUP);
-  const candidateSets = findCandidates(itemCode, ilvl, SET_BASE_LOOKUP);
+  const candidateUniques = findCandidates(itemCode, ilvl, UniqueBaseLookup);
+  const candidateSets = findCandidates(itemCode, ilvl, SetBaseLookup);
 
   // If there are no uniques that can be generated,
   // Generate a triple-durability rare in its place
