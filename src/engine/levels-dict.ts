@@ -33,7 +33,7 @@ export const LevelsDict: { [key: string]: LevelsObj } = {
     act: 1,
     levels: [4, 37, 68],
     mon: ["skeleton1", "zombie2", "crownest1", "goatman1", "cr_archer1"],
-    umon: ["skeleton1", "zombie2", "crownest1", "goatman1", "cr_archer1"],
+    umon: ["skeleton1", "zombie2", "foulcrow1", "goatman1", "cr_archer1"],
     nmon: ["skeleton1", "zombie2", "crownest1", "goatman1", "cr_archer1"],
   },
   "5": {
@@ -59,8 +59,8 @@ export const LevelsDict: { [key: string]: LevelsObj } = {
       "cr_archer2",
     ],
     umon: [
-      "crownest2",
       "skeleton2",
+      "foulcrow2",
       "brute2",
       "goatman2",
       "fallenshaman2",
@@ -423,7 +423,7 @@ export const LevelsDict: { [key: string]: LevelsObj } = {
     act: 2,
     levels: [16, 45, 76],
     mon: ["crownest3", "sandmaggot1", "swarm1", "scarab2", "vulture2"],
-    umon: ["crownest3", "sandmaggot1", "swarm1", "scarab2", "vulture2"],
+    umon: ["foulcrow3", "sandmaggot1", "swarm1", "scarab2", "vulture2"],
     nmon: ["crownest3", "sandmaggot1", "swarm1", "scarab2", "vulture2"],
   },
   "44": {
@@ -1287,7 +1287,7 @@ export const LevelsDict: { [key: string]: LevelsObj } = {
     act: 3,
     levels: [21, 51, 85],
     mon: ["bonefetish4", "bonefetish5", "batdemon2", "willowisp1"],
-    umon: ["bonefetish4", "bonefetish5", "batdemon2", "willowisp1"],
+    umon: ["mosquito2", "bonefetish5", "batdemon2", "willowisp1"],
     nmon: ["bonefetish4", "bonefetish5", "batdemon2", "willowisp1"],
   },
   "91": {
@@ -1422,7 +1422,7 @@ export const LevelsDict: { [key: string]: LevelsObj } = {
     act: 3,
     levels: [25, 55, 83],
     mon: ["vampire4", "vampire4"],
-    umon: ["vampire4", "vampire4"],
+    umon: ["vampire4", "bonefetish5"],
     nmon: ["vampire4", "vampire4"],
   },
   "104": {
@@ -1444,7 +1444,7 @@ export const LevelsDict: { [key: string]: LevelsObj } = {
       "fingermage1",
       "regurgitator1",
       "doomknight1",
-      "megademon3",
+      "megademon1",
     ],
     nmon: [
       "sandleaper5",
@@ -1474,7 +1474,7 @@ export const LevelsDict: { [key: string]: LevelsObj } = {
       "fingermage1",
       "regurgitator1",
       "doomknight1",
-      "megademon3",
+      "megademon2",
     ],
     nmon: [
       "willowisp3",
@@ -1539,7 +1539,7 @@ export const LevelsDict: { [key: string]: LevelsObj } = {
       "fingermage2",
       "regurgitator3",
       "doomknight2",
-      "megademon2",
+      "megademon3",
     ],
     nmon: [
       "sandmaggot5",
@@ -1574,15 +1574,7 @@ export const LevelsDict: { [key: string]: LevelsObj } = {
       "quillrat6",
       "bighead6",
     ],
-    umon: [
-      "minion1",
-      "deathmauler1",
-      "overseer1",
-      "imp1",
-      "sk_archer6",
-      "quillrat6",
-      "bighead6",
-    ],
+    umon: [],
     nmon: [
       "minion1",
       "deathmauler1",
@@ -1602,7 +1594,7 @@ export const LevelsDict: { [key: string]: LevelsObj } = {
     act: 5,
     levels: [25, 59, 81],
     mon: ["imp1", "siegebeast2"],
-    umon: ["imp1", "siegebeast2"],
+    umon: ["imp2"],
     nmon: [
       "imp3",
       "siegebeast1",
@@ -1622,7 +1614,7 @@ export const LevelsDict: { [key: string]: LevelsObj } = {
     act: 5,
     levels: [26, 60, 81],
     mon: ["overseer2", "minion2"],
-    umon: ["overseer2", "minion2"],
+    umon: ["overseer2"],
     nmon: [
       "deathmauler3",
       "minion4",
@@ -1642,7 +1634,7 @@ export const LevelsDict: { [key: string]: LevelsObj } = {
     act: 5,
     levels: [29, 61, 82],
     mon: ["frozenhorror1", "succubus3", "bloodlord1"],
-    umon: ["frozenhorror1", "succubus3", "bloodlord1"],
+    umon: ["snowyeti1", "bloodlord1"],
     nmon: [
       "snowyeti1",
       "frozenhorror1",
@@ -1662,7 +1654,7 @@ export const LevelsDict: { [key: string]: LevelsObj } = {
     act: 5,
     levels: [29, 61, 83],
     mon: ["snowyeti2", "succubus5", "reanimatedhorde1"],
-    umon: ["snowyeti2", "succubus5", "reanimatedhorde1"],
+    umon: ["frozenhorror2", "deathmauler3", "bloodlord1"],
     nmon: [
       "snowyeti1",
       "frozenhorror1",
@@ -1682,7 +1674,7 @@ export const LevelsDict: { [key: string]: LevelsObj } = {
     act: 5,
     levels: [29, 61, 83],
     mon: ["deathmauler3", "reanimatedhorde2", "frozenhorror2"],
-    umon: ["deathmauler3", "reanimatedhorde2", "frozenhorror2"],
+    umon: ["snowyeti2", "deathmauler3"],
     nmon: [
       "snowyeti1",
       "frozenhorror1",
@@ -1702,7 +1694,7 @@ export const LevelsDict: { [key: string]: LevelsObj } = {
     act: 5,
     levels: [29, 61, 85],
     mon: ["snowyeti1", "succubus2"],
-    umon: ["snowyeti1", "succubus2"],
+    umon: ["succubus3", "frozenhorror3"],
     nmon: [
       "snowyeti2",
       "succubus6",
@@ -1722,7 +1714,7 @@ export const LevelsDict: { [key: string]: LevelsObj } = {
     act: 5,
     levels: [27, 60, 81],
     mon: ["siegebeast2", "imp4"],
-    umon: ["siegebeast2", "imp4"],
+    umon: ["imp4"],
     nmon: [
       "siegebeast2",
       "imp2",
@@ -1742,7 +1734,7 @@ export const LevelsDict: { [key: string]: LevelsObj } = {
     act: 5,
     levels: [29, 62, 82],
     mon: ["frozenhorror3", "deathmauler3", "bloodlord1"],
-    umon: ["frozenhorror3", "deathmauler3", "bloodlord1"],
+    umon: ["frozenhorror3", "succubus1"],
     nmon: [
       "frozenhorror2",
       "snowyeti2",
@@ -1762,7 +1754,7 @@ export const LevelsDict: { [key: string]: LevelsObj } = {
     act: 5,
     levels: [29, 62, 85],
     mon: ["snowyeti4", "succubus3", "reanimatedhorde3"],
-    umon: ["snowyeti4", "succubus3", "reanimatedhorde3"],
+    umon: ["succubus5", "deathmauler5", "snowyeti4"],
     nmon: [
       "snowyeti2",
       "succubus4",
@@ -1775,15 +1767,6 @@ export const LevelsDict: { [key: string]: LevelsObj } = {
       "wraith6",
       "succubuswitch6",
     ],
-  },
-  "120": {
-    id: 120,
-    name: "Arreat Summit",
-    act: 5,
-    levels: [37, 68, 87],
-    mon: ["ancientbarb1", "ancientbarb2", "ancientbarb3"],
-    umon: ["ancientbarb1", "ancientbarb2", "ancientbarb3"],
-    nmon: ["ancientbarb1", "ancientbarb2", "ancientbarb3"],
   },
   "121": {
     id: 121,
@@ -1800,7 +1783,7 @@ export const LevelsDict: { [key: string]: LevelsObj } = {
     act: 5,
     levels: [33, 63, 83],
     mon: ["reanimatedhorde3", "bloodlord2"],
-    umon: ["reanimatedhorde3", "bloodlord2"],
+    umon: ["reanimatedhorde2", "bloodlord2"],
     nmon: [
       "reanimatedhorde3",
       "bloodlord2",
@@ -1820,7 +1803,7 @@ export const LevelsDict: { [key: string]: LevelsObj } = {
     act: 5,
     levels: [34, 64, 84],
     mon: ["reanimatedhorde4", "deathmauler2", "putriddefiler1"],
-    umon: ["reanimatedhorde4", "deathmauler2", "putriddefiler1"],
+    umon: ["reanimatedhorde3", "deathmauler2", "baaltaunt"],
     nmon: [
       "bloodlord2",
       "sandraider7",
@@ -1840,7 +1823,7 @@ export const LevelsDict: { [key: string]: LevelsObj } = {
     act: 5,
     levels: [36, 64, 84],
     mon: ["minion6", "succubus4", "putriddefiler2"],
-    umon: ["minion6", "succubus4", "putriddefiler2"],
+    umon: ["minion6", "succubus4", "putriddefiler1"],
     nmon: [
       "minion9",
       "succubus4",
@@ -1860,7 +1843,7 @@ export const LevelsDict: { [key: string]: LevelsObj } = {
     act: 5,
     levels: [39, 60, 85],
     mon: ["bloodlord3", "imp2"],
-    umon: ["bloodlord3", "imp2"],
+    umon: ["overseer2", "bloodlord4"],
     nmon: [
       "bloodlord3",
       "imp6",
@@ -1880,7 +1863,7 @@ export const LevelsDict: { [key: string]: LevelsObj } = {
     act: 5,
     levels: [39, 61, 85],
     mon: ["bloodlord2", "overseer3"],
-    umon: ["bloodlord2", "overseer3"],
+    umon: ["overseer3", "bloodlord4"],
     nmon: [
       "bloodlord3",
       "imp6",
@@ -1900,7 +1883,7 @@ export const LevelsDict: { [key: string]: LevelsObj } = {
     act: 5,
     levels: [39, 62, 85],
     mon: ["imp4", "overseer4"],
-    umon: ["imp4", "overseer4"],
+    umon: ["overseer4", "bloodlord5"],
     nmon: [
       "imp7",
       "overseer4",
@@ -1920,7 +1903,7 @@ export const LevelsDict: { [key: string]: LevelsObj } = {
     act: 5,
     levels: [39, 65, 85],
     mon: ["reanimatedhorde5", "succubuswitch2", "putriddefiler3"],
-    umon: ["reanimatedhorde5", "succubuswitch2", "putriddefiler3"],
+    umon: ["bloodlord3", "succubuswitch2", "putriddefiler2"],
     nmon: [
       "reanimatedhorde6",
       "succubuswitch8",
@@ -1940,7 +1923,7 @@ export const LevelsDict: { [key: string]: LevelsObj } = {
     act: 5,
     levels: [40, 65, 85],
     mon: ["suicideminion6", "minion7"],
-    umon: ["suicideminion6", "minion7"],
+    umon: ["bloodlord4", "minion7"],
     nmon: [
       "suicideminion6",
       "minion11",
@@ -1960,7 +1943,7 @@ export const LevelsDict: { [key: string]: LevelsObj } = {
     act: 5,
     levels: [42, 66, 85],
     mon: ["bloodlord5", "imp5", "putriddefiler4"],
-    umon: ["bloodlord5", "imp5", "putriddefiler4"],
+    umon: ["bloodlord5", "succubuswitch3", "putriddefiler3"],
     nmon: [
       "bloodlord5",
       "imp5",

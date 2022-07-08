@@ -1,9 +1,6 @@
-import { assert, expect } from "chai";
+import { expect } from "chai";
 
-import { Difficulty, MonsterType, MonsterDict } from "./monstats-dict";
-import { SuperuniqueDict } from "./superunique-dict";
-import { FlatBossDict } from "./boss-dict";
-import { LevelsDict } from "./levels-dict";
+import { Difficulty, MonsterType } from "./monstats-dict";
 import { getTcAndMlvlFromMonster } from "./monster";
 
 describe("getTcAndMlvlFromMonster", () => {
@@ -265,7 +262,10 @@ describe("getTcAndMlvlFromMonster", () => {
       "Blood Raven (N)",
       43,
     ]);
-    expect(testBoss(Difficulty.NIGHTMARE, "summoner")).to.eql(["Summoner", 58]);
+    expect(testBoss(Difficulty.NIGHTMARE, "summoner")).to.eql([
+      "Summoner (N)",
+      55,
+    ]);
     expect(testBoss(Difficulty.NIGHTMARE, "andariel")).to.eql([
       "Andarielq (N)",
       49,
@@ -379,7 +379,7 @@ describe("getTcAndMlvlFromMonster", () => {
       "Blood Raven (H)",
       88,
     ]);
-    expect(testBoss(Difficulty.HELL, "summoner")).to.eql(["Summoner (H)", 83]);
+    expect(testBoss(Difficulty.HELL, "summoner")).to.eql(["Summoner (H)", 80]);
     expect(testBoss(Difficulty.HELL, "andariel")).to.eql(["Andarielq (H)", 75]);
     expect(testBoss(Difficulty.HELL, "mephisto")).to.eql(["Mephisto (H)", 87]);
   });

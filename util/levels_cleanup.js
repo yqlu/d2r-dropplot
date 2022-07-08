@@ -20,12 +20,16 @@ for (var entry of Object.entries(json)) {
       .map((i) => obj[`mon${i + 1}`])
       .filter((e) => e),
     umon: range(10)
-      .map((i) => obj[`mon${i + 1}`])
+      .map((i) => obj[`umon${i + 1}`])
       .filter((e) => e),
     nmon: range(10)
       .map((i) => obj[`nmon${i + 1}`])
       .filter((e) => e),
   };
+  if (cleaned.id == 120) {
+    // Arreat Summit -- skip because we manually cleaned the 3 ancients
+    continue;
+  }
   if (
     (cleaned.levels.filter((e) => e).length > 0 && cleaned.mon.length > 0) ||
     cleaned.id == 121 // Nithlathak's Temple

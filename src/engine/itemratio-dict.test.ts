@@ -1,5 +1,4 @@
-import { assert, expect } from "chai";
-import { map } from "lodash-es";
+import { expect } from "chai";
 
 import { RARITY, ITEMTIER, getRarityConstants } from "./itemratio-dict";
 

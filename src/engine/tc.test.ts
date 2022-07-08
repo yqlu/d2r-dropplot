@@ -1,17 +1,9 @@
 import { makeLookupTcFunction, TcCalculator, getAdjustedDenom } from "./tc";
-import { TCDict, TCDictType, TCObject } from "./tc-dict";
-import Fraction from "fraction.js";
-import { filter, sum, map, isTypedArray } from "lodash-es";
+import { TCDict, TCDictType } from "./tc-dict";
+import { filter } from "lodash-es";
 
-import { assert, expect } from "chai";
-import { AtomicDict } from "./atomic-dict";
-import {
-  BaseItemProbTuple,
-  BaseItemResultAggregator,
-  TCProbTuple,
-  TCResultAggregator,
-} from "./resultAggregator";
-import { ItemDict } from "./item-dict";
+import { expect } from "chai";
+import { TCProbTuple, TCResultAggregator } from "./resultAggregator";
 
 describe("getAdjustedDenom", () => {
   it("works with base cases", () => {

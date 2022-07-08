@@ -2,14 +2,12 @@ import Fraction from "fraction.js";
 import { map, sum } from "lodash-es";
 import { expect } from "chai";
 
-import { ItemDict } from "./item-dict";
-import { RARITY, ITEMTIER } from "./itemratio-dict";
+import { RARITY } from "./itemratio-dict";
 import {
   computeQualityProb,
   computeQualityProbsHelper,
   computeQualityProbs,
 } from "./rarity";
-import { ArmorDict, WeaponsDict } from "./weapon-armor-dict";
 
 describe("computeQualityProb", () => {
   it("should work for Hell Baal / Tyrael's Might example", () => {

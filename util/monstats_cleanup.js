@@ -47,6 +47,11 @@ const minor = [
   "summoner",
   "izual",
   "nihlathakboss",
+  "putriddefiler1",
+  "putriddefiler2",
+  "putriddefiler3",
+  "putriddefiler4",
+  "putriddefiler5",
 ];
 const actbosses = ["andariel", "duriel", "mephisto", "diablo", "baalcrab"];
 const pandemonium = [

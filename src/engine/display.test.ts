@@ -1,4 +1,4 @@
-import { assert, expect } from "chai";
+import { expect } from "chai";
 import Fraction from "fraction.js";
 import { map } from "lodash-es";
 
