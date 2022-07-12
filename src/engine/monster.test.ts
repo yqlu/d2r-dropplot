@@ -1,4 +1,5 @@
 import { expect } from "chai";
+import { describe, test as it } from "vitest";
 
 import { Difficulty, MonsterType } from "./monstats-dict";
 import { getTcAndMlvlFromMonster } from "./monster";

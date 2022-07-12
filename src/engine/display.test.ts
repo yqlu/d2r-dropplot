@@ -1,6 +1,7 @@
 import { expect } from "chai";
 import Fraction from "fraction.js";
 import { map } from "lodash-es";
+import { describe, test as it } from "vitest";
 
 import { TCProbTuple } from "./resultAggregator";
 import { sortTCs } from "./display";

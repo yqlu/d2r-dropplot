@@ -1,4 +1,5 @@
 import { expect } from "chai";
+import { describe, test as it } from "vitest";
 
 import { MonsterDict } from "./monstats-dict";
 import { SuperuniqueDict } from "./superunique-dict";

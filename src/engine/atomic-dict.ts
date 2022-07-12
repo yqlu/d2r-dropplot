@@ -1,4 +1,5 @@
 import { TCDictType } from "./tc-dict";
+import { describe, test as it } from "vitest";
 
 export const AtomicDict: TCDictType = {
   abow12: { nodrop: 0, picks: 1, qualityRatios: [0, 0, 0, 0], tcs: [] },

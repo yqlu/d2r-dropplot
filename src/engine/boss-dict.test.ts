@@ -1,4 +1,5 @@
 import { expect } from "chai";
+import { describe, test as it } from "vitest";
 
 import { getBossHierarchy, FlatBossDict } from "./boss-dict";
 import { Difficulty } from "./monstats-dict";

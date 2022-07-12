@@ -1,8 +1,9 @@
-import { assert, expect } from "chai";
+import { expect } from "chai";
+import { describe, test as it } from "vitest";
 import Fraction from "fraction.js";
 import { sum, map } from "lodash-es";
-import { ItemRarityProb, QualityProbabilityObject } from "./rarity";
 
+import { QualityProbabilityObject } from "./rarity";
 import {
   TCResultAggregator,
   BaseItemResultAggregator,

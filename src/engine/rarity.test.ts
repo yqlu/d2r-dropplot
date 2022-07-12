@@ -1,6 +1,7 @@
 import Fraction from "fraction.js";
 import { map, sum } from "lodash-es";
 import { expect } from "chai";
+import { describe, test as it } from "vitest";
 
 import { RARITY } from "./itemratio-dict";
 import {

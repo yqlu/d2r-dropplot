@@ -3,6 +3,7 @@ import { TCDict, TCDictType } from "./tc-dict";
 import { filter } from "lodash-es";
 
 import { expect } from "chai";
+import { describe, test as it } from "vitest";
 import { TCProbTuple, TCResultAggregator } from "./resultAggregator";
 
 describe("getAdjustedDenom", () => {

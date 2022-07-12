@@ -1,4 +1,5 @@
 import { expect } from "chai";
+import { describe, test as it } from "vitest";
 
 import { RARITY, ITEMTIER, getRarityConstants } from "./itemratio-dict";
 
