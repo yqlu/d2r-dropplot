@@ -23,7 +23,6 @@ export type MonsterFormProps = MonsterFormState & {
 
 export class MonsterForm extends React.Component<MonsterFormProps> {
   levelsOptions: JSX.Element[];
-  monsterElements: JSX.Element[];
   superuniqueElements: JSX.Element[];
 
   constructor(props: MonsterFormProps) {
@@ -226,7 +225,7 @@ export class MonsterForm extends React.Component<MonsterFormProps> {
         )}
         {this.props.monsterType === MonsterType.BOSS && (
           <p>
-            <span>Boss</span>
+            <span className="text-3xl font-bold underline">Boss</span>
             <select
               id="boss"
               value={this.props.boss}
