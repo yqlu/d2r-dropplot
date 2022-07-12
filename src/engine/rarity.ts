@@ -9,11 +9,7 @@ import {
   AtLeastMagicSet,
   RareableSet,
 } from "./item-dict";
-import {
-  WeaponsDict,
-  ArmorDict,
-  WeaponArmorDictEntryType,
-} from "./weapon-armor-dict";
+import { WeaponsDict, ArmorDict } from "./weapon-armor-dict";
 import { RARITY, ITEMTIER, getRarityConstants } from "./itemratio-dict";
 import {
   UniqueBaseLookup,
@@ -60,7 +56,7 @@ const mfFactor: { [key in RARITY]: number } = {
 };
 
 export function getEffectiveMf(mf: number, rarity: RARITY) {
-  if (rarity == RARITY.MAGIC) {
+  if (rarity === RARITY.MAGIC) {
     return mf;
   }
   const factor = mfFactor[rarity];
@@ -76,7 +72,7 @@ export function computeQualityProb(
   qualityFactor: number // from ItemRarityRatios from TC,
 ): Fraction {
   // Special case: these items are always at least magical
-  if (rarity == RARITY.MAGIC && AtLeastMagicSet.has(ItemDict[itemCode].type)) {
+  if (rarity === RARITY.MAGIC && AtLeastMagicSet.has(ItemDict[itemCode].type)) {
     return new Fraction(1);
   }
 
@@ -200,14 +196,14 @@ export function computeQualityProbs(
 
   // If there are no uniques that can be generated,
   // Generate a triple-durability rare in its place
-  if (candidateUniques.length == 0) {
+  if (candidateUniques.length === 0) {
     rareProb = rareProb.add(uniqProb);
     uniqProb = new Fraction(0);
   }
 
   // If there are no sets that can be generated,
   // Generate a double-durability magic in its place
-  if (candidateSets.length == 0) {
+  if (candidateSets.length === 0) {
     magicProb = magicProb.add(setProb);
     setProb = new Fraction(0);
   }

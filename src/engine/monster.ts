@@ -78,7 +78,7 @@ function getBossTCMlvl(
 ): [tc: string, mlvl: number] {
   let bossName = boss;
   let quest = 0;
-  if (boss.substring(0, 5) == "quest") {
+  if (boss.substring(0, 5) === "quest") {
     bossName = boss.substring(5);
     quest = 1;
   }
@@ -98,7 +98,7 @@ function getStandardMlvl(
   // Mlvl is read from MonsterDict (for normal) and LevelsDict (for nightmare / hell)
   // and modified by monsterType
   let baseMlvl;
-  if (difficulty == Difficulty.NORMAL) {
+  if (difficulty === Difficulty.NORMAL) {
     baseMlvl = monsterEntry.levels[0];
   } else {
     baseMlvl = LevelsDict[levelId].levels[difficulty];
@@ -107,20 +107,20 @@ function getStandardMlvl(
 }
 
 function getTcOffset(monsterType: MonsterType) {
-  if (monsterType == MonsterType.CHAMP) {
+  if (monsterType === MonsterType.CHAMP) {
     return 1;
-  } else if (monsterType == MonsterType.UNIQUE) {
+  } else if (monsterType === MonsterType.UNIQUE) {
     return 2;
   }
   return 0;
 }
 
 function getMlvlOffset(monsterType: MonsterType) {
-  if (monsterType == MonsterType.CHAMP) {
+  if (monsterType === MonsterType.CHAMP) {
     return 2;
   } else if (
-    monsterType == MonsterType.MINION ||
-    monsterType == MonsterType.UNIQUE
+    monsterType === MonsterType.MINION ||
+    monsterType === MonsterType.UNIQUE
   ) {
     return 3;
   }

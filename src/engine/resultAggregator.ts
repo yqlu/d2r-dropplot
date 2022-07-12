@@ -50,7 +50,7 @@ export class TCResultAggregator implements ResultAggregator<TCProbTuple[]> {
   }
 
   withPositivePicks(picks: number) {
-    if (picks == 1) {
+    if (picks === 1) {
       return this;
     }
     let adjProbFunction: (p: Fraction) => Fraction;
@@ -169,7 +169,7 @@ export class BaseItemResultAggregator
   }
 
   withPositivePicks(picks: number) {
-    if (picks == 1) {
+    if (picks === 1) {
       return this;
     }
     let adjProbFunction: (p: Fraction) => Fraction;
@@ -196,7 +196,7 @@ export class BaseItemResultAggregator
       Object.keys(this.dict),
       (accum: BaseItemProbDict, tc: string) => {
         const dictEntry = this.dict[tc];
-        if (this.aggregationStyle == ProbabilityAggregation.CHANCE_OF_FIRST) {
+        if (this.aggregationStyle === ProbabilityAggregation.CHANCE_OF_FIRST) {
           dictEntry[0] = adjProbFunction(dictEntry[0]);
         } else {
           dictEntry[0] = dictEntry[0].mul(picks);
@@ -210,7 +210,7 @@ export class BaseItemResultAggregator
   }
 
   combineNegativePicks(other: BaseItemResultAggregator): void {
-    for (var [key, value] of Object.entries(other.dict)) {
+    for (let [key, value] of Object.entries(other.dict)) {
       // Insert into map if it doesn't exist
       if (!this.dict.hasOwnProperty(key)) {
         this.dict[key] = value;
@@ -220,7 +220,7 @@ export class BaseItemResultAggregator
         // Coalesce probability into map
         // If item X has chance A of dropping from TCA and B of dropping from TCB
         // Combined chance to drop is 1 - (1 - A)(1 - B) = 1 - (1 - A - B + AB) = A + B - AB
-        if (this.aggregationStyle == ProbabilityAggregation.CHANCE_OF_FIRST) {
+        if (this.aggregationStyle === ProbabilityAggregation.CHANCE_OF_FIRST) {
           baseItemProb = ONE.sub(
             ONE.sub(other.dict[key][0]).mul(ONE.sub(this.dict[key][0]))
           );

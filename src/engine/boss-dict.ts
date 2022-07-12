@@ -38,7 +38,7 @@ export function getBossHierarchy(difficulty: Difficulty): BossHierarchyType {
       "uberbaal",
     ],
   };
-  if (difficulty != Difficulty.HELL) {
+  if (difficulty !== Difficulty.HELL) {
     bossHierarchy.pandemonium = [];
   }
   return bossHierarchy;

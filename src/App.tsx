@@ -1,5 +1,4 @@
 import React from "react";
-import Fraction from "fraction.js";
 
 import "./App.css";
 import "./engine/tc";
@@ -16,7 +15,7 @@ import {
   BaseItemResultAggregator,
   TCProbTuple,
 } from "./engine/resultAggregator";
-import { sortTCs, sortAlphabetical } from "./engine/display";
+import { sortAlphabetical } from "./engine/display";
 import { Difficulty, MonsterType } from "./engine/monstats-dict";
 import { getTcAndMlvlFromMonster } from "./engine/monster";
 
@@ -105,7 +104,7 @@ class App extends React.Component<{}, IAppPropType> {
   onMonsterFormChange(event: React.ChangeEvent<HTMLSelectElement>) {
     const name = event.target.id;
     let value: string | number = event.target.value;
-    if (name == "difficulty" || name == "level" || name == "monsterType") {
+    if (name === "difficulty" || name === "level" || name === "monsterType") {
       value = parseInt(value);
     }
     this.setState<never>(

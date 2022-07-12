@@ -12,8 +12,7 @@ function format(percent: Fraction) {
 }
 
 function formatReciprocal(chance: Fraction) {
-  if (chance.valueOf() == 0) {
-    console.log();
+  if (chance.valueOf() === 0) {
     return `1/0`;
   }
   let f = chance.inverse().valueOf();

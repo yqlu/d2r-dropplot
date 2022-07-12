@@ -53,14 +53,14 @@ export function sortTCs(tcs: TCProbTuple[]): TCProbTuple[] {
   );
   baseWeapTCs.sort(function (a, b) {
     const [aObj, bObj] = [ItemDict[a[0]], ItemDict[b[0]]];
-    if (aObj.level != bObj.level) {
+    if (aObj.level !== bObj.level) {
       return aObj.level - bObj.level;
     }
     return aObj.name.localeCompare(bObj.name);
   });
   baseArmoTCs.sort(function (a, b) {
     const [aObj, bObj] = [ItemDict[a[0]], ItemDict[b[0]]];
-    if (aObj.level != bObj.level) {
+    if (aObj.level !== bObj.level) {
       return aObj.level - bObj.level;
     }
     return aObj.name.localeCompare(bObj.name);

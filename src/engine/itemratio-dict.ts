@@ -18,9 +18,9 @@ export const getRarityConstants = function (
   difficulty: ITEMTIER,
   classSpecific: boolean,
   rarity: RARITY
-) {
+): RarityConstants {
   let lookup;
-  if (difficulty == ITEMTIER.NORMAL) {
+  if (difficulty === ITEMTIER.NORMAL) {
     if (classSpecific) {
       lookup = ItemRatioDict["Class Specific"];
     } else {

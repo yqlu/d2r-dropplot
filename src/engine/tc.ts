@@ -1,7 +1,7 @@
-import { range, sum, map, clone, reduce, zip } from "lodash-es";
+import { sum, map, zip } from "lodash-es";
 import Fraction from "fraction.js";
 
-import { ResultAggregator, TCProbTuple } from "./resultAggregator";
+import { ResultAggregator } from "./resultAggregator";
 import { TCDictType, TCObject, ItemQualityRatios } from "./tc-dict";
 
 // TODO: handle countess rune rate
@@ -23,9 +23,9 @@ export function getAdjustedDenom(
   partyCount: number = 1
 ): number {
   // Easy early optimization
-  if (tcNoDrop == 0) {
+  if (tcNoDrop === 0) {
     return tcDenom;
-  } else if (totalPlayers == 1) {
+  } else if (totalPlayers === 1) {
     return tcDenom + tcNoDrop;
   }
   // validate inputs
@@ -138,7 +138,6 @@ export class TcCalculator<T> {
     cumuProb: Fraction,
     parentAggregator: ResultAggregator<T>
   ): ResultAggregator<T> {
-    const atomicTcMap: { [key: string]: TCProbTuple } = {};
     let cumulativePickCount = 0;
     // Picks = -4, with [TCA, 2], [TCB, 2]
     // means drawing 2 picks from TCA and 2 picks from TCB
@@ -153,7 +152,7 @@ export class TcCalculator<T> {
       // it is atomic and there is no filter or it belongs in the filter
       if (
         this.lookupTcFunction(subTC) ||
-        filter.size == 0 ||
+        filter.size === 0 ||
         filter.has(subTC)
       ) {
         const subAggregator = this.aggregatorFactory();
@@ -204,7 +203,7 @@ export class TcCalculator<T> {
       // If subTC is not present in lookup, it is atomic
       if (!this.lookupTcFunction(subTC)) {
         // If there is a filter, only track if it is in the filter
-        if (filter.size == 0 || filter.has(subTC)) {
+        if (filter.size === 0 || filter.has(subTC)) {
           aggregator.add(subTC, subProb, cumuQualityRatios);
         }
       } else {

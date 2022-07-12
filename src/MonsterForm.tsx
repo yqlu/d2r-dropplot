@@ -78,8 +78,8 @@ export class MonsterForm extends React.Component<MonsterFormProps> {
   getMonList() {
     const levelEntry = LevelsDict[this.props.levelId];
     let monList: string[];
-    if (this.props.difficulty == Difficulty.NORMAL) {
-      if (this.props.monsterType != MonsterType.UNIQUE) {
+    if (this.props.difficulty === Difficulty.NORMAL) {
+      if (this.props.monsterType !== MonsterType.UNIQUE) {
         monList = levelEntry.mon;
       } else {
         monList = levelEntry.umon;
@@ -104,41 +104,38 @@ export class MonsterForm extends React.Component<MonsterFormProps> {
           </option>
         );
       });
-    } else if (this.props.monsterType == MonsterType.BOSS) {
-      bossElements = Object.entries(
-        getBossHierarchy(this.props.difficulty)
-      ).map(([category, bosses]) => {
-        if (bosses.length == 0) {
-          return;
-        }
-        let innerBossElements: JSX.Element[];
-        if (category == "actbosses") {
-          innerBossElements = bosses.map((boss) => {
-            const localized = Locale(FlatBossDict[boss].nameStr);
-            return (
-              <React.Fragment key={boss}>
-                <option key={boss} value={boss}>
-                  {localized}
-                </option>
-                <option key={`quest${boss}`} value={`quest${boss}`}>
-                  {localized} (Q)
-                </option>
-              </React.Fragment>
-            );
-          });
-        } else {
-          innerBossElements = bosses.map((boss) => (
-            <option key={boss} value={boss}>
-              {Locale(FlatBossDict[boss].nameStr)}
-            </option>
-          ));
-        }
-        return (
-          <optgroup key={category} label={category}>
-            {innerBossElements}
-          </optgroup>
-        );
-      });
+    } else if (this.props.monsterType === MonsterType.BOSS) {
+      bossElements = Object.entries(getBossHierarchy(this.props.difficulty))
+        .filter(([category, bosses]) => bosses.length > 0)
+        .map(([category, bosses]) => {
+          let innerBossElements: JSX.Element[];
+          if (category === "actbosses") {
+            innerBossElements = bosses.map((boss) => {
+              const localized = Locale(FlatBossDict[boss].nameStr);
+              return (
+                <React.Fragment key={boss}>
+                  <option key={boss} value={boss}>
+                    {localized}
+                  </option>
+                  <option key={`quest${boss}`} value={`quest${boss}`}>
+                    {localized} (Q)
+                  </option>
+                </React.Fragment>
+              );
+            });
+          } else {
+            innerBossElements = bosses.map((boss) => (
+              <option key={boss} value={boss}>
+                {Locale(FlatBossDict[boss].nameStr)}
+              </option>
+            ));
+          }
+          return (
+            <optgroup key={category} label={category}>
+              {innerBossElements}
+            </optgroup>
+          );
+        });
     }
 
     return (
@@ -215,7 +212,7 @@ export class MonsterForm extends React.Component<MonsterFormProps> {
             </select>
           </p>
         )}
-        {this.props.monsterType == MonsterType.SUPERUNIQUE && (
+        {this.props.monsterType === MonsterType.SUPERUNIQUE && (
           <p>
             <span>Superunique</span>
             <select
@@ -227,7 +224,7 @@ export class MonsterForm extends React.Component<MonsterFormProps> {
             </select>
           </p>
         )}
-        {this.props.monsterType == MonsterType.BOSS && (
+        {this.props.monsterType === MonsterType.BOSS && (
           <p>
             <span>Boss</span>
             <select
