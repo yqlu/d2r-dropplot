@@ -138,10 +138,11 @@ export class MonsterForm extends React.Component<MonsterFormProps> {
     }
 
     return (
-      <div>
-        <p>
-          <span>Difficulty</span>
+      <div className="w-96 px-3">
+        <div className="mb-4">
+          <label className="block text-sm font-bold mb-2">Difficulty</label>
           <select
+            className="text-gray-700 block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
             id="difficulty"
             value={this.props.difficulty}
             onChange={this.props.onChange}
@@ -156,10 +157,11 @@ export class MonsterForm extends React.Component<MonsterFormProps> {
               Hell
             </option>
           </select>
-        </p>
-        <p>
-          <span>Monster Type</span>
+        </div>
+        <div className="mb-4">
+          <label className="block text-sm font-bold mb-2">Monster Type</label>
           <select
+            className="text-gray-700 block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
             id="monsterType"
             value={this.props.monsterType}
             onChange={this.props.onChange}
@@ -186,54 +188,58 @@ export class MonsterForm extends React.Component<MonsterFormProps> {
               Boss
             </option>
           </select>
-        </p>
+        </div>
         {this.monsterApplicable() && (
-          <p>
-            <span>Levels</span>
+          <div className="mb-4">
+            <label className="block text-sm font-bold mb-2">Levels</label>
             <select
+              className="text-gray-700 block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
               id="levelId"
               value={this.props.levelId}
               onChange={this.props.onChange}
             >
               {this.levelsOptions}
             </select>
-          </p>
+          </div>
         )}
         {this.monsterApplicable() && (
-          <p>
-            <span>Monster</span>
+          <div className="mb-4">
+            <label className="block text-sm font-bold mb-2">Monster</label>
             <select
+              className="text-gray-700 block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
               id="monster"
               value={this.props.monster}
               onChange={this.props.onChange}
             >
               {monsterOptions}
             </select>
-          </p>
+          </div>
         )}
         {this.props.monsterType === MonsterType.SUPERUNIQUE && (
-          <p>
-            <span>Superunique</span>
+          <div className="mb-4">
+            <label className="block text-sm font-bold mb-2">Superunique</label>
             <select
+              className="text-gray-700 block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
               id="superunique"
               value={this.props.superunique}
               onChange={this.props.onChange}
             >
               {this.superuniqueElements}
             </select>
-          </p>
+          </div>
         )}
         {this.props.monsterType === MonsterType.BOSS && (
-          <p>
-            <span className="text-3xl font-bold underline">Boss</span>
+          <div className="mb-4">
+            <label className="block text-sm font-bold mb-2">Boss</label>
             <select
+              className="text-gray-700 block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
               id="boss"
               value={this.props.boss}
               onChange={this.props.onChange}
             >
               {bossElements}
             </select>
-          </p>
+          </div>
         )}
       </div>
     );

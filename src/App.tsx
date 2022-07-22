@@ -47,26 +47,28 @@ class App extends React.Component<{}, IAppPropType> {
 
   render() {
     return (
-      <div className="App">
-        <PlayerForm
-          partyCount={this.state.partyCount}
-          playerCount={this.state.playerCount}
-          mlvl={this.state.mlvl}
-          magicFind={this.state.magicFind}
-          tc={this.state.tc}
-          errors={this.state.errors}
-          onChange={this.onPlayerFormChange.bind(this)}
-        />
-        <MonsterForm
-          difficulty={this.state.difficulty}
-          monsterType={this.state.monsterType}
-          levelId={this.state.levelId}
-          monster={this.state.monster}
-          superunique={this.state.superunique}
-          boss={this.state.boss}
-          errors={this.state.errors}
-          onChange={this.onMonsterFormChange.bind(this)}
-        />
+      <div className="App container w-full mx-auto pt-20 text-gray-200">
+        <div className="flex flex-wrap">
+          <PlayerForm
+            partyCount={this.state.partyCount}
+            playerCount={this.state.playerCount}
+            mlvl={this.state.mlvl}
+            magicFind={this.state.magicFind}
+            tc={this.state.tc}
+            errors={this.state.errors}
+            onChange={this.onPlayerFormChange.bind(this)}
+          />
+          <MonsterForm
+            difficulty={this.state.difficulty}
+            monsterType={this.state.monsterType}
+            levelId={this.state.levelId}
+            monster={this.state.monster}
+            superunique={this.state.superunique}
+            boss={this.state.boss}
+            errors={this.state.errors}
+            onChange={this.onMonsterFormChange.bind(this)}
+          />
+        </div>
         <Result results={this.state.results} />
       </div>
     );
