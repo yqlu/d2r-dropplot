@@ -6,7 +6,11 @@ import { ItemDict } from "./engine/item-dict";
 import { Locale } from "./engine/locale-dict";
 import { RARITY } from "./engine/itemratio-dict";
 
-export type SelectItemType = (name: string, rarity: RARITY) => void;
+export type SelectItemType = (
+  baseItemName: string,
+  itemName: string,
+  rarity: RARITY
+) => void;
 
 type IAppPropType = {
   results: BaseItemProbTuple[];
@@ -50,7 +54,7 @@ export const Result = ({
         <tr key={item[0]} className="sub-table-row">
           <td
             className="px-10 text-lime-500"
-            onClick={(e) => onSelectItem(item[0], RARITY.SET)}
+            onClick={(e) => onSelectItem(tcTuple[0], item[0], RARITY.SET)}
           >
             {Locale(item[0])}
           </td>
@@ -71,7 +75,7 @@ export const Result = ({
         <tr key={item[0]} className="sub-table-row">
           <td
             className="px-10 text-orange-400"
-            onClick={(e) => onSelectItem(item[0], RARITY.UNIQUE)}
+            onClick={(e) => onSelectItem(tcTuple[0], item[0], RARITY.UNIQUE)}
           >
             {Locale(item[0])}
           </td>
@@ -91,7 +95,7 @@ export const Result = ({
       <React.Fragment key={tcTuple[0]}>
         <tr
           className="table-row"
-          onClick={(e) => onSelectItem(tcTuple[0], RARITY.WHITE)}
+          onClick={(e) => onSelectItem(tcTuple[0], "", RARITY.WHITE)}
         >
           <td className="px-5">{name}</td>
           <td>{formatReciprocal(tcTuple[1])}</td>

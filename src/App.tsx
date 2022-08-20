@@ -39,6 +39,7 @@ const App = (): JSX.Element => {
   } as MonsterFormState);
   const [errors, setErrors] = useState({});
   const [results, setResults] = useState([] as BaseItemProbTuple[]);
+  const [baseItemName, setBaseItemName] = useState("");
   const [itemName, setItemName] = useState("");
   const [rarity, setRarity] = useState(RARITY.WHITE);
 
@@ -92,7 +93,9 @@ const App = (): JSX.Element => {
     }));
   };
 
-  const selectItem: SelectItemType = (itemName, rarity) => {
+  const selectItem: SelectItemType = (baseItemName, itemName, rarity) => {
+    console.log(baseItemName, itemName, rarity);
+    setBaseItemName(baseItemName);
     setItemName(itemName);
     setRarity(rarity);
   };
@@ -123,6 +126,7 @@ const App = (): JSX.Element => {
       <Dashboard
         playerFormState={playerFormState}
         results={results}
+        baseItemName={baseItemName}
         itemName={itemName}
         rarity={rarity}
       />

@@ -11,6 +11,7 @@
     "@types/node": "^18.0.0",
     "@types/react": "^18.0.14",
     "@types/react-dom": "^18.0.5",
+    "chart.js": "^3.9.1",
     "d2-data": "github:blizzhackers/d2data",
     "fraction.js": "^4.2.0",
     "lodash-es": "^4.17.21",
