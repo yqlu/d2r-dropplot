@@ -39,4 +39,14 @@ input.error {
     @apply appearance-none block w-full bg-gray-200 text-gray-700 border
       border-gray-200 rounded px-2 py-1 pr-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500;
   }
+
+  .table-row {
+    user-select: none;
+    @apply border-t dark:border-gray-700 hover:cursor-pointer hover:bg-gray-500;
+  }
+
+  .sub-table-row {
+    user-select: none;
+    @apply hover:cursor-pointer hover:bg-gray-500;
+  }
 }
