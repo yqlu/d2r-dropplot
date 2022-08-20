@@ -43,10 +43,10 @@ export class PlayerForm extends React.Component<PlayerFormProps> {
   render() {
     return (
       <div className="w-96 px-3">
-        <div className="mb-4">
-          <label className="block text-sm font-bold mb-2">TC</label>
+        <div className="form-group">
+          <label className="form-label">TC</label>
           <select
-            className="text-gray-700 block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-2 py-1 pr-4 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
+            className="select"
             id="tc"
             value={this.props.tc}
             onChange={this.props.onChange}
@@ -54,10 +54,10 @@ export class PlayerForm extends React.Component<PlayerFormProps> {
             {this.tcOptions}
           </select>
         </div>
-        <div className="mb-4">
-          <label className="block text-sm font-bold mb-2">Player Count</label>
+        <div className="form-group">
+          <label className="form-label">Player Count</label>
           <select
-            className="text-gray-700 block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
+            className="select"
             id="playerCount"
             value={this.props.playerCount}
             onChange={this.props.onChange}
@@ -65,10 +65,10 @@ export class PlayerForm extends React.Component<PlayerFormProps> {
             {this.playerOptions}
           </select>
         </div>
-        <div className="mb-4">
-          <label className="block text-sm font-bold mb-2">Party Count</label>
+        <div className="form-group">
+          <label className="form-label">Party Count</label>
           <select
-            className="text-gray-700 block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
+            className="select"
             id="partyCount"
             value={this.props.partyCount}
             onChange={this.props.onChange}
@@ -76,28 +76,22 @@ export class PlayerForm extends React.Component<PlayerFormProps> {
             {this.playerOptions}
           </select>
         </div>
-        <div className="mb-4">
-          <label className="block text-sm font-bold mb-2">Mlvl</label>
+        <div className="form-group">
+          <label className="form-label">Mlvl</label>
           <input
             type="text"
             id="mlvl"
-            className={
-              (this.props.errors.mlvl ? "error" : "") +
-              "appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-            }
+            className={(this.props.errors.mlvl ? "error" : "") + "textbox"}
             value={this.props.mlvl}
             onChange={this.props.onChange}
           />
         </div>
-        <div className="mb-4">
-          <label className="block text-sm font-bold mb-2">Magic Find</label>
+        <div className="form-group">
+          <label className="form-label">Magic Find</label>
           <input
             type="text"
             id="magicFind"
-            className={
-              (this.props.errors.magicFind ? "error" : "") +
-              "appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-            }
+            className={(this.props.errors.magicFind ? "error" : "") + "textbox"}
             value={this.props.magicFind}
             onChange={this.props.onChange}
           />

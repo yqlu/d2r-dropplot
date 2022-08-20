@@ -139,10 +139,10 @@ export class MonsterForm extends React.Component<MonsterFormProps> {
 
     return (
       <div className="w-96 px-3">
-        <div className="mb-4">
-          <label className="block text-sm font-bold mb-2">Difficulty</label>
+        <div className="form-group">
+          <label className="form-label">Difficulty</label>
           <select
-            className="text-gray-700 block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
+            className="select"
             id="difficulty"
             value={this.props.difficulty}
             onChange={this.props.onChange}
@@ -158,10 +158,10 @@ export class MonsterForm extends React.Component<MonsterFormProps> {
             </option>
           </select>
         </div>
-        <div className="mb-4">
-          <label className="block text-sm font-bold mb-2">Monster Type</label>
+        <div className="form-group">
+          <label className="form-label">Monster Type</label>
           <select
-            className="text-gray-700 block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
+            className="select"
             id="monsterType"
             value={this.props.monsterType}
             onChange={this.props.onChange}
@@ -190,10 +190,10 @@ export class MonsterForm extends React.Component<MonsterFormProps> {
           </select>
         </div>
         {this.monsterApplicable() && (
-          <div className="mb-4">
-            <label className="block text-sm font-bold mb-2">Levels</label>
+          <div className="form-group">
+            <label className="form-label">Levels</label>
             <select
-              className="text-gray-700 block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
+              className="select"
               id="levelId"
               value={this.props.levelId}
               onChange={this.props.onChange}
@@ -203,10 +203,10 @@ export class MonsterForm extends React.Component<MonsterFormProps> {
           </div>
         )}
         {this.monsterApplicable() && (
-          <div className="mb-4">
-            <label className="block text-sm font-bold mb-2">Monster</label>
+          <div className="form-group">
+            <label className="form-label">Monster</label>
             <select
-              className="text-gray-700 block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
+              className="select"
               id="monster"
               value={this.props.monster}
               onChange={this.props.onChange}
@@ -216,10 +216,10 @@ export class MonsterForm extends React.Component<MonsterFormProps> {
           </div>
         )}
         {this.props.monsterType === MonsterType.SUPERUNIQUE && (
-          <div className="mb-4">
-            <label className="block text-sm font-bold mb-2">Superunique</label>
+          <div className="form-group">
+            <label className="form-label">Superunique</label>
             <select
-              className="text-gray-700 block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
+              className="select"
               id="superunique"
               value={this.props.superunique}
               onChange={this.props.onChange}
@@ -229,10 +229,10 @@ export class MonsterForm extends React.Component<MonsterFormProps> {
           </div>
         )}
         {this.props.monsterType === MonsterType.BOSS && (
-          <div className="mb-4">
-            <label className="block text-sm font-bold mb-2">Boss</label>
+          <div className="form-group">
+            <label className="form-label">Boss</label>
             <select
-              className="text-gray-700 block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
+              className="select"
               id="boss"
               value={this.props.boss}
               onChange={this.props.onChange}

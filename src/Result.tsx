@@ -9,7 +9,7 @@ type IAppPropType = { results: BaseItemProbTuple[] };
 
 function format(percent: Fraction) {
   if (percent.valueOf() === 0) {
-    return "-";
+    return "";
   }
   return Math.round(percent.valueOf() * 10000) / 100;
 }

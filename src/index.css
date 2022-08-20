@@ -19,3 +19,24 @@ code {
 input.error {
   border: 1px solid red;
 }
+
+@layer components {
+  .form-group {
+    @apply mb-4;
+  }
+
+  .form-label {
+    @apply block text-sm mb-2;
+  }
+
+  .select {
+    @apply text-gray-700 block appearance-none w-full bg-white border
+      border-gray-400 hover:border-gray-500 px-2 py-1 pr-4 rounded shadow
+      leading-tight focus:outline-none;
+  }
+
+  .textbox {
+    @apply appearance-none block w-full bg-gray-200 text-gray-700 border
+      border-gray-200 rounded px-2 py-1 pr-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500;
+  }
+}
