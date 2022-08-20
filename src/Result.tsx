@@ -4,8 +4,14 @@ import Fraction from "fraction.js";
 import { BaseItemProbTuple } from "./engine/resultAggregator";
 import { ItemDict } from "./engine/item-dict";
 import { Locale } from "./engine/locale-dict";
+import { RARITY } from "./engine/itemratio-dict";
 
-type IAppPropType = { results: BaseItemProbTuple[] };
+export type SelectItemType = (name: string, rarity: RARITY) => void;
+
+type IAppPropType = {
+  results: BaseItemProbTuple[];
+  onSelectItem: SelectItemType;
+};
 
 function format(percent: Fraction) {
   if (percent.valueOf() === 0) {
@@ -27,7 +33,10 @@ function formatReciprocal(chance: Fraction) {
   return `1:${f}`;
 }
 
-export const Result = ({ results }: IAppPropType): JSX.Element => {
+export const Result = ({
+  results,
+  onSelectItem,
+}: IAppPropType): JSX.Element => {
   const tableRows = results.map((tcTuple) => {
     let name;
     if (ItemDict[tcTuple[0]]) {
@@ -39,7 +48,12 @@ export const Result = ({ results }: IAppPropType): JSX.Element => {
     for (const item of tcTuple[2].sets) {
       children.push(
         <tr key={item[0]} className="sub-table-row">
-          <td className="px-5 text-lime-500">{Locale(item[0])}</td>
+          <td
+            className="px-10 text-lime-500"
+            onClick={(e) => onSelectItem(item[0], RARITY.SET)}
+          >
+            {Locale(item[0])}
+          </td>
           <td>
             {formatReciprocal(
               item[1].mul(tcTuple[2].quality[2]).mul(tcTuple[1])
@@ -55,7 +69,12 @@ export const Result = ({ results }: IAppPropType): JSX.Element => {
     for (const item of tcTuple[2].uniques) {
       children.push(
         <tr key={item[0]} className="sub-table-row">
-          <td className="px-5 text-orange-400">{Locale(item[0])}</td>
+          <td
+            className="px-10 text-orange-400"
+            onClick={(e) => onSelectItem(item[0], RARITY.UNIQUE)}
+          >
+            {Locale(item[0])}
+          </td>
           <td>
             {formatReciprocal(
               item[1].mul(tcTuple[2].quality[3].mul(tcTuple[1]))
@@ -70,8 +89,11 @@ export const Result = ({ results }: IAppPropType): JSX.Element => {
     }
     return (
       <React.Fragment key={tcTuple[0]}>
-        <tr className="table-row">
-          <td>{name}</td>
+        <tr
+          className="table-row"
+          onClick={(e) => onSelectItem(tcTuple[0], RARITY.WHITE)}
+        >
+          <td className="px-5">{name}</td>
           <td>{formatReciprocal(tcTuple[1])}</td>
           <td className="text-sky-400">{format(tcTuple[2].quality[0])}</td>
           <td className="text-yellow-400">{format(tcTuple[2].quality[1])}</td>

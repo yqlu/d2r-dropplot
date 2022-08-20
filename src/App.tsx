@@ -5,7 +5,8 @@ import "./engine/tc";
 
 import { PlayerForm, PlayerFormState } from "./PlayerForm";
 import { MonsterForm, MonsterFormState } from "./MonsterForm";
-import { Result } from "./Result";
+import { Result, SelectItemType } from "./Result";
+import { Dashboard } from "./Dashboard";
 
 import { TCDict } from "./engine/tc-dict";
 import { AtomicDict } from "./engine/atomic-dict";
@@ -18,6 +19,7 @@ import {
 import { sortAlphabetical } from "./engine/display";
 import { Difficulty, MonsterType } from "./engine/monstats-dict";
 import { getTcAndMlvlFromMonster } from "./engine/monster";
+import { RARITY } from "./engine/itemratio-dict";
 
 const App = (): JSX.Element => {
   const [playerFormState, setPlayerFormState] = useState({
@@ -37,8 +39,11 @@ const App = (): JSX.Element => {
   } as MonsterFormState);
   const [errors, setErrors] = useState({});
   const [results, setResults] = useState([] as BaseItemProbTuple[]);
+  const [itemName, setItemName] = useState("");
+  const [rarity, setRarity] = useState(RARITY.WHITE);
 
   useEffect(() => {
+    console.log("playerFormChange useEffect");
     const errors = hasPlayerFormErrors(playerFormState, setErrors);
     if (!errors) {
       compute(playerFormState, setResults);
@@ -46,6 +51,7 @@ const App = (): JSX.Element => {
   }, [playerFormState]);
 
   useEffect(() => {
+    console.log("monsterFormChange useEffect");
     let [tc, mlvl] = getTcAndMlvlFromMonster(
       monsterFormState.difficulty,
       monsterFormState.monsterType,
@@ -86,6 +92,11 @@ const App = (): JSX.Element => {
     }));
   };
 
+  const selectItem: SelectItemType = (itemName, rarity) => {
+    setItemName(itemName);
+    setRarity(rarity);
+  };
+
   return (
     <div className="App container w-full mx-auto pt-20 text-gray-200">
       <div className="flex flex-wrap">
@@ -109,7 +120,13 @@ const App = (): JSX.Element => {
           onChange={onMonsterFormChange}
         />
       </div>
-      <Result results={results} />
+      <Dashboard
+        playerFormState={playerFormState}
+        results={results}
+        itemName={itemName}
+        rarity={rarity}
+      />
+      <Result results={results} onSelectItem={selectItem} />
     </div>
   );
 };

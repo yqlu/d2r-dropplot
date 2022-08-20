@@ -16,10 +16,6 @@ code {
     monospace;
 }
 
-input.error {
-  border: 1px solid red;
-}
-
 @layer components {
   .form-group {
     @apply mb-4;
@@ -38,6 +34,10 @@ input.error {
   .textbox {
     @apply appearance-none block w-full bg-gray-200 text-gray-700 border
       border-gray-200 rounded px-2 py-1 pr-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500;
+
+    &.error {
+      border: 1px solid red;
+    }
   }
 
   .table-row {

@@ -82,7 +82,7 @@ export const PlayerForm = (props: PlayerFormProps): JSX.Element => {
         <input
           type="text"
           id="mlvl"
-          className={(props.errors.mlvl ? "error" : "") + "textbox"}
+          className={(props.errors.mlvl ? "error " : "") + "textbox"}
           value={props.mlvl}
           onChange={props.onChange}
         />
@@ -92,7 +92,7 @@ export const PlayerForm = (props: PlayerFormProps): JSX.Element => {
         <input
           type="text"
           id="magicFind"
-          className={(props.errors.magicFind ? "error" : "") + "textbox"}
+          className={(props.errors.magicFind ? "error " : "") + "textbox"}
           value={props.magicFind}
           onChange={props.onChange}
         />
