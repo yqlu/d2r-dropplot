@@ -21,35 +21,43 @@ import { TCDict } from "../engine/tc-dict";
 import { AtomicDict } from "../engine/atomic-dict";
 import Fraction from "fraction.js";
 
-Chart.defaults.font.family =
-  "'Segoe UI', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif";
 Chart.defaults.color = WHITE_COLOR;
 Chart.defaults.borderColor = "rgba(255,255,255,0.2)";
 
-const calculateMagicFind = (
+const calculateBaseItemProbability = (
   playerFormState: PlayerFormState,
-  magicFind: number,
+  playerCount: number,
   baseItemName: string
 ) => {
   const mlvl = parseInt(playerFormState.mlvl);
+  const magicFind = parseInt(playerFormState.magicFind);
   const tcLookup = makeLookupTcFunction(TCDict, AtomicDict);
   const tcCalculator = new TcCalculator(
     tcLookup,
     () => new BaseItemResultAggregator(mlvl, magicFind)
   );
-  let tcs = tcCalculator
+  const playerTcs = tcCalculator
+    .getAtomicTCs(playerFormState.tc, playerCount, 1, new Set([baseItemName]))
+    .result();
+  const partyTcs = tcCalculator
     .getAtomicTCs(
       playerFormState.tc,
-      playerFormState.partyCount,
-      playerFormState.playerCount,
+      playerCount,
+      playerCount,
       new Set([baseItemName])
     )
     .result();
-  if (tcs.length == 0) {
+  if (playerTcs.length == 0) {
     const ZERO = new Fraction(0);
-    return [ZERO, ZERO, ZERO, ZERO];
+    return {
+      player: ZERO,
+      party: ZERO,
+    };
   }
-  return tcs[0][2].quality;
+  return {
+    player: playerTcs[0][1],
+    party: partyTcs[0][1],
+  };
 };
 
 const getData = (
@@ -58,11 +66,9 @@ const getData = (
   itemName: string,
   rarity: RARITY
 ) => {
-  const intervals = 20;
-  const max = 500;
-  const xs = range(intervals + 1).map((x) => x * (max / intervals));
+  const xs = range(1, 9);
   const ys = xs.map((x) =>
-    calculateMagicFind(playerFormState, x, baseItemName)
+    calculateBaseItemProbability(playerFormState, x, baseItemName)
   );
   return {
     xs,
@@ -70,9 +76,9 @@ const getData = (
   };
 };
 
-const formatPercent = (num: number) => Math.round(num * 10000) / 100;
+const makePercent = (num: number) => num * 100; //Math.round(num * 10000) / 100;
 
-export const MagicFindChart = ({
+export const PartyCountChart = ({
   playerFormState,
   results,
   baseItemName,
@@ -83,63 +89,29 @@ export const MagicFindChart = ({
     if (baseItemName == "") {
       return;
     }
-
     const tension = 0.3;
     const { xs, ys } = getData(playerFormState, baseItemName, itemName, rarity);
-    const white = {
-      label: "Normal",
-      data: ys.map((ratio) => {
-        const chance = new Fraction(1)
-          .sub(ratio[0])
-          .sub(ratio[1])
-          .sub(ratio[2])
-          .sub(ratio[3])
-          .valueOf();
-        return formatPercent(chance);
-      }),
+    const player = {
+      label: "Player",
+      data: ys.map((val) => makePercent(val.player.valueOf())),
       backgroundColor: WHITE_COLOR,
       borderColor: WHITE_COLOR,
-      tension,
     };
-    const magic = {
-      label: "Magic",
-      data: ys.map((ratio) => formatPercent(ratio[0].valueOf())),
-      backgroundColor: MAGIC_COLOR,
-      borderColor: MAGIC_COLOR,
-      tension,
-    };
-    const rare = {
-      label: "Rare",
-      data: ys.map((ratio) => formatPercent(ratio[1].valueOf())),
-      backgroundColor: RARE_COLOR,
-      borderColor: RARE_COLOR,
-      tension,
-    };
-    const set = {
-      label: "Set",
-      data: ys.map((ratio) => formatPercent(ratio[2].valueOf())),
-      backgroundColor: SET_COLOR,
-      borderColor: SET_COLOR,
-      tension,
-    };
-    const unique = {
-      label: "Unique",
-      data: ys.map((ratio) => formatPercent(ratio[3].valueOf())),
+    const party = {
+      label: "Party",
+      data: ys.map((val) => makePercent(val.party.valueOf())),
       backgroundColor: UNIQUE_COLOR,
       borderColor: UNIQUE_COLOR,
-      tension,
     };
 
     let ctx = (
-      document.getElementById("magicFindChart") as HTMLCanvasElement
+      document.getElementById("partyCountChart") as HTMLCanvasElement
     )?.getContext("2d");
     const config = {
       type: "line" as keyof ChartTypeRegistry,
       data: {
         labels: xs,
-        datasets: [white, magic, rare, set, unique].filter((dataset) => {
-          return uniq(dataset.data)[0] != 0;
-        }),
+        datasets: [party, player],
       },
       options: {
         scales: {
@@ -153,7 +125,7 @@ export const MagicFindChart = ({
           x: {
             title: {
               display: true,
-              text: "Magic Find",
+              text: "Count",
             },
           },
         },
@@ -164,13 +136,13 @@ export const MagicFindChart = ({
         plugins: {
           title: {
             display: true,
-            text: "Item rarity vs Magic Find",
+            text: "Drop Rate vs Player Count",
           },
           tooltip: {
             callbacks: {
-              title: (ctx: TooltipItem<"line">[]) => `${ctx[0].label}% MF`,
+              title: () => "",
               label: (ctx: TooltipItem<"line">) =>
-                `${ctx.dataset.label}: ${ctx.formattedValue}%`,
+                `${ctx.dataset.label} ${ctx.label}: ${ctx.formattedValue}%`,
             },
           },
         },
@@ -187,7 +159,7 @@ export const MagicFindChart = ({
 
   return (
     <div>
-      <canvas id="magicFindChart"></canvas>
+      <canvas id="partyCountChart"></canvas>
     </div>
   );
 };

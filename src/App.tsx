@@ -44,7 +44,6 @@ const App = (): JSX.Element => {
   const [rarity, setRarity] = useState(RARITY.WHITE);
 
   useEffect(() => {
-    console.log("playerFormChange useEffect");
     const errors = hasPlayerFormErrors(playerFormState, setErrors);
     if (!errors) {
       compute(playerFormState, setResults);
@@ -52,7 +51,6 @@ const App = (): JSX.Element => {
   }, [playerFormState]);
 
   useEffect(() => {
-    console.log("monsterFormChange useEffect");
     let [tc, mlvl] = getTcAndMlvlFromMonster(
       monsterFormState.difficulty,
       monsterFormState.monsterType,
@@ -70,6 +68,12 @@ const App = (): JSX.Element => {
       mlvl: `${mlvl}`,
     }));
   }, [monsterFormState]);
+
+  useEffect(() => {
+    if (results.filter((tuple) => tuple[0] == baseItemName).length !== 1) {
+      selectItem("", "", RARITY.WHITE);
+    }
+  }, [results]);
 
   const onPlayerFormChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -94,7 +98,6 @@ const App = (): JSX.Element => {
   };
 
   const selectItem: SelectItemType = (baseItemName, itemName, rarity) => {
-    console.log(baseItemName, itemName, rarity);
     setBaseItemName(baseItemName);
     setItemName(itemName);
     setRarity(rarity);

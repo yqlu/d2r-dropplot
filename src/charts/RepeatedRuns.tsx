@@ -1,28 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { PlayerFormState } from "../PlayerForm";
 import { RARITY } from "../engine/itemratio-dict";
-import {
-  BaseItemProbTuple,
-  BaseItemResultAggregator,
-} from "../engine/resultAggregator";
+import { BaseItemProbTuple } from "../engine/resultAggregator";
 import { IDashboardPropType, WHITE_COLOR, colorFromRarity } from "./common";
-import { range, uniq } from "lodash-es";
-import { ChartTypeRegistry } from "chart.js";
+import { range } from "lodash-es";
+import { ChartTypeRegistry, InteractionMode, TooltipItem } from "chart.js";
 import Chart from "chart.js/auto";
-import { makeLookupTcFunction, TcCalculator } from "../engine/tc";
-import { TCDict } from "../engine/tc-dict";
-import { AtomicDict } from "../engine/atomic-dict";
-import Fraction from "fraction.js";
 
 Chart.defaults.font.family =
   "'Segoe UI', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif";
 Chart.defaults.color = WHITE_COLOR;
 Chart.defaults.borderColor = "rgba(255,255,255,0.2)";
+
 const getXRange = (singleRunChance: number): number[] => {
-  const divisions = 11;
+  const intervals = 10;
   const expectedRuns90Chance = Math.log(0.1) / Math.log(1 - singleRunChance);
-  if (expectedRuns90Chance <= 10) {
-    return range(divisions);
+  if (expectedRuns90Chance <= intervals) {
+    return range(intervals + 1);
   }
   const powerOf10 = Math.floor(Math.log10(expectedRuns90Chance));
   const leadingDigit = Math.floor(
@@ -31,10 +25,13 @@ const getXRange = (singleRunChance: number): number[] => {
   let max: number;
   if (leadingDigit <= 2) {
     max = (leadingDigit + 0.5) * Math.pow(10, powerOf10);
+    if (max < expectedRuns90Chance) {
+      max = (leadingDigit + 1) * Math.pow(10, powerOf10);
+    }
   } else {
     max = (leadingDigit + 1) * Math.pow(10, powerOf10);
   }
-  return range(divisions).map((x) => (x * max) / (divisions - 1));
+  return range(intervals + 1).map((x) => (x * max) / intervals);
 };
 
 const getData = (
@@ -120,13 +117,29 @@ export const RepeatedRunsChart = ({
             },
           },
         },
+        interaction: {
+          intersect: false,
+          mode: "index" as InteractionMode,
+        },
         plugins: {
           title: {
             display: true,
-            text: "Cumulative Chance over Repeated Runs",
+            text: "Cumulative chance to drop over multiple runs",
           },
           legend: {
             display: false,
+          },
+          tooltip: {
+            callbacks: {
+              title: (ctx: TooltipItem<"line">[]) => {
+                return [
+                  `${ctx[0].formattedValue}% chance`,
+                  `over ${ctx[0].label} runs`,
+                ];
+              },
+              label: () => "",
+            },
+            displayColors: false,
           },
         },
       },
