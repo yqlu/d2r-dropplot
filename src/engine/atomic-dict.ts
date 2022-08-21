@@ -1,5 +1,18 @@
 import { TCDictType } from "./tc-dict";
-import { describe, test as it } from "vitest";
+import { sum } from "lodash-es";
+import Fraction from "fraction.js";
+
+export const getAtomicFraction = (tc: string, item: string) => {
+  if (AtomicDict[tc]) {
+    const items = AtomicDict[tc].tcs;
+    const denom = sum(items.map((tuple) => tuple[1]));
+    const tuple = items.find((tuple) => tuple[0] === item);
+    if (tuple) {
+      return new Fraction(tuple[1], denom);
+    }
+  }
+  return new Fraction(0);
+};
 
 export const AtomicDict: TCDictType = {
   abow12: { nodrop: 0, picks: 1, qualityRatios: [0, 0, 0, 0], tcs: [] },

@@ -13,6 +13,7 @@
     "@types/react-dom": "^18.0.5",
     "chart.js": "^3.9.1",
     "chartjs-chart-sankey": "^0.9.0",
+    "chartjs-chart-treemap": "^2.0.2",
     "d2-data": "github:blizzhackers/d2data",
     "fraction.js": "^4.2.0",
     "lodash-es": "^4.17.21",
