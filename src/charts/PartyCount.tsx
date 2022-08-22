@@ -1,25 +1,16 @@
-import React, { useEffect, useState } from "react";
-import { PlayerFormState } from "../PlayerForm";
-import { RARITY } from "../engine/itemratio-dict";
-import {
-  BaseItemProbTuple,
-  BaseItemResultAggregator,
-} from "../engine/resultAggregator";
-import {
-  IDashboardPropType,
-  WHITE_COLOR,
-  MAGIC_COLOR,
-  RARE_COLOR,
-  SET_COLOR,
-  UNIQUE_COLOR,
-} from "./common";
-import { range, uniq } from "lodash-es";
+import { useEffect } from "react";
+import { range } from "lodash-es";
 import { ChartTypeRegistry, TooltipItem } from "chart.js";
 import Chart from "chart.js/auto";
+import Fraction from "fraction.js";
+
+import { RARITY } from "../engine/itemratio-dict";
+import { BaseItemResultAggregator } from "../engine/resultAggregator";
 import { makeLookupTcFunction, TcCalculator } from "../engine/tc";
 import { TCDict } from "../engine/tc-dict";
 import { AtomicDict } from "../engine/atomic-dict";
-import Fraction from "fraction.js";
+import { IDashboardPropType, WHITE_COLOR, UNIQUE_COLOR } from "./common";
+import { PlayerFormState } from "../PlayerForm";
 
 Chart.defaults.color = WHITE_COLOR;
 Chart.defaults.borderColor = "rgba(255,255,255,0.2)";

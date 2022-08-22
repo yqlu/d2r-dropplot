@@ -1,34 +1,41 @@
-import React, { useEffect, useState } from "react";
-import { PlayerFormState } from "../PlayerForm";
-import { RARITY } from "../engine/itemratio-dict";
-import {
-  BaseItemProbTuple,
-  TCProbTuple,
-  TCResultAggregator,
-} from "../engine/resultAggregator";
-import { IDashboardPropType, STACKED_BAR_COLORS, WHITE_COLOR } from "./common";
+import { useEffect } from "react";
 import { max, range, sum } from "lodash-es";
 import {
+  ChartDataset,
   ChartTypeRegistry,
-  FontSpec,
-  InteractionMode,
+  ScriptableContext,
   TooltipItem,
 } from "chart.js";
 import Chart from "chart.js/auto";
-import Fraction from "fraction.js";
-import { sortAlphabetical } from "../engine/display";
+
+import { TCProbTuple, TCResultAggregator } from "../engine/resultAggregator";
 import { makeLookupTcFunction, TcCalculator } from "../engine/tc";
 import { TCDict, TCDictType } from "../engine/tc-dict";
 import { AtomicDict } from "../engine/atomic-dict";
 import { Locale } from "../engine/locale-dict";
 
+import { PlayerFormState } from "../PlayerForm";
+import { IDashboardPropType, STACKED_BAR_COLORS, WHITE_COLOR } from "./common";
+import { addAbortSignal } from "stream";
+
 const TC_REGEX = /^(weap|armo|bow|mele)(\d+)$/;
 const MAX_ITEMS_PER_TC = 15;
 
-const makeBlankDataset = (stack: string) => {
+type datasetType = ChartDataset<"bar", number[]>;
+
+type datasetMapType = {
+  weap: datasetType[];
+  armo: datasetType[];
+  mele: datasetType[];
+  bow: datasetType[];
+};
+
+type tcClass = keyof datasetMapType;
+
+const makeBlankDataset = (stack: string): datasetType[] => {
   return range(MAX_ITEMS_PER_TC).map((i) => {
     return {
-      label: i,
+      label: i + "",
       data: range(29).map(() => 0),
       stack: stack,
     };
@@ -50,9 +57,18 @@ const getData = (playerFormState: PlayerFormState, baseItemName: string) => {
     )
     .result()
     .filter((tuple) => TC_REGEX.test(tuple[0]));
-  const maxClass = max(tcs.map((tuple) => Number(TC_REGEX.exec(tuple[0])[2])));
+  if (tcs.length === 0) {
+    throw new Error("No applicable TCs");
+  }
+  const maxClass =
+    max(
+      tcs.map((tuple) => {
+        const groups = TC_REGEX.exec(tuple[0]);
+        return groups ? Number(groups[2]) : 0;
+      })
+    ) ?? 3;
   const labels = range(3, maxClass + 1, 3);
-  const datasetMap = {
+  const datasetMap: datasetMapType = {
     weap: makeBlankDataset("weap"),
     armo: makeBlankDataset("armo"),
     mele: makeBlankDataset("mele"),
@@ -67,8 +83,12 @@ const getData = (playerFormState: PlayerFormState, baseItemName: string) => {
         tcsContainingItem.push(tuple[0]);
       }
       const groups = TC_REGEX.exec(tuple[0]);
+      if (!groups) {
+        return;
+      }
+      const tcClass = groups[1] as tcClass;
       const chance = (tuple[1].valueOf() * item[1]) / denom;
-      datasetMap[groups[1]][idx].data[Number(groups[2]) / 3 - 1] = chance;
+      datasetMap[tcClass][idx].data[Number(groups[2]) / 3 - 1] = chance;
     });
   });
   return { labels, datasetMap, tcs, tcsContainingItem };
@@ -98,7 +118,7 @@ export const TreasureClassStackedBars = ({
       document.getElementById("treasureClassStackedBars") as HTMLCanvasElement
     )?.getContext("2d");
     const config = {
-      type: "bar" as keyof ChartTypeRegistry,
+      type: "bar" as "bar",
       data: {
         labels,
         datasets,
@@ -110,7 +130,7 @@ export const TreasureClassStackedBars = ({
         elements: {
           bar: {
             borderWidth: 1,
-            backgroundColor: (ctx) => {
+            backgroundColor: (ctx: ScriptableContext<"bar">) => {
               if (ctx.raw === 0) {
                 return;
               }
@@ -124,7 +144,7 @@ export const TreasureClassStackedBars = ({
               }
               return STACKED_BAR_COLORS.NEUTRAL;
             },
-            hoverBackgroundColor: (ctx) => {
+            hoverBackgroundColor: (ctx: ScriptableContext<"bar">) => {
               return WHITE_COLOR;
             },
           },
@@ -139,14 +159,14 @@ export const TreasureClassStackedBars = ({
           },
           tooltip: {
             callbacks: {
-              title: (cs: TooltipItem<"line">[]) => {
+              title: (cs: TooltipItem<"bar">[]) => {
                 const ctx = cs[0];
                 const tc = ctx.dataset.stack + ctx.label;
-                const item = AtomicDict[tc].tcs[ctx.dataset.label][0];
-                // console.log(tcs.find((tuple) => tuple[0] === tc));
+                const itemIdxWithinTc = (ctx.dataset.label || 0) as number;
+                const item = AtomicDict[tc].tcs[itemIdxWithinTc][0];
                 return [
                   `Chance of rolling  ${formatPercent(
-                    ctx.raw
+                    ctx.raw as number
                   )}% chance ${tc} ${Locale(item)}`,
                 ];
               },

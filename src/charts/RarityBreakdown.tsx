@@ -1,14 +1,4 @@
-import React, { useEffect, useState } from "react";
-import { RARITY } from "../engine/itemratio-dict";
-import { BaseItemProbTuple } from "../engine/resultAggregator";
-import {
-  IDashboardPropType,
-  WHITE_COLOR,
-  MAGIC_COLOR,
-  RARE_COLOR,
-  SET_COLOR,
-  UNIQUE_COLOR,
-} from "./common";
+import { useEffect } from "react";
 import { SankeyController, Flow } from "chartjs-chart-sankey";
 import {
   ChartTypeRegistry,
@@ -17,9 +7,19 @@ import {
   TooltipItem,
 } from "chart.js";
 import Chart from "chart.js/auto";
-import { Locale } from "../engine/locale-dict";
-import { getPriority } from "os";
 import Fraction from "fraction.js";
+
+import { RARITY } from "../engine/itemratio-dict";
+import { BaseItemProbTuple } from "../engine/resultAggregator";
+import { Locale } from "../engine/locale-dict";
+import {
+  IDashboardPropType,
+  WHITE_COLOR,
+  MAGIC_COLOR,
+  RARE_COLOR,
+  SET_COLOR,
+  UNIQUE_COLOR,
+} from "./common";
 
 Chart.register(SankeyController, Flow);
 

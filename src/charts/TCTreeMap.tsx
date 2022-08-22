@@ -1,43 +1,24 @@
-import React, { useEffect, useState } from "react";
-import { PlayerFormState } from "../PlayerForm";
-import { RARITY } from "../engine/itemratio-dict";
-import {
-  BaseItemProbTuple,
-  TCProbTuple,
-  TCResultAggregator,
-} from "../engine/resultAggregator";
-import {
-  IDashboardPropType,
-  WHITE_COLOR,
-  colorFromRarity,
-  SET_COLOR,
-  UNIQUE_COLOR,
-  TREEMAP_COLORS,
-} from "./common";
-import { range, sum } from "lodash-es";
-import {
-  ChartTypeRegistry,
-  FontSpec,
-  InteractionMode,
-  TooltipItem,
-} from "chart.js";
+import { useEffect } from "react";
+import { sum } from "lodash-es";
+import { ChartTypeRegistry, TooltipItem } from "chart.js";
 import Chart from "chart.js/auto";
 import {
   TreemapController,
   TreemapElement,
   TreemapControllerDatasetOptions,
   TreemapDataPoint,
-  TreemapControllerDatasetLabelsOptions,
   TreemapScriptableContext,
 } from "chartjs-chart-treemap";
-import Fraction from "fraction.js";
-import { sortAlphabetical } from "../engine/display";
+import { color } from "chart.js/helpers";
+
+import { AtomicDict, getAtomicFraction } from "../engine/atomic-dict";
 import { makeLookupTcFunction, TcCalculator } from "../engine/tc";
 import { TCDict, TCDictType } from "../engine/tc-dict";
-import { AtomicDict, getAtomicFraction } from "../engine/atomic-dict";
-import { color } from "chart.js/helpers";
-import { hover } from "@testing-library/user-event/dist/hover";
 import { Locale } from "../engine/locale-dict";
+import { TCProbTuple, TCResultAggregator } from "../engine/resultAggregator";
+
+import { PlayerFormState } from "../PlayerForm";
+import { IDashboardPropType, WHITE_COLOR, TREEMAP_COLORS } from "./common";
 
 Chart.register(TreemapController, TreemapElement);
 Chart.defaults.color = WHITE_COLOR;
@@ -70,8 +51,9 @@ const getData = (playerFormState: PlayerFormState, baseItemName: string) => {
         if (item[0] === baseItemName) {
           tcsContainingItem.push(tuple[0]);
         }
+        const groups = TC_REGEX.exec(tuple[0]);
         return {
-          type: TC_REGEX.exec(tuple[0])[1],
+          type: groups ? groups[0] : "weap",
           item: item[0],
           absoluteChance: (tuple[1].valueOf() * item[1]) / denom,
           tc: tuple[0],
@@ -156,7 +138,8 @@ export const TreasureClassTreeMap = ({
             callbacks: {
               title: () => "",
               label: (ctx: TooltipItem<"treemap">) => {
-                const obj = ctx.dataset.data[ctx.dataIndex]._data;
+                // _data exists in Chartjs but not formally recognized in type system
+                const obj = (ctx.dataset.data[ctx.dataIndex] as any)._data;
                 if (obj["item"]) {
                   return `Chance of ${Locale(
                     obj["item"]

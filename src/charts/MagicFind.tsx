@@ -1,10 +1,15 @@
-import React, { useEffect, useState } from "react";
-import { PlayerFormState } from "../PlayerForm";
+import { useEffect } from "react";
+import Fraction from "fraction.js";
+import { range, uniq } from "lodash-es";
+import { ChartTypeRegistry, TooltipItem } from "chart.js";
+import Chart from "chart.js/auto";
+
 import { RARITY } from "../engine/itemratio-dict";
-import {
-  BaseItemProbTuple,
-  BaseItemResultAggregator,
-} from "../engine/resultAggregator";
+import { BaseItemResultAggregator } from "../engine/resultAggregator";
+import { makeLookupTcFunction, TcCalculator } from "../engine/tc";
+import { TCDict } from "../engine/tc-dict";
+import { AtomicDict } from "../engine/atomic-dict";
+import { PlayerFormState } from "../PlayerForm";
 import {
   IDashboardPropType,
   WHITE_COLOR,
@@ -13,13 +18,6 @@ import {
   SET_COLOR,
   UNIQUE_COLOR,
 } from "./common";
-import { range, uniq } from "lodash-es";
-import { ChartTypeRegistry, TooltipItem } from "chart.js";
-import Chart from "chart.js/auto";
-import { makeLookupTcFunction, TcCalculator } from "../engine/tc";
-import { TCDict } from "../engine/tc-dict";
-import { AtomicDict } from "../engine/atomic-dict";
-import Fraction from "fraction.js";
 
 Chart.defaults.font.family =
   "'Segoe UI', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif";

@@ -1,8 +1,7 @@
+import { color } from "chart.js/helpers";
 import { PlayerFormState } from "../PlayerForm";
 import { RARITY } from "../engine/itemratio-dict";
 import { BaseItemProbTuple } from "../engine/resultAggregator";
-import { color } from "chart.js/helpers";
-import { cp } from "fs";
 
 export type IDashboardPropType = {
   playerFormState: PlayerFormState;

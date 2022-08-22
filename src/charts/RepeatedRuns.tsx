@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
-import { PlayerFormState } from "../PlayerForm";
-import { RARITY } from "../engine/itemratio-dict";
-import { BaseItemProbTuple } from "../engine/resultAggregator";
-import { IDashboardPropType, WHITE_COLOR, colorFromRarity } from "./common";
+import { useEffect } from "react";
 import { range } from "lodash-es";
 import { ChartTypeRegistry, InteractionMode, TooltipItem } from "chart.js";
 import Chart from "chart.js/auto";
+
+import { RARITY } from "../engine/itemratio-dict";
+import { BaseItemProbTuple } from "../engine/resultAggregator";
+import { IDashboardPropType, WHITE_COLOR, colorFromRarity } from "./common";
 
 Chart.defaults.font.family =
   "'Segoe UI', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif";
