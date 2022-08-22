@@ -6,6 +6,7 @@ import { PartyCountChart } from "./charts/PartyCount";
 import { TreasureClassTreeMap } from "./charts/TCTreeMap";
 import { RARITY } from "./engine/itemratio-dict";
 import { RarityBreakdownChart } from "./charts/RarityBreakdown";
+import { TreasureClassStackedBars } from "./charts/TcStackedBars";
 
 export const Dashboard = ({
   playerFormState,
@@ -19,7 +20,7 @@ export const Dashboard = ({
       {baseItemName} {itemName} {rarity}
       {baseItemName && (
         <React.Fragment>
-          {/* <MagicFindChart
+          <MagicFindChart
             playerFormState={playerFormState}
             results={results}
             baseItemName={baseItemName}
@@ -46,8 +47,15 @@ export const Dashboard = ({
             baseItemName={baseItemName}
             itemName={itemName}
             rarity={rarity}
-          /> */}
+          />
           <TreasureClassTreeMap
+            playerFormState={playerFormState}
+            results={results}
+            baseItemName={baseItemName}
+            itemName={itemName}
+            rarity={rarity}
+          />
+          <TreasureClassStackedBars
             playerFormState={playerFormState}
             results={results}
             baseItemName={baseItemName}

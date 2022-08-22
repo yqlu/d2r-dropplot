@@ -12,10 +12,7 @@ import {
   colorFromRarity,
   SET_COLOR,
   UNIQUE_COLOR,
-  TREEMAP_ACTIVE_ITEM_COLOR,
-  TREEMAP_ACTIVE_TC_COLOR,
-  TREEMAP_NEUTRAL_TC_COLOR,
-  TREEMAP_NEUTRAL_ITEM_COLOR,
+  TREEMAP_COLORS,
 } from "./common";
 import { range, sum } from "lodash-es";
 import {
@@ -100,17 +97,17 @@ export const TreasureClassTreeMap = ({
     }
     const backgroundColor = (c: TreemapScriptableContext) => {
       if (!c?.raw?.g) {
-        return TREEMAP_NEUTRAL_TC_COLOR.rgbString();
+        return TREEMAP_COLORS.NEUTRAL.TC.rgbString();
       }
       const caption = c.raw.g;
       if (tcsContainingItem.indexOf(caption) >= 0) {
-        return TREEMAP_ACTIVE_TC_COLOR.rgbString();
+        return TREEMAP_COLORS.ACTIVE.TC.rgbString();
       } else if (caption === baseItemName) {
-        return TREEMAP_ACTIVE_ITEM_COLOR.rgbString();
+        return TREEMAP_COLORS.ACTIVE.ITEM.rgbString();
       } else if (TC_REGEX.test(caption)) {
-        return TREEMAP_NEUTRAL_TC_COLOR.rgbString();
+        return TREEMAP_COLORS.NEUTRAL.TC.rgbString();
       }
-      return TREEMAP_NEUTRAL_ITEM_COLOR.rgbString();
+      return TREEMAP_COLORS.NEUTRAL.ITEM.rgbString();
     };
     const hoverBackgroundColor = (c: TreemapScriptableContext) => {
       const bg = backgroundColor(c);
@@ -142,15 +139,15 @@ export const TreasureClassTreeMap = ({
           treemap: {
             captions: {
               // font: { size: 4, lineHeight: 5 },
-              // display: true,
-              // color: "red",
+              display: true,
+              color: WHITE_COLOR,
             },
           },
         },
         plugins: {
           title: {
             display: true,
-            text: "Item Drop Chance Relative to all Treasure Classes",
+            text: "Item Drop Chance Relative to Treasure Class",
           },
           legend: {
             display: false,
