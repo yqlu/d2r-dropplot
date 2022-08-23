@@ -1,22 +1,21 @@
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { max, range, sum } from "lodash-es";
-import {
-  ChartDataset,
-  ChartTypeRegistry,
-  ScriptableContext,
-  TooltipItem,
-} from "chart.js";
+import { ChartDataset, ScriptableContext, TooltipItem } from "chart.js";
 import Chart from "chart.js/auto";
 
 import { TCProbTuple, TCResultAggregator } from "../engine/resultAggregator";
 import { makeLookupTcFunction, TcCalculator } from "../engine/tc";
 import { TCDict, TCDictType } from "../engine/tc-dict";
-import { AtomicDict } from "../engine/atomic-dict";
+import { AtomicDict, getAtomicFraction } from "../engine/atomic-dict";
 import { Locale } from "../engine/locale-dict";
 
 import { PlayerFormState } from "../PlayerForm";
-import { IDashboardPropType, STACKED_BAR_COLORS, WHITE_COLOR } from "./common";
-import { addAbortSignal } from "stream";
+import {
+  TC_GRADIENT,
+  IDashboardPropType,
+  STACKED_BAR_COLORS,
+  WHITE_COLOR,
+} from "./common";
 
 const TC_REGEX = /^(weap|armo|bow|mele)(\d+)$/;
 const MAX_ITEMS_PER_TC = 15;
@@ -127,6 +126,21 @@ export const TreasureClassStackedBars = ({
         options: {
           animation: false,
         },
+        scales: {
+          y: {
+            beginAtZero: true,
+            title: {
+              display: true,
+              text: "Chance %",
+            },
+          },
+          x: {
+            title: {
+              display: true,
+              text: "TC Level",
+            },
+          },
+        },
         elements: {
           bar: {
             borderWidth: 1,
@@ -139,10 +153,8 @@ export const TreasureClassStackedBars = ({
               const item = AtomicDict[tc].tcs[proto.dataset.label][0];
               if (item === baseItemName) {
                 return STACKED_BAR_COLORS.ACTIVE;
-              } else if (tcsContainingItem.indexOf(tc) >= 0) {
-                return STACKED_BAR_COLORS.TC;
               }
-              return STACKED_BAR_COLORS.NEUTRAL;
+              return TC_GRADIENT[proto.dataset.stack][ctx.dataIndex];
             },
             hoverBackgroundColor: (ctx: ScriptableContext<"bar">) => {
               return WHITE_COLOR;
@@ -161,13 +173,21 @@ export const TreasureClassStackedBars = ({
             callbacks: {
               title: (cs: TooltipItem<"bar">[]) => {
                 const ctx = cs[0];
-                const tc = ctx.dataset.stack + ctx.label;
+                const tcName = ctx.dataset.stack + ctx.label;
                 const itemIdxWithinTc = (ctx.dataset.label || 0) as number;
-                const item = AtomicDict[tc].tcs[itemIdxWithinTc][0];
+                const item = AtomicDict[tcName].tcs[itemIdxWithinTc][0];
+                const tc = tcs.filter((tuple) => tuple[0] === tcName)[0];
+                const tcChance = `${formatPercent(tc[1].valueOf())}%`;
+                const absoluteChance = `${formatPercent(ctx.raw as number)}%`;
+                const itemInTcChance = getAtomicFraction(
+                  tcName,
+                  item
+                ).toFraction();
                 return [
-                  `Chance of rolling  ${formatPercent(
-                    ctx.raw as number
-                  )}% chance ${tc} ${Locale(item)}`,
+                  `Chance of ${tcName} = ${tcChance}`,
+                  `Chance of ${Locale(
+                    item
+                  )} = ${tcChance} x ${itemInTcChance} = ${absoluteChance}`,
                 ];
               },
               label: () => "",

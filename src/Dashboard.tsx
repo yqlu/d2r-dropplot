@@ -48,14 +48,14 @@ export const Dashboard = ({
             itemName={itemName}
             rarity={rarity}
           />
-          <TreasureClassTreeMap
+          <TreasureClassStackedBars
             playerFormState={playerFormState}
             results={results}
             baseItemName={baseItemName}
             itemName={itemName}
             rarity={rarity}
           />
-          <TreasureClassStackedBars
+          <TreasureClassTreeMap
             playerFormState={playerFormState}
             results={results}
             baseItemName={baseItemName}

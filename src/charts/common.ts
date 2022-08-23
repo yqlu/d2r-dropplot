@@ -2,6 +2,58 @@ import { color } from "chart.js/helpers";
 import { PlayerFormState } from "../PlayerForm";
 import { RARITY } from "../engine/itemratio-dict";
 import { BaseItemProbTuple } from "../engine/resultAggregator";
+import { Gradient } from "javascript-color-gradient";
+
+export const TC_GRADIENT = {
+  armo: new Gradient()
+    .setColorGradient(
+      // sky
+      "#BAE6FD", // 200
+      // "#7DD3FC", // 300
+      // "#38BDF8", // 400
+      "#0EA5E9", // 500
+      "#0284C7", // 600
+      "#0C4A6E" // 900
+    )
+    .setMidpoint(30)
+    .getColors(),
+  weap: new Gradient()
+    .setColorGradient(
+      // lime
+      "#D9F99D", // 200
+      // "#BEF264", // 300
+      // "#38BDF8", // 400
+      "#84CC16", // 500
+      "#65A30D", // 600
+      "#365314" // 900
+    )
+    .setMidpoint(30)
+    .getColors(),
+  bow: new Gradient()
+    .setColorGradient(
+      // violet
+      "#DDD6FE", // 200
+      // "#C4B5FD", // 300
+      // "#A78BFA", // 400
+      "#8B5CF6", // 500
+      "#7C3AED", // 600
+      "#4C1D95" // 900
+    )
+    .setMidpoint(30)
+    .getColors(),
+  mele: new Gradient()
+    .setColorGradient(
+      // fuchsia
+      "#F5D0FE", // 200
+      // "#F0ABFC", // 300
+      // "#E879F9", // 400
+      "#D946EF", // 500
+      "#C026D3", // 600
+      "#701A75" // 900
+    )
+    .setMidpoint(30)
+    .getColors(),
+};
 
 export type IDashboardPropType = {
   playerFormState: PlayerFormState;

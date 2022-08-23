@@ -1,6 +1,6 @@
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { sum } from "lodash-es";
-import { ChartTypeRegistry, TooltipItem } from "chart.js";
+import { ChartTypeRegistry, ScriptableContext, TooltipItem } from "chart.js";
 import Chart from "chart.js/auto";
 import {
   TreemapController,
@@ -11,21 +11,27 @@ import {
 } from "chartjs-chart-treemap";
 import { color } from "chart.js/helpers";
 
-import { AtomicDict, getAtomicFraction } from "../engine/atomic-dict";
+import { AtomicDict } from "../engine/atomic-dict";
 import { makeLookupTcFunction, TcCalculator } from "../engine/tc";
 import { TCDict, TCDictType } from "../engine/tc-dict";
 import { Locale } from "../engine/locale-dict";
 import { TCProbTuple, TCResultAggregator } from "../engine/resultAggregator";
 
 import { PlayerFormState } from "../PlayerForm";
-import { IDashboardPropType, WHITE_COLOR, TREEMAP_COLORS } from "./common";
+import {
+  IDashboardPropType,
+  WHITE_COLOR,
+  TREEMAP_COLORS,
+  TC_GRADIENT,
+} from "./common";
+import Fraction from "fraction.js";
 
 Chart.register(TreemapController, TreemapElement);
 Chart.defaults.color = WHITE_COLOR;
 
 type TreemapDataType = Record<string, unknown>;
 
-const TC_REGEX = /^(weap|armo|bow|mele)\d+/;
+const TC_REGEX = /^(weap|armo|bow|mele)(\d+)/;
 
 const getData = (playerFormState: PlayerFormState, baseItemName: string) => {
   const tcLookup = makeLookupTcFunction(TCDict, {} as TCDictType);
@@ -52,10 +58,14 @@ const getData = (playerFormState: PlayerFormState, baseItemName: string) => {
           tcsContainingItem.push(tuple[0]);
         }
         const groups = TC_REGEX.exec(tuple[0]);
+        const level = groups ? Number(groups[2]) : 0;
         return {
-          type: groups ? groups[0] : "weap",
+          type: groups ? groups[1] : "weap",
           item: item[0],
+          tcChance: tuple[1].valueOf(),
+          itemInTcChance: new Fraction(item[1], denom).toFraction(),
           absoluteChance: (tuple[1].valueOf() * item[1]) / denom,
+          backgroundColor: TC_GRADIENT[groups[1]][level / 3],
           tc: tuple[0],
         } as TreemapDataType;
       });
@@ -82,14 +92,12 @@ export const TreasureClassTreeMap = ({
         return TREEMAP_COLORS.NEUTRAL.TC.rgbString();
       }
       const caption = c.raw.g;
-      if (tcsContainingItem.indexOf(caption) >= 0) {
-        return TREEMAP_COLORS.ACTIVE.TC.rgbString();
-      } else if (caption === baseItemName) {
+      if (caption === baseItemName) {
         return TREEMAP_COLORS.ACTIVE.ITEM.rgbString();
-      } else if (TC_REGEX.test(caption)) {
-        return TREEMAP_COLORS.NEUTRAL.TC.rgbString();
       }
-      return TREEMAP_COLORS.NEUTRAL.ITEM.rgbString();
+      return c.raw._data.children[0].backgroundColor;
+      // console.log(c);
+      // return TREEMAP_COLORS.NEUTRAL.ITEM.rgbString();
     };
     const hoverBackgroundColor = (c: TreemapScriptableContext) => {
       const bg = backgroundColor(c);
@@ -99,6 +107,8 @@ export const TreasureClassTreeMap = ({
     let ctx = (
       document.getElementById("treasureClassTreeMap") as HTMLCanvasElement
     )?.getContext("2d");
+    const groups = ["item"] as string[];
+    // const groups = ["item"] as string[];
     const config = {
       type: "treemap" as keyof ChartTypeRegistry,
       data: {
@@ -106,7 +116,7 @@ export const TreasureClassTreeMap = ({
           {
             tree: data as TreemapDataType[],
             key: "absoluteChance",
-            groups: ["type", "tc", "item"] as string[],
+            groups: groups,
             borderWidth: 1,
             spacing: 1,
             borderColor: "rgba(200,200,200,1)",
@@ -120,9 +130,17 @@ export const TreasureClassTreeMap = ({
         datasets: {
           treemap: {
             captions: {
-              // font: { size: 4, lineHeight: 5 },
               display: true,
               color: WHITE_COLOR,
+            },
+            labels: {
+              display: true,
+              align: "left",
+              color: WHITE_COLOR,
+              font: { size: 8 },
+              formatter: (ctx: ScriptableContext<"treemap">) => {
+                return Locale(ctx.raw.g);
+              },
             },
           },
         },
@@ -135,25 +153,48 @@ export const TreasureClassTreeMap = ({
             display: false,
           },
           tooltip: {
+            display: (ctx) => {
+              console.log(ctx);
+              return true;
+            },
             callbacks: {
-              title: () => "",
-              label: (ctx: TooltipItem<"treemap">) => {
-                // _data exists in Chartjs but not formally recognized in type system
-                const obj = (ctx.dataset.data[ctx.dataIndex] as any)._data;
-                if (obj["item"]) {
-                  return `Chance of ${Locale(
-                    obj["item"]
-                  )} given TC: ${getAtomicFraction(
-                    obj["tc"],
-                    obj["item"]
-                  ).toFraction()}`;
-                } else if (obj["tc"]) {
-                  return `Chance of TC ${obj["tc"]}: ${formatPercent(
-                    obj.absoluteChance
-                  )}%`;
+              title: (ctx: TooltipItem<"treemap">[]) => {
+                if (groups.length == 3 && ctx.length < 3) {
+                  // `weap`
+                  if (ctx.length == 1) {
+                    const obj = ctx[0].raw._data as any;
+                    // TODO: this should be an expectation
+                    return `Chance of ${obj.type} = ${formatPercent(
+                      obj.absoluteChance
+                    )}%`;
+                  } else {
+                    // `weap12`
+                    const obj = ctx[1].raw._data as any;
+                    // TODO: this should be an expectation
+                    return `Chance of ${obj.tc} = ${formatPercent(
+                      obj.absoluteChance
+                    )}%`;
+                  }
                 }
-                return "";
+                // individual item
+                // _data exists in Chartjs but not formally recognized in type system
+                const obj = (
+                  ctx[ctx.length - 1].dataset.data[
+                    ctx[ctx.length - 1].dataIndex
+                  ] as any
+                )._data;
+                if (!obj["item"]) {
+                  return;
+                }
+                const itemName = Locale(obj["item"]);
+                const tcChance = `${formatPercent(obj.children[0].tcChance)}%`;
+                const absoluteChance = `${formatPercent(obj.absoluteChance)}%`;
+                return [
+                  `Chance of ${obj.children[0].tc} = ${tcChance}`,
+                  `Chance of ${itemName} = ${tcChance} x ${obj.children[0].itemInTcChance} = ${absoluteChance}`,
+                ];
               },
+              label: (ctx: TooltipItem<"treemap">) => {},
             },
             displayColors: false,
           },

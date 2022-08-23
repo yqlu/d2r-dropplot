@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import Fraction from "fraction.js";
 import { range, uniq } from "lodash-es";
 import { ChartTypeRegistry, TooltipItem } from "chart.js";

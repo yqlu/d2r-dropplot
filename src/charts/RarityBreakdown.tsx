@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { SankeyController, Flow } from "chartjs-chart-sankey";
 import {
   ChartTypeRegistry,
@@ -135,8 +135,8 @@ export const RarityBreakdownChart = ({
       data: {
         datasets: [
           {
-            label: "my sankey",
             data: data,
+            color: "white",
             colorFrom: (c) =>
               colors[c.dataset.data[c.dataIndex].from] ?? WHITE_COLOR,
             colorTo: (c) =>
