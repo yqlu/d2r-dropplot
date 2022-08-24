@@ -138,7 +138,7 @@ export const MonsterForm = (props: MonsterFormProps): JSX.Element => {
   }
 
   return (
-    <div className="w-96 px-3">
+    <div className="w-full px-3">
       <div className="form-group">
         <label className="form-label">Difficulty</label>
         <select

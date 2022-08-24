@@ -43,7 +43,7 @@ export const PlayerForm = (props: PlayerFormProps): JSX.Element => {
   const playerOptions: JSX.Element[] = makePlayerOptions();
 
   return (
-    <div className="w-96 px-3">
+    <div className="w-full px-3">
       <div className="form-group">
         <label className="form-label">TC</label>
         <select

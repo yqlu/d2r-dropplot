@@ -106,8 +106,8 @@ const App = (): JSX.Element => {
   };
 
   return (
-    <div className="App container w-full mx-auto pt-20 text-gray-200">
-      <div className="flex flex-wrap">
+    <div className="flex text-gray-200">
+      <aside className="w-44 fixed left-0 top-0 text-xs h-screen">
         <PlayerForm
           partyCount={playerFormState.partyCount}
           playerCount={playerFormState.playerCount}
@@ -127,15 +127,19 @@ const App = (): JSX.Element => {
           errors={errors}
           onChange={onMonsterFormChange}
         />
-      </div>
-      <Dashboard
-        playerFormState={playerFormState}
-        results={results}
-        baseItemName={baseItemName}
-        itemName={itemName}
-        rarity={rarity}
-      />
-      <Result results={results} onSelectItem={selectItem} />
+        <div className="resultParent h-full overflow-y-auto">
+          <Result results={results} onSelectItem={selectItem} />
+        </div>{" "}
+      </aside>
+      <main className="flex-1 p-20 ml-44">
+        <Dashboard
+          playerFormState={playerFormState}
+          results={results}
+          baseItemName={baseItemName}
+          itemName={itemName}
+          rarity={rarity}
+        />
+      </main>
     </div>
   );
 };

@@ -53,7 +53,7 @@ export const Result = ({
       children.push(
         <tr key={item[0]} className="sub-table-row">
           <td
-            className="px-10 text-lime-500"
+            className="px-5 text-lime-500"
             onClick={(e) => onSelectItem(tcTuple[0], item[0], RARITY.SET)}
           >
             {Locale(item[0])}
@@ -74,7 +74,7 @@ export const Result = ({
       children.push(
         <tr key={item[0]} className="sub-table-row">
           <td
-            className="px-10 text-orange-400"
+            className="px-5 text-orange-400"
             onClick={(e) => onSelectItem(tcTuple[0], item[0], RARITY.UNIQUE)}
           >
             {Locale(item[0])}
@@ -97,7 +97,7 @@ export const Result = ({
           className="table-row"
           onClick={(e) => onSelectItem(tcTuple[0], "", RARITY.WHITE)}
         >
-          <td className="px-5">{name}</td>
+          <td className="">{name}</td>
           <td>{formatReciprocal(tcTuple[1])}</td>
           <td className="text-sky-400">{format(tcTuple[2].quality[0])}</td>
           <td className="text-yellow-400">{format(tcTuple[2].quality[1])}</td>
@@ -109,9 +109,9 @@ export const Result = ({
     );
   });
   return (
-    <div className="bg-gray-900 border border-gray-800 rounded shadow w-full xl:w-2/3">
-      <div className="p-5">
-        <table className="w-full p-5">
+    <div className="bg-gray-900 border border-gray-800 rounded shadow w-100">
+      <div className="p-5 ">
+        <table className="w-full ">
           <tbody>{tableRows}</tbody>
         </table>
       </div>
