@@ -1,55 +1,16 @@
 import React, { useEffect } from "react";
-import { range } from "lodash-es";
+import { map, range, sum } from "lodash-es";
 import { ChartTypeRegistry, TooltipItem } from "chart.js";
 import Chart from "chart.js/auto";
-import Fraction from "fraction.js";
 
 import { RARITY } from "../engine/itemratio-dict";
-import { BaseItemResultAggregator } from "../engine/resultAggregator";
-import { makeLookupTcFunction, TcCalculator } from "../engine/tc";
+import { getAdjustedNoDrop } from "../engine/tc";
 import { TCDict } from "../engine/tc-dict";
-import { AtomicDict } from "../engine/atomic-dict";
 import { IDashboardPropType, WHITE_COLOR, UNIQUE_COLOR } from "./common";
 import { PlayerFormState } from "../PlayerForm";
 
 Chart.defaults.color = WHITE_COLOR;
 Chart.defaults.borderColor = "rgba(255,255,255,0.2)";
-
-const calculateBaseItemProbability = (
-  playerFormState: PlayerFormState,
-  playerCount: number,
-  baseItemName: string
-) => {
-  const mlvl = parseInt(playerFormState.mlvl);
-  const magicFind = parseInt(playerFormState.magicFind);
-  const tcLookup = makeLookupTcFunction(TCDict, AtomicDict);
-  const tcCalculator = new TcCalculator(
-    tcLookup,
-    () => new BaseItemResultAggregator(mlvl, magicFind)
-  );
-  const playerTcs = tcCalculator
-    .getAtomicTCs(playerFormState.tc, playerCount, 1, new Set([baseItemName]))
-    .result();
-  const partyTcs = tcCalculator
-    .getAtomicTCs(
-      playerFormState.tc,
-      playerCount,
-      playerCount,
-      new Set([baseItemName])
-    )
-    .result();
-  if (playerTcs.length == 0) {
-    const ZERO = new Fraction(0);
-    return {
-      player: ZERO,
-      party: ZERO,
-    };
-  }
-  return {
-    player: playerTcs[0][1],
-    party: partyTcs[0][1],
-  };
-};
 
 const getData = (
   playerFormState: PlayerFormState,
@@ -58,18 +19,19 @@ const getData = (
   rarity: RARITY
 ) => {
   const xs = range(1, 9);
-  const ys = xs.map((x) =>
-    calculateBaseItemProbability(playerFormState, x, baseItemName)
-  );
+  const tcObject = TCDict[playerFormState.tc];
+  const tcDenom = sum(map(tcObject.tcs, (tuple) => tuple[1]));
+  const tcNoDrop = tcObject.nodrop;
+  const players = xs.map((x) => getAdjustedNoDrop(tcDenom, tcNoDrop, x, 1));
+  const party = xs.map((x) => getAdjustedNoDrop(tcDenom, tcNoDrop, x, x));
   return {
     xs,
-    ys,
+    players,
+    party,
   };
 };
 
-const makePercent = (num: number) => num * 100; //Math.round(num * 10000) / 100;
-
-export const PartyCountChart = ({
+export const NoDropChart = ({
   playerFormState,
   results,
   baseItemName,
@@ -80,28 +42,33 @@ export const PartyCountChart = ({
     if (baseItemName == "") {
       return;
     }
-    const { xs, ys } = getData(playerFormState, baseItemName, itemName, rarity);
-    const player = {
+    const { xs, players, party } = getData(
+      playerFormState,
+      baseItemName,
+      itemName,
+      rarity
+    );
+    const playerDataset = {
       label: "Player",
-      data: ys.map((val) => makePercent(val.player.valueOf())),
+      data: players,
       backgroundColor: WHITE_COLOR,
       borderColor: WHITE_COLOR,
     };
-    const party = {
+    const partyDataset = {
       label: "Party",
-      data: ys.map((val) => makePercent(val.party.valueOf())),
+      data: party,
       backgroundColor: UNIQUE_COLOR,
       borderColor: UNIQUE_COLOR,
     };
 
     let ctx = (
-      document.getElementById("partyCountChart") as HTMLCanvasElement
+      document.getElementById("NoDropChart") as HTMLCanvasElement
     )?.getContext("2d");
     const config = {
       type: "line" as keyof ChartTypeRegistry,
       data: {
         labels: xs,
-        datasets: [party, player],
+        datasets: [partyDataset, playerDataset],
       },
       options: {
         scales: {
@@ -109,7 +76,7 @@ export const PartyCountChart = ({
             beginAtZero: true,
             title: {
               display: true,
-              text: "Chance %",
+              text: "Nodrop",
             },
           },
           x: {
@@ -126,13 +93,13 @@ export const PartyCountChart = ({
         plugins: {
           title: {
             display: true,
-            text: "Drop Rate vs Player Count",
+            text: "Nodrop vs Player Count",
           },
           tooltip: {
             callbacks: {
               title: () => "",
               label: (ctx: TooltipItem<"line">) =>
-                `${ctx.dataset.label} ${ctx.label}: ${ctx.formattedValue}%`,
+                `${ctx.dataset.label} ${ctx.label}: ${ctx.formattedValue}`,
             },
           },
         },
@@ -149,7 +116,7 @@ export const PartyCountChart = ({
 
   return (
     <div>
-      <canvas id="partyCountChart"></canvas>
+      <canvas id="NoDropChart"></canvas>
     </div>
   );
 };

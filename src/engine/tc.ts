@@ -37,13 +37,25 @@ export function getAdjustedDenom(
   if (totalPlayers > 8) {
     throw new Error(`Number of players ${totalPlayers} cannot exceed 8`);
   }
+  const adjustedNoDrop = getAdjustedNoDrop(
+    tcDenom,
+    tcNoDrop,
+    totalPlayers,
+    partyCount
+  );
+  return adjustedNoDrop + tcDenom;
+}
+
+export function getAdjustedNoDrop(
+  tcDenom: number,
+  tcNoDrop: number,
+  totalPlayers: number,
+  partyCount: number
+) {
   // https://diablo2.diablowiki.net/Item_Generation_Tutorial
   const n = Math.floor(1 + (partyCount - 1) / 2 + (totalPlayers - 1) / 2);
   const adjustedNoDropRate = Math.pow(tcNoDrop / (tcNoDrop + tcDenom), n);
-  const adjustedNoDrop = Math.floor(
-    (adjustedNoDropRate / (1 - adjustedNoDropRate)) * tcDenom
-  );
-  return adjustedNoDrop + tcDenom;
+  return Math.floor((adjustedNoDropRate / (1 - adjustedNoDropRate)) * tcDenom);
 }
 
 export function makeLookupTcFunction(
@@ -182,7 +194,7 @@ export class TcCalculator<T> {
     aggregator: ResultAggregator<T>
   ): ResultAggregator<T> {
     // tcs gives relative probability
-    const tcDenom = sum(map(tcObject.tcs, 1));
+    const tcDenom = sum(map(tcObject.tcs, (tuple) => tuple[1]));
     // Actual probability is derived by dividing by the sum over all sub TCs (and nodrop)
     const tcDenomAdjustedNoDrop = getAdjustedDenom(
       tcDenom,

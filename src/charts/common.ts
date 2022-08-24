@@ -68,6 +68,7 @@ export const MAGIC_COLOR = "#38BDF8"; // sky-400
 export const RARE_COLOR = "#FACC15"; // yellow-400
 export const SET_COLOR = "#84CC16"; // lime-500
 export const UNIQUE_COLOR = "#FB923C"; // orange-400
+export const RUNE_COLOR = "#FB923C"; // orange-400
 
 export const TREEMAP_COLORS = {
   NEUTRAL: {

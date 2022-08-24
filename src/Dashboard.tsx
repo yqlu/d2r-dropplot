@@ -5,8 +5,11 @@ import { RepeatedRunsChart } from "./charts/RepeatedRuns";
 import { PartyCountChart } from "./charts/PartyCount";
 import { TreasureClassTreeMap } from "./charts/TCTreeMap";
 import { RARITY } from "./engine/itemratio-dict";
+import { RuneBars } from "./charts/RuneBars";
 import { RarityBreakdownChart } from "./charts/RarityBreakdown";
 import { TreasureClassStackedBars } from "./charts/TcStackedBars";
+import { BinomialRunsChart } from "./charts/BinomialRuns";
+import { NoDropChart } from "./charts/NoDrop";
 
 export const Dashboard = ({
   playerFormState,
@@ -27,7 +30,28 @@ export const Dashboard = ({
             itemName={itemName}
             rarity={rarity}
           />
+          <RarityBreakdownChart
+            playerFormState={playerFormState}
+            results={results}
+            baseItemName={baseItemName}
+            itemName={itemName}
+            rarity={rarity}
+          />
           <RepeatedRunsChart
+            playerFormState={playerFormState}
+            results={results}
+            baseItemName={baseItemName}
+            itemName={itemName}
+            rarity={rarity}
+          />
+          <BinomialRunsChart
+            playerFormState={playerFormState}
+            results={results}
+            baseItemName={baseItemName}
+            itemName={itemName}
+            rarity={rarity}
+          />
+          <NoDropChart
             playerFormState={playerFormState}
             results={results}
             baseItemName={baseItemName}
@@ -41,7 +65,7 @@ export const Dashboard = ({
             itemName={itemName}
             rarity={rarity}
           />
-          <RarityBreakdownChart
+          <RuneBars
             playerFormState={playerFormState}
             results={results}
             baseItemName={baseItemName}
