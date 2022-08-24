@@ -3,10 +3,7 @@ import { range } from "lodash-es";
 import { ChartTypeRegistry, InteractionMode, TooltipItem } from "chart.js";
 import Chart from "chart.js/auto";
 
-import {
-  binomialDistributionFunction,
-  binomialDistributionFunctionCumulative,
-} from "binomial-distribution-function";
+import { binomialDistributionFunction } from "./common";
 import { RARITY } from "../engine/itemratio-dict";
 import { BaseItemProbTuple } from "../engine/resultAggregator";
 import { IDashboardPropType, WHITE_COLOR, colorFromRarity } from "./common";
@@ -24,7 +21,10 @@ const getData = (
 ) => {
   let result = results.filter((tuple) => tuple[0] == baseItemName);
   if (result.length !== 1) {
-    return { xs: [], ys: [] };
+    return {
+      xs: [] as number[],
+      ys: [] as number[],
+    };
   }
   let singleRunChance = result[0][1].valueOf();
   if (itemName !== "") {

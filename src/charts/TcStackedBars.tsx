@@ -18,6 +18,7 @@ import {
 } from "./common";
 
 const TC_REGEX = /^(weap|armo|bow|mele)(\d+)$/;
+type tcClassType = "weap" | "armo" | "bow" | "mele";
 const MAX_ITEMS_PER_TC = 15;
 
 type datasetType = ChartDataset<"bar", number[]>;
@@ -154,7 +155,9 @@ export const TreasureClassStackedBars = ({
               if (item === baseItemName) {
                 return STACKED_BAR_COLORS.ACTIVE;
               }
-              return TC_GRADIENT[proto.dataset.stack][ctx.dataIndex];
+              return TC_GRADIENT[proto.dataset.stack as tcClassType][
+                ctx.dataIndex
+              ];
             },
             hoverBackgroundColor: (ctx: ScriptableContext<"bar">) => {
               return WHITE_COLOR;

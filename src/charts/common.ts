@@ -101,3 +101,34 @@ export const colorFromRarity = (rarity: RARITY): string => {
       return WHITE_COLOR;
   }
 };
+
+const n_choose_k = function (n: number, k: number) {
+  if (k > n - k) {
+    k = n - k;
+  }
+  let r = 1;
+  for (let d = 1; d <= k; d++) {
+    r *= n--;
+    r /= d;
+  }
+  return r;
+};
+const binomialDistributionFunction = function (
+  n: number,
+  k: number,
+  p: number
+) {
+  return n_choose_k(n, k) * p ** k * (1 - p) ** (n - k);
+};
+const binomialDistributionFunctionCumulative = function (
+  n: number,
+  k: number,
+  p: number
+) {
+  let total = 0;
+  for (let i = 0; i <= k; i++) {
+    total += binomialDistributionFunction(n, i, p);
+  }
+  return total;
+};
+export { binomialDistributionFunction, binomialDistributionFunctionCumulative };

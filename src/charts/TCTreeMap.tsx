@@ -32,6 +32,7 @@ Chart.defaults.color = WHITE_COLOR;
 type TreemapDataType = Record<string, unknown>;
 
 const TC_REGEX = /^(weap|armo|bow|mele)(\d+)/;
+type tcClassType = "weap" | "armo" | "bow" | "mele";
 
 const getData = (playerFormState: PlayerFormState, baseItemName: string) => {
   const tcLookup = makeLookupTcFunction(TCDict, {} as TCDictType);
@@ -59,13 +60,14 @@ const getData = (playerFormState: PlayerFormState, baseItemName: string) => {
         }
         const groups = TC_REGEX.exec(tuple[0]);
         const level = groups ? Number(groups[2]) : 0;
+        const type = (groups ? groups[1] : "weap") as tcClassType;
         return {
-          type: groups ? groups[1] : "weap",
+          type,
           item: item[0],
           tcChance: tuple[1].valueOf(),
           itemInTcChance: new Fraction(item[1], denom).toFraction(),
           absoluteChance: (tuple[1].valueOf() * item[1]) / denom,
-          backgroundColor: TC_GRADIENT[groups[1]][level / 3],
+          backgroundColor: TC_GRADIENT[type][level / 3],
           tc: tuple[0],
         } as TreemapDataType;
       });
@@ -87,7 +89,7 @@ export const TreasureClassTreeMap = ({
     if (baseItemName == "") {
       return;
     }
-    const backgroundColor = (c: TreemapScriptableContext) => {
+    const backgroundColor = (c: TreemapScriptableContext): string => {
       if (!c?.raw?.g) {
         return TREEMAP_COLORS.NEUTRAL.TC.rgbString();
       }
@@ -95,7 +97,7 @@ export const TreasureClassTreeMap = ({
       if (caption === baseItemName) {
         return TREEMAP_COLORS.ACTIVE.ITEM.rgbString();
       }
-      return c.raw._data.children[0].backgroundColor;
+      return (c.raw as any)._data.children[0].backgroundColor as string;
       // console.log(c);
       // return TREEMAP_COLORS.NEUTRAL.ITEM.rgbString();
     };
@@ -139,7 +141,7 @@ export const TreasureClassTreeMap = ({
               color: WHITE_COLOR,
               font: { size: 8 },
               formatter: (ctx: ScriptableContext<"treemap">) => {
-                return Locale(ctx.raw.g);
+                return Locale((ctx.raw as any).g);
               },
             },
           },
@@ -153,23 +155,20 @@ export const TreasureClassTreeMap = ({
             display: false,
           },
           tooltip: {
-            display: (ctx) => {
-              console.log(ctx);
-              return true;
-            },
+            display: true,
             callbacks: {
               title: (ctx: TooltipItem<"treemap">[]) => {
                 if (groups.length == 3 && ctx.length < 3) {
                   // `weap`
                   if (ctx.length == 1) {
-                    const obj = ctx[0].raw._data as any;
+                    const obj = (ctx[0].raw as any)._data as any;
                     // TODO: this should be an expectation
                     return `Chance of ${obj.type} = ${formatPercent(
                       obj.absoluteChance
                     )}%`;
                   } else {
                     // `weap12`
-                    const obj = ctx[1].raw._data as any;
+                    const obj = (ctx[1].raw as any)._data as any;
                     // TODO: this should be an expectation
                     return `Chance of ${obj.tc} = ${formatPercent(
                       obj.absoluteChance
