@@ -3,14 +3,13 @@ import { range } from "lodash-es";
 import { ChartTypeRegistry, InteractionMode, TooltipItem } from "chart.js";
 import Chart from "chart.js/auto";
 
-import { RARITY } from "../engine/itemratio-dict";
-import { BaseItemProbTuple } from "../engine/resultAggregator";
-import { IDashboardPropType, WHITE_COLOR, colorFromRarity } from "./common";
-
-Chart.defaults.font.family =
-  "'Segoe UI', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif";
-Chart.defaults.color = WHITE_COLOR;
-Chart.defaults.borderColor = "rgba(255,255,255,0.2)";
+import {
+  IDashboardPropType,
+  colorFromRarity,
+  colorClassFromRarity,
+} from "./common";
+import { Locale } from "../engine/locale-dict";
+import Fraction from "fraction.js";
 
 const getXRange = (singleRunChance: number): number[] => {
   const intervals = 10;
@@ -34,36 +33,8 @@ const getXRange = (singleRunChance: number): number[] => {
   return range(intervals + 1).map((x) => (x * max) / intervals);
 };
 
-const getData = (
-  results: BaseItemProbTuple[],
-  baseItemName: string,
-  itemName: string,
-  rarity: RARITY
-) => {
-  let result = results.filter((tuple) => tuple[0] == baseItemName);
-  if (result.length !== 1) {
-    return { xs: [], ys: [] };
-  }
-  let singleRunChance = result[0][1].valueOf();
-  if (itemName !== "") {
-    // Get percentage of set / unique item
-    const quality = result[0][2];
-    if (rarity === RARITY.SET) {
-      const relativeProb = quality.sets.find((tuple) => tuple[0] === itemName);
-      if (relativeProb) {
-        singleRunChance *=
-          quality.quality[2].valueOf() * relativeProb[1].valueOf();
-      }
-    } else if (rarity === RARITY.UNIQUE) {
-      const relativeProb = quality.uniques.find(
-        (tuple) => tuple[0] === itemName
-      );
-      if (relativeProb) {
-        singleRunChance *=
-          quality.quality[3].valueOf() * relativeProb[1].valueOf();
-      }
-    }
-  }
+const getData = (selectedChance: Fraction) => {
+  const singleRunChance = selectedChance.valueOf();
   const xs = getXRange(singleRunChance);
   const ys = xs.map(
     (x) => Math.floor((1 - Math.pow(1 - singleRunChance, x)) * 1000) / 10
@@ -80,12 +51,13 @@ export const RepeatedRunsChart = ({
   baseItemName,
   itemName,
   rarity,
+  selectedChance,
 }: IDashboardPropType): JSX.Element => {
   useEffect(() => {
     if (baseItemName == "") {
       return;
     }
-    const { xs, ys } = getData(results, baseItemName, itemName, rarity);
+    const { xs, ys } = getData(selectedChance);
     let ctx = (
       document.getElementById("repeatedRunsChart") as HTMLCanvasElement
     )?.getContext("2d");
@@ -123,8 +95,7 @@ export const RepeatedRunsChart = ({
         },
         plugins: {
           title: {
-            display: true,
-            text: "Cumulative chance to drop over multiple runs",
+            display: false,
           },
           legend: {
             display: false,
@@ -153,8 +124,15 @@ export const RepeatedRunsChart = ({
     };
   }, [playerFormState, results, baseItemName, itemName, rarity]);
 
+  const name = itemName === "" ? baseItemName : itemName;
+  const styling = colorClassFromRarity(rarity);
+
   return (
     <div>
+      <div className="chartTitle">
+        Cumulative chance to drop{" "}
+        <span className={"font-bold " + styling}>{Locale(name)}</span>
+      </div>
       <canvas id="repeatedRunsChart"></canvas>
     </div>
   );

@@ -18,11 +18,7 @@ import {
   SET_COLOR,
   UNIQUE_COLOR,
 } from "./common";
-
-Chart.defaults.font.family =
-  "'Segoe UI', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif";
-Chart.defaults.color = WHITE_COLOR;
-Chart.defaults.borderColor = "rgba(255,255,255,0.2)";
+import { Locale } from "../engine/locale-dict";
 
 const calculateMagicFind = (
   playerFormState: PlayerFormState,
@@ -50,12 +46,7 @@ const calculateMagicFind = (
   return tcs[0][2].quality;
 };
 
-const getData = (
-  playerFormState: PlayerFormState,
-  baseItemName: string,
-  itemName: string,
-  rarity: RARITY
-) => {
+const getData = (playerFormState: PlayerFormState, baseItemName: string) => {
   const intervals = 20;
   const max = 500;
   const xs = range(intervals + 1).map((x) => x * (max / intervals));
@@ -83,7 +74,7 @@ export const MagicFindChart = ({
     }
 
     const tension = 0.3;
-    const { xs, ys } = getData(playerFormState, baseItemName, itemName, rarity);
+    const { xs, ys } = getData(playerFormState, baseItemName);
     const white = {
       label: "Normal",
       data: ys.map((ratio) => {
@@ -161,8 +152,7 @@ export const MagicFindChart = ({
         },
         plugins: {
           title: {
-            display: true,
-            text: "Item rarity vs Magic Find",
+            display: false,
           },
           tooltip: {
             callbacks: {
@@ -181,10 +171,14 @@ export const MagicFindChart = ({
     return () => {
       chart?.destroy();
     };
-  }, [playerFormState, results, baseItemName, itemName]);
+  }, [playerFormState.tc, playerFormState.mlvl, baseItemName]);
 
   return (
     <div>
+      <div className="chartTitle">
+        <span className="font-bold">{Locale(baseItemName)}</span> rarity vs
+        Magic Find
+      </div>
       <canvas id="magicFindChart"></canvas>
     </div>
   );

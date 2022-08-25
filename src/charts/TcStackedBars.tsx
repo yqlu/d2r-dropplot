@@ -166,8 +166,7 @@ export const TreasureClassStackedBars = ({
         },
         plugins: {
           title: {
-            display: true,
-            text: "Item Drop Chance Relative to Treasure Class",
+            display: false,
           },
           legend: {
             display: false,
@@ -211,6 +210,10 @@ export const TreasureClassStackedBars = ({
 
   return (
     <div>
+      <div className="chartTitle">
+        <span className="font-bold">{Locale(baseItemName)}</span> Drop Chance
+        plotted by Treasure Class Level
+      </div>
       <canvas id="treasureClassStackedBars"></canvas>
     </div>
   );

@@ -25,12 +25,7 @@ Chart.register(SankeyController, Flow);
 
 const formatPercent = (num: number) => Math.round(num * 10000) / 100;
 
-const getData = (
-  results: BaseItemProbTuple[],
-  baseItemName: string,
-  itemName: string,
-  rarity: RARITY
-) => {
+const getData = (results: BaseItemProbTuple[], baseItemName: string) => {
   let result = results.filter((tuple) => tuple[0] == baseItemName);
   if (result.length !== 1) {
     return { data: [], labels: {}, colors: {}, setUniqueDisplays: {} };
@@ -121,9 +116,7 @@ export const RarityBreakdownChart = ({
 
     const { data, labels, colors, setUniqueDisplays } = getData(
       results,
-      baseItemName,
-      itemName,
-      rarity
+      baseItemName
     );
 
     if (data.length == 0) {
@@ -135,6 +128,7 @@ export const RarityBreakdownChart = ({
       data: {
         datasets: [
           {
+            label: "Item rarity breakdown",
             data: data,
             color: "white",
             colorFrom: (c) =>
@@ -157,10 +151,10 @@ export const RarityBreakdownChart = ({
         ] as SankeyControllerDatasetOptions[],
       },
       options: {
+        resizeDelay: 50,
         plugins: {
           title: {
-            display: true,
-            text: "Item rarity breakdown",
+            display: false,
           },
           tooltip: {
             displayColors: false,
@@ -190,10 +184,14 @@ export const RarityBreakdownChart = ({
     return () => {
       chart?.destroy();
     };
-  }, [playerFormState, results, baseItemName, itemName]);
+  }, [results, baseItemName]);
 
   return (
     <div>
+      <div className="chartTitle">
+        <span className="font-bold">{Locale(baseItemName)}</span> rarity
+        breakdown
+      </div>
       <canvas id="rarityBreakdownChart"></canvas>
     </div>
   );

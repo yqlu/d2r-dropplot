@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { sum } from "lodash-es";
 import { ChartTypeRegistry, ScriptableContext, TooltipItem } from "chart.js";
 import Chart from "chart.js/auto";
@@ -85,6 +85,8 @@ export const TreasureClassTreeMap = ({
   itemName,
   rarity,
 }: IDashboardPropType): JSX.Element => {
+  const [tcGrouped, setTcGrouped] = useState(false);
+
   useEffect(() => {
     if (baseItemName == "") {
       return;
@@ -98,8 +100,6 @@ export const TreasureClassTreeMap = ({
         return TREEMAP_COLORS.ACTIVE.ITEM.rgbString();
       }
       return (c.raw as any)._data.children[0].backgroundColor as string;
-      // console.log(c);
-      // return TREEMAP_COLORS.NEUTRAL.ITEM.rgbString();
     };
     const hoverBackgroundColor = (c: TreemapScriptableContext) => {
       const bg = backgroundColor(c);
@@ -109,8 +109,7 @@ export const TreasureClassTreeMap = ({
     let ctx = (
       document.getElementById("treasureClassTreeMap") as HTMLCanvasElement
     )?.getContext("2d");
-    const groups = ["item"] as string[];
-    // const groups = ["item"] as string[];
+    const groups = (tcGrouped ? ["type", "tc", "item"] : ["item"]) as string[];
     const config = {
       type: "treemap" as keyof ChartTypeRegistry,
       data: {
@@ -129,6 +128,7 @@ export const TreasureClassTreeMap = ({
         ],
       },
       options: {
+        resizeDelay: 50,
         datasets: {
           treemap: {
             captions: {
@@ -148,8 +148,7 @@ export const TreasureClassTreeMap = ({
         },
         plugins: {
           title: {
-            display: true,
-            text: "Item Drop Chance Relative to Treasure Class",
+            display: false,
           },
           legend: {
             display: false,
@@ -207,10 +206,23 @@ export const TreasureClassTreeMap = ({
     return () => {
       chart?.destroy();
     };
-  }, [playerFormState, results, baseItemName, itemName, rarity]);
+  }, [playerFormState, results, baseItemName, itemName, rarity, tcGrouped]);
 
+  // TODO: explanatory tooltip
   return (
     <div>
+      <div className="chartTitle">
+        <span className="font-bold">{Locale(baseItemName)}</span> Drop Chance
+        relative to all Weapons and Armor
+        <div className="chartSubtitle">
+          <input
+            type="checkbox"
+            checked={tcGrouped}
+            onChange={(event) => setTcGrouped(!tcGrouped)}
+          />{" "}
+          Group By TC
+        </div>
+      </div>
       <canvas id="treasureClassTreeMap"></canvas>
     </div>
   );

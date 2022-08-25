@@ -12,14 +12,9 @@ import { PlayerFormState } from "../PlayerForm";
 Chart.defaults.color = WHITE_COLOR;
 Chart.defaults.borderColor = "rgba(255,255,255,0.2)";
 
-const getData = (
-  playerFormState: PlayerFormState,
-  baseItemName: string,
-  itemName: string,
-  rarity: RARITY
-) => {
+const getData = (tc: string) => {
   const xs = range(1, 9);
-  const tcObject = TCDict[playerFormState.tc];
+  const tcObject = TCDict[tc];
   const tcDenom = sum(map(tcObject.tcs, (tuple) => tuple[1]));
   const tcNoDrop = tcObject.nodrop;
   const players = xs.map((x) => getAdjustedNoDrop(tcDenom, tcNoDrop, x, 1));
@@ -42,12 +37,7 @@ export const NoDropChart = ({
     if (baseItemName == "") {
       return;
     }
-    const { xs, players, party } = getData(
-      playerFormState,
-      baseItemName,
-      itemName,
-      rarity
-    );
+    const { xs, players, party } = getData(playerFormState.tc);
     const playerDataset = {
       label: "Player",
       data: players,
@@ -92,8 +82,7 @@ export const NoDropChart = ({
         },
         plugins: {
           title: {
-            display: true,
-            text: "Nodrop vs Player Count",
+            display: false,
           },
           tooltip: {
             callbacks: {
@@ -112,10 +101,14 @@ export const NoDropChart = ({
     return () => {
       chart?.destroy();
     };
-  }, [playerFormState, results, baseItemName, itemName]);
+  }, [playerFormState.tc]);
 
   return (
     <div>
+      <div className="chartTitle">
+        <span className="font-bold">{playerFormState.tc}</span> Nodrop vs Player
+        Count
+      </div>
       <canvas id="NoDropChart"></canvas>
     </div>
   );

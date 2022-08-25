@@ -3,6 +3,7 @@ import { PlayerFormState } from "../PlayerForm";
 import { RARITY } from "../engine/itemratio-dict";
 import { BaseItemProbTuple } from "../engine/resultAggregator";
 import { Gradient } from "javascript-color-gradient";
+import Fraction from "fraction.js";
 
 export const TC_GRADIENT = {
   armo: new Gradient()
@@ -61,6 +62,7 @@ export type IDashboardPropType = {
   baseItemName: string;
   itemName: string;
   rarity: RARITY;
+  selectedChance: Fraction;
 };
 
 export const WHITE_COLOR = "white";
@@ -69,6 +71,36 @@ export const RARE_COLOR = "#FACC15"; // yellow-400
 export const SET_COLOR = "#84CC16"; // lime-500
 export const UNIQUE_COLOR = "#FB923C"; // orange-400
 export const RUNE_COLOR = "#FB923C"; // orange-400
+
+export const colorFromRarity = (rarity: RARITY): string => {
+  switch (rarity) {
+    case RARITY.UNIQUE:
+      return UNIQUE_COLOR;
+    case RARITY.SET:
+      return SET_COLOR;
+    case RARITY.RARE:
+      return RARE_COLOR;
+    case RARITY.MAGIC:
+      return MAGIC_COLOR;
+    default:
+      return WHITE_COLOR;
+  }
+};
+
+export const colorClassFromRarity = (rarity: RARITY): string => {
+  switch (rarity) {
+    case RARITY.UNIQUE:
+      return "text-orange-400";
+    case RARITY.SET:
+      return "text-lime-500";
+    case RARITY.RARE:
+      return "text-yellow-400";
+    case RARITY.MAGIC:
+      return "text-sky-400";
+    default:
+      return "white";
+  }
+};
 
 export const TREEMAP_COLORS = {
   NEUTRAL: {
@@ -85,21 +117,6 @@ export const STACKED_BAR_COLORS = {
   NEUTRAL: color("#e0e0e0").alpha(0.5).rgbString(), // grey-300
   TC: color("#1565c0").rgbString(), // blue-800
   ACTIVE: color("#e53935").rgbString(), // purple-800
-};
-
-export const colorFromRarity = (rarity: RARITY): string => {
-  switch (rarity) {
-    case RARITY.UNIQUE:
-      return UNIQUE_COLOR;
-    case RARITY.SET:
-      return SET_COLOR;
-    case RARITY.RARE:
-      return RARE_COLOR;
-    case RARITY.MAGIC:
-      return MAGIC_COLOR;
-    default:
-      return WHITE_COLOR;
-  }
 };
 
 const n_choose_k = function (n: number, k: number) {

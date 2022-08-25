@@ -44,6 +44,7 @@ const App = (): JSX.Element => {
   const [baseItemName, setBaseItemName] = useState("");
   const [itemName, setItemName] = useState("");
   const [rarity, setRarity] = useState(RARITY.WHITE);
+  const [selectedChance, setSelectedChance] = useState(new Fraction(0));
 
   useEffect(() => {
     const errors = hasPlayerFormErrors(playerFormState, setErrors);
@@ -73,7 +74,7 @@ const App = (): JSX.Element => {
 
   useEffect(() => {
     if (results.filter((tuple) => tuple[0] == baseItemName).length !== 1) {
-      selectItem("", "", RARITY.WHITE);
+      selectItem("", "", RARITY.WHITE, new Fraction(0));
     }
   }, [results]);
 
@@ -99,10 +100,16 @@ const App = (): JSX.Element => {
     }));
   };
 
-  const selectItem: SelectItemType = (baseItemName, itemName, rarity) => {
+  const selectItem: SelectItemType = (
+    baseItemName,
+    itemName,
+    rarity,
+    chance
+  ) => {
     setBaseItemName(baseItemName);
     setItemName(itemName);
     setRarity(rarity);
+    setSelectedChance(chance);
   };
 
   return (
@@ -131,13 +138,14 @@ const App = (): JSX.Element => {
           <Result results={results} onSelectItem={selectItem} />
         </div>{" "}
       </aside>
-      <main className="flex-1 p-20 ml-44">
+      <main className="flex-1 p-10 ml-44">
         <Dashboard
           playerFormState={playerFormState}
           results={results}
           baseItemName={baseItemName}
           itemName={itemName}
           rarity={rarity}
+          selectedChance={selectedChance}
         />
       </main>
     </div>

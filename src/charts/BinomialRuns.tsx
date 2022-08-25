@@ -1,72 +1,40 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { range } from "lodash-es";
 import { ChartTypeRegistry, InteractionMode, TooltipItem } from "chart.js";
 import Chart from "chart.js/auto";
 
-import { binomialDistributionFunction } from "./common";
+import { binomialDistributionFunction, colorClassFromRarity } from "./common";
 import { RARITY } from "../engine/itemratio-dict";
 import { BaseItemProbTuple } from "../engine/resultAggregator";
 import { IDashboardPropType, WHITE_COLOR, colorFromRarity } from "./common";
+import { Locale } from "../engine/locale-dict";
 
 Chart.defaults.font.family =
-  "'Segoe UI', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif";
+  "'Noto Sans', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif";
 Chart.defaults.color = WHITE_COLOR;
 Chart.defaults.borderColor = "rgba(255,255,255,0.2)";
 
-const getData = (
-  results: BaseItemProbTuple[],
-  baseItemName: string,
-  itemName: string,
-  rarity: RARITY
-) => {
-  let result = results.filter((tuple) => tuple[0] == baseItemName);
-  if (result.length !== 1) {
-    return {
-      xs: [] as number[],
-      ys: [] as number[],
-    };
-  }
-  let singleRunChance = result[0][1].valueOf();
-  if (itemName !== "") {
-    // Get percentage of set / unique item
-    const quality = result[0][2];
-    if (rarity === RARITY.SET) {
-      const relativeProb = quality.sets.find((tuple) => tuple[0] === itemName);
-      if (relativeProb) {
-        singleRunChance *=
-          quality.quality[2].valueOf() * relativeProb[1].valueOf();
-      }
-    } else if (rarity === RARITY.UNIQUE) {
-      const relativeProb = quality.uniques.find(
-        (tuple) => tuple[0] === itemName
-      );
-      if (relativeProb) {
-        singleRunChance *=
-          quality.quality[3].valueOf() * relativeProb[1].valueOf();
-      }
-    }
-  }
-  const expectedRuns90Chance = Math.log(0.1) / Math.log(1 - singleRunChance);
+const getData = (runs: number, singleRunChance: number) => {
   const ys = [];
-  for (let x = 0; x < expectedRuns90Chance / 10; x++) {
-    let y =
-      binomialDistributionFunction(
-        Math.round(expectedRuns90Chance),
-        x,
-        singleRunChance
-      ) * 100;
-    if (y > 1e-2) {
+  let [prevY, y] = [0, 0];
+  for (let x = 0; x < runs / 10; x++) {
+    y = binomialDistributionFunction(runs, x, singleRunChance) * 100;
+    if (y >= prevY || y > 1e-2) {
       ys.push(y);
+      prevY = y;
     } else {
       break;
     }
   }
   const xs = range(ys.length);
   return {
-    runs: Math.round(expectedRuns90Chance),
     xs,
     ys,
   };
+};
+
+const getDefaultRuns = (singleRunChance: number) => {
+  return Math.round(Math.log(0.1) / Math.log(1 - singleRunChance));
 };
 
 export const BinomialRunsChart = ({
@@ -75,12 +43,15 @@ export const BinomialRunsChart = ({
   baseItemName,
   itemName,
   rarity,
+  selectedChance,
 }: IDashboardPropType): JSX.Element => {
+  const [runs, setRuns] = useState(getDefaultRuns(selectedChance.valueOf()));
+
   useEffect(() => {
     if (baseItemName == "") {
       return;
     }
-    const { xs, ys, runs } = getData(results, baseItemName, itemName, rarity);
+    const { xs, ys } = getData(runs, selectedChance.valueOf());
     let ctx = (
       document.getElementById("binomialRunsChart") as HTMLCanvasElement
     )?.getContext("2d");
@@ -108,7 +79,7 @@ export const BinomialRunsChart = ({
           x: {
             title: {
               display: true,
-              text: "Runs",
+              text: "Copies",
             },
           },
         },
@@ -118,8 +89,7 @@ export const BinomialRunsChart = ({
         },
         plugins: {
           title: {
-            display: true,
-            text: `Chance vs number of items dropped over ${runs} runs`,
+            display: false,
           },
           legend: {
             display: false,
@@ -146,10 +116,24 @@ export const BinomialRunsChart = ({
     return () => {
       chart?.destroy();
     };
-  }, [playerFormState, results, baseItemName, itemName, rarity]);
+  }, [selectedChance, runs]);
+
+  const name = itemName === "" ? baseItemName : itemName;
+  const styling = colorClassFromRarity(rarity);
 
   return (
     <div>
+      <div className="chartTitle">
+        Chance to drop x copies of{" "}
+        <span className={"font-bold " + styling}>{Locale(name)}</span> over{" "}
+        <input
+          type="text"
+          className="inline-textbox w-16"
+          value={runs}
+          onChange={(event) => setRuns(Number(event.target.value))}
+        />{" "}
+        runs
+      </div>
       <canvas id="binomialRunsChart"></canvas>
     </div>
   );

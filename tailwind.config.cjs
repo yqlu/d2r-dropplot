@@ -4,7 +4,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: "Segoe UI, Helvetica Neue, sans-serif",
+        sans: "Noto Sans, Helvetica Neue, sans-serif",
       },
     },
   },

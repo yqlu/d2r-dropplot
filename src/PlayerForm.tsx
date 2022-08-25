@@ -1,7 +1,6 @@
 import React from "react";
 import { range } from "lodash-es";
 import { TCDict } from "./engine/tc-dict";
-import { Select, Option } from "@material-tailwind/react";
 
 export type PlayerFormState = {
   tc: string;

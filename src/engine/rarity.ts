@@ -162,7 +162,7 @@ export function findCandidates(
   ]);
 }
 
-function qualityNotApplicable(itemCode: string) {
+export function qualityNotApplicable(itemCode: string) {
   // If itemCode is not in itemDict, don't attempt to calculate quality
   if (!ItemDict.hasOwnProperty(itemCode)) {
     return true;

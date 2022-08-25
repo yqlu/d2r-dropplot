@@ -11,32 +11,27 @@ import { TCDict } from "../engine/tc-dict";
 import { AtomicDict } from "../engine/atomic-dict";
 import { IDashboardPropType, WHITE_COLOR, UNIQUE_COLOR } from "./common";
 import { PlayerFormState } from "../PlayerForm";
+import { Locale } from "../engine/locale-dict";
 
 Chart.defaults.color = WHITE_COLOR;
 Chart.defaults.borderColor = "rgba(255,255,255,0.2)";
 
 const calculateBaseItemProbability = (
-  playerFormState: PlayerFormState,
+  tc: string,
+  mlvl: number,
   playerCount: number,
   baseItemName: string
 ) => {
-  const mlvl = parseInt(playerFormState.mlvl);
-  const magicFind = parseInt(playerFormState.magicFind);
   const tcLookup = makeLookupTcFunction(TCDict, AtomicDict);
   const tcCalculator = new TcCalculator(
     tcLookup,
-    () => new BaseItemResultAggregator(mlvl, magicFind)
+    () => new BaseItemResultAggregator(mlvl, 0)
   );
   const playerTcs = tcCalculator
-    .getAtomicTCs(playerFormState.tc, playerCount, 1, new Set([baseItemName]))
+    .getAtomicTCs(tc, playerCount, 1, new Set([baseItemName]))
     .result();
   const partyTcs = tcCalculator
-    .getAtomicTCs(
-      playerFormState.tc,
-      playerCount,
-      playerCount,
-      new Set([baseItemName])
-    )
+    .getAtomicTCs(tc, playerCount, playerCount, new Set([baseItemName]))
     .result();
   if (playerTcs.length == 0) {
     const ZERO = new Fraction(0);
@@ -51,15 +46,10 @@ const calculateBaseItemProbability = (
   };
 };
 
-const getData = (
-  playerFormState: PlayerFormState,
-  baseItemName: string,
-  itemName: string,
-  rarity: RARITY
-) => {
+const getData = (tc: string, mlvl: number, baseItemName: string) => {
   const xs = range(1, 9);
   const ys = xs.map((x) =>
-    calculateBaseItemProbability(playerFormState, x, baseItemName)
+    calculateBaseItemProbability(tc, mlvl, x, baseItemName)
   );
   return {
     xs,
@@ -80,7 +70,11 @@ export const PartyCountChart = ({
     if (baseItemName == "") {
       return;
     }
-    const { xs, ys } = getData(playerFormState, baseItemName, itemName, rarity);
+    const { xs, ys } = getData(
+      playerFormState.tc,
+      Number(playerFormState.mlvl),
+      baseItemName
+    );
     const player = {
       label: "Player",
       data: ys.map((val) => makePercent(val.player.valueOf())),
@@ -125,8 +119,7 @@ export const PartyCountChart = ({
         },
         plugins: {
           title: {
-            display: true,
-            text: "Drop Rate vs Player Count",
+            display: false,
           },
           tooltip: {
             callbacks: {
@@ -145,10 +138,14 @@ export const PartyCountChart = ({
     return () => {
       chart?.destroy();
     };
-  }, [playerFormState, results, baseItemName, itemName]);
+  }, [playerFormState.tc, playerFormState.mlvl, baseItemName]);
 
   return (
     <div>
+      <div className="chartTitle">
+        <span className="font-bold">{Locale(baseItemName)}</span> Drop Rate vs
+        Player Count
+      </div>
       <canvas id="partyCountChart"></canvas>
     </div>
   );

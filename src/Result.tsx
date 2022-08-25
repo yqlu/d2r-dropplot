@@ -9,7 +9,8 @@ import { RARITY } from "./engine/itemratio-dict";
 export type SelectItemType = (
   baseItemName: string,
   itemName: string,
-  rarity: RARITY
+  rarity: RARITY,
+  chance: Fraction
 ) => void;
 
 type IAppPropType = {
@@ -50,19 +51,18 @@ export const Result = ({
     }
     const children: JSX.Element[] = [];
     for (const item of tcTuple[2].sets) {
+      const chance = item[1].mul(tcTuple[2].quality[2].mul(tcTuple[1]));
       children.push(
         <tr key={item[0]} className="sub-table-row">
           <td
             className="px-5 text-lime-500"
-            onClick={(e) => onSelectItem(tcTuple[0], item[0], RARITY.SET)}
+            onClick={(e) =>
+              onSelectItem(tcTuple[0], item[0], RARITY.SET, chance)
+            }
           >
             {Locale(item[0])}
           </td>
-          <td>
-            {formatReciprocal(
-              item[1].mul(tcTuple[2].quality[2]).mul(tcTuple[1])
-            )}
-          </td>
+          <td>{formatReciprocal(chance)}</td>
           <td></td>
           <td></td>
           <td></td>
@@ -71,19 +71,18 @@ export const Result = ({
       );
     }
     for (const item of tcTuple[2].uniques) {
+      const chance = item[1].mul(tcTuple[2].quality[3].mul(tcTuple[1]));
       children.push(
         <tr key={item[0]} className="sub-table-row">
           <td
             className="px-5 text-orange-400"
-            onClick={(e) => onSelectItem(tcTuple[0], item[0], RARITY.UNIQUE)}
+            onClick={(e) =>
+              onSelectItem(tcTuple[0], item[0], RARITY.UNIQUE, chance)
+            }
           >
             {Locale(item[0])}
           </td>
-          <td>
-            {formatReciprocal(
-              item[1].mul(tcTuple[2].quality[3].mul(tcTuple[1]))
-            )}
-          </td>
+          <td>{formatReciprocal(chance)}</td>
           <td></td>
           <td></td>
           <td></td>
@@ -95,7 +94,9 @@ export const Result = ({
       <React.Fragment key={tcTuple[0]}>
         <tr
           className="table-row"
-          onClick={(e) => onSelectItem(tcTuple[0], "", RARITY.WHITE)}
+          onClick={(e) =>
+            onSelectItem(tcTuple[0], "", RARITY.WHITE, tcTuple[1])
+          }
         >
           <td className="">{name}</td>
           <td>{formatReciprocal(tcTuple[1])}</td>
