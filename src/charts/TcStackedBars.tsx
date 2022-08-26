@@ -16,6 +16,8 @@ import {
   STACKED_BAR_COLORS,
   REGULAR_COLOR,
 } from "./common";
+import { RARITY } from "../engine/itemratio-dict";
+import Fraction from "fraction.js";
 
 const TC_REGEX = /^(weap|armo|bow|mele)(\d+)$/;
 type tcClassType = "weap" | "armo" | "bow" | "mele";
@@ -102,6 +104,7 @@ export const TreasureClassStackedBars = ({
   baseItemName,
   itemName,
   rarity,
+  onSelectItem,
 }: IDashboardPropType): JSX.Element => {
   useEffect(() => {
     if (baseItemName == "") {
@@ -124,8 +127,28 @@ export const TreasureClassStackedBars = ({
         datasets,
       },
       options: {
-        options: {
-          animation: false,
+        onClick: (e) => {
+          const activePoints = chart.getElementsAtEventForMode(
+            e,
+            "nearest",
+            {
+              intersect: true,
+            },
+            false
+          );
+          if (activePoints.length > 0) {
+            const [{ index, datasetIndex }] = activePoints;
+            const dataObj = datasets[datasetIndex];
+            const tcName = `${dataObj.stack}${(index + 1) * 3}`;
+            const itemIdxWithinTc = Number(dataObj.label) || 0;
+            const item = AtomicDict[tcName].tcs[itemIdxWithinTc][0];
+            const chance = results.find((tuple) => tuple[0] === item)![1];
+            onSelectItem(item, "", RARITY.WHITE, chance);
+          }
+        },
+        onHover: (event, activeEvents) => {
+          (event?.native?.target as HTMLElement).style.cursor =
+            activeEvents?.length > 0 ? "pointer" : "auto";
         },
         scales: {
           y: {

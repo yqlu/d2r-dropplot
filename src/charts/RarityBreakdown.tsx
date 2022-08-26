@@ -96,15 +96,13 @@ const getData = (results: BaseItemProbTuple[], baseItemName: string) => {
     labels["normal"] = "Normal";
     data.push({ from: "base", to: "normal", flow: normalChance });
   }
-  return { data, labels, colors, setUniqueDisplays };
+  return { data, labels, colors, result, setUniqueDisplays };
 };
 
 export const RarityBreakdownChart = ({
-  playerFormState,
   results,
   baseItemName,
-  itemName,
-  rarity,
+  onSelectItem,
 }: IDashboardPropType): JSX.Element => {
   useEffect(() => {
     if (baseItemName == "") {
@@ -114,11 +112,10 @@ export const RarityBreakdownChart = ({
       document.getElementById("rarityBreakdownChart") as HTMLCanvasElement
     )?.getContext("2d");
 
-    const { data, labels, colors, setUniqueDisplays } = getData(
+    const { data, labels, colors, result, setUniqueDisplays } = getData(
       results,
       baseItemName
     );
-
     if (data.length == 0) {
       return;
     }
@@ -151,6 +148,45 @@ export const RarityBreakdownChart = ({
         ] as SankeyControllerDatasetOptions[],
       },
       options: {
+        onClick: (e) => {
+          const activePoints = chart.getElementsAtEventForMode(
+            e,
+            "nearest",
+            {
+              intersect: true,
+            },
+            false
+          );
+          if (activePoints.length > 0) {
+            const [{ index }] = activePoints;
+            const dataObj = data[index];
+            if (dataObj.from === "set" && result) {
+              const setObj = result[0][2].sets.find(
+                (tuple) => tuple[0] === dataObj.to
+              );
+              onSelectItem(
+                baseItemName,
+                setObj![0],
+                RARITY.SET,
+                result[0][1].mul(result[0][2].quality[2]).mul(setObj![1])
+              );
+            } else if (dataObj.from === "unique" && result) {
+              const uniqueObj = result![0][2].uniques.find(
+                (tuple) => tuple[0] === dataObj.to
+              );
+              onSelectItem(
+                baseItemName,
+                uniqueObj![0],
+                RARITY.UNIQUE,
+                result[0][1].mul(result[0][2].quality[3]).mul(uniqueObj![1])
+              );
+            }
+          }
+        },
+        onHover: (event, activeEvents) => {
+          (event?.native?.target as HTMLElement).style.cursor =
+            activeEvents?.length > 0 ? "pointer" : "auto";
+        },
         resizeDelay: 50,
         plugins: {
           title: {

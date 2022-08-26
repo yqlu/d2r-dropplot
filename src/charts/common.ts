@@ -4,6 +4,7 @@ import { RARITY } from "../engine/itemratio-dict";
 import { BaseItemProbTuple } from "../engine/resultAggregator";
 import { Gradient } from "javascript-color-gradient";
 import Fraction from "fraction.js";
+import { SelectItemType } from "../Result";
 
 export const TC_GRADIENT = {
   armo: new Gradient()
@@ -63,6 +64,7 @@ export type IDashboardPropType = {
   itemName: string;
   rarity: RARITY;
   selectedChance: Fraction;
+  onSelectItem: SelectItemType;
 };
 
 export const REGULAR_COLOR = "white";

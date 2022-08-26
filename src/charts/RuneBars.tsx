@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { max, range, sortBy, sum } from "lodash-es";
-import { ChartDataset, ScriptableContext, TooltipItem } from "chart.js";
+import { range, sortBy } from "lodash-es";
+import { ScriptableContext, TooltipItem } from "chart.js";
+import { getRelativePosition } from "chart.js/helpers";
 import Chart from "chart.js/auto";
 
 import { BaseItemProbTuple } from "../engine/resultAggregator";
@@ -13,6 +14,8 @@ import {
   RUNE_REGEX,
 } from "./common";
 import { ItemDict } from "../engine/item-dict";
+import { RARITY } from "../engine/itemratio-dict";
+import Fraction from "fraction.js";
 
 const getData = (results: BaseItemProbTuple[], baseItemName: string) => {
   const runes = results.filter(
@@ -25,11 +28,9 @@ const getData = (results: BaseItemProbTuple[], baseItemName: string) => {
 const LocaleShortForm = (rune: string) => Locale(rune).split(" ")[0];
 
 export const RuneBars = ({
-  playerFormState,
   results,
   baseItemName,
-  itemName,
-  rarity,
+  onSelectItem,
 }: IDashboardPropType): JSX.Element => {
   const [runeFilter, setRuneFilter] = useState("r00");
   const filterOptions = range(1, 34).map((num) => {
@@ -49,7 +50,6 @@ export const RuneBars = ({
       (tuple) =>
         Number(tuple[0].substring(1)) >= Number(runeFilter.substring(1))
     );
-    console.log(runeFilter, tcs, filterTcs);
     const labels = filterTcs.map((tuple) => LocaleShortForm(tuple[0]));
     const dataset = {
       data: filterTcs.map((tuple) => {
@@ -71,8 +71,25 @@ export const RuneBars = ({
         datasets: [dataset],
       },
       options: {
-        options: {
-          animation: false,
+        onClick: (e) => {
+          const activePoints = chart.getElementsAtEventForMode(
+            e,
+            "nearest",
+            {
+              intersect: true,
+            },
+            false
+          );
+          if (activePoints.length > 0) {
+            const [{ index }] = activePoints;
+            const subject = dataset.data[index].tc;
+            const chance = results.find((tuple) => tuple[0] === subject)![1];
+            onSelectItem(subject, "", RARITY.WHITE, chance);
+          }
+        },
+        onHover: (event, activeEvents) => {
+          (event?.native?.target as HTMLElement).style.cursor =
+            activeEvents?.length > 0 ? "pointer" : "auto";
         },
         scales: {
           y: {

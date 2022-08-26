@@ -45,6 +45,7 @@ const App = (): JSX.Element => {
   const [itemName, setItemName] = useState("");
   const [rarity, setRarity] = useState(RARITY.WHITE);
   const [selectedChance, setSelectedChance] = useState(new Fraction(0));
+  const [scrollPosition, setScrollPosition] = useState(null as number | null);
 
   useEffect(() => {
     const errors = hasPlayerFormErrors(playerFormState, setErrors);
@@ -78,6 +79,12 @@ const App = (): JSX.Element => {
     }
   }, [results]);
 
+  useEffect(() => {
+    if (scrollPosition) {
+      window.scrollTo(window.scrollX, scrollPosition);
+    }
+  }, [scrollPosition]);
+
   const onPlayerFormChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
@@ -106,6 +113,7 @@ const App = (): JSX.Element => {
     rarity,
     chance
   ) => {
+    setScrollPosition(window.scrollY);
     setBaseItemName(baseItemName);
     setItemName(itemName);
     setRarity(rarity);
@@ -146,6 +154,7 @@ const App = (): JSX.Element => {
           itemName={itemName}
           rarity={rarity}
           selectedChance={selectedChance}
+          onSelectItem={selectItem}
         />
       </main>
     </div>

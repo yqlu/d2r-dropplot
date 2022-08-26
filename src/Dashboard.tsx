@@ -20,6 +20,7 @@ export const Dashboard = ({
   itemName,
   rarity,
   selectedChance,
+  onSelectItem,
 }: IDashboardPropType): JSX.Element => {
   let magicFindApplicable = !qualityNotApplicable(baseItemName);
   let isWeaponOrArmor =
@@ -41,6 +42,7 @@ export const Dashboard = ({
                   itemName={itemName}
                   rarity={rarity}
                   selectedChance={selectedChance}
+                  onSelectItem={onSelectItem}
                 />
               </Card>
             )}
@@ -53,6 +55,7 @@ export const Dashboard = ({
                   itemName={itemName}
                   rarity={rarity}
                   selectedChance={selectedChance}
+                  onSelectItem={onSelectItem}
                 />
               </Card>
             )}
@@ -64,6 +67,7 @@ export const Dashboard = ({
                 itemName={itemName}
                 rarity={rarity}
                 selectedChance={selectedChance}
+                onSelectItem={onSelectItem}
               />
             </Card>
             <Card>
@@ -74,6 +78,7 @@ export const Dashboard = ({
                 itemName={itemName}
                 rarity={rarity}
                 selectedChance={selectedChance}
+                onSelectItem={onSelectItem}
               />
             </Card>
             <Card>
@@ -84,6 +89,7 @@ export const Dashboard = ({
                 itemName={itemName}
                 rarity={rarity}
                 selectedChance={selectedChance}
+                onSelectItem={onSelectItem}
               />
             </Card>
             <Card>
@@ -94,6 +100,7 @@ export const Dashboard = ({
                 itemName={itemName}
                 rarity={rarity}
                 selectedChance={selectedChance}
+                onSelectItem={onSelectItem}
               />
             </Card>
             {isWeaponOrArmor && (
@@ -105,6 +112,7 @@ export const Dashboard = ({
                   itemName={itemName}
                   rarity={rarity}
                   selectedChance={selectedChance}
+                  onSelectItem={onSelectItem}
                 />
               </Card>
             )}
@@ -117,6 +125,7 @@ export const Dashboard = ({
                   itemName={itemName}
                   rarity={rarity}
                   selectedChance={selectedChance}
+                  onSelectItem={onSelectItem}
                 />
               </Card>
             )}
@@ -129,6 +138,7 @@ export const Dashboard = ({
                   itemName={itemName}
                   rarity={rarity}
                   selectedChance={selectedChance}
+                  onSelectItem={onSelectItem}
                 />
               </Card>
             )}

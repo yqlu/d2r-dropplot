@@ -25,6 +25,7 @@ import {
   TC_GRADIENT,
 } from "./common";
 import Fraction from "fraction.js";
+import { RARITY } from "../engine/itemratio-dict";
 
 Chart.register(TreemapController, TreemapElement);
 Chart.defaults.color = REGULAR_COLOR;
@@ -84,6 +85,7 @@ export const TreasureClassTreeMap = ({
   baseItemName,
   itemName,
   rarity,
+  onSelectItem,
 }: IDashboardPropType): JSX.Element => {
   const [tcGrouped, setTcGrouped] = useState(false);
 
@@ -129,6 +131,29 @@ export const TreasureClassTreeMap = ({
       },
       options: {
         resizeDelay: 50,
+        onClick: (e) => {
+          const activePoints = chart.getElementsAtEventForMode(
+            e,
+            "nearest",
+            {
+              intersect: true,
+            },
+            false
+          );
+          if (activePoints.length > 0) {
+            const [{ index }] = activePoints;
+            const item = chart.config.data.datasets[0].data[index]!.g;
+            const tcTuple = results.find((tuple) => tuple[0] === item);
+            if (tcTuple) {
+              const chance = tcTuple[1];
+              onSelectItem(item, "", RARITY.WHITE, chance);
+            }
+          }
+        },
+        onHover: (event, activeEvents) => {
+          (event?.native?.target as HTMLElement).style.cursor =
+            activeEvents?.length > 0 ? "pointer" : "auto";
+        },
         datasets: {
           treemap: {
             captions: {

@@ -5,7 +5,7 @@ import { BaseItemProbTuple } from "./engine/resultAggregator";
 import { ItemDict } from "./engine/item-dict";
 import { Locale } from "./engine/locale-dict";
 import { RARITY } from "./engine/itemratio-dict";
-import { REGULAR_COLOR, RUNE_COLOR, RUNE_REGEX } from "./charts/common";
+import { RUNE_REGEX } from "./charts/common";
 
 export type SelectItemType = (
   baseItemName: string,
