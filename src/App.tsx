@@ -55,6 +55,9 @@ const App = (): JSX.Element => {
   }, [playerFormState]);
 
   useEffect(() => {
+    if (monsterFormState.monsterType === MonsterType.TREASURE_CLASS) {
+      return;
+    }
     let [tc, mlvl] = getTcAndMlvlFromMonster(
       monsterFormState.difficulty,
       monsterFormState.monsterType,
@@ -126,9 +129,9 @@ const App = (): JSX.Element => {
         <PlayerForm
           partyCount={playerFormState.partyCount}
           playerCount={playerFormState.playerCount}
-          mlvl={playerFormState.mlvl}
           magicFind={playerFormState.magicFind}
           tc={playerFormState.tc}
+          mlvl={playerFormState.mlvl}
           errors={errors}
           onChange={onPlayerFormChange}
         />
@@ -139,8 +142,11 @@ const App = (): JSX.Element => {
           monster={monsterFormState.monster}
           superunique={monsterFormState.superunique}
           boss={monsterFormState.boss}
+          tc={playerFormState.tc}
+          mlvl={playerFormState.mlvl}
           errors={errors}
-          onChange={onMonsterFormChange}
+          onPlayerFormChange={onPlayerFormChange}
+          onMonsterFormChange={onMonsterFormChange}
         />
         <div className="resultParent h-full overflow-y-auto">
           <Result results={results} onSelectItem={selectItem} />

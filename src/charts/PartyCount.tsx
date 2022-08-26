@@ -9,12 +9,13 @@ import { makeLookupTcFunction, TcCalculator } from "../engine/tc";
 import { TCDict } from "../engine/tc-dict";
 import { AtomicDict } from "../engine/atomic-dict";
 import {
+  colorClassFromRarity,
   IDashboardPropType,
   REGULAR_COLOR,
   RUNE_COLOR,
-  UNIQUE_COLOR,
 } from "./common";
 import { Locale } from "../engine/locale-dict";
+import { RARITY } from "../engine/itemratio-dict";
 
 Chart.defaults.borderColor = "rgba(255,255,255,0.2)";
 
@@ -142,11 +143,12 @@ export const PartyCountChart = ({
     };
   }, [playerFormState.tc, playerFormState.mlvl, baseItemName]);
 
+  const styling = colorClassFromRarity(baseItemName, RARITY.WHITE);
   return (
     <div>
       <div className="chartTitle">
-        <span className="font-bold">{Locale(baseItemName)}</span> Drop Rate vs
-        Player Count
+        <span className={"font-bold " + styling}>{Locale(baseItemName)}</span>{" "}
+        Drop Rate vs Player Count
       </div>
       <canvas id="partyCountChart"></canvas>
     </div>

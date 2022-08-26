@@ -18,6 +18,7 @@ export enum MonsterType {
   UNIQUE,
   SUPERUNIQUE,
   BOSS,
+  TREASURE_CLASS,
 }
 
 export const MonsterDict: { [key: string]: MonsterEntry } = {

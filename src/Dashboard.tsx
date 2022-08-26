@@ -33,6 +33,28 @@ export const Dashboard = ({
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 place-content-stretch">
         {baseItemName && (
           <React.Fragment>
+            <Card>
+              <RepeatedRunsChart
+                playerFormState={playerFormState}
+                results={results}
+                baseItemName={baseItemName}
+                itemName={itemName}
+                rarity={rarity}
+                selectedChance={selectedChance}
+                onSelectItem={onSelectItem}
+              />
+            </Card>
+            <Card>
+              <BinomialRunsChart
+                playerFormState={playerFormState}
+                results={results}
+                baseItemName={baseItemName}
+                itemName={itemName}
+                rarity={rarity}
+                selectedChance={selectedChance}
+                onSelectItem={onSelectItem}
+              />
+            </Card>
             {magicFindApplicable && (
               <Card>
                 <MagicFindChart
@@ -59,28 +81,6 @@ export const Dashboard = ({
                 />
               </Card>
             )}
-            <Card>
-              <RepeatedRunsChart
-                playerFormState={playerFormState}
-                results={results}
-                baseItemName={baseItemName}
-                itemName={itemName}
-                rarity={rarity}
-                selectedChance={selectedChance}
-                onSelectItem={onSelectItem}
-              />
-            </Card>
-            <Card>
-              <BinomialRunsChart
-                playerFormState={playerFormState}
-                results={results}
-                baseItemName={baseItemName}
-                itemName={itemName}
-                rarity={rarity}
-                selectedChance={selectedChance}
-                onSelectItem={onSelectItem}
-              />
-            </Card>
             <Card>
               <PartyCountChart
                 playerFormState={playerFormState}

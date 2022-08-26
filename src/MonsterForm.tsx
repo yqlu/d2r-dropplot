@@ -6,6 +6,7 @@ import { LevelsDict } from "./engine/levels-dict";
 import { SuperuniqueDict } from "./engine/superunique-dict";
 import { FlatBossDict, getBossHierarchy } from "./engine/boss-dict";
 import { Locale } from "./engine/locale-dict";
+import { TCDict } from "./engine/tc-dict";
 
 export type MonsterFormState = {
   difficulty: Difficulty;
@@ -14,11 +15,16 @@ export type MonsterFormState = {
   monster: string;
   superunique: string;
   boss: string;
+  tc: string;
+  mlvl: string;
 };
 
 export type MonsterFormProps = MonsterFormState & {
   errors: any;
-  onChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
+  onPlayerFormChange: (
+    event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => void;
+  onMonsterFormChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
 };
 
 const makeLevelOptions = (): JSX.Element[] => {
@@ -87,9 +93,20 @@ const getMonsterList = (
   return uniq(monList.filter((mon) => MonsterDict[mon]));
 };
 
+const makeTcOptions = (): JSX.Element[] => {
+  return Object.keys(TCDict).map((tcName) => {
+    return (
+      <option value={tcName} key={tcName}>
+        {tcName}
+      </option>
+    );
+  });
+};
+
 export const MonsterForm = (props: MonsterFormProps): JSX.Element => {
   let monsterOptions: JSX.Element[] = [];
   let bossElements: JSX.Element[] = [];
+  let tcOptions: JSX.Element[] = [];
   if (monsterApplicable(props.monsterType)) {
     monsterOptions = getMonsterList(
       props.levelId,
@@ -135,37 +152,26 @@ export const MonsterForm = (props: MonsterFormProps): JSX.Element => {
           </optgroup>
         );
       });
+  } else if (props.monsterType == MonsterType.TREASURE_CLASS) {
+    tcOptions = makeTcOptions();
   }
 
   return (
     <div className="w-full px-3">
-      <div className="form-group">
-        <label className="form-label">Difficulty</label>
-        <select
-          className="select"
-          id="difficulty"
-          value={props.difficulty}
-          onChange={props.onChange}
-        >
-          <option key={Difficulty.NORMAL} value={Difficulty.NORMAL}>
-            Normal
-          </option>
-          <option key={Difficulty.NIGHTMARE} value={Difficulty.NIGHTMARE}>
-            Nightmare
-          </option>
-          <option key={Difficulty.HELL} value={Difficulty.HELL}>
-            Hell
-          </option>
-        </select>
-      </div>
       <div className="form-group">
         <label className="form-label">Monster Type</label>
         <select
           className="select"
           id="monsterType"
           value={props.monsterType}
-          onChange={props.onChange}
+          onChange={props.onMonsterFormChange}
         >
+          <option
+            key={MonsterType.TREASURE_CLASS}
+            value={MonsterType.TREASURE_CLASS}
+          >
+            Treasure Class
+          </option>
           <option key={MonsterType.NORMAL} value={MonsterType.NORMAL}>
             Normal
           </option>
@@ -186,6 +192,52 @@ export const MonsterForm = (props: MonsterFormProps): JSX.Element => {
           </option>
         </select>
       </div>
+      {props.monsterType === MonsterType.TREASURE_CLASS && (
+        <div className="form-group">
+          <label className="form-label">TC</label>
+          <select
+            className="select"
+            id="tc"
+            value={props.tc}
+            onChange={props.onPlayerFormChange}
+          >
+            {tcOptions}
+          </select>
+        </div>
+      )}
+      {props.monsterType === MonsterType.TREASURE_CLASS && (
+        <div className="form-group">
+          <label className="form-label">Mlvl</label>
+          <input
+            type="text"
+            id="mlvl"
+            className={(props.errors.mlvl ? "error " : "") + "textbox"}
+            value={props.mlvl}
+            onChange={props.onPlayerFormChange}
+          />
+        </div>
+      )}
+      {props.monsterType !== MonsterType.TREASURE_CLASS && (
+        <div className="form-group">
+          <label className="form-label">Difficulty</label>
+          <select
+            className="select"
+            id="difficulty"
+            value={props.difficulty}
+            onChange={props.onMonsterFormChange}
+          >
+            <option key={Difficulty.NORMAL} value={Difficulty.NORMAL}>
+              Normal
+            </option>
+            <option key={Difficulty.NIGHTMARE} value={Difficulty.NIGHTMARE}>
+              Nightmare
+            </option>
+            <option key={Difficulty.HELL} value={Difficulty.HELL}>
+              Hell
+            </option>
+          </select>
+        </div>
+      )}
       {monsterApplicable(props.monsterType) && (
         <div className="form-group">
           <label className="form-label">Levels</label>
@@ -193,7 +245,7 @@ export const MonsterForm = (props: MonsterFormProps): JSX.Element => {
             className="select"
             id="levelId"
             value={props.levelId}
-            onChange={props.onChange}
+            onChange={props.onMonsterFormChange}
           >
             {makeLevelOptions()}
           </select>
@@ -206,7 +258,7 @@ export const MonsterForm = (props: MonsterFormProps): JSX.Element => {
             className="select"
             id="monster"
             value={props.monster}
-            onChange={props.onChange}
+            onChange={props.onMonsterFormChange}
           >
             {monsterOptions}
           </select>
@@ -219,7 +271,7 @@ export const MonsterForm = (props: MonsterFormProps): JSX.Element => {
             className="select"
             id="superunique"
             value={props.superunique}
-            onChange={props.onChange}
+            onChange={props.onMonsterFormChange}
           >
             {makeSuperuniqueElements()}
           </select>
@@ -232,7 +284,7 @@ export const MonsterForm = (props: MonsterFormProps): JSX.Element => {
             className="select"
             id="boss"
             value={props.boss}
-            onChange={props.onChange}
+            onChange={props.onMonsterFormChange}
           >
             {bossElements}
           </select>

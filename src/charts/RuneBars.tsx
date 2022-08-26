@@ -143,7 +143,8 @@ export const RuneBars = ({
   return (
     <div>
       <div className="chartTitle">
-        Rune Drop Chance
+        <span className="font-bold text-rune">{Locale(baseItemName)}</span> Drop
+        Chance
         <div className="chartSubtitle">
           Filter runes above{" "}
           <select
