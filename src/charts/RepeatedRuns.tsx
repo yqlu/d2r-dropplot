@@ -11,11 +11,13 @@ import {
 import { Locale } from "../engine/locale-dict";
 import Fraction from "fraction.js";
 
-const getXRange = (singleRunChance: number): number[] => {
-  const intervals = 10;
+export const getXMax = (
+  singleRunChance: number,
+  intervals: number = 10
+): number => {
   const expectedRuns90Chance = Math.log(0.1) / Math.log(1 - singleRunChance);
   if (expectedRuns90Chance <= intervals) {
-    return range(intervals + 1);
+    return intervals + 1;
   }
   const powerOf10 = Math.floor(Math.log10(expectedRuns90Chance));
   const leadingDigit = Math.floor(
@@ -30,12 +32,14 @@ const getXRange = (singleRunChance: number): number[] => {
   } else {
     max = (leadingDigit + 1) * Math.pow(10, powerOf10);
   }
-  return range(intervals + 1).map((x) => (x * max) / intervals);
+  return max;
 };
 
 const getData = (selectedChance: Fraction) => {
   const singleRunChance = selectedChance.valueOf();
-  const xs = getXRange(singleRunChance);
+  const intervals = 10;
+  const xMax = getXMax(singleRunChance, intervals);
+  const xs = range(intervals + 1).map((x) => (x * xMax) / intervals);
   const ys = xs.map(
     (x) => Math.floor((1 - Math.pow(1 - singleRunChance, x)) * 1000) / 10
   );
@@ -85,7 +89,7 @@ export const RepeatedRunsChart = ({
           x: {
             title: {
               display: true,
-              text: "Runs",
+              text: "Copies",
             },
           },
         },
