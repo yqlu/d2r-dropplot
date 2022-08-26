@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { range } from "lodash-es";
 import { ChartTypeRegistry, InteractionMode, TooltipItem } from "chart.js";
 import Chart from "chart.js/auto";
@@ -35,11 +35,10 @@ export const getXMax = (
   return max;
 };
 
-const getData = (selectedChance: Fraction) => {
+const getData = (selectedChance: Fraction, runs: number) => {
   const singleRunChance = selectedChance.valueOf();
   const intervals = 10;
-  const xMax = getXMax(singleRunChance, intervals);
-  const xs = range(intervals + 1).map((x) => (x * xMax) / intervals);
+  const xs = range(intervals + 1).map((x) => (x * runs) / intervals);
   const ys = xs.map(
     (x) => Math.floor((1 - Math.pow(1 - singleRunChance, x)) * 1000) / 10
   );
@@ -57,11 +56,13 @@ export const RepeatedRunsChart = ({
   rarity,
   selectedChance,
 }: IDashboardPropType): JSX.Element => {
+  const [runs, setRuns] = useState(getXMax(selectedChance.valueOf()));
+  useEffect(() => setRuns(getXMax(selectedChance.valueOf())), [selectedChance]);
   useEffect(() => {
     if (baseItemName == "") {
       return;
     }
-    const { xs, ys } = getData(selectedChance);
+    const { xs, ys } = getData(selectedChance, runs);
     let ctx = (
       document.getElementById("repeatedRunsChart") as HTMLCanvasElement
     )?.getContext("2d");
@@ -126,7 +127,7 @@ export const RepeatedRunsChart = ({
     return () => {
       chart?.destroy();
     };
-  }, [playerFormState, results, baseItemName, itemName, rarity]);
+  }, [playerFormState, results, baseItemName, itemName, rarity, runs]);
 
   const name = itemName === "" ? baseItemName : itemName;
   const styling = colorClassFromRarity(baseItemName, rarity);
@@ -134,7 +135,14 @@ export const RepeatedRunsChart = ({
     <div>
       <div className="chartTitle">
         Cumulative chance to drop{" "}
-        <span className={"font-bold " + styling}>{Locale(name)}</span>
+        <span className={"font-bold " + styling}>{Locale(name)}</span> over{" "}
+        <input
+          type="text"
+          className="inline-textbox w-16"
+          value={runs}
+          onChange={(event) => setRuns(Number(event.target.value))}
+        />{" "}
+        runs
       </div>
       <canvas id="repeatedRunsChart"></canvas>
     </div>

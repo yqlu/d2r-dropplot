@@ -45,9 +45,7 @@ export const BinomialRunsChart = ({
   selectedChance,
 }: IDashboardPropType): JSX.Element => {
   const [runs, setRuns] = useState(getXMax(selectedChance.valueOf()));
-
   useEffect(() => setRuns(getXMax(selectedChance.valueOf())), [selectedChance]);
-
   useEffect(() => {
     if (baseItemName == "") {
       return;
