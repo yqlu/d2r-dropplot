@@ -68,8 +68,8 @@ export const RepeatedRunsChart = ({
         datasets: [
           {
             data: ys,
-            backgroundColor: colorFromRarity(rarity),
-            borderColor: colorFromRarity(rarity),
+            backgroundColor: colorFromRarity(baseItemName, rarity),
+            borderColor: colorFromRarity(baseItemName, rarity),
           },
         ],
       },
@@ -125,8 +125,7 @@ export const RepeatedRunsChart = ({
   }, [playerFormState, results, baseItemName, itemName, rarity]);
 
   const name = itemName === "" ? baseItemName : itemName;
-  const styling = colorClassFromRarity(rarity);
-
+  const styling = colorClassFromRarity(baseItemName, rarity);
   return (
     <div>
       <div className="chartTitle">

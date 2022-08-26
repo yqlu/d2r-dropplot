@@ -3,13 +3,10 @@ import { map, range, sum } from "lodash-es";
 import { ChartTypeRegistry, TooltipItem } from "chart.js";
 import Chart from "chart.js/auto";
 
-import { RARITY } from "../engine/itemratio-dict";
 import { getAdjustedNoDrop } from "../engine/tc";
 import { TCDict } from "../engine/tc-dict";
-import { IDashboardPropType, WHITE_COLOR, UNIQUE_COLOR } from "./common";
-import { PlayerFormState } from "../PlayerForm";
+import { IDashboardPropType, REGULAR_COLOR, RUNE_COLOR } from "./common";
 
-Chart.defaults.color = WHITE_COLOR;
 Chart.defaults.borderColor = "rgba(255,255,255,0.2)";
 
 const getData = (tc: string) => {
@@ -41,14 +38,14 @@ export const NoDropChart = ({
     const playerDataset = {
       label: "Player",
       data: players,
-      backgroundColor: WHITE_COLOR,
-      borderColor: WHITE_COLOR,
+      backgroundColor: REGULAR_COLOR,
+      borderColor: REGULAR_COLOR,
     };
     const partyDataset = {
       label: "Party",
       data: party,
-      backgroundColor: UNIQUE_COLOR,
-      borderColor: UNIQUE_COLOR,
+      backgroundColor: RUNE_COLOR,
+      borderColor: RUNE_COLOR,
     };
 
     let ctx = (

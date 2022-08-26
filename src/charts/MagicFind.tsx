@@ -12,7 +12,7 @@ import { AtomicDict } from "../engine/atomic-dict";
 import { PlayerFormState } from "../PlayerForm";
 import {
   IDashboardPropType,
-  WHITE_COLOR,
+  REGULAR_COLOR,
   MAGIC_COLOR,
   RARE_COLOR,
   SET_COLOR,
@@ -86,8 +86,8 @@ export const MagicFindChart = ({
           .valueOf();
         return formatPercent(chance);
       }),
-      backgroundColor: WHITE_COLOR,
-      borderColor: WHITE_COLOR,
+      backgroundColor: REGULAR_COLOR,
+      borderColor: REGULAR_COLOR,
       tension,
     };
     const magic = {

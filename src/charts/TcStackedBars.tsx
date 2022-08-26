@@ -14,7 +14,7 @@ import {
   TC_GRADIENT,
   IDashboardPropType,
   STACKED_BAR_COLORS,
-  WHITE_COLOR,
+  REGULAR_COLOR,
 } from "./common";
 
 const TC_REGEX = /^(weap|armo|bow|mele)(\d+)$/;
@@ -160,7 +160,7 @@ export const TreasureClassStackedBars = ({
               ];
             },
             hoverBackgroundColor: (ctx: ScriptableContext<"bar">) => {
-              return WHITE_COLOR;
+              return REGULAR_COLOR;
             },
           },
         },

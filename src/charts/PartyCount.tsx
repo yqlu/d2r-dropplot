@@ -4,16 +4,18 @@ import { ChartTypeRegistry, TooltipItem } from "chart.js";
 import Chart from "chart.js/auto";
 import Fraction from "fraction.js";
 
-import { RARITY } from "../engine/itemratio-dict";
 import { BaseItemResultAggregator } from "../engine/resultAggregator";
 import { makeLookupTcFunction, TcCalculator } from "../engine/tc";
 import { TCDict } from "../engine/tc-dict";
 import { AtomicDict } from "../engine/atomic-dict";
-import { IDashboardPropType, WHITE_COLOR, UNIQUE_COLOR } from "./common";
-import { PlayerFormState } from "../PlayerForm";
+import {
+  IDashboardPropType,
+  REGULAR_COLOR,
+  RUNE_COLOR,
+  UNIQUE_COLOR,
+} from "./common";
 import { Locale } from "../engine/locale-dict";
 
-Chart.defaults.color = WHITE_COLOR;
 Chart.defaults.borderColor = "rgba(255,255,255,0.2)";
 
 const calculateBaseItemProbability = (
@@ -78,14 +80,14 @@ export const PartyCountChart = ({
     const player = {
       label: "Player",
       data: ys.map((val) => makePercent(val.player.valueOf())),
-      backgroundColor: WHITE_COLOR,
-      borderColor: WHITE_COLOR,
+      backgroundColor: REGULAR_COLOR,
+      borderColor: REGULAR_COLOR,
     };
     const party = {
       label: "Party",
       data: ys.map((val) => makePercent(val.party.valueOf())),
-      backgroundColor: UNIQUE_COLOR,
-      borderColor: UNIQUE_COLOR,
+      backgroundColor: RUNE_COLOR,
+      borderColor: RUNE_COLOR,
     };
 
     let ctx = (

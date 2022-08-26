@@ -4,14 +4,12 @@ import { ChartTypeRegistry, InteractionMode, TooltipItem } from "chart.js";
 import Chart from "chart.js/auto";
 
 import { binomialDistributionFunction, colorClassFromRarity } from "./common";
-import { RARITY } from "../engine/itemratio-dict";
-import { BaseItemProbTuple } from "../engine/resultAggregator";
-import { IDashboardPropType, WHITE_COLOR, colorFromRarity } from "./common";
+import { IDashboardPropType, REGULAR_COLOR, colorFromRarity } from "./common";
 import { Locale } from "../engine/locale-dict";
 
 Chart.defaults.font.family =
   "'Noto Sans', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif";
-Chart.defaults.color = WHITE_COLOR;
+Chart.defaults.color = REGULAR_COLOR;
 Chart.defaults.borderColor = "rgba(255,255,255,0.2)";
 
 const getData = (runs: number, singleRunChance: number) => {
@@ -62,8 +60,8 @@ export const BinomialRunsChart = ({
         datasets: [
           {
             data: ys,
-            backgroundColor: colorFromRarity(rarity),
-            borderColor: colorFromRarity(rarity),
+            backgroundColor: colorFromRarity(baseItemName, rarity),
+            borderColor: colorFromRarity(baseItemName, rarity),
           },
         ],
       },
@@ -119,7 +117,7 @@ export const BinomialRunsChart = ({
   }, [selectedChance, runs]);
 
   const name = itemName === "" ? baseItemName : itemName;
-  const styling = colorClassFromRarity(rarity);
+  const styling = colorClassFromRarity(baseItemName, rarity);
 
   return (
     <div>

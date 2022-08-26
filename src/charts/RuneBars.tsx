@@ -3,32 +3,21 @@ import { max, range, sortBy, sum } from "lodash-es";
 import { ChartDataset, ScriptableContext, TooltipItem } from "chart.js";
 import Chart from "chart.js/auto";
 
-import {
-  BaseItemProbTuple,
-  TCProbTuple,
-  TCResultAggregator,
-} from "../engine/resultAggregator";
-import { makeLookupTcFunction, TcCalculator } from "../engine/tc";
-import { TCDict, TCDictType } from "../engine/tc-dict";
-import { AtomicDict, getAtomicFraction } from "../engine/atomic-dict";
+import { BaseItemProbTuple } from "../engine/resultAggregator";
 import { Locale } from "../engine/locale-dict";
 
-import { PlayerFormState } from "../PlayerForm";
 import {
-  TC_GRADIENT,
   IDashboardPropType,
-  STACKED_BAR_COLORS,
-  WHITE_COLOR,
+  REGULAR_COLOR,
   RUNE_COLOR,
+  RUNE_REGEX,
 } from "./common";
 import { ItemDict } from "../engine/item-dict";
-
-export const TC_REGEX = /^r(\d+)$/;
 
 const getData = (results: BaseItemProbTuple[], baseItemName: string) => {
   const runes = results.filter(
     (tuple) =>
-      TC_REGEX.test(tuple[0]) && Number(TC_REGEX.exec(tuple[0])![1]) > 0
+      RUNE_REGEX.test(tuple[0]) && Number(RUNE_REGEX.exec(tuple[0])![1]) > 0
   );
   return sortBy(runes, (tuple) => ItemDict[tuple[0]].level);
 };
@@ -100,7 +89,7 @@ export const RuneBars = ({
             borderWidth: 1,
             backgroundColor: (ctx: ScriptableContext<"bar">) => {
               if (ctx.raw!.tc === baseItemName) {
-                return WHITE_COLOR;
+                return REGULAR_COLOR;
               }
               return RUNE_COLOR;
             },

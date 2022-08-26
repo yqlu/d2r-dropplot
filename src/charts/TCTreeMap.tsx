@@ -20,14 +20,14 @@ import { TCProbTuple, TCResultAggregator } from "../engine/resultAggregator";
 import { PlayerFormState } from "../PlayerForm";
 import {
   IDashboardPropType,
-  WHITE_COLOR,
+  REGULAR_COLOR,
   TREEMAP_COLORS,
   TC_GRADIENT,
 } from "./common";
 import Fraction from "fraction.js";
 
 Chart.register(TreemapController, TreemapElement);
-Chart.defaults.color = WHITE_COLOR;
+Chart.defaults.color = REGULAR_COLOR;
 
 type TreemapDataType = Record<string, unknown>;
 
@@ -133,12 +133,12 @@ export const TreasureClassTreeMap = ({
           treemap: {
             captions: {
               display: true,
-              color: WHITE_COLOR,
+              color: REGULAR_COLOR,
             },
             labels: {
               display: true,
               align: "left",
-              color: WHITE_COLOR,
+              color: REGULAR_COLOR,
               font: { size: 8 },
               formatter: (ctx: ScriptableContext<"treemap">) => {
                 return Locale((ctx.raw as any).g);

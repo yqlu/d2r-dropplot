@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { IDashboardPropType } from "./charts/common";
+import { IDashboardPropType, RUNE_REGEX } from "./charts/common";
 import { MagicFindChart } from "./charts/MagicFind";
 import { RepeatedRunsChart } from "./charts/RepeatedRuns";
 import { PartyCountChart } from "./charts/PartyCount";
 import { TreasureClassTreeMap } from "./charts/TCTreeMap";
-import { RARITY } from "./engine/itemratio-dict";
-import { RuneBars, TC_REGEX } from "./charts/RuneBars";
+import { RuneBars } from "./charts/RuneBars";
 import { RarityBreakdownChart } from "./charts/RarityBreakdown";
 import { TreasureClassStackedBars } from "./charts/TcStackedBars";
 import { BinomialRunsChart } from "./charts/BinomialRuns";
@@ -26,7 +25,7 @@ export const Dashboard = ({
   let isWeaponOrArmor =
     WeaponsDict.hasOwnProperty(baseItemName) ||
     ArmorDict.hasOwnProperty(baseItemName);
-  let isRune = TC_REGEX.test(baseItemName);
+  let isRune = RUNE_REGEX.test(baseItemName);
   return (
     <div>
       {baseItemName} {itemName} {rarity}

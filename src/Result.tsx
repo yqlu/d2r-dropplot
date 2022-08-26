@@ -5,6 +5,7 @@ import { BaseItemProbTuple } from "./engine/resultAggregator";
 import { ItemDict } from "./engine/item-dict";
 import { Locale } from "./engine/locale-dict";
 import { RARITY } from "./engine/itemratio-dict";
+import { REGULAR_COLOR, RUNE_COLOR, RUNE_REGEX } from "./charts/common";
 
 export type SelectItemType = (
   baseItemName: string,
@@ -55,7 +56,7 @@ export const Result = ({
       children.push(
         <tr key={item[0]} className="sub-table-row">
           <td
-            className="px-5 text-lime-500"
+            className="px-5 text-set"
             onClick={(e) =>
               onSelectItem(tcTuple[0], item[0], RARITY.SET, chance)
             }
@@ -75,7 +76,7 @@ export const Result = ({
       children.push(
         <tr key={item[0]} className="sub-table-row">
           <td
-            className="px-5 text-orange-400"
+            className="px-5 text-unique"
             onClick={(e) =>
               onSelectItem(tcTuple[0], item[0], RARITY.UNIQUE, chance)
             }
@@ -90,6 +91,7 @@ export const Result = ({
         </tr>
       );
     }
+    const styling = RUNE_REGEX.test(tcTuple[0]) ? "text-rune" : "text-white";
     return (
       <React.Fragment key={tcTuple[0]}>
         <tr
@@ -98,12 +100,12 @@ export const Result = ({
             onSelectItem(tcTuple[0], "", RARITY.WHITE, tcTuple[1])
           }
         >
-          <td className="">{name}</td>
+          <td className={styling}>{name}</td>
           <td>{formatReciprocal(tcTuple[1])}</td>
-          <td className="text-sky-400">{format(tcTuple[2].quality[0])}</td>
-          <td className="text-yellow-400">{format(tcTuple[2].quality[1])}</td>
-          <td className="text-lime-500">{format(tcTuple[2].quality[2])}</td>
-          <td className="text-orange-400">{format(tcTuple[2].quality[3])}</td>
+          <td className="text-magic">{format(tcTuple[2].quality[0])}</td>
+          <td className="text-rare">{format(tcTuple[2].quality[1])}</td>
+          <td className="text-set">{format(tcTuple[2].quality[2])}</td>
+          <td className="text-unique">{format(tcTuple[2].quality[3])}</td>
         </tr>
         {children}
       </React.Fragment>

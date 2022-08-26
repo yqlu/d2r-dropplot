@@ -14,7 +14,7 @@ import { BaseItemProbTuple } from "../engine/resultAggregator";
 import { Locale } from "../engine/locale-dict";
 import {
   IDashboardPropType,
-  WHITE_COLOR,
+  REGULAR_COLOR,
   MAGIC_COLOR,
   RARE_COLOR,
   SET_COLOR,
@@ -35,8 +35,8 @@ const getData = (results: BaseItemProbTuple[], baseItemName: string) => {
   // TODO: FORK FOR ALPHA
   const labels: Record<string, string> = { base: Locale(baseItemName) };
   const colors: Record<string, string> = {
-    base: WHITE_COLOR,
-    normal: WHITE_COLOR,
+    base: REGULAR_COLOR,
+    normal: REGULAR_COLOR,
     magic: MAGIC_COLOR,
     rare: RARE_COLOR,
     set: SET_COLOR,
@@ -132,9 +132,9 @@ export const RarityBreakdownChart = ({
             data: data,
             color: "white",
             colorFrom: (c) =>
-              colors[c.dataset.data[c.dataIndex].from] ?? WHITE_COLOR,
+              colors[c.dataset.data[c.dataIndex].from] ?? REGULAR_COLOR,
             colorTo: (c) =>
-              colors[c.dataset.data[c.dataIndex].to] ?? WHITE_COLOR,
+              colors[c.dataset.data[c.dataIndex].to] ?? REGULAR_COLOR,
             colorMode: "to",
             labels: labels,
             column: { normal: 1, magic: 1, rare: 1 },

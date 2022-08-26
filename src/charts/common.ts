@@ -65,14 +65,17 @@ export type IDashboardPropType = {
   selectedChance: Fraction;
 };
 
-export const WHITE_COLOR = "white";
-export const MAGIC_COLOR = "#38BDF8"; // sky-400
-export const RARE_COLOR = "#FACC15"; // yellow-400
-export const SET_COLOR = "#84CC16"; // lime-500
-export const UNIQUE_COLOR = "#FB923C"; // orange-400
-export const RUNE_COLOR = "#FB923C"; // orange-400
+export const REGULAR_COLOR = "white";
+export const MAGIC_COLOR = "#3B82F6";
+export const RARE_COLOR = "#FACC15";
+export const SET_COLOR = "#84CC16";
+export const UNIQUE_COLOR = "#c7b377";
+export const RUNE_COLOR = "#F97316";
 
-export const colorFromRarity = (rarity: RARITY): string => {
+export const colorFromRarity = (name: string, rarity: RARITY): string => {
+  if (RUNE_REGEX.test(name)) {
+    return RUNE_COLOR;
+  }
   switch (rarity) {
     case RARITY.UNIQUE:
       return UNIQUE_COLOR;
@@ -83,22 +86,25 @@ export const colorFromRarity = (rarity: RARITY): string => {
     case RARITY.MAGIC:
       return MAGIC_COLOR;
     default:
-      return WHITE_COLOR;
+      return REGULAR_COLOR;
   }
 };
 
-export const colorClassFromRarity = (rarity: RARITY): string => {
+export const colorClassFromRarity = (name: string, rarity: RARITY): string => {
+  if (RUNE_REGEX.test(name)) {
+    return "text-rune";
+  }
   switch (rarity) {
     case RARITY.UNIQUE:
-      return "text-orange-400";
+      return "text-unique";
     case RARITY.SET:
-      return "text-lime-500";
+      return "text-set";
     case RARITY.RARE:
-      return "text-yellow-400";
+      return "text-rare";
     case RARITY.MAGIC:
-      return "text-sky-400";
+      return "text-magic";
     default:
-      return "white";
+      return "text-regular";
   }
 };
 
@@ -118,6 +124,8 @@ export const STACKED_BAR_COLORS = {
   TC: color("#1565c0").rgbString(), // blue-800
   ACTIVE: color("#e53935").rgbString(), // purple-800
 };
+
+export const RUNE_REGEX = /^r(\d+)$/;
 
 const n_choose_k = function (n: number, k: number) {
   if (k > n - k) {
