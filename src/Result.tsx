@@ -1,52 +1,15 @@
 import React, { useState } from "react";
-import Fraction from "fraction.js";
+import { RUNE_REGEX } from "./charts/common";
 
 import { BaseItemProbTuple } from "./engine/resultAggregator";
-import { ItemDict } from "./engine/item-dict";
-import { Locale } from "./engine/locale-dict";
-import { RARITY } from "./engine/itemratio-dict";
-import { RUNE_REGEX } from "./charts/common";
-import { SetDict, UniqueDict } from "./engine/unique-set-dict";
-
-export type SelectItemType = (
-  baseItemName: string,
-  itemName: string,
-  rarity: RARITY,
-  chance: Fraction
-) => void;
+import { ArmorDict, WeaponsDict } from "./engine/weapon-armor-dict";
+import { SelectItemType, ResultListing, tryLocale } from "./ResultListing";
 
 type IAppPropType = {
   results: BaseItemProbTuple[];
   onSelectItem: SelectItemType;
   displayFull: boolean;
 };
-
-function format(percent: Fraction) {
-  if (percent.valueOf() === 0) {
-    return "";
-  }
-  return `${Math.round(percent.valueOf() * 10000) / 100}%`;
-}
-
-function formatReciprocal(chance: Fraction) {
-  if (chance.valueOf() === 0) {
-    return `0`;
-  }
-  let f = chance.inverse().valueOf();
-  if (f < 50) {
-    f = Math.round(f * 10) / 10;
-  } else {
-    f = Math.round(f);
-  }
-  return `1:${f}`;
-}
-
-function tryLocale(name: string) {
-  if (ItemDict[name]) {
-    return Locale(name);
-  }
-  return name;
-}
 
 function getNames(tcTuple: BaseItemProbTuple) {
   const names: string[] = [];
@@ -60,14 +23,30 @@ function getNames(tcTuple: BaseItemProbTuple) {
   return names;
 }
 
+function testJewelry(name: string) {
+  return (
+    name === "rin" ||
+    name === "amu" ||
+    name === "jew" ||
+    name === "cm1" ||
+    name === "cm2" ||
+    name === "cm3"
+  );
+}
+
 export const Result = ({
   results,
   onSelectItem,
 }: IAppPropType): JSX.Element => {
   const [textFilter, setTextFilter] = useState("");
+  const [includeWeapons, setIncludeWeapons] = useState(true);
+  const [includeArmor, setIncludeArmor] = useState(true);
+  const [includeJewelry, setIncludeJewelry] = useState(true);
+  const [includeRunes, setIncludeRunes] = useState(true);
+  const [includeOthers, setIncludeOthers] = useState(true);
 
   const textFilterRegex = new RegExp(textFilter);
-  const tableRows = results
+  const filteredResults = results
     .filter((tcTuple) => {
       if (textFilter === "") {
         return true;
@@ -75,84 +54,25 @@ export const Result = ({
       const names = getNames(tcTuple);
       return names.some((name) => textFilterRegex.test(name));
     })
-    .map((tcTuple) => {
-      let name;
-      if (ItemDict[tcTuple[0]]) {
-        name = Locale(tcTuple[0]);
-      } else {
-        name = tcTuple[0];
+    .filter((tcTuple) => {
+      const name = tcTuple[0];
+      const isWeapon = WeaponsDict[name];
+      const isArmor = ArmorDict[name];
+      const isRune = RUNE_REGEX.test(name);
+      const isJewelry = testJewelry(name);
+      const isOthers = !isWeapon && !isArmor && !isRune && !isJewelry;
+      if (!includeWeapons && isWeapon) {
+        return false;
+      } else if (!includeArmor && isArmor) {
+        return false;
+      } else if (!includeRunes && isRune) {
+        return false;
+      } else if (!includeJewelry && isJewelry) {
+        return false;
+      } else if (!includeOthers && isOthers) {
+        return false;
       }
-      const children: JSX.Element[] = [];
-      for (const item of tcTuple[2].sets) {
-        if (textFilter !== "" && !textFilterRegex.test(tryLocale(item[0]))) {
-          continue;
-        }
-        const chance = item[1].mul(tcTuple[2].quality[2].mul(tcTuple[1]));
-        children.push(
-          <li key={item[0]} className="table-row sub-table-row">
-            <span
-              className="row-name pl-3 text-set"
-              onClick={(e) =>
-                onSelectItem(tcTuple[0], item[0], RARITY.SET, chance)
-              }
-            >
-              {Locale(item[0])}
-            </span>
-            <span className="row-chance">{formatReciprocal(chance)}</span>
-            <span className="row-level">{SetDict[item[0]]?.lvl || "-"}</span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-          </li>
-        );
-      }
-      for (const item of tcTuple[2].uniques) {
-        if (textFilter !== "" && !textFilterRegex.test(tryLocale(item[0]))) {
-          continue;
-        }
-        const chance = item[1].mul(tcTuple[2].quality[3].mul(tcTuple[1]));
-        children.push(
-          <li key={item[0]} className="table-row sub-table-row">
-            <span
-              className="row-name pl-3 text-unique"
-              onClick={(e) =>
-                onSelectItem(tcTuple[0], item[0], RARITY.UNIQUE, chance)
-              }
-            >
-              {Locale(item[0])}
-            </span>
-            <span className="row-chance">{formatReciprocal(chance)}</span>
-            <span className="row-level">{UniqueDict[item[0]]?.lvl || "-"}</span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-          </li>
-        );
-      }
-      const styling = RUNE_REGEX.test(tcTuple[0]) ? "text-rune" : "text-white";
-      return (
-        <React.Fragment key={tcTuple[0]}>
-          <li
-            className="table-row main-table-row"
-            onClick={(e) =>
-              onSelectItem(tcTuple[0], "", RARITY.WHITE, tcTuple[1])
-            }
-          >
-            <span className={"row-name " + styling}>{name}</span>
-            <span className="row-chance">{formatReciprocal(tcTuple[1])}</span>
-            <span className="row-level">
-              {ItemDict[tcTuple[0]]?.level || "-"}
-            </span>
-            <span className="text-magic">{format(tcTuple[2].quality[0])}</span>
-            <span className="text-rare">{format(tcTuple[2].quality[1])}</span>
-            <span className="text-set">{format(tcTuple[2].quality[2])}</span>
-            <span className="text-unique">{format(tcTuple[2].quality[3])}</span>
-          </li>
-          {children}
-        </React.Fragment>
-      );
+      return true;
     });
   return (
     <React.Fragment>
@@ -184,9 +104,43 @@ export const Result = ({
             }
           />
         </div>
+        <span
+          className={"pill " + (includeWeapons ? "" : "unselected")}
+          onClick={() => setIncludeWeapons(!includeWeapons)}
+        >
+          Weapons
+        </span>
+        <span
+          className={"pill " + (includeArmor ? "" : "unselected")}
+          onClick={() => setIncludeArmor(!includeArmor)}
+        >
+          Armor
+        </span>
+        <span
+          className={"pill " + (includeJewelry ? "" : "unselected")}
+          onClick={() => setIncludeJewelry(!includeJewelry)}
+        >
+          Jewelry
+        </span>
+        <span
+          className={"pill " + (includeRunes ? "" : "unselected")}
+          onClick={() => setIncludeRunes(!includeRunes)}
+        >
+          Runes
+        </span>
+        <span
+          className={"pill " + (includeOthers ? "" : "unselected")}
+          onClick={() => setIncludeOthers(!includeOthers)}
+        >
+          Misc
+        </span>
       </div>
       <div className="resultParent flex-grow overflow-y-auto">
-        <ul className="table-body">{tableRows}</ul>
+        <ResultListing
+          filteredResults={filteredResults}
+          onSelectItem={onSelectItem}
+          textFilter={textFilter}
+        />
       </div>
     </React.Fragment>
   );

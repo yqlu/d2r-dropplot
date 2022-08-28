@@ -24,7 +24,7 @@ code {
 
   .inline-textbox {
     @apply appearance-none inline bg-gray-200 text-gray-700 border
-      border-gray-200 rounded px-1 mx-1 py-0 leading-tight focus:outline-none focus:bg-white focus:border-gray-500;
+      border-gray-400 rounded px-1 mx-1 py-0 leading-tight focus:outline-none focus:bg-white focus:border-gray-500;
   }
 
   .inline-select {
@@ -57,6 +57,13 @@ code {
 
   aside {
     transition: width 0.5s ease;
+  }
+
+  .pill {
+    @apply border border-gray-400 px-2 rounded mx-1 select-none cursor-pointer bg-gray-700 hover:bg-gray-500;
+    &.unselected {
+      @apply opacity-20;
+    }
   }
 
   .table-body {
