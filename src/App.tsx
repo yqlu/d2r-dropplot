@@ -46,6 +46,7 @@ const App = (): JSX.Element => {
   const [rarity, setRarity] = useState(RARITY.WHITE);
   const [selectedChance, setSelectedChance] = useState(new Fraction(0));
   const [scrollPosition, setScrollPosition] = useState(null as number | null);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   useEffect(() => {
     const errors = hasPlayerFormErrors(playerFormState, setErrors);
@@ -121,38 +122,57 @@ const App = (): JSX.Element => {
     setItemName(itemName);
     setRarity(rarity);
     setSelectedChance(chance);
+    setSidebarOpen(false);
   };
+
+  // const sidebarStyle = "w-52";
+  const sidebarStyle = sidebarOpen ? "w-5/6" : "w-52";
 
   return (
     <div className="flex text-gray-200">
-      <aside className="w-44 fixed left-0 top-0 text-xs h-screen">
-        <PlayerForm
-          partyCount={playerFormState.partyCount}
-          playerCount={playerFormState.playerCount}
-          magicFind={playerFormState.magicFind}
-          tc={playerFormState.tc}
-          mlvl={playerFormState.mlvl}
-          errors={errors}
-          onChange={onPlayerFormChange}
+      <aside
+        className={
+          "flex flex-col fixed left-0 top-0 text-xs h-screen bg-gray-900 border border-gray-800 z-20 rounded shadow " +
+          sidebarStyle
+        }
+      >
+        <div className="py-3 border border-gray-800 ">
+          <PlayerForm
+            partyCount={playerFormState.partyCount}
+            playerCount={playerFormState.playerCount}
+            magicFind={playerFormState.magicFind}
+            tc={playerFormState.tc}
+            mlvl={playerFormState.mlvl}
+            errors={errors}
+            onChange={onPlayerFormChange}
+          />
+          <MonsterForm
+            difficulty={monsterFormState.difficulty}
+            monsterType={monsterFormState.monsterType}
+            levelId={monsterFormState.levelId}
+            monster={monsterFormState.monster}
+            superunique={monsterFormState.superunique}
+            boss={monsterFormState.boss}
+            tc={playerFormState.tc}
+            mlvl={playerFormState.mlvl}
+            errors={errors}
+            onPlayerFormChange={onPlayerFormChange}
+            onMonsterFormChange={onMonsterFormChange}
+          />
+        </div>
+        <Result
+          results={results}
+          onSelectItem={selectItem}
+          displayFull={sidebarOpen}
         />
-        <MonsterForm
-          difficulty={monsterFormState.difficulty}
-          monsterType={monsterFormState.monsterType}
-          levelId={monsterFormState.levelId}
-          monster={monsterFormState.monster}
-          superunique={monsterFormState.superunique}
-          boss={monsterFormState.boss}
-          tc={playerFormState.tc}
-          mlvl={playerFormState.mlvl}
-          errors={errors}
-          onPlayerFormChange={onPlayerFormChange}
-          onMonsterFormChange={onMonsterFormChange}
-        />
-        <div className="resultParent h-full overflow-y-auto">
-          <Result results={results} onSelectItem={selectItem} />
-        </div>{" "}
+        <div
+          className="px-3 py-1 border border-gray-800 hover:bg-gray-600 select-none cursor-pointer"
+          onClick={() => setSidebarOpen(!sidebarOpen)}
+        >
+          <span> {sidebarOpen ? "contract" : "expand"} </span>
+        </div>
       </aside>
-      <main className="flex-1 p-10 ml-44">
+      <main className="flex-1 p-10 ml-52">
         <Dashboard
           playerFormState={playerFormState}
           results={results}
@@ -163,6 +183,12 @@ const App = (): JSX.Element => {
           onSelectItem={selectItem}
         />
       </main>
+      <div
+        className={
+          "w-full h-full absolute z-10 bg-neutral-800 transition-[opacity] " +
+          (sidebarOpen ? "opacity-75" : "opacity-0 pointer-events-none")
+        }
+      ></div>
     </div>
   );
 };

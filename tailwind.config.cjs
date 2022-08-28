@@ -7,6 +7,7 @@ module.exports = {
     colors: {
       gray: colors.gray,
       white: colors.white,
+      neutral: colors.neutral,
       regular: "white",
       magic: "#3B82F6",
       rare: "#FACC15",
