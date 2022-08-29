@@ -43,9 +43,9 @@ export type IResultListingProps = {
 
 export function tryLocale(name: string) {
   if (ItemDict[name]) {
-    return Locale(name);
+    return Locale(name).toLowerCase();
   }
-  return name;
+  return name.toLowerCase();
 }
 
 export const ResultListing = ({
@@ -70,19 +70,19 @@ export const ResultListing = ({
       children.push(
         <li key={item[0]} className="table-row sub-table-row">
           <span
-            className="row-name pl-3 text-set"
+            className="cell row-name pl-3 text-set"
             onClick={(e) =>
               onSelectItem(tcTuple[0], item[0], RARITY.SET, chance)
             }
           >
             {Locale(item[0])}
           </span>
-          <span className="row-chance">{formatReciprocal(chance)}</span>
-          <span className="row-level">{SetDict[item[0]]?.lvl || "-"}</span>
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
+          <span className="cell row-chance">{formatReciprocal(chance)}</span>
+          <span className="cell row-level">{SetDict[item[0]]?.lvl || "-"}</span>
+          <span className="cell"></span>
+          <span className="cell"></span>
+          <span className="cell"></span>
+          <span className="cell"></span>
         </li>
       );
     }
@@ -94,19 +94,21 @@ export const ResultListing = ({
       children.push(
         <li key={item[0]} className="table-row sub-table-row">
           <span
-            className="row-name pl-3 text-unique"
+            className="cell row-name pl-3 text-unique"
             onClick={(e) =>
               onSelectItem(tcTuple[0], item[0], RARITY.UNIQUE, chance)
             }
           >
             {Locale(item[0])}
           </span>
-          <span className="row-chance">{formatReciprocal(chance)}</span>
-          <span className="row-level">{UniqueDict[item[0]]?.lvl || "-"}</span>
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
+          <span className="cell row-chance">{formatReciprocal(chance)}</span>
+          <span className="cell row-level">
+            {UniqueDict[item[0]]?.lvl || "-"}
+          </span>
+          <span className="cell"></span>
+          <span className="cell"></span>
+          <span className="cell"></span>
+          <span className="cell"></span>
         </li>
       );
     }
@@ -119,15 +121,23 @@ export const ResultListing = ({
             onSelectItem(tcTuple[0], "", RARITY.WHITE, tcTuple[1])
           }
         >
-          <span className={"row-name " + styling}>{name}</span>
-          <span className="row-chance">{formatReciprocal(tcTuple[1])}</span>
-          <span className="row-level">
+          <span className={"cell row-name " + styling}>{name}</span>
+          <span className="cell row-chance">
+            {formatReciprocal(tcTuple[1])}
+          </span>
+          <span className="cell row-level">
             {ItemDict[tcTuple[0]]?.level || "-"}
           </span>
-          <span className="text-magic">{format(tcTuple[2].quality[0])}</span>
-          <span className="text-rare">{format(tcTuple[2].quality[1])}</span>
-          <span className="text-set">{format(tcTuple[2].quality[2])}</span>
-          <span className="text-unique">{format(tcTuple[2].quality[3])}</span>
+          <span className="cell text-magic">
+            {format(tcTuple[2].quality[0])}
+          </span>
+          <span className="cell text-rare">
+            {format(tcTuple[2].quality[1])}
+          </span>
+          <span className="cell text-set">{format(tcTuple[2].quality[2])}</span>
+          <span className="cell text-unique">
+            {format(tcTuple[2].quality[3])}
+          </span>
         </li>
         {children}
       </React.Fragment>

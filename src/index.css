@@ -57,6 +57,12 @@ code {
 
   aside {
     transition: width 0.5s ease;
+    &.sidebar-open {
+      width: 650px;
+    }
+    &.sidebar-closed {
+      @apply w-52;
+    }
   }
 
   .pill {
@@ -66,25 +72,52 @@ code {
     }
   }
 
+  .sidebar-row {
+    @apply overflow-hidden shrink-0;
+    .container {
+      width: 650px;
+    }
+  }
+
   .table-body {
-    width: 700px;
+    width: 650px;
     .table-row {
-      @apply hover:cursor-pointer hover:bg-gray-500 flex flex-row py-0.5 px-3;
-      span {
-        flex-basis: 60px;
+      @apply hover:cursor-pointer hover:bg-gray-500 flex flex-row py-0.5;
+      &.main-table-row {
+        @apply border-t border-gray-700;
+        .cell {
+          &:first-child {
+            @apply pl-3;
+          }
+        }
       }
-    }
-
-    .row-name {
-      flex-grow: 1;
-    }
-
-    .row-chance {
-      flex-grow: 0.2;
-    }
-
-    .main-table-row {
-      @apply border-t dark:border-gray-700;
+      &.title-table-row {
+        @apply border-t border-gray-700 hover:bg-gray-900 cursor-auto select-none;
+        .selectable {
+          @apply hover:bg-gray-400 cursor-pointer;
+        }
+        .cell {
+          @apply py-2;
+          &:first-child {
+            @apply pl-3;
+          }
+        }
+      }
+      .cell {
+        @apply basis-16;
+        &:first-child {
+          @apply pl-6 pr-2;
+        }
+        &:not(:first-child) {
+          @apply px-2;
+        }
+        &.row-name {
+          @apply w-52 basis-52 shrink-0 grow-0;
+        }
+        &.row-chance {
+          flex-grow: 1;
+        }
+      }
     }
   }
 }

@@ -126,7 +126,7 @@ const App = (): JSX.Element => {
   };
 
   // const sidebarStyle = "w-52";
-  const sidebarStyle = sidebarOpen ? "w-5/6" : "w-52";
+  const sidebarStyle = sidebarOpen ? "sidebar-open" : "sidebar-closed";
 
   return (
     <div className="flex text-gray-200">
@@ -136,7 +136,7 @@ const App = (): JSX.Element => {
           sidebarStyle
         }
       >
-        <div className="py-3 border border-gray-800 ">
+        <div className="py-3 border border-gray-800 w-52">
           <PlayerForm
             partyCount={playerFormState.partyCount}
             playerCount={playerFormState.playerCount}
