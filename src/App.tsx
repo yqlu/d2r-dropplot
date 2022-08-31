@@ -23,6 +23,7 @@ import { getTcAndMlvlFromMonster } from "./engine/monster";
 import { RARITY } from "./engine/itemratio-dict";
 import Fraction from "fraction.js";
 import { Card } from "./components/Card";
+import { ArrowIcon } from "./components/Icon";
 import { MonsterFormInline } from "./MonsterFormInline";
 
 const App = (): JSX.Element => {
@@ -114,12 +115,11 @@ const App = (): JSX.Element => {
   };
 
   const selectItem: SelectItemType = (
-    baseItemName,
-    itemName,
-    rarity,
-    chance
+    baseItemName: string,
+    itemName: string,
+    rarity: RARITY,
+    chance: Fraction
   ) => {
-    console.log("SELECT ITEM!!!");
     setScrollPosition(window.scrollY);
     setBaseItemName(baseItemName);
     setItemName(itemName);
@@ -174,7 +174,12 @@ const App = (): JSX.Element => {
           className="px-3 py-1 border border-gray-800 hover:bg-gray-600 select-none cursor-pointer"
           onClick={() => setSidebarOpen(!sidebarOpen)}
         >
-          <span> {sidebarOpen ? "contract" : "expand"} </span>
+          <span>
+            <span className="pr-2">
+              <ArrowIcon sidebarOpen={sidebarOpen} />
+            </span>
+            {sidebarOpen ? "Contract" : "Expand"}{" "}
+          </span>
         </div>
       </aside>
       <main className="flex-1 p-10 ml-52">
@@ -213,9 +218,12 @@ const App = (): JSX.Element => {
       </main>
       <div
         className={
-          "w-full h-full absolute z-10 bg-neutral-800 transition-[opacity] " +
+          "fixed z-10 top-0 bottom-0 right-0 left-0 bg-neutral-800 transition-[opacity] " +
           (sidebarOpen ? "opacity-75" : "opacity-0 pointer-events-none")
         }
+        onClick={() => {
+          setSidebarOpen(false);
+        }}
       ></div>
     </div>
   );
