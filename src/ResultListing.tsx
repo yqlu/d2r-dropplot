@@ -39,6 +39,9 @@ export type IResultListingProps = {
   filteredResults: BaseItemProbTuple[];
   onSelectItem: SelectItemType;
   textFilter: string;
+  baseItemName: string;
+  itemName: string;
+  rarity: RARITY;
 };
 
 export function tryLocale(name: string) {
@@ -52,6 +55,9 @@ export const ResultListing = ({
   filteredResults,
   onSelectItem,
   textFilter,
+  baseItemName,
+  itemName,
+  rarity,
 }: IResultListingProps): JSX.Element => {
   const textFilterRegex = new RegExp(textFilter);
   const tableRows = filteredResults.map((tcTuple) => {
@@ -68,15 +74,15 @@ export const ResultListing = ({
       }
       const chance = item[1].mul(tcTuple[2].quality[2].mul(tcTuple[1]));
       children.push(
-        <li key={item[0]} className="table-row sub-table-row">
-          <span
-            className="cell row-name pl-3 text-set"
-            onClick={(e) =>
-              onSelectItem(tcTuple[0], item[0], RARITY.SET, chance)
-            }
-          >
-            {Locale(item[0])}
-          </span>
+        <li
+          key={item[0]}
+          className={
+            "table-row sub-table-row " +
+            (rarity === RARITY.SET && itemName === item[0] ? "selected" : "")
+          }
+          onClick={(e) => onSelectItem(tcTuple[0], item[0], RARITY.SET, chance)}
+        >
+          <span className="cell row-name pl-3 text-set">{Locale(item[0])}</span>
           <span className="cell row-chance">{formatReciprocal(chance)}</span>
           <span className="cell row-level">{SetDict[item[0]]?.lvl || "-"}</span>
           <span className="cell"></span>
@@ -92,13 +98,17 @@ export const ResultListing = ({
       }
       const chance = item[1].mul(tcTuple[2].quality[3].mul(tcTuple[1]));
       children.push(
-        <li key={item[0]} className="table-row sub-table-row">
-          <span
-            className="cell row-name pl-3 text-unique"
-            onClick={(e) =>
-              onSelectItem(tcTuple[0], item[0], RARITY.UNIQUE, chance)
-            }
-          >
+        <li
+          key={item[0]}
+          className={
+            "table-row sub-table-row " +
+            (rarity === RARITY.UNIQUE && itemName === item[0] ? "selected" : "")
+          }
+          onClick={(e) =>
+            onSelectItem(tcTuple[0], item[0], RARITY.UNIQUE, chance)
+          }
+        >
+          <span className="cell row-name pl-3 text-unique">
             {Locale(item[0])}
           </span>
           <span className="cell row-chance">{formatReciprocal(chance)}</span>
@@ -116,7 +126,12 @@ export const ResultListing = ({
     return (
       <React.Fragment key={tcTuple[0]}>
         <li
-          className="table-row main-table-row"
+          className={
+            "table-row main-table-row " +
+            (rarity === RARITY.WHITE && baseItemName === tcTuple[0]
+              ? "selected"
+              : "")
+          }
           onClick={(e) =>
             onSelectItem(tcTuple[0], "", RARITY.WHITE, tcTuple[1])
           }

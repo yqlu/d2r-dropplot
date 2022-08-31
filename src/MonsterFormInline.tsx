@@ -298,7 +298,7 @@ export const MonsterFormInline = (props: MonsterFormProps): JSX.Element => {
       )}
       {props.baseItemName !== "" && (
         <p>
-          Analyze: <b className={styling}>{name}</b> (
+          Analyze: <b className={styling}>{Locale(name)}</b> (
           {formatReciprocal(props.selectedChance)} drop chance)
         </p>
       )}

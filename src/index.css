@@ -89,6 +89,9 @@ code {
     width: 650px;
     .table-row {
       @apply hover:cursor-pointer hover:bg-gray-500 flex flex-row py-0.5;
+      &.selected {
+        @apply bg-gray-700 hover:bg-gray-500;
+      }
       &.main-table-row {
         @apply border-t border-gray-700;
         .cell {
@@ -98,21 +101,21 @@ code {
         }
       }
       &.title-table-row {
-        @apply border-t border-gray-700 hover:bg-gray-900 cursor-auto select-none;
+        @apply border-t border-gray-700 hover:bg-gray-900 font-bold cursor-auto select-none;
         .selectable {
-          @apply hover:bg-gray-400 cursor-pointer;
+          @apply hover:bg-gray-500 cursor-pointer;
         }
         .cell {
           @apply py-2;
           &:first-child {
-            @apply pl-3;
+            @apply pl-3 select-none;
           }
         }
       }
       .cell {
         @apply basis-16;
         &:first-child {
-          @apply pl-6 pr-2;
+          @apply pl-6 pr-2 select-none;
         }
         &:not(:first-child) {
           @apply px-2;

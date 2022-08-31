@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { RUNE_REGEX } from "./charts/common";
 import { ItemDict } from "./engine/item-dict";
+import { RARITY } from "./engine/itemratio-dict";
 
 import { BaseItemProbTuple } from "./engine/resultAggregator";
 import { ArmorDict, WeaponsDict } from "./engine/weapon-armor-dict";
@@ -10,6 +11,9 @@ type IAppPropType = {
   results: BaseItemProbTuple[];
   onSelectItem: SelectItemType;
   displayFull: boolean;
+  baseItemName: string;
+  itemName: string;
+  rarity: RARITY;
 };
 
 type SortType = "name" | "chance" | "level";
@@ -63,6 +67,9 @@ function getSortSymbol(field: SortType, sortObject: SortObject) {
 export const Result = ({
   results,
   onSelectItem,
+  baseItemName,
+  itemName,
+  rarity,
 }: IAppPropType): JSX.Element => {
   const [textFilter, setTextFilter] = useState("");
   const [includeWeapons, setIncludeWeapons] = useState(true);
@@ -226,6 +233,9 @@ export const Result = ({
           filteredResults={filteredResults}
           onSelectItem={onSelectItem}
           textFilter={textFilter}
+          baseItemName={baseItemName}
+          itemName={itemName}
+          rarity={rarity}
         />
       </div>
     </React.Fragment>

@@ -119,6 +119,7 @@ const App = (): JSX.Element => {
     rarity,
     chance
   ) => {
+    console.log("SELECT ITEM!!!");
     setScrollPosition(window.scrollY);
     setBaseItemName(baseItemName);
     setItemName(itemName);
@@ -127,7 +128,6 @@ const App = (): JSX.Element => {
     setSidebarOpen(false);
   };
 
-  // const sidebarStyle = "w-52";
   const sidebarStyle = sidebarOpen ? "sidebar-open" : "sidebar-closed";
 
   return (
@@ -166,6 +166,9 @@ const App = (): JSX.Element => {
           results={results}
           onSelectItem={selectItem}
           displayFull={sidebarOpen}
+          baseItemName={baseItemName}
+          itemName={itemName}
+          rarity={rarity}
         />
         <div
           className="px-3 py-1 border border-gray-800 hover:bg-gray-600 select-none cursor-pointer"
