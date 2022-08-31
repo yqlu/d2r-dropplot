@@ -81,8 +81,28 @@ const App = (): JSX.Element => {
   }, [monsterFormState]);
 
   useEffect(() => {
-    if (results.filter((tuple) => tuple[0] == baseItemName).length !== 1) {
+    const newResult = results.filter((tuple) => tuple[0] == baseItemName);
+    if (newResult.length !== 1) {
       selectItem("", "", RARITY.WHITE, new Fraction(0));
+    } else {
+      let chance = newResult[0][1];
+      if (rarity === RARITY.SET) {
+        chance = chance.mul(newResult[0][2].quality[2]);
+        for (const setTuple of newResult[0][2].sets) {
+          if (setTuple[0] === itemName) {
+            chance = chance.mul(setTuple[1]);
+          }
+        }
+      }
+      if (rarity === RARITY.UNIQUE) {
+        chance = chance.mul(newResult[0][2].quality[3]);
+        for (const uniqueTuple of newResult[0][2].uniques) {
+          if (uniqueTuple[0] === itemName) {
+            chance = chance.mul(uniqueTuple[1]);
+          }
+        }
+      }
+      selectItem(baseItemName, itemName, rarity, chance);
     }
   }, [results]);
 
