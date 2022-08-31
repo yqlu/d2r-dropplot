@@ -29,7 +29,6 @@ export const Dashboard = ({
   let isRune = RUNE_REGEX.test(baseItemName);
   return (
     <div>
-      {baseItemName} {itemName} {rarity}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 place-content-stretch">
         {baseItemName && (
           <React.Fragment>

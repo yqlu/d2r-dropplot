@@ -46,6 +46,12 @@ code {
       leading-tight focus:outline-none;
   }
 
+  .select-inline {
+    @apply text-gray-700 bg-gray-200 border
+      border-gray-400 hover:border-gray-500 px-2 py-0.5 pr-2 rounded shadow
+      leading-tight focus:outline-none mx-2;
+  }
+
   .textbox {
     @apply appearance-none block w-full bg-gray-200 text-gray-700 border
       border-gray-400 text-sm rounded text-xs px-2 py-0.5 pr-2 leading-tight focus:outline-none focus:bg-white focus:border-gray-500;

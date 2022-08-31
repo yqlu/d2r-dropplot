@@ -22,6 +22,8 @@ import { Difficulty, MonsterType } from "./engine/monstats-dict";
 import { getTcAndMlvlFromMonster } from "./engine/monster";
 import { RARITY } from "./engine/itemratio-dict";
 import Fraction from "fraction.js";
+import { Card } from "./components/Card";
+import { MonsterFormInline } from "./MonsterFormInline";
 
 const App = (): JSX.Element => {
   const [playerFormState, setPlayerFormState] = useState({
@@ -146,7 +148,7 @@ const App = (): JSX.Element => {
             errors={errors}
             onChange={onPlayerFormChange}
           />
-          <MonsterForm
+          {/* <MonsterForm
             difficulty={monsterFormState.difficulty}
             monsterType={monsterFormState.monsterType}
             levelId={monsterFormState.levelId}
@@ -158,7 +160,7 @@ const App = (): JSX.Element => {
             errors={errors}
             onPlayerFormChange={onPlayerFormChange}
             onMonsterFormChange={onMonsterFormChange}
-          />
+          /> */}
         </div>
         <Result
           results={results}
@@ -173,15 +175,38 @@ const App = (): JSX.Element => {
         </div>
       </aside>
       <main className="flex-1 p-10 ml-52">
-        <Dashboard
-          playerFormState={playerFormState}
-          results={results}
-          baseItemName={baseItemName}
-          itemName={itemName}
-          rarity={rarity}
-          selectedChance={selectedChance}
-          onSelectItem={selectItem}
-        />
+        <Card>
+          <div className="text-xs">
+            <MonsterFormInline
+              difficulty={monsterFormState.difficulty}
+              monsterType={monsterFormState.monsterType}
+              levelId={monsterFormState.levelId}
+              monster={monsterFormState.monster}
+              superunique={monsterFormState.superunique}
+              boss={monsterFormState.boss}
+              tc={playerFormState.tc}
+              mlvl={playerFormState.mlvl}
+              errors={errors}
+              onPlayerFormChange={onPlayerFormChange}
+              onMonsterFormChange={onMonsterFormChange}
+              baseItemName={baseItemName}
+              itemName={itemName}
+              rarity={rarity}
+              selectedChance={selectedChance}
+            />
+          </div>
+        </Card>
+        <div className="pt-4">
+          <Dashboard
+            playerFormState={playerFormState}
+            results={results}
+            baseItemName={baseItemName}
+            itemName={itemName}
+            rarity={rarity}
+            selectedChance={selectedChance}
+            onSelectItem={selectItem}
+          />
+        </div>
       </main>
       <div
         className={

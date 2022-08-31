@@ -15,7 +15,7 @@ function format(percent: Fraction) {
   return `${Math.round(percent.valueOf() * 10000) / 100}%`;
 }
 
-function formatReciprocal(chance: Fraction) {
+export function formatReciprocal(chance: Fraction) {
   if (chance.valueOf() === 0) {
     return `0`;
   }
