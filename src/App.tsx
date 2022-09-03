@@ -80,7 +80,24 @@ const App = (): JSX.Element => {
   }, [monsterFormState]);
 
   useEffect(() => {
-    const newResult = results.filter((tuple) => tuple[0] == baseItemName);
+    const newResult = results.filter((tuple) => {
+      if (tuple[0] !== baseItemName) {
+        return false;
+      } else if (
+        rarity === RARITY.SET &&
+        tuple[2].sets.filter((setTuple) => setTuple[0] === itemName).length ===
+          0
+      ) {
+        return false;
+      } else if (
+        rarity === RARITY.UNIQUE &&
+        tuple[2].uniques.filter((uniqueTuple) => uniqueTuple[0] === itemName)
+          .length === 0
+      ) {
+        return false;
+      }
+      return true;
+    });
     if (newResult.length !== 1) {
       selectItem("", "", RARITY.WHITE, new Fraction(0));
     } else {
@@ -134,17 +151,16 @@ const App = (): JSX.Element => {
   };
 
   const selectItem: SelectItemType = (
-    baseItemName: string,
-    itemName: string,
-    rarity: RARITY,
-    chance: Fraction
+    newBaseItemName: string,
+    newItemName: string,
+    newRarity: RARITY,
+    newChance: Fraction
   ) => {
     setScrollPosition(window.scrollY);
-    setBaseItemName(baseItemName);
-    setItemName(itemName);
-    setRarity(rarity);
-    setSelectedChance(chance);
-    setSidebarOpen(false);
+    setBaseItemName(newBaseItemName);
+    setItemName(newItemName);
+    setRarity(newRarity);
+    setSelectedChance(newChance);
   };
 
   const sidebarStyle = sidebarOpen ? "sidebar-open" : "sidebar-closed";
