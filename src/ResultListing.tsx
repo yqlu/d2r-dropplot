@@ -46,9 +46,9 @@ export type IResultListingProps = {
 
 export function tryLocale(name: string) {
   if (ItemDict[name]) {
-    return Locale(name).toLowerCase();
+    return Locale(name);
   }
-  return name.toLowerCase();
+  return name;
 }
 
 export const ResultListing = ({
@@ -61,15 +61,15 @@ export const ResultListing = ({
 }: IResultListingProps): JSX.Element => {
   const textFilterRegex = new RegExp(textFilter);
   const tableRows = filteredResults.map((tcTuple) => {
-    let name;
-    if (ItemDict[tcTuple[0]]) {
-      name = Locale(tcTuple[0]);
-    } else {
-      name = tcTuple[0];
-    }
+    const name = tryLocale(tcTuple[0]);
+    const textFilterFailsOnBase =
+      textFilter !== "" && !textFilterRegex.test(name.toLowerCase());
     const children: JSX.Element[] = [];
     for (const item of tcTuple[2].sets) {
-      if (textFilter !== "" && !textFilterRegex.test(tryLocale(item[0]))) {
+      if (
+        textFilterFailsOnBase &&
+        !textFilterRegex.test(tryLocale(item[0]).toLowerCase())
+      ) {
         continue;
       }
       const chance = item[1].mul(tcTuple[2].quality[2].mul(tcTuple[1]));
@@ -93,7 +93,10 @@ export const ResultListing = ({
       );
     }
     for (const item of tcTuple[2].uniques) {
-      if (textFilter !== "" && !textFilterRegex.test(tryLocale(item[0]))) {
+      if (
+        textFilterFailsOnBase &&
+        !textFilterRegex.test(tryLocale(item[0]).toLowerCase())
+      ) {
         continue;
       }
       const chance = item[1].mul(tcTuple[2].quality[3].mul(tcTuple[1]));
