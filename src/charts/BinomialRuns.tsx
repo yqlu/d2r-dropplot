@@ -17,9 +17,9 @@ Chart.defaults.borderColor = "rgba(255,255,255,0.2)";
 const getData = (runs: number, singleRunChance: number) => {
   const ys = [];
   let [prevY, y] = [0, 0];
-  for (let x = 0; x < runs / 10; x++) {
+  for (let x = 0; x <= Math.ceil(runs / 10); x++) {
     y = binomialDistributionFunction(runs, x, singleRunChance) * 100;
-    if (y >= prevY || y > 1e-2) {
+    if (y >= prevY || y > 1e-2 || x <= 1) {
       ys.push(y);
       prevY = y;
     } else {
@@ -41,18 +41,14 @@ export const BinomialRunsChart = ({
   rarity,
   selectedChance,
 }: IDashboardPropType): JSX.Element => {
-  const [runs, setRuns] = useState(getXMax(selectedChance.valueOf()));
-  let latestRuns = runs;
+  const [runs, setRuns] = useState(-1);
   useEffect(() => {
-    // Avoid race condition
-    let latestRuns = getXMax(selectedChance.valueOf());
-    setRuns(latestRuns);
+    if (selectedChance.valueOf() > 0) {
+      setRuns(getXMax(selectedChance.valueOf()));
+    }
   }, [selectedChance]);
   useEffect(() => {
-    if (baseItemName == "") {
-      return;
-    }
-    if (runs !== latestRuns) {
+    if (baseItemName == "" || selectedChance.valueOf() <= 0) {
       return;
     }
     const { xs, ys } = getData(runs, selectedChance.valueOf());
@@ -103,7 +99,7 @@ export const BinomialRunsChart = ({
               title: (ctx: TooltipItem<"line">[]) => {
                 return [
                   `${ctx[0].formattedValue}% chance`,
-                  `to drop ${ctx[0].label} items`,
+                  `to drop ${ctx[0].label} copies`,
                 ];
               },
               label: () => "",
@@ -120,7 +116,7 @@ export const BinomialRunsChart = ({
     return () => {
       chart?.destroy();
     };
-  }, [selectedChance, runs]);
+  }, [runs]);
 
   const name = itemName === "" ? baseItemName : itemName;
   const styling = colorClassFromRarity(baseItemName, rarity);

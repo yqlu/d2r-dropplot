@@ -134,10 +134,6 @@ const binomialDistributionFunction = function (
   k: number,
   p: number
 ) {
-  // Guarantee that k <= n / 2
-  if (k > n - k) {
-    k = n - k;
-  }
   let r = 1;
   for (let d = 1; d <= k; d++) {
     r *= n-- * p * (1 - p);
