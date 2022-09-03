@@ -7,6 +7,7 @@ import { binomialDistributionFunction, colorClassFromRarity } from "./common";
 import { IDashboardPropType, REGULAR_COLOR, colorFromRarity } from "./common";
 import { Locale } from "../engine/locale-dict";
 import { getXMax } from "./RepeatedRuns";
+import { createImportSpecifier } from "typescript";
 
 Chart.defaults.font.family =
   "'Noto Sans', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif";
@@ -32,10 +33,6 @@ const getData = (runs: number, singleRunChance: number) => {
   };
 };
 
-// const getXMax = (singleRunChance: number) => {
-//   return Math.round(Math.log(0.1) / Math.log(1 - singleRunChance));
-// };
-
 export const BinomialRunsChart = ({
   playerFormState,
   results,
@@ -45,9 +42,17 @@ export const BinomialRunsChart = ({
   selectedChance,
 }: IDashboardPropType): JSX.Element => {
   const [runs, setRuns] = useState(getXMax(selectedChance.valueOf()));
-  useEffect(() => setRuns(getXMax(selectedChance.valueOf())), [selectedChance]);
+  let latestRuns = runs;
+  useEffect(() => {
+    // Avoid race condition
+    let latestRuns = getXMax(selectedChance.valueOf());
+    setRuns(latestRuns);
+  }, [selectedChance]);
   useEffect(() => {
     if (baseItemName == "") {
+      return;
+    }
+    if (runs !== latestRuns) {
       return;
     }
     const { xs, ys } = getData(runs, selectedChance.valueOf());

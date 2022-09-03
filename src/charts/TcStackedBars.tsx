@@ -60,6 +60,7 @@ const getData = (playerFormState: PlayerFormState, baseItemName: string) => {
     .result()
     .filter((tuple) => TC_REGEX.test(tuple[0]));
   if (tcs.length === 0) {
+    console.log(playerFormState, baseItemName);
     throw new Error("No applicable TCs");
   }
   const maxClass =

@@ -2,21 +2,13 @@ import React, { useEffect, useState } from "react";
 
 import "./engine/tc";
 
+import { useStateParams, idFunc, compute } from "./helpers";
 import { PlayerForm, PlayerFormState } from "./PlayerForm";
 import { MonsterForm, MonsterFormState } from "./MonsterForm";
-import { Result, SelectItemType } from "./Result";
+import { Result } from "./Result";
+import { SelectItemType } from "./ResultListing";
 import { Dashboard } from "./Dashboard";
 
-import { TCDict, TCDictType } from "./engine/tc-dict";
-import { AtomicDict } from "./engine/atomic-dict";
-import { makeLookupTcFunction, TcCalculator } from "./engine/tc";
-import {
-  BaseItemProbTuple,
-  BaseItemResultAggregator,
-  TCProbTuple,
-  TCResultAggregator,
-} from "./engine/resultAggregator";
-import { sortAlphabetical } from "./engine/display";
 import { Difficulty, MonsterType } from "./engine/monstats-dict";
 import { getTcAndMlvlFromMonster } from "./engine/monster";
 import { RARITY } from "./engine/itemratio-dict";
@@ -26,13 +18,6 @@ import { ArrowIcon } from "./components/Icon";
 import { MonsterFormInline } from "./MonsterFormInline";
 
 const App = (): JSX.Element => {
-  const [playerFormState, setPlayerFormState] = useState({
-    partyCount: 1,
-    playerCount: 1,
-    mlvl: "99",
-    magicFind: "0",
-    tc: "Gold",
-  } as PlayerFormState);
   const [monsterFormState, setMonsterFormState] = useState({
     difficulty: Difficulty.HELL,
     monsterType: MonsterType.BOSS,
@@ -41,11 +26,47 @@ const App = (): JSX.Element => {
     superunique: "Bishibosh",
     boss: "diablo",
   } as MonsterFormState);
+
+  let [initTc, initMlvl] = getTcAndMlvlFromMonster(
+    monsterFormState.difficulty,
+    monsterFormState.monsterType,
+    monsterFormState.levelId,
+    monsterFormState.monster,
+    monsterFormState.superunique,
+    monsterFormState.boss
+  );
+
+  const [playerFormState, setPlayerFormState] = useState({
+    partyCount: 1,
+    playerCount: 1,
+    magicFind: "0",
+    tc: initTc,
+    mlvl: `${initMlvl}`,
+  } as PlayerFormState);
+
   const [errors, setErrors] = useState({});
-  const [results, setResults] = useState([] as BaseItemProbTuple[]);
-  const [baseItemName, setBaseItemName] = useState("");
-  const [itemName, setItemName] = useState("");
-  const [rarity, setRarity] = useState(RARITY.WHITE);
+  const [results, setResults] = useState(
+    compute(playerFormState, "in first useState")
+  );
+  const [baseItemName, setBaseItemName] = useStateParams(
+    "",
+    "base",
+    idFunc,
+    idFunc
+  );
+  // const [itemName, setItemName] = useState("");
+  const [itemName, setItemName] = useStateParams("", "itm", idFunc, idFunc);
+  const [rarity, setRarity] = useStateParams(
+    RARITY.WHITE,
+    "r",
+    (rarity: RARITY) => `${rarity}`,
+    (str: string) => {
+      if (str in RARITY) {
+        return Number(str) as RARITY;
+      }
+      return RARITY.WHITE;
+    }
+  );
   const [selectedChance, setSelectedChance] = useState(new Fraction(0));
   const [scrollPosition, setScrollPosition] = useState(null as number | null);
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -53,7 +74,10 @@ const App = (): JSX.Element => {
   useEffect(() => {
     const errors = hasPlayerFormErrors(playerFormState, setErrors);
     if (!errors) {
-      compute(playerFormState, setResults);
+      const newResults = compute(playerFormState, "in playerFormUseEffect");
+      if (newResults) {
+        setResults(newResults);
+      }
     }
   }, [playerFormState]);
 
@@ -157,10 +181,18 @@ const App = (): JSX.Element => {
     newChance: Fraction
   ) => {
     setScrollPosition(window.scrollY);
-    setBaseItemName(newBaseItemName);
-    setItemName(newItemName);
-    setRarity(newRarity);
-    setSelectedChance(newChance);
+    if (baseItemName !== newBaseItemName) {
+      setBaseItemName(newBaseItemName);
+    }
+    if (itemName !== newItemName) {
+      setItemName(newItemName);
+    }
+    if (rarity !== newRarity) {
+      setRarity(newRarity);
+    }
+    if (selectedChance !== newChance) {
+      setSelectedChance(newChance);
+    }
   };
 
   const sidebarStyle = sidebarOpen ? "sidebar-open" : "sidebar-closed";
@@ -277,61 +309,6 @@ const hasPlayerFormErrors = (
   }
   setErrors(errors);
   return Object.keys(errors).length > 0;
-};
-
-const compute = (
-  playerFormState: PlayerFormState,
-  setResults: React.Dispatch<React.SetStateAction<BaseItemProbTuple[]>>
-) => {
-  console.time("compute");
-  const mlvl = parseInt(playerFormState.mlvl);
-  const magicFind = parseInt(playerFormState.magicFind);
-
-  const atomic = true;
-  let tcs: BaseItemProbTuple[];
-  if (atomic) {
-    const tcLookup = makeLookupTcFunction(TCDict, AtomicDict);
-    const tcCalculator = new TcCalculator(
-      tcLookup,
-      () => new BaseItemResultAggregator(mlvl, magicFind)
-    );
-    let tcsCast = tcCalculator
-      .getAtomicTCs(
-        playerFormState.tc,
-        playerFormState.partyCount,
-        playerFormState.playerCount
-      )
-      .result();
-    const ZERO = new Fraction(0);
-    tcs = sortAlphabetical(
-      tcsCast as unknown as TCProbTuple[]
-    ) as unknown as BaseItemProbTuple[];
-  } else {
-    const tcLookup = makeLookupTcFunction(TCDict, {} as TCDictType);
-    const tcCalculator = new TcCalculator<TCProbTuple[]>(
-      tcLookup,
-      () => new TCResultAggregator()
-    );
-
-    let tcsCast = tcCalculator
-      .getAtomicTCs(
-        playerFormState.tc,
-        playerFormState.partyCount,
-        playerFormState.playerCount
-      )
-      .result();
-    const ZERO = new Fraction(0);
-    tcs = sortAlphabetical(tcsCast as unknown as TCProbTuple[]).map(
-      (tuple) =>
-        [
-          tuple[0],
-          tuple[1],
-          { quality: [ZERO, ZERO, ZERO, ZERO], sets: [], uniques: [] },
-        ] as BaseItemProbTuple
-    );
-  }
-  console.timeEnd("compute");
-  setResults(tcs);
 };
 
 export default App;

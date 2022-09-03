@@ -90,7 +90,7 @@ export const RepeatedRunsChart = ({
           x: {
             title: {
               display: true,
-              text: "Copies",
+              text: "Runs",
             },
           },
         },
@@ -134,7 +134,7 @@ export const RepeatedRunsChart = ({
   return (
     <div>
       <div className="chartTitle">
-        Cumulative chance to drop{" "}
+        Chance to drop at least one{" "}
         <span className={"font-bold " + styling}>{Locale(name)}</span> over{" "}
         <input
           type="text"
