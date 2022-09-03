@@ -228,7 +228,7 @@ export const Result = ({
           </div>
         </div>
       </div>
-      <div className="resultParent flex-grow overflow-y-auto">
+      <div className="resultParent flex-grow overflow-y-auto overflow-x-hidden">
         <ResultListing
           filteredResults={filteredResults}
           onSelectItem={onSelectItem}

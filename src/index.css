@@ -78,10 +78,27 @@ code {
     }
   }
 
+  .bg-black-alt {
+    background: #191919;
+  }
+
   .sidebar-row {
     @apply overflow-hidden shrink-0;
     .container {
       width: 650px;
+    }
+  }
+
+  .resultParent {
+    scrollbar-width: thin; /* Firefox */
+    /* Webkit */
+    &::-webkit-scrollbar {
+      @apply bg-gray-900;
+      width: 10px;
+      height: 0px;
+    }
+    &::-webkit-scrollbar-thumb {
+      @apply bg-gray-500;
     }
   }
 

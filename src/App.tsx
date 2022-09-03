@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 
-import "./App.css";
 import "./engine/tc";
 
 import { PlayerForm, PlayerFormState } from "./PlayerForm";
