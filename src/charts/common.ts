@@ -129,24 +129,24 @@ export const STACKED_BAR_COLORS = {
 
 export const RUNE_REGEX = /^r(\d+)$/;
 
-const n_choose_k = function (n: number, k: number) {
-  if (k > n - k) {
-    k = n - k;
-  }
-  let r = 1;
-  for (let d = 1; d <= k; d++) {
-    r *= n--;
-    r /= d;
-  }
-  return r;
-};
 const binomialDistributionFunction = function (
   n: number,
   k: number,
   p: number
 ) {
-  return n_choose_k(n, k) * p ** k * (1 - p) ** (n - k);
+  // Guarantee that k <= n / 2
+  if (k > n - k) {
+    k = n - k;
+  }
+  let r = 1;
+  for (let d = 1; d <= k; d++) {
+    r *= n-- * p * (1 - p);
+    r /= d;
+  }
+  r *= (1 - p) ** (n - 2 * k);
+  return r;
 };
+
 const binomialDistributionFunctionCumulative = function (
   n: number,
   k: number,
