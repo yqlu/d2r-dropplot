@@ -24,6 +24,8 @@ export function getTcAndMlvlFromMonster(
       return getSuperUniqueTCMlvl(difficulty, superunique);
     case MonsterType.BOSS:
       return getBossTCMlvl(difficulty, boss);
+    case MonsterType.TREASURE_CLASS:
+      return ["Diablo (H)", 94];
   }
 }
 
@@ -92,7 +94,7 @@ function getStandardMlvl(
   difficulty: Difficulty,
   monsterType: MonsterType,
   levelId: number,
-  monster: string
+  monster: keyof typeof MonsterDict
 ) {
   const monsterEntry = MonsterDict[monster];
   // Mlvl is read from MonsterDict (for normal) and LevelsDict (for nightmare / hell)

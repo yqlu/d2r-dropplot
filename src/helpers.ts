@@ -21,7 +21,6 @@ export function useStateParams<T>(
   serialize: (state: T) => string,
   deserialize: (state: string) => T
 ): [T, (state: T) => void] {
-  // const history = useHistory();
   const search = new URLSearchParams(document.location.search);
 
   const existingValue = search.get(paramsName);
@@ -71,12 +70,6 @@ export const compute = (() => {
     }
   };
 })();
-//   playerFormState: PlayerFormState,
-//   debugContext: string
-// ): BaseItemProbTuple[] => {
-//   if JSON.stringify(base)
-
-// };
 
 const _compute = (playerFormState: PlayerFormState): BaseItemProbTuple[] => {
   const mlvl = parseInt(playerFormState.mlvl);
