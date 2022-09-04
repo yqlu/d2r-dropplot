@@ -156,10 +156,26 @@ const App = (): JSX.Element => {
     event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
     const name = event.target.id;
-    setPlayerFormState((prevState) => ({
-      ...prevState,
-      [name]: event.target.value,
-    }));
+    const value = Number(event.target.value);
+    setPlayerFormState((prevState) => {
+      const newState = {
+        ...prevState,
+        [name]: value,
+      };
+      // Enforce restriction that playerCount >= partyCount always
+      if (name === "partyCount") {
+        newState.playerCount = Math.max(
+          newState.playerCount,
+          newState.partyCount
+        );
+      } else if (name === "playerCount") {
+        newState.partyCount = Math.min(
+          newState.playerCount,
+          newState.partyCount
+        );
+      }
+      return newState;
+    });
   };
 
   const onMonsterFormChange = (event: React.ChangeEvent<HTMLSelectElement>) => {

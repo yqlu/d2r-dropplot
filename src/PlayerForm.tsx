@@ -17,8 +17,8 @@ export type PlayerFormProps = PlayerFormState & {
   ) => void;
 };
 
-const makePlayerOptions = (): JSX.Element[] => {
-  return range(8).map((i) => {
+const makePlayerOptions = (upTo: number = 8): JSX.Element[] => {
+  return range(upTo).map((i) => {
     return (
       <option key={i + 1} value={i + 1}>
         {i + 1}
@@ -29,6 +29,7 @@ const makePlayerOptions = (): JSX.Element[] => {
 
 export const PlayerForm = (props: PlayerFormProps): JSX.Element => {
   const playerOptions: JSX.Element[] = makePlayerOptions();
+  const partyOptions: JSX.Element[] = makePlayerOptions(props.playerCount);
 
   return (
     <div className="w-full px-3">
@@ -51,7 +52,7 @@ export const PlayerForm = (props: PlayerFormProps): JSX.Element => {
           value={props.partyCount}
           onChange={props.onChange}
         >
-          {playerOptions}
+          {partyOptions}
         </select>
       </div>
       <div className="form-group">

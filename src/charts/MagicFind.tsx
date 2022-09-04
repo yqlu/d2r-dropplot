@@ -34,8 +34,8 @@ const calculateMagicFind = (
   let tcs = tcCalculator
     .getAtomicTCs(
       playerFormState.tc,
-      playerFormState.partyCount,
       playerFormState.playerCount,
+      playerFormState.partyCount,
       new Set([baseItemName])
     )
     .result();

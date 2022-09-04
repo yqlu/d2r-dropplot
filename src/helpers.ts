@@ -86,8 +86,8 @@ const _compute = (playerFormState: PlayerFormState): BaseItemProbTuple[] => {
     let tcsCast = tcCalculator
       .getAtomicTCs(
         playerFormState.tc,
-        playerFormState.partyCount,
-        playerFormState.playerCount
+        playerFormState.playerCount,
+        playerFormState.partyCount
       )
       .result();
     const ZERO = new Fraction(0);
@@ -104,8 +104,8 @@ const _compute = (playerFormState: PlayerFormState): BaseItemProbTuple[] => {
     let tcsCast = tcCalculator
       .getAtomicTCs(
         playerFormState.tc,
-        playerFormState.partyCount,
-        playerFormState.playerCount
+        playerFormState.playerCount,
+        playerFormState.partyCount
       )
       .result();
     const ZERO = new Fraction(0);
