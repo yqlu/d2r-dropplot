@@ -29,20 +29,25 @@ export function getBossHierarchy(difficulty: Difficulty): BossHierarchyType {
       "putriddefiler5",
     ],
     actbosses: ["andariel", "duriel", "mephisto", "diablo", "baalcrab"],
-    pandemonium: [
-      "uberandariel",
-      "uberizual",
-      "uberduriel",
-      "ubermephisto",
-      "uberdiablo",
-      "uberbaal",
-    ],
+    // pandemonium: [
+    //   "uberandariel",
+    //   "uberizual",
+    //   "uberduriel",
+    //   "ubermephisto",
+    //   "uberdiablo",
+    //   "uberbaal",
+    // ],
   };
-  if (difficulty !== Difficulty.HELL) {
-    bossHierarchy.pandemonium = [];
-  }
+  // if (difficulty !== Difficulty.HELL) {
+  //   bossHierarchy.pandemonium = [];
+  // }
   return bossHierarchy;
 }
+
+export const categoriesLocale = {
+  minor: "Minor",
+  actbosses: "Act Bosses",
+};
 
 export const FlatBossDict: { [key: string]: BossEntry } = {
   bloodraven: {

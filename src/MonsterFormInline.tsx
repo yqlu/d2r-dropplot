@@ -4,7 +4,11 @@ import { groupBy, sortBy, uniq } from "lodash-es";
 import { Difficulty, MonsterDict, MonsterType } from "./engine/monstats-dict";
 import { LevelsDict } from "./engine/levels-dict";
 import { SuperuniqueDict } from "./engine/superunique-dict";
-import { FlatBossDict, getBossHierarchy } from "./engine/boss-dict";
+import {
+  categoriesLocale,
+  FlatBossDict,
+  getBossHierarchy,
+} from "./engine/boss-dict";
 import { Locale } from "./engine/locale-dict";
 import { TCDict } from "./engine/tc-dict";
 import { RARITY } from "./engine/itemratio-dict";
@@ -155,7 +159,10 @@ export const MonsterFormInline = (props: MonsterFormProps): JSX.Element => {
           ));
         }
         return (
-          <optgroup key={category} label={category}>
+          <optgroup
+            key={category}
+            label={categoriesLocale[category as keyof typeof categoriesLocale]}
+          >
             {innerBossElements}
           </optgroup>
         );

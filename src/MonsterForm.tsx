@@ -147,7 +147,10 @@ export const MonsterForm = (props: MonsterFormProps): JSX.Element => {
           ));
         }
         return (
-          <optgroup key={category} label={category}>
+          <optgroup
+            key={category}
+            label={categoriesLocale[category as keyof typeof categoriesLocale]}
+          >
             {innerBossElements}
           </optgroup>
         );
