@@ -73,11 +73,10 @@ export const RARE_COLOR = "#FACC15";
 export const SET_COLOR = "#84CC16";
 export const UNIQUE_COLOR = "#c7b377";
 export const RUNE_COLOR = "#F97316";
+export const RUNE_REGEX = /^r(\d+)$/;
+export const KEY_REGEX = /^pk[1-3]$/;
 
 export const colorFromRarity = (name: string, rarity: RARITY): string => {
-  if (RUNE_REGEX.test(name)) {
-    return RUNE_COLOR;
-  }
   switch (rarity) {
     case RARITY.UNIQUE:
       return UNIQUE_COLOR;
@@ -88,14 +87,14 @@ export const colorFromRarity = (name: string, rarity: RARITY): string => {
     case RARITY.MAGIC:
       return MAGIC_COLOR;
     default:
+      if (RUNE_REGEX.test(name) || KEY_REGEX.test(name)) {
+        return RUNE_COLOR;
+      }
       return REGULAR_COLOR;
   }
 };
 
 export const colorClassFromRarity = (name: string, rarity: RARITY): string => {
-  if (RUNE_REGEX.test(name)) {
-    return "text-rune";
-  }
   switch (rarity) {
     case RARITY.UNIQUE:
       return "text-unique";
@@ -106,6 +105,9 @@ export const colorClassFromRarity = (name: string, rarity: RARITY): string => {
     case RARITY.MAGIC:
       return "text-magic";
     default:
+      if (RUNE_REGEX.test(name) || KEY_REGEX.test(name)) {
+        return "text-rune";
+      }
       return "text-regular";
   }
 };
@@ -126,8 +128,6 @@ export const STACKED_BAR_COLORS = {
   TC: color("#1565c0").rgbString(), // blue-800
   ACTIVE: color("#e53935").rgbString(), // purple-800
 };
-
-export const RUNE_REGEX = /^r(\d+)$/;
 
 const binomialDistributionFunction = function (
   n: number,

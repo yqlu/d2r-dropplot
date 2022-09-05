@@ -16,6 +16,7 @@ import {
   SetBaseLookup,
   UniqueSetBaseLookupType,
 } from "./unique-set-dict";
+import { KEY_REGEX } from "../charts/common";
 
 export type ItemRarityProb = [Fraction, Fraction, Fraction, Fraction];
 
@@ -165,6 +166,10 @@ export function findCandidates(
 export function qualityNotApplicable(itemCode: string) {
   // If itemCode is not in itemDict, don't attempt to calculate quality
   if (!ItemDict.hasOwnProperty(itemCode)) {
+    return true;
+  }
+  // Don't calculate rarity for special quest items like keys
+  if (KEY_REGEX.test(itemCode)) {
     return true;
   }
   // Otherwise, only attempt calculating quality if not in OnlyNormalSet

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Fraction from "fraction.js";
 
 import { BaseItemProbTuple } from "./engine/resultAggregator";
-import { RUNE_REGEX } from "./charts/common";
+import { colorClassFromRarity } from "./charts/common";
 import { SetDict, UniqueDict } from "./engine/unique-set-dict";
 import { ItemDict } from "./engine/item-dict";
 import { Locale } from "./engine/locale-dict";
@@ -125,7 +125,7 @@ export const ResultListing = ({
         </li>
       );
     }
-    const styling = RUNE_REGEX.test(tcTuple[0]) ? "text-rune" : "text-white";
+    const styling = colorClassFromRarity(tcTuple[0], RARITY.WHITE);
     return (
       <React.Fragment key={tcTuple[0]}>
         <li
