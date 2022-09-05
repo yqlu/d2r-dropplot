@@ -75,7 +75,7 @@ const makeSuperuniqueElements = (): JSX.Element[] => {
   });
 };
 
-const monsterApplicable = (monsterType: MonsterType): boolean => {
+export const monsterApplicable = (monsterType: MonsterType): boolean => {
   return (
     monsterType == MonsterType.NORMAL ||
     monsterType == MonsterType.MINION ||
@@ -84,7 +84,7 @@ const monsterApplicable = (monsterType: MonsterType): boolean => {
   );
 };
 
-const getMonsterList = (
+export const getMonsterList = (
   levelId: number,
   difficulty: Difficulty,
   monsterType: MonsterType

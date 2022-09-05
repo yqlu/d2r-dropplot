@@ -15,7 +15,11 @@ import { RARITY } from "./engine/itemratio-dict";
 import Fraction from "fraction.js";
 import { Card } from "./components/Card";
 import { ArrowIcon } from "./components/Icon";
-import { MonsterFormInline } from "./MonsterFormInline";
+import {
+  getMonsterList,
+  monsterApplicable,
+  MonsterFormInline,
+} from "./MonsterFormInline";
 
 const App = (): JSX.Element => {
   const [monsterFormState, setMonsterFormState] = useState({
@@ -181,15 +185,31 @@ const App = (): JSX.Element => {
   };
 
   const onMonsterFormChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const name = event.target.id;
+    const name = event.target.id as keyof MonsterFormState;
     let value: string | number = event.target.value;
-    if (name === "difficulty" || name === "level" || name === "monsterType") {
+    if (name === "difficulty" || name === "mlvl" || name === "monsterType") {
       value = parseInt(value);
     }
-    setMonsterFormState((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
+    setMonsterFormState((prevState) => {
+      const res = {
+        ...prevState,
+        [name]: value,
+      };
+      if (
+        monsterApplicable(res.monsterType) &&
+        (name === "levelId" || name === "difficulty" || name === "monsterType")
+      ) {
+        const monsterList = getMonsterList(
+          res.levelId,
+          res.difficulty,
+          res.monsterType
+        );
+        if (monsterList.length > 0 && monsterList.indexOf(res.monster) === -1) {
+          res.monster = monsterList[0];
+        }
+      }
+      return res;
+    });
   };
 
   const selectItem: SelectItemType = (
