@@ -42,12 +42,7 @@ export interface ResultAggregator<T> {
   combineNegativePicks(other: this): void;
   finalize(): this;
   result(): T;
-  adjustCountessRune(
-    itemDropProb: Fraction,
-    itemPicks: number,
-    runeDropProb: Fraction,
-    runePicks: number
-  ): void;
+  adjustCountessRune(itemDropProb: Fraction, runeDropProb: Fraction): void;
 }
 
 export class TCResultAggregator implements ResultAggregator<TCProbTuple[]> {
@@ -129,12 +124,7 @@ export class TCResultAggregator implements ResultAggregator<TCProbTuple[]> {
     return Object.entries(this.dict);
   }
 
-  adjustCountessRune(
-    itemDropProb: Fraction,
-    itemPicks: number,
-    runeDropProb: Fraction,
-    runePicks: number
-  ) {
+  adjustCountessRune(itemDropProb: Fraction, runeDropProb: Fraction) {
     // Unimplemented
   }
 }
@@ -286,13 +276,28 @@ export class BaseItemResultAggregator
     });
   }
 
-  adjustCountessRune(
-    itemDropProb: Fraction,
-    itemPicks: number,
-    runeDropProb: Fraction,
-    runePicks: number
-  ) {
-    // Unimplemented
+  adjustCountessRune(itemDropProb: Fraction, runeDropProb: Fraction) {
+    if (this.aggregationStyle === ProbabilityAggregation.CHANCE_OF_FIRST) {
+      // Unimplemented
+      return;
+    }
+    // If calculating expectation
+    const fiveItemDroppedMultiplier = itemDropProb.pow(5);
+    const fourItemDroppedMultiplier = new Fraction(5)
+      .mul(itemDropProb.pow(4))
+      .mul(ONE.sub(itemDropProb));
+    const runeNoDrop = ONE.sub(runeDropProb);
+    for (let tc of Object.keys(this.dict)) {
+      const dProb = this.dict[tc][0].div(3);
+      const fiveItemDroppedAdjustment = dProb
+        .mul(runeDropProb)
+        .mul(new Fraction(2).add(runeNoDrop));
+
+      const fourItemDroppedAdjustment = dProb.mul(runeDropProb.pow(2));
+      this.dict[tc][0] = this.dict[tc][0]
+        .sub(fiveItemDroppedMultiplier.mul(fiveItemDroppedAdjustment))
+        .sub(fourItemDroppedMultiplier.mul(fourItemDroppedAdjustment));
+    }
   }
 }
 
@@ -447,13 +452,7 @@ export class BaseItemDistributionAggregator
     });
   }
 
-  adjustCountessRune(
-    itemDropProb: Fraction,
-    itemPicks: number,
-    runeDropProb: Fraction,
-    runePicks: number
-  ) {
-    const itemNoDrop = ONE.sub(itemDropProb);
+  adjustCountessRune(itemDropProb: Fraction, runeDropProb: Fraction) {
     const fiveItemDroppedMultiplier = itemDropProb.pow(5);
     const fourItemDroppedMultiplier = new Fraction(5)
       .mul(itemDropProb.pow(4))

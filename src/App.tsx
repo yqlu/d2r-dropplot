@@ -43,7 +43,6 @@ const App = (): JSX.Element => {
     tc: initTc,
     mlvl: `${initMlvl}`,
   } as PlayerFormState);
-  console.log(initTc, playerFormState.tc);
 
   const [errors, setErrors] = useState({});
   const [results, setResults] = useState(
@@ -93,7 +92,6 @@ const App = (): JSX.Element => {
       monsterFormState.superunique,
       monsterFormState.boss
     );
-    console.log("setting tc", tc);
     if (!tc) {
       tc = "None";
     }

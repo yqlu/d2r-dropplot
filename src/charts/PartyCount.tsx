@@ -7,6 +7,7 @@ import Fraction from "fraction.js";
 import {
   BaseItemDistributionAggregator,
   BaseItemResultAggregator,
+  ProbabilityAggregation,
 } from "../engine/resultAggregator";
 import { makeLookupTcFunction, TcCalculator } from "../engine/tc";
 import { TCDict } from "../engine/tc-dict";
@@ -32,7 +33,12 @@ const calculateBaseItemProbability = (
   const tcLookup = makeLookupTcFunction(TCDict, AtomicDict);
   const tcCalculator = new TcCalculator(
     tcLookup,
-    () => new BaseItemDistributionAggregator(mlvl, 0)
+    () =>
+      new BaseItemResultAggregator(
+        mlvl,
+        0,
+        ProbabilityAggregation.EXPECTED_VALUE
+      )
   );
   const playerTcs = tcCalculator
     .getAtomicTCs(tc, playerCount, 1, new Set([baseItemName]))
@@ -47,8 +53,8 @@ const calculateBaseItemProbability = (
     };
   }
   return {
-    player: playerTcs[0][1].eval().expectation(),
-    party: partyTcs[0][1].eval().expectation(),
+    player: playerTcs[0][1], //.eval().expectation(),
+    party: partyTcs[0][1], //.eval().expectation(),
   };
 };
 

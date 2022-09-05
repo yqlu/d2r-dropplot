@@ -10,6 +10,14 @@ import { ONE } from "./polynomialOps";
 
 export type TCLookupFunction = (name: string) => TCObject;
 
+const isCountess = (tcObject: TCObject) => {
+  return (
+    tcObject === TCDict["Countess"] ||
+    tcObject === TCDict["Countess (N)"] ||
+    tcObject === TCDict["Countess (H)"]
+  );
+};
+
 export function maxQualityRatios(a: ItemQualityRatios, b: ItemQualityRatios) {
   return map(zip(a, b), ([ratioA, ratioB]) =>
     Math.max(ratioA, ratioB)
@@ -50,8 +58,7 @@ export function getAdjustedNoDrop(
   tcDenom: number,
   tcNoDrop: number,
   totalPlayers: number,
-  partyCount: number,
-  debug: boolean = false
+  partyCount: number
 ) {
   // https://diablo2.diablowiki.net/Item_Generation_Tutorial
   const n = Math.floor(1 + (partyCount - 1) / 2 + (totalPlayers - 1) / 2);
@@ -134,6 +141,15 @@ export class TcCalculator<T> {
         cumuQualityRatios,
         aggregator
       ).withPositivePicks(tcObject.picks);
+    } else if (isCountess(tcObject)) {
+      return this.getAtomicTcsCountessCase(
+        tcObject,
+        totalPlayers,
+        partyCount,
+        filter,
+        cumuProb,
+        aggregator
+      );
     } else {
       return this.getAtomicTCsNegativePicks(
         tcObject,
@@ -181,43 +197,72 @@ export class TcCalculator<T> {
           tcObject.qualityRatios,
           subAggregator
         ).withPositivePicks(subPicks);
-        console.log(subTC, subTC.slice(0, 13));
-        if (subTC.slice(0, 13) === "Countess Rune") {
-          const itemTc = TCDict[tcObject.tcs[0][0]];
-          const itemDenom = sum(map(itemTc.tcs, (tuple) => tuple[1]));
-          const itemNoDrop = getAdjustedNoDrop(
-            itemDenom,
-            itemTc.nodrop,
-            totalPlayers,
-            partyCount,
-            true
-          );
-          const itemDropProb = ONE.sub(
-            new Fraction(itemNoDrop, itemNoDrop + itemDenom)
-          );
-          const runeTc = TCDict[subTC];
-          const runeDenom = sum(map(runeTc.tcs, (tuple) => tuple[1]));
-          const runeNoDrop = getAdjustedNoDrop(
-            runeDenom,
-            runeTc.nodrop,
-            totalPlayers,
-            partyCount,
-            true
-          );
-          const runeDropProb = ONE.sub(
-            new Fraction(runeNoDrop, runeNoDrop + runeDenom)
-          );
-          subAggregator.adjustCountessRune(
-            itemDropProb,
-            itemTc.picks,
-            runeDropProb,
-            runeTc.picks
-          );
-        }
         parentAggregator.combineNegativePicks(subAggregator);
       }
       cumulativePickCount += tcTuple[1];
     }
+    return parentAggregator;
+  }
+
+  private getAtomicTcsCountessCase(
+    tcObject: TCObject,
+    totalPlayers: number,
+    partyCount: number,
+    filter: Set<string>,
+    cumuProb: Fraction,
+    parentAggregator: ResultAggregator<T>
+  ): ResultAggregator<T> {
+    // First calculate the first TC (Countess Item) normally
+    // writing into parentAggregator
+    const itemTc = tcObject.tcs[0][0];
+    const itemTcObject = TCDict[itemTc];
+    const itemDenom = sum(map(itemTcObject.tcs, (tuple) => tuple[1]));
+    const itemNoDrop = getAdjustedNoDrop(
+      itemDenom,
+      itemTcObject.nodrop,
+      totalPlayers,
+      partyCount
+    );
+    const itemDropProb = ONE.sub(
+      new Fraction(itemNoDrop, itemNoDrop + itemDenom)
+    );
+    this._getAtomicTCs(
+      this.lookupTcFunction(itemTc),
+      totalPlayers,
+      partyCount,
+      filter,
+      cumuProb,
+      tcObject.qualityRatios,
+      parentAggregator
+    );
+
+    // Now calculate the second TC (Countess Rune) into runeAggregator
+    const runeAggregator = this.aggregatorFactory();
+    const runeTc = tcObject.tcs[1][0];
+    const runeTcObject = TCDict[runeTc];
+    const runeDenom = sum(map(runeTcObject.tcs, (tuple) => tuple[1]));
+    const runeNoDrop = getAdjustedNoDrop(
+      runeDenom,
+      runeTcObject.nodrop,
+      totalPlayers,
+      partyCount
+    );
+    const runeDropProb = ONE.sub(
+      new Fraction(runeNoDrop, runeNoDrop + runeDenom)
+    );
+    this._getAtomicTCs(
+      this.lookupTcFunction(runeTc),
+      totalPlayers,
+      partyCount,
+      filter,
+      cumuProb,
+      tcObject.qualityRatios,
+      runeAggregator
+    );
+
+    // Run Countess special adjustment before combining the two
+    runeAggregator.adjustCountessRune(itemDropProb, runeDropProb);
+    parentAggregator.combineNegativePicks(runeAggregator);
     return parentAggregator;
   }
 
