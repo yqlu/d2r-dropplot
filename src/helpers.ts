@@ -9,10 +9,11 @@ import {
   BaseItemResultAggregator,
   TCProbTuple,
   TCResultAggregator,
+  BaseItemDistributionTuple,
+  BaseItemDistributionAggregator,
 } from "./engine/resultAggregator";
-import { sortAlphabetical } from "./engine/display";
-import { PlayerForm, PlayerFormState } from "./PlayerForm";
-import { MonsterForm, MonsterFormState } from "./MonsterForm";
+import { sortBaseItemAlphabetical } from "./engine/display";
+import { PlayerFormState } from "./PlayerForm";
 import Fraction from "fraction.js";
 
 export function useStateParams<T>(
@@ -75,48 +76,39 @@ const _compute = (playerFormState: PlayerFormState): BaseItemProbTuple[] => {
   const mlvl = parseInt(playerFormState.mlvl);
   const magicFind = parseInt(playerFormState.magicFind);
 
-  const atomic = true;
+  const experiment = false;
   let tcs: BaseItemProbTuple[];
-  if (atomic) {
-    const tcLookup = makeLookupTcFunction(TCDict, AtomicDict);
+  const tcLookup = makeLookupTcFunction(TCDict, AtomicDict);
+  if (experiment) {
+    const tcCalculator = new TcCalculator(
+      tcLookup,
+      () => new BaseItemDistributionAggregator(mlvl, magicFind)
+    );
+    const tcDistributionTuples = tcCalculator
+      .getAtomicTCs(
+        playerFormState.tc,
+        playerFormState.playerCount,
+        playerFormState.partyCount
+      )
+      .result();
+    tcs = tcDistributionTuples.map((tuple) => [
+      tuple[0],
+      tuple[1].eval().expectation(),
+      tuple[2],
+    ]);
+  } else {
     const tcCalculator = new TcCalculator(
       tcLookup,
       () => new BaseItemResultAggregator(mlvl, magicFind)
     );
-    let tcsCast = tcCalculator
+    tcs = tcCalculator
       .getAtomicTCs(
         playerFormState.tc,
         playerFormState.playerCount,
         playerFormState.partyCount
       )
       .result();
-    const ZERO = new Fraction(0);
-    tcs = sortAlphabetical(
-      tcsCast as unknown as TCProbTuple[]
-    ) as unknown as BaseItemProbTuple[];
-  } else {
-    const tcLookup = makeLookupTcFunction(TCDict, {} as TCDictType);
-    const tcCalculator = new TcCalculator<TCProbTuple[]>(
-      tcLookup,
-      () => new TCResultAggregator()
-    );
-
-    let tcsCast = tcCalculator
-      .getAtomicTCs(
-        playerFormState.tc,
-        playerFormState.playerCount,
-        playerFormState.partyCount
-      )
-      .result();
-    const ZERO = new Fraction(0);
-    tcs = sortAlphabetical(tcsCast as unknown as TCProbTuple[]).map(
-      (tuple) =>
-        [
-          tuple[0],
-          tuple[1],
-          { quality: [ZERO, ZERO, ZERO, ZERO], sets: [], uniques: [] },
-        ] as BaseItemProbTuple
-    );
   }
+  tcs = sortBaseItemAlphabetical(tcs) as BaseItemProbTuple[];
   return tcs;
 };

@@ -287,7 +287,7 @@ const App = (): JSX.Element => {
             />
           </div>
         </Card>
-        <div className="pt-4">
+        {/* <div className="pt-4">
           <Dashboard
             playerFormState={playerFormState}
             results={results}
@@ -297,7 +297,7 @@ const App = (): JSX.Element => {
             selectedChance={selectedChance}
             onSelectItem={selectItem}
           />
-        </div>
+        </div> */}
       </main>
       <div
         className={

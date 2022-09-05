@@ -17,6 +17,15 @@ export class Distribution {
     throw new Error("Child class must implement this!");
   }
 
+  simplify(eps: number): void {
+    this.eval().polySimplify(eps);
+    return;
+  }
+
+  static Polynomial(coeffs: Fraction[]) {
+    return new Polynomial(coeffs);
+  }
+
   // static constructors
   static Atomic(chance: Fraction): Distribution {
     return new Polynomial([ONE.sub(chance), chance]);
@@ -42,6 +51,13 @@ class Polynomial extends Distribution {
   constructor(coeffs: Fraction[]) {
     super();
     this.coeffs = polynomialReduce(coeffs);
+  }
+
+  polySimplify(eps: number) {
+    for (let i = 0; i < this.coeffs.length; i++) {
+      this.coeffs[i] = this.coeffs[i].simplify(eps);
+    }
+    this.coeffs[0] = ONE.sub(this.coeffs.slice(1).reduce((a, b) => a.add(b)));
   }
 
   expectation() {

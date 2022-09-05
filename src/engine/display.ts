@@ -1,5 +1,10 @@
 import { ItemDict } from "./item-dict";
-import { TCProbTuple } from "./resultAggregator";
+import {
+  BaseItemDistributionTuple,
+  BaseItemProbDict,
+  BaseItemProbTuple,
+  TCProbTuple,
+} from "./resultAggregator";
 import { WeaponsDict, ArmorDict } from "./weapon-armor-dict";
 
 export function sortTCs(tcs: TCProbTuple[]): TCProbTuple[] {
@@ -77,6 +82,21 @@ export function sortTCs(tcs: TCProbTuple[]): TCProbTuple[] {
 }
 
 export function sortAlphabetical(tcs: TCProbTuple[]) {
+  tcs.sort(function (a, b) {
+    if (!ItemDict[a[0]]) {
+      return 1;
+    } else if (!ItemDict[b[0]]) {
+      return -1;
+    }
+    return ItemDict[a[0]].name.localeCompare(ItemDict[b[0]].name);
+  });
+
+  return tcs;
+}
+
+export function sortBaseItemAlphabetical(
+  tcs: (BaseItemProbTuple | BaseItemDistributionTuple)[]
+) {
   tcs.sort(function (a, b) {
     if (!ItemDict[a[0]]) {
       return 1;

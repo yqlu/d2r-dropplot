@@ -3,11 +3,11 @@ import Fraction from "fraction.js";
 
 import { ResultAggregator } from "./resultAggregator";
 import { TCDictType, TCObject, ItemQualityRatios } from "./tc-dict";
+import { ONE } from "./polynomialOps";
 
 // TODO: handle countess rune rate
 // TODO: handle Duriel drop rate
 
-const ONE = new Fraction(1);
 export type TCLookupFunction = (name: string) => TCObject;
 
 export function maxQualityRatios(a: ItemQualityRatios, b: ItemQualityRatios) {

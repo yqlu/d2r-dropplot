@@ -4,11 +4,11 @@ import { readFile } from "fs/promises";
 
 import {
   BaseItemResultAggregator,
-  ProbabilityAggregation,
-} from "../dist/src/resultAggregator.js";
-import { makeLookupTcFunction, TcCalculator } from "../dist/src/tc.js";
-import { TCDict } from "../dist/src/tc-dict.js";
-import { AtomicDict } from "../dist/src/atomic-dict.js";
+  BaseItemDistributionAggregator,
+} from "../dist/resultAggregator.js";
+import { makeLookupTcFunction, TcCalculator } from "../dist/tc.js";
+import { TCDict } from "../dist/tc-dict.js";
+import { AtomicDict } from "../dist/atomic-dict.js";
 
 const treasureClasses = JSON.parse(
   await readFile(
@@ -33,10 +33,12 @@ Caveats:
 
 If so, validated consistency for P1 0MF except for
 - Andariel, Mephisto, Diablo, Baal
-- Countess
+- Countess (should test against larger player counts)
 - Duriel
-- Super
-- ROP (N) / (H) --> need to account for Annihilus
+- ROP / ROP (N) / ROP (H) --> need to account for Annihilus
+
+
+test that if I break rarity aggregation, Hephesto or Griswold or Smith fail
 */
 
 const ERROR = 1.001;
@@ -78,16 +80,27 @@ function compute(tc, mlvl) {
   );
 
   const tcLookup = makeLookupTcFunction(TCDict, AtomicDict);
-  const tcCalculator = new TcCalculator(
-    tcLookup,
-    () =>
-      new BaseItemResultAggregator(
-        mlvl,
-        0,
-        ProbabilityAggregation.EXPECTED_VALUE
-      )
-  );
-  let tcs = tcCalculator.getAtomicTCs(tc).result();
+  const experiment = true;
+  let tcs;
+  if (experiment) {
+    const tcCalculator = new TcCalculator(
+      tcLookup,
+      () => new BaseItemDistributionAggregator(mlvl, 0)
+    );
+    tcs = tcCalculator
+      .getAtomicTCs(tc)
+      .result()
+      .map((tuple) => {
+        tuple[1] = tuple[1].eval().expectation();
+        return tuple;
+      });
+  } else {
+    const tcCalculator = new TcCalculator(
+      tcLookup,
+      () => new BaseItemResultAggregator(mlvl, 0)
+    );
+    tcs = tcCalculator.getAtomicTCs(tc).result();
+  }
   let passed = 0;
   let failed = 0;
   let errors = [];
@@ -148,17 +161,17 @@ function compute(tc, mlvl) {
 function test(tc, mlvl) {
   let res = compute(tc, mlvl);
   if (res.errors.length > 0) {
-    console.log(tc, res.errors);
+    console.log(tc, res.errors.slice(0, 10));
   } else {
     console.log(`${tc} passed`);
   }
 }
 
-test("Duriel - Base", 99);
+test("Diablo", 99);
 
-// Object.keys(TCDict).forEach(function (tc, idx) {
-//   if (tc.substring(0, 3) == "Act") {
-//     return;
-//   }
-//   test(tc, 99);
-// });
+Object.keys(TCDict).forEach(function (tc, idx) {
+  if (tc.substring(0, 3) === "Act") {
+    return;
+  }
+  test(tc, 99);
+});
