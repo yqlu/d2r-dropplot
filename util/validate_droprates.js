@@ -32,7 +32,6 @@ Caveats:
 - need to ignore set / uniques bumping down if they don't exist
 
 If so, validated consistency for P1 0MF except for
-- Andariel, Mephisto, Diablo, Baal
 - Countess (should test against larger player counts)
 - Duriel
 - ROP / ROP (N) / ROP (H) --> need to account for Annihilus
@@ -114,7 +113,13 @@ function compute(tc, mlvl) {
       const ratio = prob.div(compare[items[tc].classid][0]);
       if (Math.max(ratio.valueOf(), ratio.inverse().valueOf()) > ERROR) {
         failed += 1;
-        errors.push(`${tc} error of ${ratio.valueOf()}`);
+        // errors.push(`${tc} error of ${ratio.valueOf()}`);
+
+        errors.push(
+          `${tc} mine - ${prob.valueOf()} theirs - ${compare[
+            items[tc].classid
+          ][0].valueOf()}`
+        );
       } else {
         // Now check item rarity
         let failedBefore = failed;
@@ -167,7 +172,7 @@ function test(tc, mlvl) {
   }
 }
 
-test("Diablo", 99);
+// test("Countess", 99);
 
 Object.keys(TCDict).forEach(function (tc, idx) {
   if (tc.substring(0, 3) === "Act") {

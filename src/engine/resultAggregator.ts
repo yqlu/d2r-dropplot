@@ -7,7 +7,7 @@ import {
   ItemRarityProb,
   QualityProbabilityObject,
 } from "./rarity";
-import { ONE } from "./polynomialOps";
+import { ONE, scalarMultiply, ZERO } from "./polynomialOps";
 import { Distribution } from "./distribution";
 import { BinomialRunsChart } from "../charts/BinomialRuns";
 
@@ -42,6 +42,12 @@ export interface ResultAggregator<T> {
   combineNegativePicks(other: this): void;
   finalize(): this;
   result(): T;
+  adjustCountessRune(
+    itemDropProb: Fraction,
+    itemPicks: number,
+    runeDropProb: Fraction,
+    runePicks: number
+  ): void;
 }
 
 export class TCResultAggregator implements ResultAggregator<TCProbTuple[]> {
@@ -121,6 +127,15 @@ export class TCResultAggregator implements ResultAggregator<TCProbTuple[]> {
 
   result(): TCProbTuple[] {
     return Object.entries(this.dict);
+  }
+
+  adjustCountessRune(
+    itemDropProb: Fraction,
+    itemPicks: number,
+    runeDropProb: Fraction,
+    runePicks: number
+  ) {
+    // Unimplemented
   }
 }
 
@@ -270,6 +285,15 @@ export class BaseItemResultAggregator
       return [key, a[0], a[1]];
     });
   }
+
+  adjustCountessRune(
+    itemDropProb: Fraction,
+    itemPicks: number,
+    runeDropProb: Fraction,
+    runePicks: number
+  ) {
+    // Unimplemented
+  }
 }
 
 export class BaseItemDistributionAggregator
@@ -346,8 +370,8 @@ export class BaseItemDistributionAggregator
       // Monsters can never drop more than 6 items, so discount the chance that
       //  7 items dropped in total, the first 6 items were not the TC but the 7th was
       adjustedDistFn = (d: Distribution) => {
-        // Assume that d is atomic for now
-        const dProb = d.eval().coeffs[1]; // TODO: challenge this
+        // Assume that d is atomic for now -- TODO: challenge this
+        const dProb = d.eval().coeffs[1];
 
         const naive = Distribution.Binomial(d, picks);
         const somethingDrops = Distribution.Polynomial([
@@ -421,5 +445,44 @@ export class BaseItemDistributionAggregator
       const a = this.dict[key];
       return [key, a[0], a[1]];
     });
+  }
+
+  adjustCountessRune(
+    itemDropProb: Fraction,
+    itemPicks: number,
+    runeDropProb: Fraction,
+    runePicks: number
+  ) {
+    const itemNoDrop = ONE.sub(itemDropProb);
+    const fiveItemDroppedMultiplier = itemDropProb.pow(5);
+    const fourItemDroppedMultiplier = new Fraction(5)
+      .mul(itemDropProb.pow(4))
+      .mul(ONE.sub(itemDropProb));
+    for (let tc of Object.keys(this.dict)) {
+      // Assume that d is atomic for now -- TODO: challenge this
+      const dComp = this.dict[tc][0].d.eval().coeffs[0];
+      const dProb = this.dict[tc][0].d.eval().coeffs[1];
+      const otherRuneDropProb = runeDropProb.sub(dProb);
+      const fiveItemDroppedAdjustment = Distribution.And([
+        Distribution.Polynomial([otherRuneDropProb, dProb]),
+        Distribution.Polynomial([dProb, dProb.mul(new Fraction(-1))]),
+        Distribution.Polynomial([
+          dComp.mul(new Fraction(2)).add(ONE.sub(runeDropProb)),
+          dProb.mul(new Fraction(2)),
+        ]),
+      ]);
+      const fourItemDroppedAdjustment = Distribution.And([
+        Distribution.Binomial(
+          Distribution.Polynomial([otherRuneDropProb, dProb]),
+          2
+        ),
+        Distribution.Polynomial([dProb, dProb.mul(new Fraction(-1))]),
+      ]);
+      this.dict[tc][0] = Distribution.Or([
+        [this.dict[tc][0], ONE],
+        [fiveItemDroppedAdjustment, fiveItemDroppedMultiplier],
+        [fourItemDroppedAdjustment, fourItemDroppedMultiplier],
+      ]);
+    }
   }
 }

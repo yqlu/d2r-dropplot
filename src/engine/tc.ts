@@ -2,7 +2,7 @@ import { sum, map, zip } from "lodash-es";
 import Fraction from "fraction.js";
 
 import { ResultAggregator } from "./resultAggregator";
-import { TCDictType, TCObject, ItemQualityRatios } from "./tc-dict";
+import { TCDictType, TCObject, ItemQualityRatios, TCDict } from "./tc-dict";
 import { ONE } from "./polynomialOps";
 
 // TODO: handle countess rune rate
@@ -50,14 +50,17 @@ export function getAdjustedNoDrop(
   tcDenom: number,
   tcNoDrop: number,
   totalPlayers: number,
-  partyCount: number
+  partyCount: number,
+  debug: boolean = false
 ) {
   // https://diablo2.diablowiki.net/Item_Generation_Tutorial
   const n = Math.floor(1 + (partyCount - 1) / 2 + (totalPlayers - 1) / 2);
   const adjustedNoDropRate = Math.pow(tcNoDrop / (tcNoDrop + tcDenom), n);
-  return Math.floor((adjustedNoDropRate / (1 - adjustedNoDropRate)) * tcDenom);
+  // Hack for numerical instability where 19 for Countess Item would become 18.9999
+  return Math.floor(
+    (adjustedNoDropRate / (1 - adjustedNoDropRate)) * tcDenom * (1 + 1e-10)
+  );
 }
-
 export function makeLookupTcFunction(
   tcDict: TCDictType,
   atomicDict: TCDictType
@@ -97,7 +100,8 @@ export class TcCalculator<T> {
     const aggregator = this.aggregatorFactory();
     const tcObject = this.lookupTcFunction(tcName);
     if (!tcObject) {
-      console.error(`${tcName} not a valid TC`);
+      console.trace(`${tcName} not a valid TC`);
+
       return this.aggregatorFactory().finalize();
     }
     return this._getAtomicTCs(
@@ -177,6 +181,39 @@ export class TcCalculator<T> {
           tcObject.qualityRatios,
           subAggregator
         ).withPositivePicks(subPicks);
+        console.log(subTC, subTC.slice(0, 13));
+        if (subTC.slice(0, 13) === "Countess Rune") {
+          const itemTc = TCDict[tcObject.tcs[0][0]];
+          const itemDenom = sum(map(itemTc.tcs, (tuple) => tuple[1]));
+          const itemNoDrop = getAdjustedNoDrop(
+            itemDenom,
+            itemTc.nodrop,
+            totalPlayers,
+            partyCount,
+            true
+          );
+          const itemDropProb = ONE.sub(
+            new Fraction(itemNoDrop, itemNoDrop + itemDenom)
+          );
+          const runeTc = TCDict[subTC];
+          const runeDenom = sum(map(runeTc.tcs, (tuple) => tuple[1]));
+          const runeNoDrop = getAdjustedNoDrop(
+            runeDenom,
+            runeTc.nodrop,
+            totalPlayers,
+            partyCount,
+            true
+          );
+          const runeDropProb = ONE.sub(
+            new Fraction(runeNoDrop, runeNoDrop + runeDenom)
+          );
+          subAggregator.adjustCountessRune(
+            itemDropProb,
+            itemTc.picks,
+            runeDropProb,
+            runeTc.picks
+          );
+        }
         parentAggregator.combineNegativePicks(subAggregator);
       }
       cumulativePickCount += tcTuple[1];

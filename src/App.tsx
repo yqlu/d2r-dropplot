@@ -19,11 +19,11 @@ import { MonsterFormInline } from "./MonsterFormInline";
 
 const App = (): JSX.Element => {
   const [monsterFormState, setMonsterFormState] = useState({
-    difficulty: Difficulty.HELL,
-    monsterType: MonsterType.BOSS,
+    difficulty: Difficulty.NORMAL,
+    monsterType: MonsterType.SUPERUNIQUE,
     levelId: 2, // Blood Moor
     monster: "zombie1",
-    superunique: "Bishibosh",
+    superunique: "The Countess",
     boss: "diablo",
   } as MonsterFormState);
 
@@ -43,6 +43,7 @@ const App = (): JSX.Element => {
     tc: initTc,
     mlvl: `${initMlvl}`,
   } as PlayerFormState);
+  console.log(initTc, playerFormState.tc);
 
   const [errors, setErrors] = useState({});
   const [results, setResults] = useState(
@@ -54,7 +55,6 @@ const App = (): JSX.Element => {
     idFunc,
     idFunc
   );
-  // const [itemName, setItemName] = useState("");
   const [itemName, setItemName] = useStateParams("", "itm", idFunc, idFunc);
   const [rarity, setRarity] = useStateParams(
     RARITY.WHITE,
@@ -93,6 +93,7 @@ const App = (): JSX.Element => {
       monsterFormState.superunique,
       monsterFormState.boss
     );
+    console.log("setting tc", tc);
     if (!tc) {
       tc = "None";
     }
@@ -156,7 +157,10 @@ const App = (): JSX.Element => {
     event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
     const name = event.target.id;
-    const value = Number(event.target.value);
+    let value: string | number = event.target.value;
+    if (name !== "tc") {
+      value = Number(value);
+    }
     setPlayerFormState((prevState) => {
       const newState = {
         ...prevState,
