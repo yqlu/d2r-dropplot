@@ -8,9 +8,7 @@ import { TCDict } from "./tc-dict";
 describe("BossDict structure", () => {
   it("should contain a defined BossFlatDict entry for every monster in the hierarchy", () => {
     const hierarchy = getBossHierarchy(Difficulty.HELL);
-    for (let mon of hierarchy.actbosses
-      .concat(hierarchy.minor)
-      .concat(hierarchy.pandemonium)) {
+    for (let mon of hierarchy.actbosses.concat(hierarchy.minor)) {
       expect(FlatBossDict[mon], mon).to.not.be.undefined;
     }
   });

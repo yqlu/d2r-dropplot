@@ -91,6 +91,9 @@ const _compute = (playerFormState: PlayerFormState): BaseItemProbTuple[] => {
         playerFormState.partyCount
       )
       .result();
+    if (playerFormState.tc === "Durielq (H)") {
+      console.log(tcDistributionTuples.find((tuple) => tuple[0] === "r24"));
+    }
     tcs = tcDistributionTuples.map((tuple) => [
       tuple[0],
       tuple[1].eval().expectation(),
