@@ -43,6 +43,7 @@ test that if I break rarity aggregation, Hephesto or Griswold or Smith fail
 const ERROR = 1.001;
 const ZERO = new Fraction(0);
 const RARITY_MAPPING = [0, 2, 1, 3];
+const PLAYER_COUNT = 8;
 
 function format(str) {
   const res = {};
@@ -73,7 +74,7 @@ function compute(tc, mlvl) {
       .execSync(
         `python3 ../diablo2_drop_calc/113d/treasure_classes.py ${
           treasureClasses[tc].lineNumber + 161
-        } ${mlvl} --fraction`
+        } ${mlvl} --fraction --players_mod ${PLAYER_COUNT} `
       )
       .toString()
   );
@@ -87,7 +88,7 @@ function compute(tc, mlvl) {
       () => new BaseItemDistributionAggregator(mlvl, 0)
     );
     tcs = tcCalculator
-      .getAtomicTCs(tc)
+      .getAtomicTCs(tc, PLAYER_COUNT, PLAYER_COUNT)
       .result()
       .map((tuple) => {
         tuple[1] = tuple[1].eval().expectation();
@@ -98,7 +99,7 @@ function compute(tc, mlvl) {
       tcLookup,
       () => new BaseItemResultAggregator(mlvl, 0)
     );
-    tcs = tcCalculator.getAtomicTCs(tc).result();
+    tcs = tcCalculator.getAtomicTCs(tc, PLAYER_COUNT, PLAYER_COUNT).result();
   }
   let passed = 0;
   let failed = 0;
@@ -116,7 +117,7 @@ function compute(tc, mlvl) {
         // errors.push(`${tc} error of ${ratio.valueOf()}`);
 
         errors.push(
-          `${tc} mine - ${prob.valueOf()} theirs - ${compare[
+          `${tc} error of ${ratio.valueOf()} - ${prob.valueOf()} vs ${compare[
             items[tc].classid
           ][0].valueOf()}`
         );
@@ -129,7 +130,7 @@ function compute(tc, mlvl) {
           const other = compare[items[tc].classid][1][idx];
           const error = `${tc} ${rarity} discrepancy of ${JSON.stringify(
             qualityRatio
-          )} vs ${JSON.stringify(other)}`;
+          )} - ${JSON.stringify(other)}`;
           if (qualityRatio.valueOf() == 0) {
             if (other.valueOf() == 0) {
               return;
@@ -172,7 +173,7 @@ function test(tc, mlvl) {
   }
 }
 
-// test("Countess", 99);
+// test("Countess Item (H)", 99);
 
 Object.keys(TCDict).forEach(function (tc, idx) {
   if (tc.substring(0, 3) === "Act") {

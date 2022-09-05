@@ -27,6 +27,8 @@ const calculateMagicFind = (
 ) => {
   const mlvl = parseInt(playerFormState.mlvl);
   const tcLookup = makeLookupTcFunction(TCDict, AtomicDict);
+  // No need to use more accurate DistributionAggregator
+  // Since we are only looking at quality
   const tcCalculator = new TcCalculator(
     tcLookup,
     () => new BaseItemResultAggregator(mlvl, magicFind)

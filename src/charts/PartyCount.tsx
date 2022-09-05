@@ -4,7 +4,10 @@ import { ChartTypeRegistry, TooltipItem } from "chart.js";
 import Chart from "chart.js/auto";
 import Fraction from "fraction.js";
 
-import { BaseItemResultAggregator } from "../engine/resultAggregator";
+import {
+  BaseItemDistributionAggregator,
+  BaseItemResultAggregator,
+} from "../engine/resultAggregator";
 import { makeLookupTcFunction, TcCalculator } from "../engine/tc";
 import { TCDict } from "../engine/tc-dict";
 import { AtomicDict } from "../engine/atomic-dict";
@@ -16,6 +19,7 @@ import {
 } from "./common";
 import { Locale } from "../engine/locale-dict";
 import { RARITY } from "../engine/itemratio-dict";
+import { ZERO } from "../engine/polynomialOps";
 
 Chart.defaults.borderColor = "rgba(255,255,255,0.2)";
 
@@ -28,7 +32,7 @@ const calculateBaseItemProbability = (
   const tcLookup = makeLookupTcFunction(TCDict, AtomicDict);
   const tcCalculator = new TcCalculator(
     tcLookup,
-    () => new BaseItemResultAggregator(mlvl, 0)
+    () => new BaseItemDistributionAggregator(mlvl, 0)
   );
   const playerTcs = tcCalculator
     .getAtomicTCs(tc, playerCount, 1, new Set([baseItemName]))
@@ -37,15 +41,14 @@ const calculateBaseItemProbability = (
     .getAtomicTCs(tc, playerCount, playerCount, new Set([baseItemName]))
     .result();
   if (playerTcs.length == 0) {
-    const ZERO = new Fraction(0);
     return {
       player: ZERO,
       party: ZERO,
     };
   }
   return {
-    player: playerTcs[0][1],
-    party: partyTcs[0][1],
+    player: playerTcs[0][1].eval().expectation(),
+    party: partyTcs[0][1].eval().expectation(),
   };
 };
 

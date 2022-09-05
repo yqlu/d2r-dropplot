@@ -17,7 +17,7 @@ Chart.defaults.borderColor = "rgba(255,255,255,0.2)";
 const getData = (runs: number, singleRunChance: number) => {
   const ys = [];
   let [prevY, y] = [0, 0];
-  for (let x = 0; x <= Math.ceil(runs / 10); x++) {
+  for (let x = 0; x <= Math.ceil(runs / 5); x++) {
     y = binomialDistributionFunction(runs, x, singleRunChance) * 100;
     if (y >= prevY || y > 1e-2 || x <= 1) {
       ys.push(y);
