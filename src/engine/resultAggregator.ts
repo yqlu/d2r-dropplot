@@ -294,13 +294,14 @@ export class BaseItemResultAggregator
       .mul(ONE.sub(itemDropProb));
     const runeNoDrop = ONE.sub(runeDropProb);
     for (let tc of Object.keys(this.dict)) {
-      const dProb = this.dict[tc][0].div(3);
+      const dProb = this.dict[tc][0];
       const fiveItemDroppedAdjustment = dProb
         .mul(runeDropProb)
         .mul(new Fraction(2).add(runeNoDrop));
 
       const fourItemDroppedAdjustment = dProb.mul(runeDropProb.pow(2));
       this.dict[tc][0] = this.dict[tc][0]
+        .mul(new Fraction(3))
         .sub(fiveItemDroppedMultiplier.mul(fiveItemDroppedAdjustment))
         .sub(fourItemDroppedMultiplier.mul(fourItemDroppedAdjustment));
     }
@@ -499,8 +500,8 @@ export class BaseItemDistributionAggregator
       .mul(ONE.sub(itemDropProb));
     for (let tc of Object.keys(this.dict)) {
       // Assume that d is atomic for now -- TODO: challenge this
-      const dComp = this.dict[tc][0].d.eval().coeffs[0];
-      const dProb = this.dict[tc][0].d.eval().coeffs[1];
+      const dComp = this.dict[tc][0].eval().coeffs[0];
+      const dProb = this.dict[tc][0].eval().coeffs[1];
       const otherRuneDropProb = runeDropProb.sub(dProb);
       const fiveItemDroppedAdjustment = Distribution.And([
         Distribution.Polynomial([otherRuneDropProb, dProb]),
@@ -518,7 +519,7 @@ export class BaseItemDistributionAggregator
         Distribution.Polynomial([dProb, dProb.mul(new Fraction(-1))]),
       ]);
       this.dict[tc][0] = Distribution.Or([
-        [this.dict[tc][0], ONE],
+        [Distribution.Binomial(this.dict[tc][0], 3), ONE],
         [fiveItemDroppedAdjustment, fiveItemDroppedMultiplier],
         [fourItemDroppedAdjustment, fourItemDroppedMultiplier],
       ]);

@@ -267,7 +267,7 @@ export class TcCalculator<T> {
     const runeDropProb = ONE.sub(
       new Fraction(runeNoDrop, runeNoDrop + runeDenom)
     );
-    this._getAtomicTCs(
+    this.getAtomicTCsOnePick(
       this.lookupTcFunction(runeTc),
       totalPlayers,
       partyCount,
