@@ -38,8 +38,13 @@ export class Distribution {
   static Or(distTuples: OrDistributionTuple[]): Distribution {
     return new Or(distTuples);
   }
+
   static And(dists: Distribution[]): Distribution {
     return new And(dists);
+  }
+
+  static Substitute(parent: Distribution, child: Distribution): Distribution {
+    return new Substitute(parent, child);
   }
 }
 
@@ -164,6 +169,30 @@ class And extends Distribution {
       [ONE]
     );
     this._eval = new Polynomial(evaluatedCoeffs);
+    return this._eval;
+  }
+}
+
+class Substitute extends Distribution {
+  private _eval: Polynomial | null = null;
+
+  constructor(
+    private readonly parent: Distribution,
+    private readonly child: Distribution
+  ) {
+    super();
+  }
+
+  eval() {
+    if (this._eval) {
+      return this._eval;
+    }
+    const or = Distribution.Or(
+      this.parent.eval().coeffs.map((coeff: Fraction, degree: number) => {
+        return [Distribution.Binomial(this.child, degree), coeff];
+      })
+    );
+    this._eval = or.eval();
     return this._eval;
   }
 }

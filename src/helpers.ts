@@ -7,10 +7,8 @@ import { makeLookupTcFunction, TcCalculator } from "./engine/tc";
 import {
   BaseItemProbTuple,
   BaseItemResultAggregator,
-  TCProbTuple,
-  TCResultAggregator,
-  BaseItemDistributionTuple,
   BaseItemDistributionAggregator,
+  ProbabilityAggregation,
 } from "./engine/resultAggregator";
 import { sortBaseItemAlphabetical } from "./engine/display";
 import { PlayerFormState } from "./PlayerForm";
@@ -91,9 +89,6 @@ const _compute = (playerFormState: PlayerFormState): BaseItemProbTuple[] => {
         playerFormState.partyCount
       )
       .result();
-    if (playerFormState.tc === "Durielq (H)") {
-      console.log(tcDistributionTuples.find((tuple) => tuple[0] === "r24"));
-    }
     tcs = tcDistributionTuples.map((tuple) => [
       tuple[0],
       tuple[1].eval().expectation(),
@@ -102,7 +97,12 @@ const _compute = (playerFormState: PlayerFormState): BaseItemProbTuple[] => {
   } else {
     const tcCalculator = new TcCalculator(
       tcLookup,
-      () => new BaseItemResultAggregator(mlvl, magicFind)
+      () =>
+        new BaseItemResultAggregator(
+          mlvl,
+          magicFind,
+          ProbabilityAggregation.EXPECTED_VALUE
+        )
     );
     tcs = tcCalculator
       .getAtomicTCs(

@@ -5,6 +5,7 @@ import { readFile } from "fs/promises";
 import {
   BaseItemResultAggregator,
   BaseItemDistributionAggregator,
+  ProbabilityAggregation,
 } from "../dist/resultAggregator.js";
 import { makeLookupTcFunction, TcCalculator } from "../dist/tc.js";
 import { TCDict } from "../dist/tc-dict.js";
@@ -43,7 +44,7 @@ test that if I break rarity aggregation, Hephesto or Griswold or Smith fail
 const ERROR = 1.001;
 const ZERO = new Fraction(0);
 const RARITY_MAPPING = [0, 2, 1, 3];
-const PLAYER_COUNT = 8;
+const PLAYER_COUNT = 1;
 
 function format(str) {
   const res = {};
@@ -80,7 +81,7 @@ function compute(tc, mlvl) {
   );
 
   const tcLookup = makeLookupTcFunction(TCDict, AtomicDict);
-  const experiment = true;
+  const experiment = false;
   let tcs;
   if (experiment) {
     const tcCalculator = new TcCalculator(
@@ -97,7 +98,12 @@ function compute(tc, mlvl) {
   } else {
     const tcCalculator = new TcCalculator(
       tcLookup,
-      () => new BaseItemResultAggregator(mlvl, 0)
+      () =>
+        new BaseItemResultAggregator(
+          mlvl,
+          0,
+          ProbabilityAggregation.EXPECTED_VALUE
+        )
     );
     tcs = tcCalculator.getAtomicTCs(tc, PLAYER_COUNT, PLAYER_COUNT).result();
   }
@@ -112,10 +118,9 @@ function compute(tc, mlvl) {
     } else {
       // First check base item probability
       const ratio = prob.div(compare[items[tc].classid][0]);
+      compare[items[tc].classid].visited = true;
       if (Math.max(ratio.valueOf(), ratio.inverse().valueOf()) > ERROR) {
         failed += 1;
-        // errors.push(`${tc} error of ${ratio.valueOf()}`);
-
         errors.push(
           `${tc} error of ${ratio.valueOf()} - ${prob.valueOf()} vs ${compare[
             items[tc].classid
@@ -124,7 +129,6 @@ function compute(tc, mlvl) {
       } else {
         // Now check item rarity
         let failedBefore = failed;
-        // console.log(tc, qualityObj.quality, compare[items[tc].classid][1]);
         qualityObj.quality.forEach(function (qualityRatio, idx) {
           const rarity = ["Magic", "Rare", "Set", "Unique"][idx];
           const other = compare[items[tc].classid][1][idx];
@@ -160,6 +164,11 @@ function compute(tc, mlvl) {
         tcs.length
       }) in Python output.`
     );
+    for (let key in compare) {
+      if (!compare[key].visited) {
+        console.log(key, compare[key]);
+      }
+    }
   }
   return { passed, failed, errors };
 }
@@ -173,7 +182,7 @@ function test(tc, mlvl) {
   }
 }
 
-// test("Countess Item (H)", 99);
+// test("Durielq", 99);
 
 Object.keys(TCDict).forEach(function (tc, idx) {
   if (tc.substring(0, 3) === "Act") {

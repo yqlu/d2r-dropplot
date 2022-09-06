@@ -1,5 +1,5 @@
 import Fraction from "fraction.js";
-import { reduce, range, map } from "lodash-es";
+import { reduce, range, map, sum } from "lodash-es";
 
 import { ItemQualityRatios } from "./tc-dict";
 import {
@@ -10,6 +10,7 @@ import {
 import { ONE, scalarMultiply, ZERO } from "./polynomialOps";
 import { Distribution } from "./distribution";
 import { BinomialRunsChart } from "../charts/BinomialRuns";
+import { propagateMarkov, histogramResult } from "./duriel-markov";
 
 export enum ProbabilityAggregation {
   EXPECTED_VALUE,
@@ -43,6 +44,7 @@ export interface ResultAggregator<T> {
   finalize(): this;
   result(): T;
   adjustCountessRune(itemDropProb: Fraction, runeDropProb: Fraction): void;
+  adjustDurielPicks(itemDropProb: Fraction): void;
 }
 
 export class TCResultAggregator implements ResultAggregator<TCProbTuple[]> {
@@ -125,6 +127,10 @@ export class TCResultAggregator implements ResultAggregator<TCProbTuple[]> {
   }
 
   adjustCountessRune(itemDropProb: Fraction, runeDropProb: Fraction) {
+    // Unimplemented
+  }
+
+  adjustDurielPicks(itemDropProb: Fraction) {
     // Unimplemented
   }
 }
@@ -297,6 +303,40 @@ export class BaseItemResultAggregator
       this.dict[tc][0] = this.dict[tc][0]
         .sub(fiveItemDroppedMultiplier.mul(fiveItemDroppedAdjustment))
         .sub(fourItemDroppedMultiplier.mul(fourItemDroppedAdjustment));
+    }
+  }
+
+  adjustDurielPicks(itemDropProb: Fraction) {
+    if (this.aggregationStyle === ProbabilityAggregation.CHANCE_OF_FIRST) {
+      // Unimplemented
+      return;
+    }
+    const [resultVector] = propagateMarkov(itemDropProb);
+    const { tscHistogram, itemHistogram } = histogramResult(resultVector);
+    const itemFractionHistogram = itemHistogram.map((val: number) =>
+      new Fraction(`${val * 1e10}`).div(new Fraction(1e10))
+    );
+    const itemDist = Distribution.Polynomial(itemFractionHistogram);
+    const expectationModifier = itemDist.eval().expectation();
+    for (let tc of Object.keys(this.dict)) {
+      const expBefore = this.dict[tc][0];
+      this.dict[tc][0] = this.dict[tc][0].mul(expectationModifier);
+      const expAfter = this.dict[tc][0];
+    }
+    const tscExpectationModifier = Distribution.Polynomial(
+      tscHistogram.map((val: number) =>
+        new Fraction(`${val * 1e10}`).div(new Fraction(1e10))
+      )
+    )
+      .eval()
+      .expectation();
+    if (this.dict["tsc"]) {
+      this.dict["tsc"][0] = this.dict["tsc"][0].add(tscExpectationModifier);
+    } else {
+      this.dict["tsc"] = [
+        tscExpectationModifier,
+        computeQualityProbs("tsc", this.mlvl, this.magicFind, [0, 0, 0, 0]),
+      ];
     }
   }
 }
@@ -482,6 +522,39 @@ export class BaseItemDistributionAggregator
         [fiveItemDroppedAdjustment, fiveItemDroppedMultiplier],
         [fourItemDroppedAdjustment, fourItemDroppedMultiplier],
       ]);
+    }
+  }
+
+  adjustDurielPicks(itemDropProb: Fraction) {
+    const [resultVector] = propagateMarkov(itemDropProb);
+    const { tscHistogram, itemHistogram } = histogramResult(resultVector);
+    const itemFractionHistogram = itemHistogram.map((val: number) =>
+      new Fraction(`${val * 1e10}`).div(new Fraction(1e10))
+    );
+    const itemDist = Distribution.Polynomial(itemFractionHistogram);
+    for (let tc of Object.keys(this.dict)) {
+      const substituteResult = Distribution.Substitute(
+        itemDist,
+        this.dict[tc][0]
+      );
+      this.dict[tc][0] = substituteResult;
+    }
+    // Specially account for tsc
+    const tscDistribution = Distribution.Polynomial(
+      tscHistogram.map((val: number) =>
+        new Fraction(`${val * 1e10}`).div(new Fraction(1e10))
+      )
+    );
+    if (this.dict["tsc"]) {
+      this.dict["tsc"][0] = Distribution.Or([
+        [this.dict["tsc"][0], ONE],
+        [tscDistribution, ONE],
+      ]);
+    } else {
+      this.dict["tsc"] = [
+        tscDistribution,
+        computeQualityProbs("tsc", this.mlvl, this.magicFind, [0, 0, 0, 0]),
+      ];
     }
   }
 }

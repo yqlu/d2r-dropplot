@@ -18,6 +18,14 @@ const isCountess = (tcObject: TCObject) => {
   );
 };
 
+const isDuriel = (tcObject: TCObject) => {
+  return (
+    tcObject !== null &&
+    tcObject.tcs[0][0] === "tsc" &&
+    tcObject.tcs[1][0].slice(0, 6) === "Duriel"
+  );
+};
+
 export function maxQualityRatios(a: ItemQualityRatios, b: ItemQualityRatios) {
   return map(zip(a, b), ([ratioA, ratioB]) =>
     Math.max(ratioA, ratioB)
@@ -131,16 +139,15 @@ export class TcCalculator<T> {
     cumuQualityRatios: ItemQualityRatios,
     aggregator: ResultAggregator<T>
   ): ResultAggregator<T> {
-    if (tcObject.picks >= 1) {
-      return this.getAtomicTCsOnePick(
+    if (isDuriel(tcObject)) {
+      return this.getAtomicTcsDurielCase(
         tcObject,
         totalPlayers,
         partyCount,
         filter,
         cumuProb,
-        cumuQualityRatios,
         aggregator
-      ).withPositivePicks(tcObject.picks);
+      );
     } else if (isCountess(tcObject)) {
       return this.getAtomicTcsCountessCase(
         tcObject,
@@ -150,6 +157,16 @@ export class TcCalculator<T> {
         cumuProb,
         aggregator
       );
+    } else if (tcObject.picks >= 0) {
+      return this.getAtomicTCsOnePick(
+        tcObject,
+        totalPlayers,
+        partyCount,
+        filter,
+        cumuProb,
+        cumuQualityRatios,
+        aggregator
+      ).withPositivePicks(tcObject.picks);
     } else {
       return this.getAtomicTCsNegativePicks(
         tcObject,
@@ -263,6 +280,47 @@ export class TcCalculator<T> {
     // Run Countess special adjustment before combining the two
     runeAggregator.adjustCountessRune(itemDropProb, runeDropProb);
     parentAggregator.combineNegativePicks(runeAggregator);
+    return parentAggregator;
+  }
+
+  private getAtomicTcsDurielCase(
+    tcObject: TCObject,
+    totalPlayers: number,
+    partyCount: number,
+    filter: Set<string>,
+    cumuProb: Fraction,
+    parentAggregator: ResultAggregator<T>
+  ): ResultAggregator<T> {
+    // First calculate the first TC (Countess Item) normally
+    // writing into parentAggregator
+    const itemTc = tcObject.tcs[1][0];
+    const itemTcObjectCopy = { ...TCDict[itemTc] };
+    const itemDenom = sum(map(itemTcObjectCopy.tcs, (tuple) => tuple[1]));
+    const itemNoDrop = getAdjustedNoDrop(
+      itemDenom,
+      itemTcObjectCopy.nodrop,
+      totalPlayers,
+      partyCount
+    );
+    const itemDropProb = ONE.sub(
+      new Fraction(itemNoDrop, itemNoDrop + itemDenom)
+    );
+    // For adjustDurielPicks to work out correctly, expand itemTc
+    // assuming nodrop = 0
+    itemTcObjectCopy.nodrop = 0;
+    this.getAtomicTCsOnePick(
+      itemTcObjectCopy,
+      totalPlayers,
+      partyCount,
+      filter,
+      cumuProb,
+      tcObject.qualityRatios,
+      parentAggregator
+    ); // Don't amplify by number of picks!
+
+    parentAggregator.adjustDurielPicks(itemDropProb);
+
+    // Now add back tsc
     return parentAggregator;
   }
 

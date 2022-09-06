@@ -24,7 +24,7 @@ import {
 const App = (): JSX.Element => {
   const [monsterFormState, setMonsterFormState] = useState({
     difficulty: Difficulty.NORMAL,
-    monsterType: MonsterType.SUPERUNIQUE,
+    monsterType: MonsterType.BOSS,
     levelId: 2, // Blood Moor
     monster: "zombie1",
     superunique: "The Countess",
