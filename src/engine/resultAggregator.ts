@@ -195,9 +195,13 @@ export class BaseItemResultAggregator
     }
     let adjProbFunction: (p: Fraction) => Fraction;
     if (picks <= 6) {
-      // if p is probability of getting X in 1 pick
-      // probability of at least 1 X in picks pick is 1 - (1 - X)^picks
-      adjProbFunction = (p) => ONE.sub(ONE.sub(p).pow(picks));
+      if (this.aggregationStyle === ProbabilityAggregation.CHANCE_OF_FIRST) {
+        // if p is probability of getting X in 1 pick
+        // probability of at least 1 X in picks pick is 1 - (1 - X)^picks
+        adjProbFunction = (p) => ONE.sub(ONE.sub(p).pow(picks));
+      } else {
+        adjProbFunction = (p) => p.mul(picks);
+      }
     } else {
       // Act bosses have 7 drops, and we can assume that is the max because we verify it in tests
       const yesdrop = reduce(
@@ -205,28 +209,25 @@ export class BaseItemResultAggregator
         (acc, entry) => acc.add(entry[0]),
         new Fraction(0)
       );
-      // Monsters can never drop more than 6 items, so discount the chance that
-      //  7 items dropped in total, the first 6 items were not the TC but the 7th was
-      adjProbFunction = function (p) {
-        const naive = ONE.sub(ONE.sub(p).pow(picks));
-        const probDropSomethingElse = yesdrop.sub(p);
-        return naive.sub(probDropSomethingElse.pow(6).mul(p));
-      };
+      if (this.aggregationStyle === ProbabilityAggregation.CHANCE_OF_FIRST) {
+        // Monsters can never drop more than 6 items, so discount the chance that
+        //  7 items dropped in total, the first 6 items were not the TC but the 7th was
+        adjProbFunction = function (p) {
+          const naive = ONE.sub(ONE.sub(p).pow(picks));
+          const probDropSomethingElse = yesdrop.sub(p);
+          return naive.sub(probDropSomethingElse.pow(6).mul(p));
+        };
+      } else {
+        // Expectation = 7p - (yesDrop)^6 * p
+        // Since the last p is not dropped if 6 things dropped before it
+        const multiplier = new Fraction(7).sub(yesdrop.pow(6));
+        adjProbFunction = (p) => p.mul(multiplier);
+      }
     }
-    this.dict = reduce(
-      Object.keys(this.dict),
-      (accum: BaseItemProbDict, tc: string) => {
-        const dictEntry = this.dict[tc];
-        if (this.aggregationStyle === ProbabilityAggregation.CHANCE_OF_FIRST) {
-          dictEntry[0] = adjProbFunction(dictEntry[0]);
-        } else {
-          dictEntry[0] = dictEntry[0].mul(picks);
-        }
-        accum[tc] = dictEntry;
-        return accum;
-      },
-      {} as BaseItemProbDict
-    );
+    for (let tc in this.dict) {
+      const dictEntry = this.dict[tc];
+      dictEntry[0] = adjProbFunction(dictEntry[0]);
+    }
     return this;
   }
 

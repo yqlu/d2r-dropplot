@@ -23,12 +23,12 @@ import {
 
 const App = (): JSX.Element => {
   const [monsterFormState, setMonsterFormState] = useState({
-    difficulty: Difficulty.NORMAL,
+    difficulty: Difficulty.HELL,
     monsterType: MonsterType.BOSS,
     levelId: 2, // Blood Moor
     monster: "zombie1",
     superunique: "The Countess",
-    boss: "diablo",
+    boss: "baalcrab",
   } as MonsterFormState);
 
   let [initTc, initMlvl] = getTcAndMlvlFromMonster(
