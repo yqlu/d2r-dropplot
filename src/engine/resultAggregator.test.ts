@@ -37,7 +37,7 @@ describe("TCResultAggregator", () => {
     const aggregator = new TCResultAggregator();
     aggregator.add("foo", new Fraction(1, 2));
     aggregator.add("bar", new Fraction(1, 3));
-    aggregator.withPositivePicks(3);
+    aggregator.withPositivePicks(3, new Fraction(5, 6));
     const res = aggregator.result();
     expect(res).to.have.length(2);
     expect(res[0][0]).to.eql("foo");
@@ -50,7 +50,7 @@ describe("TCResultAggregator", () => {
     const aggregator = new TCResultAggregator();
     aggregator.add("foo", new Fraction(1, 2));
     aggregator.add("bar", new Fraction(1, 3));
-    aggregator.withPositivePicks(7);
+    aggregator.withPositivePicks(7, new Fraction(5, 6));
     const res = aggregator.result();
     expect(res).to.have.length(2);
     expect(res[0][0]).to.eql("foo");
@@ -140,7 +140,7 @@ describe("BaseItemResultAggregator", () => {
     const aggregator = new BaseItemResultAggregator(99);
     aggregator.add("foo", new Fraction(1, 2));
     aggregator.add("bar", new Fraction(1, 3));
-    aggregator.withPositivePicks(3);
+    aggregator.withPositivePicks(3, new Fraction(5, 6));
     const res = aggregator.result();
     expect(res).to.have.length(2);
     expect(res[0][0]).to.eql("foo");
@@ -153,7 +153,7 @@ describe("BaseItemResultAggregator", () => {
     const aggregator = new BaseItemResultAggregator(99);
     aggregator.add("foo", new Fraction(1, 2));
     aggregator.add("bar", new Fraction(1, 3));
-    aggregator.withPositivePicks(7);
+    aggregator.withPositivePicks(7, new Fraction(5, 6));
     const res = aggregator.result();
     expect(res).to.have.length(2);
     expect(res[0][0]).to.eql("foo");

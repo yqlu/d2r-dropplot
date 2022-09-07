@@ -18,7 +18,6 @@ export enum ProbabilityAggregation {
 }
 
 // TODO abstract out common parts of TCResultAggregator and BaseItemResultAggregator
-// TODO build out E2E web framework
 
 export type TCProbTuple = [string, Fraction];
 export type TCProbDict = { [key: string]: Fraction };
@@ -39,19 +38,23 @@ export type BaseItemDistributionDict = {
 
 export interface ResultAggregator<T> {
   add(tc: string, prob: Fraction, qualityRatio?: ItemQualityRatios): void;
-  withPositivePicks(picks: number): this;
+  withPositivePicks(picks: number, itemDropProb: Fraction): this;
   combineNegativePicks(other: this): void;
-  finalize(): this;
-  result(): T;
   adjustCountessRune(itemDropProb: Fraction, runeDropProb: Fraction): void;
   adjustDurielPicks(itemDropProb: Fraction): void;
+  finalize(): this;
+  result(): T;
 }
 
 export class TCResultAggregator implements ResultAggregator<TCProbTuple[]> {
   dict: TCProbDict;
+  aggregationStyle: ProbabilityAggregation;
 
-  constructor() {
+  constructor(
+    aggregationStyle: ProbabilityAggregation = ProbabilityAggregation.CHANCE_OF_FIRST
+  ) {
     this.dict = {};
+    this.aggregationStyle = aggregationStyle;
   }
 
   add(tc: string, prob: Fraction, qual?: ItemQualityRatios): void {
@@ -62,38 +65,39 @@ export class TCResultAggregator implements ResultAggregator<TCProbTuple[]> {
     }
   }
 
-  withPositivePicks(picks: number) {
+  withPositivePicks(picks: number, yesdrop: Fraction) {
     if (picks === 1) {
       return this;
     }
     let adjProbFunction: (p: Fraction) => Fraction;
     if (picks <= 6) {
-      // if p is probability of getting X in 1 pick
-      // probability of at least 1 X in picks pick is 1 - (1 - X)^picks
-      adjProbFunction = (p) => ONE.sub(ONE.sub(p).pow(picks));
+      if (this.aggregationStyle === ProbabilityAggregation.CHANCE_OF_FIRST) {
+        // if p is probability of getting X in 1 pick
+        // probability of at least 1 X in picks pick is 1 - (1 - X)^picks
+        adjProbFunction = (p) => ONE.sub(ONE.sub(p).pow(picks));
+      } else {
+        adjProbFunction = (p) => p.mul(picks);
+      }
     } else {
       // Act bosses have 7 drops, and we can assume that is the max because we verify it in tests
-      const yesdrop = reduce(
-        Object.values(this.dict),
-        (acc, prob) => acc.add(prob),
-        new Fraction(0)
-      );
-      // Monsters can never drop more than 6 items, so discount the chance that
-      //  7 items dropped in total, the first 6 items were not the TC but the 7th was
-      adjProbFunction = function (p) {
-        const naive = ONE.sub(ONE.sub(p).pow(picks));
-        const probDropSomethingElse = yesdrop.sub(p);
-        return naive.sub(probDropSomethingElse.pow(6).mul(p));
-      };
+      if (this.aggregationStyle === ProbabilityAggregation.CHANCE_OF_FIRST) {
+        // Monsters can never drop more than 6 items, so discount the chance that
+        //  7 items dropped in total, the first 6 items were not the TC but the 7th was
+        adjProbFunction = function (p) {
+          const naive = ONE.sub(ONE.sub(p).pow(picks));
+          const probDropSomethingElse = yesdrop.sub(p);
+          return naive.sub(probDropSomethingElse.pow(6).mul(p));
+        };
+      } else {
+        // Expectation = 7p - (yesDrop)^6 * p
+        // Since the last p is not dropped if 6 things dropped before it
+        const multiplier = new Fraction(7).sub(yesdrop.pow(6));
+        adjProbFunction = (p) => p.mul(multiplier);
+      }
     }
-    this.dict = reduce(
-      Object.keys(this.dict),
-      (accum: TCProbDict, tc: string) => {
-        accum[tc] = adjProbFunction(this.dict[tc]);
-        return accum;
-      },
-      {} as TCProbDict
-    );
+    for (let tc in this.dict) {
+      this.dict[tc] = adjProbFunction(this.dict[tc]);
+    }
     return this;
   }
 
@@ -106,10 +110,71 @@ export class TCResultAggregator implements ResultAggregator<TCProbTuple[]> {
         // Coalesce probability into map
         // If item X has chance A of dropping from TCA and B of dropping from TCB
         // Combined chance to drop is 1 - (1 - A)(1 - B) = 1 - (1 - A - B + AB) = A + B - AB
-        this.dict[key] = ONE.sub(
-          ONE.sub(other.dict[key]).mul(ONE.sub(this.dict[key]))
-        );
+        if (this.aggregationStyle === ProbabilityAggregation.CHANCE_OF_FIRST) {
+          this.dict[key] = ONE.sub(
+            ONE.sub(other.dict[key]).mul(ONE.sub(this.dict[key]))
+          );
+          // If tracking expectations, just add them up
+        } else {
+          this.dict[key] = this.dict[key].add(other.dict[key]);
+        }
       }
+    }
+  }
+
+  adjustCountessRune(itemDropProb: Fraction, runeDropProb: Fraction) {
+    if (this.aggregationStyle === ProbabilityAggregation.CHANCE_OF_FIRST) {
+      // Unimplemented
+      return;
+    }
+    // If calculating expectation
+    const fiveItemDroppedMultiplier = itemDropProb.pow(5);
+    const fourItemDroppedMultiplier = new Fraction(5)
+      .mul(itemDropProb.pow(4))
+      .mul(ONE.sub(itemDropProb));
+    const runeNoDrop = ONE.sub(runeDropProb);
+    for (let tc of Object.keys(this.dict)) {
+      const dProb = this.dict[tc];
+      const fiveItemDroppedAdjustment = dProb
+        .mul(runeDropProb)
+        .mul(new Fraction(2).add(runeNoDrop));
+
+      const fourItemDroppedAdjustment = dProb.mul(runeDropProb.pow(2));
+      this.dict[tc] = this.dict[tc]
+        .mul(new Fraction(3))
+        .sub(fiveItemDroppedMultiplier.mul(fiveItemDroppedAdjustment))
+        .sub(fourItemDroppedMultiplier.mul(fourItemDroppedAdjustment));
+    }
+  }
+
+  adjustDurielPicks(itemDropProb: Fraction) {
+    if (this.aggregationStyle === ProbabilityAggregation.CHANCE_OF_FIRST) {
+      // Unimplemented
+      return;
+    }
+    const [resultVector] = propagateMarkov(itemDropProb);
+    const { tscHistogram, itemHistogram } = histogramResult(resultVector);
+    const itemFractionHistogram = itemHistogram.map((val: number) =>
+      new Fraction(`${val * 1e10}`).div(new Fraction(1e10))
+    );
+    const itemDist = Distribution.Polynomial(itemFractionHistogram);
+    const expectationModifier = itemDist.eval().expectation();
+    for (let tc of Object.keys(this.dict)) {
+      const expBefore = this.dict[tc];
+      this.dict[tc] = this.dict[tc].mul(expectationModifier);
+      const expAfter = this.dict[tc];
+    }
+    const tscExpectationModifier = Distribution.Polynomial(
+      tscHistogram.map((val: number) =>
+        new Fraction(`${val * 1e10}`).div(new Fraction(1e10))
+      )
+    )
+      .eval()
+      .expectation();
+    if (this.dict["tsc"]) {
+      this.dict["tsc"] = this.dict["tsc"].add(tscExpectationModifier);
+    } else {
+      this.dict["tsc"] = tscExpectationModifier;
     }
   }
 
@@ -124,14 +189,6 @@ export class TCResultAggregator implements ResultAggregator<TCProbTuple[]> {
 
   result(): TCProbTuple[] {
     return Object.entries(this.dict);
-  }
-
-  adjustCountessRune(itemDropProb: Fraction, runeDropProb: Fraction) {
-    // Unimplemented
-  }
-
-  adjustDurielPicks(itemDropProb: Fraction) {
-    // Unimplemented
   }
 }
 
@@ -189,7 +246,7 @@ export class BaseItemResultAggregator
     }
   }
 
-  withPositivePicks(picks: number) {
+  withPositivePicks(picks: number, yesdrop: Fraction) {
     if (picks === 1) {
       return this;
     }
@@ -204,11 +261,6 @@ export class BaseItemResultAggregator
       }
     } else {
       // Act bosses have 7 drops, and we can assume that is the max because we verify it in tests
-      const yesdrop = reduce(
-        Object.values(this.dict),
-        (acc, entry) => acc.add(entry[0]),
-        new Fraction(0)
-      );
       if (this.aggregationStyle === ProbabilityAggregation.CHANCE_OF_FIRST) {
         // Monsters can never drop more than 6 items, so discount the chance that
         //  7 items dropped in total, the first 6 items were not the TC but the 7th was
@@ -246,6 +298,7 @@ export class BaseItemResultAggregator
           baseItemProb = ONE.sub(
             ONE.sub(other.dict[key][0]).mul(ONE.sub(this.dict[key][0]))
           );
+          // If tracking expectations, just add them up
         } else {
           baseItemProb = this.dict[key][0].add(other.dict[key][0]);
         }
@@ -265,22 +318,6 @@ export class BaseItemResultAggregator
         ];
       }
     }
-  }
-
-  // Up till now we've preserved exact fractional precision
-  // Now simplify with an eps
-  finalize() {
-    for (var key of Object.keys(this.dict)) {
-      this.dict[key][0] = this.dict[key][0].simplify(1e-15);
-    }
-    return this;
-  }
-
-  result(): BaseItemProbTuple[] {
-    return map(Object.keys(this.dict) as string[], (key: string) => {
-      const a = this.dict[key];
-      return [key, a[0], a[1]];
-    });
   }
 
   adjustCountessRune(itemDropProb: Fraction, runeDropProb: Fraction) {
@@ -341,6 +378,22 @@ export class BaseItemResultAggregator
       ];
     }
   }
+
+  // Up till now we've preserved exact fractional precision
+  // Now simplify with an eps
+  finalize() {
+    for (var key of Object.keys(this.dict)) {
+      this.dict[key][0] = this.dict[key][0].simplify(1e-15);
+    }
+    return this;
+  }
+
+  result(): BaseItemProbTuple[] {
+    return map(Object.keys(this.dict) as string[], (key: string) => {
+      const a = this.dict[key];
+      return [key, a[0], a[1]];
+    });
+  }
 }
 
 export class BaseItemDistributionAggregator
@@ -398,7 +451,7 @@ export class BaseItemDistributionAggregator
     }
   }
 
-  withPositivePicks(picks: number) {
+  withPositivePicks(picks: number, yesdrop: Fraction) {
     if (picks === 1) {
       return this;
     }
@@ -409,11 +462,6 @@ export class BaseItemDistributionAggregator
       adjustedDistFn = (d: Distribution) => Distribution.Binomial(d, picks);
     } else {
       // Act bosses have 7 drops, and we can assume that is the max because we verified it in tests
-      const yesdrop = reduce(
-        Object.values(this.dict),
-        (acc, entry) => acc.add(entry[0].eval().atLeastOneChance()),
-        new Fraction(0)
-      );
       // Monsters can never drop more than 6 items, so discount the chance that
       //  7 items dropped in total, the first 6 items were not the TC but the 7th was
       adjustedDistFn = (d: Distribution) => {
@@ -476,22 +524,6 @@ export class BaseItemDistributionAggregator
         ];
       }
     }
-  }
-
-  // Up till now we've preserved exact fractional precision
-  // Now simplify with an eps
-  finalize() {
-    for (var key of Object.keys(this.dict)) {
-      this.dict[key][0].simplify(1e-15);
-    }
-    return this;
-  }
-
-  result(): BaseItemDistributionTuple[] {
-    return map(Object.keys(this.dict) as string[], (key: string) => {
-      const a = this.dict[key];
-      return [key, a[0], a[1]];
-    });
   }
 
   adjustCountessRune(itemDropProb: Fraction, runeDropProb: Fraction) {
@@ -558,5 +590,21 @@ export class BaseItemDistributionAggregator
         computeQualityProbs("tsc", this.mlvl, this.magicFind, [0, 0, 0, 0]),
       ];
     }
+  }
+
+  // Up till now we've preserved exact fractional precision
+  // Now simplify with an eps
+  finalize() {
+    for (var key of Object.keys(this.dict)) {
+      this.dict[key][0].simplify(1e-15);
+    }
+    return this;
+  }
+
+  result(): BaseItemDistributionTuple[] {
+    return map(Object.keys(this.dict) as string[], (key: string) => {
+      const a = this.dict[key];
+      return [key, a[0], a[1]];
+    });
   }
 }

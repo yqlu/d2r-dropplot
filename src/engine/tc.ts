@@ -76,6 +76,23 @@ export function getAdjustedNoDrop(
     (adjustedNoDropRate / (1 - adjustedNoDropRate)) * tcDenom * (1 + 1e-10)
   );
 }
+
+export function getTcDropProb(
+  tcObject: TCObject,
+  totalPlayers: number,
+  partyCount: number
+) {
+  const denom = sum(map(tcObject.tcs, (tuple) => tuple[1]));
+  const nodrop = getAdjustedNoDrop(
+    denom,
+    tcObject.nodrop,
+    totalPlayers,
+    partyCount
+  );
+  const itemDropProb = ONE.sub(new Fraction(nodrop, nodrop + denom));
+  return itemDropProb;
+}
+
 export function makeLookupTcFunction(
   tcDict: TCDictType,
   atomicDict: TCDictType
@@ -158,6 +175,10 @@ export class TcCalculator<T> {
         aggregator
       );
     } else if (tcObject.picks >= 0) {
+      const tcDropProb =
+        tcObject.picks > 1
+          ? getTcDropProb(tcObject, totalPlayers, partyCount)
+          : ONE;
       return this.getAtomicTCsOnePick(
         tcObject,
         totalPlayers,
@@ -166,7 +187,7 @@ export class TcCalculator<T> {
         cumuProb,
         cumuQualityRatios,
         aggregator
-      ).withPositivePicks(tcObject.picks);
+      ).withPositivePicks(tcObject.picks, tcDropProb);
     } else {
       return this.getAtomicTCsNegativePicks(
         tcObject,
@@ -205,15 +226,21 @@ export class TcCalculator<T> {
         filter.has(subTC)
       ) {
         const subAggregator = this.aggregatorFactory();
+        const subTcObject = this.lookupTcFunction(subTC); // TODO: this will crash if subTC is atomic
+        const subTcDropProb = getTcDropProb(
+          subTcObject,
+          totalPlayers,
+          partyCount
+        );
         this._getAtomicTCs(
-          this.lookupTcFunction(subTC), // TODO: this will crash if subTC is atomic
+          subTcObject,
           totalPlayers,
           partyCount,
           filter,
           cumuProb,
           tcObject.qualityRatios,
           subAggregator
-        ).withPositivePicks(subPicks);
+        ).withPositivePicks(subPicks, subTcDropProb);
         parentAggregator.combineNegativePicks(subAggregator);
       }
       cumulativePickCount += tcTuple[1];
@@ -231,20 +258,9 @@ export class TcCalculator<T> {
   ): ResultAggregator<T> {
     // First calculate the first TC (Countess Item) normally
     // writing into parentAggregator
-    const itemTc = tcObject.tcs[0][0];
-    const itemTcObject = TCDict[itemTc];
-    const itemDenom = sum(map(itemTcObject.tcs, (tuple) => tuple[1]));
-    const itemNoDrop = getAdjustedNoDrop(
-      itemDenom,
-      itemTcObject.nodrop,
-      totalPlayers,
-      partyCount
-    );
-    const itemDropProb = ONE.sub(
-      new Fraction(itemNoDrop, itemNoDrop + itemDenom)
-    );
+    const itemTc = this.lookupTcFunction(tcObject.tcs[0][0]);
     this._getAtomicTCs(
-      this.lookupTcFunction(itemTc),
+      itemTc,
       totalPlayers,
       partyCount,
       filter,
@@ -255,20 +271,9 @@ export class TcCalculator<T> {
 
     // Now calculate the second TC (Countess Rune) into runeAggregator
     const runeAggregator = this.aggregatorFactory();
-    const runeTc = tcObject.tcs[1][0];
-    const runeTcObject = TCDict[runeTc];
-    const runeDenom = sum(map(runeTcObject.tcs, (tuple) => tuple[1]));
-    const runeNoDrop = getAdjustedNoDrop(
-      runeDenom,
-      runeTcObject.nodrop,
-      totalPlayers,
-      partyCount
-    );
-    const runeDropProb = ONE.sub(
-      new Fraction(runeNoDrop, runeNoDrop + runeDenom)
-    );
+    const runeTc = this.lookupTcFunction(tcObject.tcs[1][0]);
     this.getAtomicTCsOnePick(
-      this.lookupTcFunction(runeTc),
+      runeTc,
       totalPlayers,
       partyCount,
       filter,
@@ -278,6 +283,8 @@ export class TcCalculator<T> {
     );
 
     // Run Countess special adjustment before combining the two
+    const itemDropProb = getTcDropProb(itemTc, totalPlayers, partyCount);
+    const runeDropProb = getTcDropProb(runeTc, totalPlayers, partyCount);
     runeAggregator.adjustCountessRune(itemDropProb, runeDropProb);
     parentAggregator.combineNegativePicks(runeAggregator);
     return parentAggregator;
@@ -291,23 +298,10 @@ export class TcCalculator<T> {
     cumuProb: Fraction,
     parentAggregator: ResultAggregator<T>
   ): ResultAggregator<T> {
-    // First calculate the first TC (Countess Item) normally
-    // writing into parentAggregator
     const itemTc = tcObject.tcs[1][0];
-    const itemTcObjectCopy = { ...TCDict[itemTc] };
-    const itemDenom = sum(map(itemTcObjectCopy.tcs, (tuple) => tuple[1]));
-    const itemNoDrop = getAdjustedNoDrop(
-      itemDenom,
-      itemTcObjectCopy.nodrop,
-      totalPlayers,
-      partyCount
-    );
-    const itemDropProb = ONE.sub(
-      new Fraction(itemNoDrop, itemNoDrop + itemDenom)
-    );
     // For adjustDurielPicks to work out correctly, expand itemTc
     // assuming nodrop = 0
-    itemTcObjectCopy.nodrop = 0;
+    const itemTcObjectCopy = { ...TCDict[itemTc], nodrop: 0 };
     this.getAtomicTCsOnePick(
       itemTcObjectCopy,
       totalPlayers,
@@ -318,6 +312,11 @@ export class TcCalculator<T> {
       parentAggregator
     ); // Don't amplify by number of picks!
 
+    const itemDropProb = getTcDropProb(
+      TCDict[itemTc],
+      totalPlayers,
+      partyCount
+    );
     parentAggregator.adjustDurielPicks(itemDropProb);
 
     // Now add back tsc
