@@ -20,11 +20,12 @@ import {
   monsterApplicable,
   MonsterFormInline,
 } from "./MonsterFormInline";
+import { getRarityMultiplier } from "./engine/rarity";
 
 const App = (): JSX.Element => {
   const [monsterFormState, setMonsterFormState] = useState({
-    difficulty: Difficulty.NORMAL,
-    monsterType: MonsterType.TREASURE_CLASS,
+    difficulty: Difficulty.HELL,
+    monsterType: MonsterType.BOSS,
     levelId: 2, // Blood Moor
     monster: "zombie1",
     superunique: "The Countess",
@@ -129,22 +130,9 @@ const App = (): JSX.Element => {
       selectItem("", "", RARITY.WHITE, new Fraction(0));
     } else {
       let chance = newResult[0][1];
-      if (rarity === RARITY.SET) {
-        chance = chance.mul(newResult[0][2].quality[2]);
-        for (const setTuple of newResult[0][2].sets) {
-          if (setTuple[0] === itemName) {
-            chance = chance.mul(setTuple[1]);
-          }
-        }
-      }
-      if (rarity === RARITY.UNIQUE) {
-        chance = chance.mul(newResult[0][2].quality[3]);
-        for (const uniqueTuple of newResult[0][2].uniques) {
-          if (uniqueTuple[0] === itemName) {
-            chance = chance.mul(uniqueTuple[1]);
-          }
-        }
-      }
+      chance = chance.mul(
+        getRarityMultiplier(newResult[0][2], rarity, itemName)
+      );
       selectItem(baseItemName, itemName, rarity, chance);
     }
   }, [results]);

@@ -179,7 +179,7 @@ export const MagicFindChart = ({
     <div>
       <div className="chartTitle">
         <span className="font-bold">{Locale(baseItemName)}</span> rarity vs
-        Magic Find
+        magic find
       </div>
       <canvas id="magicFindChart"></canvas>
     </div>

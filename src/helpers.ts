@@ -74,7 +74,7 @@ const _compute = (playerFormState: PlayerFormState): BaseItemProbTuple[] => {
   const mlvl = parseInt(playerFormState.mlvl);
   const magicFind = parseInt(playerFormState.magicFind);
 
-  const experiment = true;
+  const experiment = false;
   let tcs: BaseItemProbTuple[];
   const tcLookup = makeLookupTcFunction(TCDict, AtomicDict);
   if (experiment) {

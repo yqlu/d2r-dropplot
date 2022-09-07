@@ -103,8 +103,8 @@ export const NoDropChart = ({
   return (
     <div>
       <div className="chartTitle">
-        <span className="font-bold">{playerFormState.tc}</span> Nodrop vs Player
-        Count
+        <span className="font-bold">{playerFormState.tc}</span> nodrop vs player
+        count
       </div>
       <canvas id="NoDropChart"></canvas>
     </div>

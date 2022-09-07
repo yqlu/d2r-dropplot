@@ -15,7 +15,11 @@ import { AtomicDict } from "../engine/atomic-dict";
 import { makeLookupTcFunction, TcCalculator } from "../engine/tc";
 import { TCDict, TCDictType } from "../engine/tc-dict";
 import { Locale } from "../engine/locale-dict";
-import { TCProbTuple, TCResultAggregator } from "../engine/resultAggregator";
+import {
+  ProbabilityAggregation,
+  TCProbTuple,
+  TCResultAggregator,
+} from "../engine/resultAggregator";
 
 import { PlayerFormState } from "../PlayerForm";
 import {
@@ -39,7 +43,7 @@ const getData = (playerFormState: PlayerFormState, baseItemName: string) => {
   const tcLookup = makeLookupTcFunction(TCDict, {} as TCDictType);
   const tcCalculator = new TcCalculator<TCProbTuple[]>(
     tcLookup,
-    () => new TCResultAggregator()
+    () => new TCResultAggregator(ProbabilityAggregation.EXPECTED_VALUE)
   );
 
   let tcs = tcCalculator
@@ -237,8 +241,8 @@ export const TreasureClassTreeMap = ({
   return (
     <div>
       <div className="chartTitle">
-        <span className="font-bold">{Locale(baseItemName)}</span> Drop Chance
-        relative to all Weapons and Armor
+        <span className="font-bold">{Locale(baseItemName)}</span> drop chance
+        relative to all weapon and armor
         <div className="chartSubtitle">
           <input
             type="checkbox"

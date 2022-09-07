@@ -3,7 +3,11 @@ import { max, range, sum } from "lodash-es";
 import { ChartDataset, ScriptableContext, TooltipItem } from "chart.js";
 import Chart from "chart.js/auto";
 
-import { TCProbTuple, TCResultAggregator } from "../engine/resultAggregator";
+import {
+  ProbabilityAggregation,
+  TCProbTuple,
+  TCResultAggregator,
+} from "../engine/resultAggregator";
 import { makeLookupTcFunction, TcCalculator } from "../engine/tc";
 import { TCDict, TCDictType } from "../engine/tc-dict";
 import { AtomicDict, getAtomicFraction } from "../engine/atomic-dict";
@@ -48,7 +52,7 @@ const getData = (playerFormState: PlayerFormState, baseItemName: string) => {
   const tcLookup = makeLookupTcFunction(TCDict, {} as TCDictType);
   const tcCalculator = new TcCalculator<TCProbTuple[]>(
     tcLookup,
-    () => new TCResultAggregator()
+    () => new TCResultAggregator(ProbabilityAggregation.EXPECTED_VALUE)
   );
 
   let tcs = tcCalculator
@@ -89,7 +93,7 @@ const getData = (playerFormState: PlayerFormState, baseItemName: string) => {
         return;
       }
       const tcClass = groups[1] as tcClass;
-      const chance = (tuple[1].valueOf() * item[1]) / denom;
+      const chance = ((tuple[1].valueOf() * item[1]) / denom) * 100;
       datasetMap[tcClass][idx].data[Number(groups[2]) / 3 - 1] = chance;
     });
   });
@@ -203,7 +207,9 @@ export const TreasureClassStackedBars = ({
                 const item = AtomicDict[tcName].tcs[itemIdxWithinTc][0];
                 const tc = tcs.filter((tuple) => tuple[0] === tcName)[0];
                 const tcChance = `${formatPercent(tc[1].valueOf())}%`;
-                const absoluteChance = `${formatPercent(ctx.raw as number)}%`;
+                const absoluteChance = `${formatPercent(
+                  (ctx.raw as number) / 100
+                )}%`;
                 const itemInTcChance = getAtomicFraction(
                   tcName,
                   item
@@ -234,8 +240,8 @@ export const TreasureClassStackedBars = ({
   return (
     <div>
       <div className="chartTitle">
-        <span className="font-bold">{Locale(baseItemName)}</span> Drop Chance
-        plotted by Treasure Class Level
+        <span className="font-bold">{Locale(baseItemName)}</span> drop chance by
+        Treasure Class level
       </div>
       <canvas id="treasureClassStackedBars"></canvas>
     </div>

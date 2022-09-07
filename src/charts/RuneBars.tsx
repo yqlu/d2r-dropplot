@@ -15,7 +15,6 @@ import {
 } from "./common";
 import { ItemDict } from "../engine/item-dict";
 import { RARITY } from "../engine/itemratio-dict";
-import Fraction from "fraction.js";
 
 const getData = (results: BaseItemProbTuple[], baseItemName: string) => {
   const runes = results.filter(
@@ -143,8 +142,8 @@ export const RuneBars = ({
   return (
     <div>
       <div className="chartTitle">
-        <span className="font-bold text-rune">{Locale(baseItemName)}</span> Drop
-        Chance
+        <span className="font-bold text-rune">{Locale(baseItemName)}</span> drop
+        chance
         <div className="chartSubtitle">
           Filter runes above{" "}
           <select

@@ -10,6 +10,17 @@ import {
 } from "./common";
 import { Locale } from "../engine/locale-dict";
 import Fraction from "fraction.js";
+import { PlayerFormState } from "../PlayerForm";
+import { RARITY } from "../engine/itemratio-dict";
+import { makeLookupTcFunction, TcCalculator } from "../engine/tc";
+import { TCDict } from "../engine/tc-dict";
+import { AtomicDict } from "../engine/atomic-dict";
+import {
+  BaseItemDistributionAggregator,
+  BaseItemDistributionTuple,
+} from "../engine/resultAggregator";
+import { getRarityMultiplier } from "../engine/rarity";
+import { Distribution } from "../engine/distribution";
 
 export const getXMax = (
   singleRunChance: number,
@@ -17,7 +28,7 @@ export const getXMax = (
 ): number => {
   const expectedRuns90Chance = Math.log(0.1) / Math.log(1 - singleRunChance);
   if (expectedRuns90Chance <= intervals) {
-    return intervals + 1;
+    return intervals;
   }
   const powerOf10 = Math.floor(Math.log10(expectedRuns90Chance));
   const leadingDigit = Math.floor(
@@ -35,10 +46,12 @@ export const getXMax = (
   return max;
 };
 
-const getData = (selectedChance: Fraction, runs: number) => {
-  const singleRunChance = selectedChance.valueOf();
-  const intervals = 10;
-  const xs = range(intervals + 1).map((x) => (x * runs) / intervals);
+const getData = (atLeastOneChance: Fraction, runs: number) => {
+  const singleRunChance = atLeastOneChance.valueOf();
+  const intervals = Math.min(runs, 10);
+  const xs = range(intervals + 1).map((x) =>
+    Math.round((x * runs) / intervals)
+  );
   const ys = xs.map(
     (x) => Math.floor((1 - Math.pow(1 - singleRunChance, x)) * 1000) / 10
   );
@@ -46,6 +59,38 @@ const getData = (selectedChance: Fraction, runs: number) => {
     xs,
     ys,
   };
+};
+
+export const getDistribution = (
+  playerFormState: PlayerFormState,
+  baseItemName: string,
+  itemName: string,
+  rarity: RARITY
+) => {
+  const mlvl = parseInt(playerFormState.mlvl);
+  const tcLookup = makeLookupTcFunction(TCDict, AtomicDict);
+  // No need to use more accurate DistributionAggregator
+  // Since we are only looking at quality
+  const tcCalculator = new TcCalculator(
+    tcLookup,
+    () => new BaseItemDistributionAggregator(mlvl)
+  );
+  let tcs = tcCalculator
+    .getAtomicTCs(
+      playerFormState.tc,
+      playerFormState.playerCount,
+      playerFormState.partyCount,
+      new Set([baseItemName])
+    )
+    .result();
+  let distribution: Distribution = tcs[0][1].eval();
+  if (rarity !== RARITY.WHITE) {
+    const itemRarityChance = getRarityMultiplier(tcs[0][2], rarity, itemName);
+    const child = Distribution.Atomic(itemRarityChance);
+    distribution = Distribution.Substitute(distribution, child);
+  }
+  distribution.simplify();
+  return distribution;
 };
 
 export const RepeatedRunsChart = ({
@@ -57,6 +102,7 @@ export const RepeatedRunsChart = ({
   selectedChance,
 }: IDashboardPropType): JSX.Element => {
   const [runs, setRuns] = useState(getXMax(selectedChance.valueOf()));
+
   useEffect(() => setRuns(getXMax(selectedChance.valueOf())), [selectedChance]);
   useEffect(() => {
     if (baseItemName == "") {
@@ -92,6 +138,7 @@ export const RepeatedRunsChart = ({
               display: true,
               text: "Runs",
             },
+            type: "linear",
           },
         },
         interaction: {

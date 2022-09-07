@@ -17,7 +17,7 @@ export class Distribution {
     throw new Error("Child class must implement this!");
   }
 
-  simplify(eps: number): void {
+  simplify(eps: number = 1e-15): void {
     this.eval().polySimplify(eps);
     return;
   }
@@ -61,6 +61,9 @@ class Polynomial extends Distribution {
   polySimplify(eps: number) {
     for (let i = 0; i < this.coeffs.length; i++) {
       this.coeffs[i] = this.coeffs[i].simplify(eps);
+    }
+    while (!this.coeffs[this.coeffs.length - 1].compare(0)) {
+      this.coeffs.pop();
     }
     this.coeffs[0] = ONE.sub(this.coeffs.slice(1).reduce((a, b) => a.add(b)));
   }

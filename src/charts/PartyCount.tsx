@@ -157,7 +157,7 @@ export const PartyCountChart = ({
     <div>
       <div className="chartTitle">
         <span className={"font-bold " + styling}>{Locale(baseItemName)}</span>{" "}
-        Drop Rate vs Player Count
+        drop chance vs player count
       </div>
       <canvas id="partyCountChart"></canvas>
     </div>

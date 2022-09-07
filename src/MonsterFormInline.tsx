@@ -176,7 +176,6 @@ export const MonsterFormInline = (props: MonsterFormProps): JSX.Element => {
   return (
     <div className="w-full text-sm px-3 text-center">
       <p className="leading-8">
-        Focus:
         <select
           className="inline-select"
           id="monsterType"
@@ -305,8 +304,8 @@ export const MonsterFormInline = (props: MonsterFormProps): JSX.Element => {
       )}
       {props.baseItemName !== "" && (
         <p>
-          Analyze: <b className={styling}>{Locale(name)}</b> (
-          {formatReciprocal(props.selectedChance)} drop chance)
+          Analysis: <b className={styling}>{Locale(name)}</b> (
+          {formatReciprocal(props.selectedChance)} chance)
         </p>
       )}
     </div>

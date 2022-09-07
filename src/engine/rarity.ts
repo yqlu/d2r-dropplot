@@ -17,6 +17,7 @@ import {
   UniqueSetBaseLookupType,
 } from "./unique-set-dict";
 import { KEY_REGEX } from "../charts/common";
+import { ONE } from "./polynomialOps";
 
 export type ItemRarityProb = [Fraction, Fraction, Fraction, Fraction];
 
@@ -62,6 +63,31 @@ export function getEffectiveMf(mf: number, rarity: RARITY) {
   }
   const factor = mfFactor[rarity];
   return Math.trunc((mf * factor) / (mf + factor));
+}
+
+export function getRarityMultiplier(
+  qualityObj: QualityProbabilityObject,
+  rarity: RARITY,
+  itemName: string
+) {
+  let chance = ONE;
+  if (rarity === RARITY.SET) {
+    chance = chance.mul(qualityObj.quality[2]);
+    for (const setTuple of qualityObj.sets) {
+      if (setTuple[0] === itemName) {
+        chance = chance.mul(setTuple[1]);
+      }
+    }
+  }
+  if (rarity === RARITY.UNIQUE) {
+    chance = chance.mul(qualityObj.quality[3]);
+    for (const uniqueTuple of qualityObj.uniques) {
+      if (uniqueTuple[0] === itemName) {
+        chance = chance.mul(uniqueTuple[1]);
+      }
+    }
+  }
+  return chance;
 }
 
 // Does not take into account whether unique / set item exists and can be dropped
