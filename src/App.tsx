@@ -24,12 +24,12 @@ import { getRarityMultiplier } from "./engine/rarity";
 
 const App = (): JSX.Element => {
   const [monsterFormState, setMonsterFormState] = useState({
-    difficulty: Difficulty.HELL,
+    difficulty: Difficulty.NORMAL,
     monsterType: MonsterType.BOSS,
     levelId: 2, // Blood Moor
     monster: "zombie1",
     superunique: "The Countess",
-    boss: "baalcrab",
+    boss: "duriel",
   } as MonsterFormState);
 
   let [initTc, initMlvl] = getTcAndMlvlFromMonster(

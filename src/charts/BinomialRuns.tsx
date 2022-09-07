@@ -7,23 +7,56 @@ import { binomialDistributionFunction, colorClassFromRarity } from "./common";
 import { IDashboardPropType, REGULAR_COLOR, colorFromRarity } from "./common";
 import { Locale } from "../engine/locale-dict";
 import { getXMax } from "./RepeatedRuns";
-import { createImportSpecifier } from "typescript";
+import { RARITY } from "../engine/itemratio-dict";
+import { Distribution } from "../engine/distribution";
 
 Chart.defaults.font.family =
   "'Noto Sans', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif";
 Chart.defaults.color = REGULAR_COLOR;
 Chart.defaults.borderColor = "rgba(255,255,255,0.2)";
 
-const getData = (runs: number, singleRunChance: number) => {
-  const ys = [];
+const CLIPPING_COEFF = 1e-4;
+const DIRECT_TO_BINOM_THRESHOLD = 10;
+
+export type IBinomialPropType = {
+  baseItemName: string;
+  itemName: string;
+  rarity: RARITY;
+  distribution: Distribution;
+};
+
+const getBinomialXMax = (distribution: Distribution): number => {
+  const raw = distribution.eval().coeffs.map((val) => val.valueOf());
+  if (raw.length > 2 && raw[0] + raw[1] < 0.99) {
+    return 1;
+  }
+  return getXMax(distribution.eval().expectation().valueOf());
+};
+
+const getData = (runs: number, distribution: Distribution) => {
+  let ys = [];
   let [prevY, y] = [0, 0];
-  for (let x = 0; x <= Math.ceil(runs / 2); x++) {
-    y = binomialDistributionFunction(runs, x, singleRunChance) * 100;
-    if (y >= prevY || y > 1e-2 || x <= 1) {
-      ys.push(y);
-      prevY = y;
-    } else {
-      break;
+  if (runs <= 0) {
+    return { xs: [], ys: [] };
+  } else if (runs <= DIRECT_TO_BINOM_THRESHOLD) {
+    let raisedDistribution = Distribution.Binomial(distribution, runs);
+    raisedDistribution.simplify(CLIPPING_COEFF);
+    ys = raisedDistribution.eval().coeffs.map((val) => val.valueOf() * 100);
+  } else {
+    // This is a bad approximation when expectation is high (because of multi-drop) -- close to 1
+    // and completely breaks when expectation > 1 (e.g. for gld, Duriel)
+    for (let x = 0; x <= runs; x++) {
+      y = binomialDistributionFunction(
+        runs,
+        x,
+        distribution.eval().expectation().valueOf()
+      );
+      if (y >= prevY || y > CLIPPING_COEFF || x <= 1) {
+        ys.push(y * 100);
+        prevY = y;
+      } else {
+        break;
+      }
     }
   }
   const xs = range(ys.length);
@@ -34,24 +67,25 @@ const getData = (runs: number, singleRunChance: number) => {
 };
 
 export const BinomialRunsChart = ({
-  playerFormState,
-  results,
   baseItemName,
   itemName,
   rarity,
-  selectedChance,
-}: IDashboardPropType): JSX.Element => {
+  distribution,
+}: IBinomialPropType): JSX.Element => {
   const [runs, setRuns] = useState(-1);
   useEffect(() => {
-    if (selectedChance.valueOf() > 0) {
-      setRuns(getXMax(selectedChance.valueOf()));
+    if (distribution.eval().expectation().valueOf() > 0) {
+      setRuns(getBinomialXMax(distribution));
     }
-  }, [selectedChance]);
+  }, [distribution]);
   useEffect(() => {
-    if (baseItemName == "" || selectedChance.valueOf() <= 0) {
+    if (
+      baseItemName == "" ||
+      distribution.eval().expectation().valueOf() <= 0
+    ) {
       return;
     }
-    const { xs, ys } = getData(runs, selectedChance.valueOf());
+    const { xs, ys } = getData(runs, distribution);
     let ctx = (
       document.getElementById("binomialRunsChart") as HTMLCanvasElement
     )?.getContext("2d");

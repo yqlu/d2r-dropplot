@@ -129,21 +129,26 @@ export const STACKED_BAR_COLORS = {
   ACTIVE: color("#e53935").rgbString(), // purple-800
 };
 
-const binomialDistributionFunction = function (
+export const binomialDistributionFunction = function (
   n: number,
   k: number,
   p: number
 ) {
   let r = 1;
+  let n_ = n;
+  if (k * 2 > n) {
+    p = 1 - p;
+    k = n - k;
+  }
   for (let d = 1; d <= k; d++) {
-    r *= n-- * p * (1 - p);
+    r *= n_-- * p * (1 - p);
     r /= d;
   }
   r *= (1 - p) ** (n - 2 * k);
   return r;
 };
 
-const binomialDistributionFunctionCumulative = function (
+export const binomialDistributionFunctionCumulative = function (
   n: number,
   k: number,
   p: number
@@ -154,4 +159,3 @@ const binomialDistributionFunctionCumulative = function (
   }
   return total;
 };
-export { binomialDistributionFunction, binomialDistributionFunctionCumulative };

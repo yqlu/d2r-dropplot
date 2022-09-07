@@ -52,9 +52,7 @@ const getData = (atLeastOneChance: Fraction, runs: number) => {
   const xs = range(intervals + 1).map((x) =>
     Math.round((x * runs) / intervals)
   );
-  const ys = xs.map(
-    (x) => Math.floor((1 - Math.pow(1 - singleRunChance, x)) * 1000) / 10
-  );
+  const ys = xs.map((x) => (1 - Math.pow(1 - singleRunChance, x)) * 100);
   return {
     xs,
     ys,

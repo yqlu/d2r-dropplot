@@ -12,6 +12,8 @@ import { NoDropChart } from "./charts/NoDrop";
 import { Card } from "./components/Card";
 import { qualityNotApplicable } from "./engine/rarity";
 import { ArmorDict, WeaponsDict } from "./engine/weapon-armor-dict";
+import { Distribution } from "./engine/distribution";
+import { ZERO } from "./engine/polynomialOps";
 
 export const Dashboard = ({
   playerFormState,
@@ -22,13 +24,17 @@ export const Dashboard = ({
   selectedChance,
   onSelectItem,
 }: IDashboardPropType): JSX.Element => {
-  const distribution = getDistribution(
-    playerFormState,
-    baseItemName,
-    itemName,
-    rarity
-  );
-  const atLeastOneChance = distribution.eval().atLeastOneChance();
+  let distribution: Distribution = Distribution.Atomic(ZERO);
+  let atLeastOneChance = selectedChance;
+  if (baseItemName) {
+    distribution = getDistribution(
+      playerFormState,
+      baseItemName,
+      itemName,
+      rarity
+    );
+    atLeastOneChance = distribution.eval().atLeastOneChance();
+  }
 
   let magicFindApplicable = !qualityNotApplicable(baseItemName);
   let isWeaponOrArmor =
@@ -53,13 +59,10 @@ export const Dashboard = ({
             </Card>
             <Card>
               <BinomialRunsChart
-                playerFormState={playerFormState}
-                results={results}
                 baseItemName={baseItemName}
                 itemName={itemName}
                 rarity={rarity}
-                selectedChance={atLeastOneChance}
-                onSelectItem={onSelectItem}
+                distribution={distribution}
               />
             </Card>
             {magicFindApplicable && (
