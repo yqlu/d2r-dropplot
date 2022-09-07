@@ -23,28 +23,28 @@ export class Distribution {
   }
 
   static Polynomial(coeffs: Fraction[]) {
-    return new Polynomial(coeffs);
+    return new Polynomial(coeffs).eval();
   }
 
   // static constructors
   static Atomic(chance: Fraction): Distribution {
-    return new Polynomial([ONE.sub(chance), chance]);
+    return new Polynomial([ONE.sub(chance), chance]).eval();
   }
 
   static Binomial(d: Distribution, picks: number): Distribution {
-    return new Binomial(d, picks);
+    return new Binomial(d, picks).eval();
   }
 
   static Or(distTuples: OrDistributionTuple[]): Distribution {
-    return new Or(distTuples);
+    return new Or(distTuples).eval();
   }
 
   static And(dists: Distribution[]): Distribution {
-    return new And(dists);
+    return new And(dists).eval();
   }
 
   static Substitute(parent: Distribution, child: Distribution): Distribution {
-    return new Substitute(parent, child);
+    return new Substitute(parent, child).eval();
   }
 }
 

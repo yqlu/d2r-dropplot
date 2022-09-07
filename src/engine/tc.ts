@@ -21,6 +21,7 @@ const isCountess = (tcObject: TCObject) => {
 const isDuriel = (tcObject: TCObject) => {
   return (
     tcObject !== null &&
+    tcObject.tcs.length > 0 &&
     tcObject.tcs[0][0] === "tsc" &&
     tcObject.tcs[1][0].slice(0, 6) === "Duriel"
   );

@@ -25,7 +25,7 @@ export function getTcAndMlvlFromMonster(
     case MonsterType.BOSS:
       return getBossTCMlvl(difficulty, boss);
     case MonsterType.TREASURE_CLASS:
-      return ["Diablo (H)", 94];
+      return ["Act 1 (H) Bow A", 94];
   }
 }
 
