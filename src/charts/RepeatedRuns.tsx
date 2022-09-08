@@ -21,6 +21,7 @@ import {
 } from "../engine/resultAggregator";
 import { getRarityMultiplier } from "../engine/rarity";
 import { Distribution } from "../engine/distribution";
+import { ONE } from "../engine/polynomialOps";
 
 export const getXMax = (
   singleRunChance: number,
@@ -81,6 +82,9 @@ export const getDistribution = (
       new Set([baseItemName])
     )
     .result();
+  if (tcs.length === 0) {
+    return Distribution.Atomic(ONE);
+  }
   let distribution: Distribution = tcs[0][1].eval();
   if (rarity !== RARITY.WHITE) {
     const itemRarityChance = getRarityMultiplier(tcs[0][2], rarity, itemName);

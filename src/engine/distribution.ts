@@ -66,7 +66,9 @@ export class Polynomial extends Distribution {
     while (!this.coeffs[this.coeffs.length - 1].compare(0)) {
       this.coeffs.pop();
     }
-    this.coeffs[0] = ONE.sub(this.coeffs.slice(1).reduce((a, b) => a.add(b)));
+    this.coeffs[0] = ONE.sub(
+      this.coeffs.slice(1).reduce((a, b) => a.add(b), ZERO)
+    );
   }
 
   expectation() {

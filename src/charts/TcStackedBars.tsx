@@ -64,7 +64,8 @@ const getData = (playerFormState: PlayerFormState, baseItemName: string) => {
     .result()
     .filter((tuple) => TC_REGEX.test(tuple[0]));
   if (tcs.length === 0) {
-    throw new Error("No applicable TCs");
+    return;
+    // throw new Error("No applicable TCs");
   }
   const maxClass =
     max(
@@ -114,10 +115,11 @@ export const TreasureClassStackedBars = ({
     if (baseItemName == "") {
       return;
     }
-    const { labels, datasetMap, tcs, tcsContainingItem } = getData(
-      playerFormState,
-      baseItemName
-    );
+    const data = getData(playerFormState, baseItemName);
+    if (!data) {
+      return;
+    }
+    const { labels, datasetMap, tcs, tcsContainingItem } = data;
     const datasets = Object.values(datasetMap)
       .flat()
       .filter((dataset) => dataset.data.filter((i) => i !== 0).length > 0);
