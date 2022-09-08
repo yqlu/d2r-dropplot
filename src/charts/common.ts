@@ -159,3 +159,14 @@ export const binomialDistributionFunctionCumulative = function (
   }
   return total;
 };
+
+export const poissonDistributionFunction = function (
+  lambda: number,
+  k: number
+) {
+  let r = Math.exp(-lambda);
+  for (let d = 1; d <= k; d++) {
+    r *= lambda / d;
+  }
+  return r;
+};

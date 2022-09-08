@@ -48,9 +48,10 @@ export class Distribution {
   }
 }
 
-class Polynomial extends Distribution {
+export class Polynomial extends Distribution {
   private _expectation: Fraction | null = null;
   private _atLeastOneChance: Fraction | null = null;
+  private _variance: Fraction | null = null;
   public coeffs: Fraction[];
 
   constructor(coeffs: Fraction[]) {
@@ -79,6 +80,19 @@ class Polynomial extends Distribution {
       ZERO
     );
     return this._expectation;
+  }
+
+  variance() {
+    if (this._variance) {
+      return this._variance;
+    }
+    this._variance = this.coeffs
+      .reduce((accum: Fraction, val: Fraction, idx: number) => {
+        return accum.add(val.mul(new Fraction(idx * (idx - 1))));
+      }, ZERO)
+      .add(this.expectation())
+      .sub(this.expectation().pow(2));
+    return this._variance;
   }
 
   atLeastOneChance() {
