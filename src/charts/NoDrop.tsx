@@ -23,6 +23,13 @@ const getData = (tc: string) => {
   };
 };
 
+const isDuriel = (tcName: string) => {
+  return /Duriel.*/.test(tcName) && TCDict[tcName].tcs[0][0] === "tsc";
+};
+const isCountess = (tcName: string) => {
+  return /Countess.*/.test(tcName) && /Countess/.test(TCDict[tcName].tcs[0][0]);
+};
+
 export const NoDropChart = ({
   playerFormState,
   results,
@@ -34,7 +41,11 @@ export const NoDropChart = ({
     if (baseItemName == "") {
       return;
     }
-    const { xs, players, party } = getData(playerFormState.tc);
+    let tc = playerFormState.tc;
+    if (isDuriel(tc)) {
+      tc = TCDict[tc].tcs[1][0];
+    }
+    let { xs, players, party } = getData(tc);
     const playerDataset = {
       label: "Player",
       data: players,
@@ -47,6 +58,26 @@ export const NoDropChart = ({
       backgroundColor: RUNE_COLOR,
       borderColor: RUNE_COLOR,
     };
+    let datasets = [partyDataset, playerDataset];
+
+    if (isCountess(tc)) {
+      const tcObject = TCDict[tc];
+      let tc1 = getData(tcObject.tcs[0][0]);
+      let tc2 = getData(tcObject.tcs[1][0]);
+      const player1Dataset = {
+        label: `${tcObject.tcs[0][0]}`,
+        data: tc1.players,
+        backgroundColor: REGULAR_COLOR,
+        borderColor: REGULAR_COLOR,
+      };
+      const player2Dataset = {
+        label: `${tcObject.tcs[1][0]}`,
+        data: tc2.players,
+        backgroundColor: RUNE_COLOR,
+        borderColor: RUNE_COLOR,
+      };
+      datasets = [player1Dataset, player2Dataset];
+    }
 
     let ctx = (
       document.getElementById("NoDropChart") as HTMLCanvasElement
@@ -55,7 +86,7 @@ export const NoDropChart = ({
       type: "line" as keyof ChartTypeRegistry,
       data: {
         labels: xs,
-        datasets: [partyDataset, playerDataset],
+        datasets: datasets,
       },
       options: {
         scales: {
@@ -100,12 +131,23 @@ export const NoDropChart = ({
     };
   }, [playerFormState.tc]);
 
+  let tc = playerFormState.tc;
+  if (isDuriel(tc)) {
+    tc = TCDict[tc].tcs[1][0];
+  }
+  let title = <span className="font-bold">{tc}</span>;
+  if (isCountess(tc)) {
+    const tcObject = TCDict[tc];
+    title = (
+      <span className="font-bold">
+        {tcObject.tcs[0][0]}, {tcObject.tcs[1][0]}
+      </span>
+    );
+  }
+
   return (
     <div>
-      <div className="chartTitle">
-        <span className="font-bold">{playerFormState.tc}</span> nodrop vs player
-        count
-      </div>
+      <div className="chartTitle">{title} nodrop vs player count</div>
       <canvas id="NoDropChart"></canvas>
     </div>
   );

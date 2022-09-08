@@ -89,6 +89,21 @@ describe("TCDict invariants", () => {
       }
     }
   });
+
+  it("Countess, Duriel and ROP are only TCs with children with non-zero nodrop", () => {
+    for (var [tcName, tcObject] of Object.entries(TCDict)) {
+      if (tcObject.nodrop === 0) {
+        const subTcs = tcObject.tcs
+          .map((child) => TCDict[child[0]])
+          .filter((val) => val);
+        for (let subTc of subTcs) {
+          if (subTc.nodrop !== 0) {
+            expect(/Countess.*|Duriel*|ROP*/.test(tcName)).to.be.true;
+          }
+        }
+      }
+    }
+  });
 });
 
 describe("TcCalculator", () => {
