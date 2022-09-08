@@ -120,6 +120,7 @@ export const BinomialRunsChart = ({
 }: IBinomialPropType): JSX.Element => {
   const polynomial = distribution.eval();
   const [runs, setRuns] = useState(-1);
+  const [cumulative, setCumulative] = useState(false);
   useEffect(() => {
     if (polynomial.expectation().valueOf() > 0) {
       setRuns(getBinomialXMax(polynomial));
@@ -129,7 +130,16 @@ export const BinomialRunsChart = ({
     if (baseItemName == "" || polynomial.eval().expectation().valueOf() <= 0) {
       return;
     }
-    const { xs, ys } = getData(runs, polynomial);
+    let { xs, ys } = getData(runs, polynomial);
+    if (cumulative) {
+      // https://stackoverflow.com/questions/20477177/creating-an-array-of-cumulative-sum-in-javascript
+      ys = ys.map(
+        (
+          (sum) => (value) =>
+            (sum += value)
+        )(0)
+      );
+    }
     let ctx = (
       document.getElementById("binomialRunsChart") as HTMLCanvasElement
     )?.getContext("2d");
@@ -177,7 +187,9 @@ export const BinomialRunsChart = ({
               title: (ctx: TooltipItem<"line">[]) => {
                 return [
                   `${ctx[0].formattedValue}% chance`,
-                  `to drop ${ctx[0].label} copies`,
+                  `to drop ${ctx[0].label} ${
+                    cumulative ? "or fewer " : ""
+                  }copies`,
                 ];
               },
               label: () => "",
@@ -194,7 +206,7 @@ export const BinomialRunsChart = ({
     return () => {
       chart?.destroy();
     };
-  }, [runs]);
+  }, [runs, cumulative]);
 
   const name = itemName === "" ? baseItemName : itemName;
   const styling = colorClassFromRarity(baseItemName, rarity);
@@ -211,6 +223,14 @@ export const BinomialRunsChart = ({
           onChange={(event) => setRuns(Number(event.target.value))}
         />{" "}
         runs
+      </div>
+      <div className="chartSubtitle">
+        <input
+          type="checkbox"
+          checked={cumulative}
+          onChange={(event) => setCumulative(!cumulative)}
+        />{" "}
+        Cumulative
       </div>
       <canvas id="binomialRunsChart"></canvas>
     </div>
