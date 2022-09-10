@@ -13,9 +13,15 @@ export const Navbar = (): JSX.Element => {
         <div className="text-sm">
           <a
             href="#responsive-header"
-            className="inline-block mt-0 hover:text-white"
+            className="inline-block mt-0 hover:text-white invisible sm:visible"
           >
             About
+          </a>
+          <a
+            href="#responsive-header"
+            className="inline-block mt-0 hover:text-white visible sm:invisible"
+          >
+            ?
           </a>
         </div>
       </div>

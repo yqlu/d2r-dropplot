@@ -299,12 +299,13 @@ export const MonsterFormInline = (props: MonsterFormProps): JSX.Element => {
       </p>
       {props.monsterType !== MonsterType.TREASURE_CLASS && (
         <p className="subtitle">
-          Treasure Class: <b>{props.tc}</b> (mlvl <b>{props.mlvl})</b>
+          Treasure Class: <b className="font-mono">{props.tc}</b> (mlvl{" "}
+          <b>{props.mlvl})</b>
         </p>
       )}
       {props.baseItemName !== "" && (
         <p>
-          Analysis: <b className={styling}>{Locale(name)}</b> (
+          Analyzing: <b className={styling}>{Locale(name)}</b> (
           {formatReciprocal(props.selectedChance)} chance)
         </p>
       )}

@@ -22,6 +22,7 @@ import {
 } from "./MonsterFormInline";
 import { getRarityMultiplier } from "./engine/rarity";
 import { Navbar } from "./Navbar";
+import { MobileInfoCard } from "./MobileInfoCard";
 
 const App = (): JSX.Element => {
   const [monsterFormState, setMonsterFormState] = useState({
@@ -221,7 +222,7 @@ const App = (): JSX.Element => {
       <Navbar></Navbar>
       <aside
         className={
-          "flex flex-col fixed left-0 top-12 bottom-0 text-xs bg-gray-900 border-r border-gray-800 z-20 shadow " +
+          "flex flex-col fixed left-0 top-12 bottom-0 text-xs bg-gray-900 border-r border-gray-800 z-20 shadow invisible sm:visible " +
           sidebarStyle
         }
       >
@@ -270,9 +271,9 @@ const App = (): JSX.Element => {
         </div>
       </aside>
       <div className="flex relative pt-12">
-        <main className="flex-1 p-10 ml-52">
-          <Card canExpand={false}>
-            <div className="text-xs">
+        <main className="flex-1 p-2 sm:px-6 lg:px-8 xl:px-10 sm:ml-52">
+          <div className="hidden sm:block">
+            <Card canExpand={false} canEdit={false}>
               <MonsterFormInline
                 difficulty={monsterFormState.difficulty}
                 monsterType={monsterFormState.monsterType}
@@ -290,9 +291,27 @@ const App = (): JSX.Element => {
                 rarity={rarity}
                 selectedChance={selectedChance}
               />
-            </div>
-          </Card>
-          <div className="pt-4">
+            </Card>
+          </div>
+          <div className="block sm:hidden">
+            <Card canExpand={false} canEdit={true}>
+              <MobileInfoCard
+                difficulty={monsterFormState.difficulty}
+                monsterType={monsterFormState.monsterType}
+                levelId={monsterFormState.levelId}
+                monster={monsterFormState.monster}
+                superunique={monsterFormState.superunique}
+                boss={monsterFormState.boss}
+                tc={playerFormState.tc}
+                mlvl={playerFormState.mlvl}
+                baseItemName={baseItemName}
+                itemName={itemName}
+                rarity={rarity}
+                selectedChance={selectedChance}
+              ></MobileInfoCard>
+            </Card>
+          </div>
+          <div className="pt-2 sm:pt-4">
             <Dashboard
               playerFormState={playerFormState}
               results={results}
