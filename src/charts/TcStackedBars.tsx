@@ -19,6 +19,7 @@ import {
   IDashboardPropType,
   STACKED_BAR_COLORS,
   REGULAR_COLOR,
+  formatPercent,
 } from "./common";
 import { RARITY } from "../engine/itemratio-dict";
 import Fraction from "fraction.js";
@@ -100,8 +101,6 @@ const getData = (playerFormState: PlayerFormState, baseItemName: string) => {
   });
   return { labels, datasetMap, tcs, tcsContainingItem };
 };
-
-const formatPercent = (num: number) => Math.round(num * 10000) / 100;
 
 export const TreasureClassStackedBars = ({
   playerFormState,
@@ -208,10 +207,8 @@ export const TreasureClassStackedBars = ({
                 const itemIdxWithinTc = (ctx.dataset.label || 0) as number;
                 const item = AtomicDict[tcName].tcs[itemIdxWithinTc][0];
                 const tc = tcs.filter((tuple) => tuple[0] === tcName)[0];
-                const tcChance = `${formatPercent(tc[1].valueOf())}%`;
-                const absoluteChance = `${formatPercent(
-                  (ctx.raw as number) / 100
-                )}%`;
+                const tcChance = `${formatPercent(tc[1].valueOf() * 100)}%`;
+                const absoluteChance = `${formatPercent(ctx.raw as number)}%`;
                 const itemInTcChance = getAtomicFraction(
                   tcName,
                   item

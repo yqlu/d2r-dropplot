@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Fraction from "fraction.js";
 
 import { BaseItemProbTuple } from "./engine/resultAggregator";
-import { colorClassFromRarity } from "./charts/common";
+import { colorClassFromRarity, formatPercent } from "./charts/common";
 import { SetDict, UniqueDict } from "./engine/unique-set-dict";
 import { ItemDict } from "./engine/item-dict";
 import { Locale } from "./engine/locale-dict";
@@ -12,7 +12,7 @@ function format(percent: Fraction) {
   if (percent.valueOf() === 0) {
     return "";
   }
-  return `${Math.round(percent.valueOf() * 10000) / 100}%`;
+  return `${formatPercent(percent.valueOf() * 100)}%`;
 }
 
 export function formatReciprocal(chance: Fraction) {

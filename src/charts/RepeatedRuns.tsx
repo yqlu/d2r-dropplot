@@ -7,6 +7,7 @@ import {
   IDashboardPropType,
   colorFromRarity,
   colorClassFromRarity,
+  formatPercent,
 } from "./common";
 import { Locale } from "../engine/locale-dict";
 import Fraction from "fraction.js";
@@ -158,7 +159,7 @@ export const RepeatedRunsChart = ({
             callbacks: {
               title: (ctx: TooltipItem<"line">[]) => {
                 return [
-                  `${ctx[0].formattedValue}% chance`,
+                  `${formatPercent(ctx[0].raw as number)}% chance`,
                   `over ${ctx[0].label} runs`,
                 ];
               },

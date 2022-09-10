@@ -14,6 +14,7 @@ import { TCDict } from "../engine/tc-dict";
 import { AtomicDict } from "../engine/atomic-dict";
 import {
   colorClassFromRarity,
+  formatPercent,
   IDashboardPropType,
   REGULAR_COLOR,
   RUNE_COLOR,
@@ -137,7 +138,9 @@ export const PartyCountChart = ({
             callbacks: {
               title: () => "",
               label: (ctx: TooltipItem<"line">) =>
-                `${ctx.dataset.label} ${ctx.label}: ${ctx.formattedValue}%`,
+                `${ctx.dataset.label} ${ctx.label}: ${formatPercent(
+                  ctx.raw as number
+                )}%`,
             },
           },
         },

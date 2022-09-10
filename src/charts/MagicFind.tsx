@@ -17,6 +17,8 @@ import {
   RARE_COLOR,
   SET_COLOR,
   UNIQUE_COLOR,
+  formatPercent,
+  round2dp,
 } from "./common";
 import { Locale } from "../engine/locale-dict";
 
@@ -61,8 +63,6 @@ const getData = (playerFormState: PlayerFormState, baseItemName: string) => {
   };
 };
 
-const formatPercent = (num: number) => Math.round(num * 10000) / 100;
-
 export const MagicFindChart = ({
   playerFormState,
   results,
@@ -80,13 +80,15 @@ export const MagicFindChart = ({
     const white = {
       label: "Normal",
       data: ys.map((ratio) => {
-        const chance = new Fraction(1)
-          .sub(ratio[0])
-          .sub(ratio[1])
-          .sub(ratio[2])
-          .sub(ratio[3])
-          .valueOf();
-        return formatPercent(chance);
+        const chance = round2dp(
+          new Fraction(1)
+            .sub(ratio[0])
+            .sub(ratio[1])
+            .sub(ratio[2])
+            .sub(ratio[3])
+            .valueOf()
+        );
+        return chance;
       }),
       backgroundColor: REGULAR_COLOR,
       borderColor: REGULAR_COLOR,
@@ -94,28 +96,28 @@ export const MagicFindChart = ({
     };
     const magic = {
       label: "Magic",
-      data: ys.map((ratio) => formatPercent(ratio[0].valueOf())),
+      data: ys.map((ratio) => ratio[0].valueOf() * 100),
       backgroundColor: MAGIC_COLOR,
       borderColor: MAGIC_COLOR,
       tension,
     };
     const rare = {
       label: "Rare",
-      data: ys.map((ratio) => formatPercent(ratio[1].valueOf())),
+      data: ys.map((ratio) => ratio[1].valueOf() * 100),
       backgroundColor: RARE_COLOR,
       borderColor: RARE_COLOR,
       tension,
     };
     const set = {
       label: "Set",
-      data: ys.map((ratio) => formatPercent(ratio[2].valueOf())),
+      data: ys.map((ratio) => ratio[2].valueOf() * 100),
       backgroundColor: SET_COLOR,
       borderColor: SET_COLOR,
       tension,
     };
     const unique = {
       label: "Unique",
-      data: ys.map((ratio) => formatPercent(ratio[3].valueOf())),
+      data: ys.map((ratio) => ratio[3].valueOf() * 100),
       backgroundColor: UNIQUE_COLOR,
       borderColor: UNIQUE_COLOR,
       tension,
@@ -160,7 +162,9 @@ export const MagicFindChart = ({
             callbacks: {
               title: (ctx: TooltipItem<"line">[]) => `${ctx[0].label}% MF`,
               label: (ctx: TooltipItem<"line">) =>
-                `${ctx.dataset.label}: ${ctx.formattedValue}%`,
+                `${ctx.dataset.label}: ${formatPercent(
+                  ctx.parsed.y as number
+                )}%`,
             },
           },
         },

@@ -5,6 +5,7 @@ import { BaseItemProbTuple } from "../engine/resultAggregator";
 import { Gradient } from "javascript-color-gradient";
 import Fraction from "fraction.js";
 import { SelectItemType } from "../Result";
+import { stringify } from "querystring";
 
 export const TC_GRADIENT = {
   armo: new Gradient()
@@ -170,3 +171,13 @@ export const poissonDistributionFunction = function (
   }
   return r;
 };
+
+// Consistent formatting across tooltips in all charts
+export const formatPercent = (chance: number): string => {
+  if (chance >= 1) {
+    return chance.toFixed(2);
+  }
+  return chance.toPrecision(2);
+};
+
+export const round2dp = (chance: number) => Math.round(chance * 10000) / 100;

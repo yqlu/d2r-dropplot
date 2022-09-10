@@ -6,6 +6,7 @@ import gaussian from "gaussian";
 import {
   binomialDistributionFunction,
   colorClassFromRarity,
+  formatPercent,
   poissonDistributionFunction,
 } from "./common";
 import { IDashboardPropType, REGULAR_COLOR, colorFromRarity } from "./common";
@@ -186,7 +187,7 @@ export const BinomialRunsChart = ({
             callbacks: {
               title: (ctx: TooltipItem<"line">[]) => {
                 return [
-                  `${ctx[0].formattedValue}% chance`,
+                  `${formatPercent(ctx[0].raw as number)}% chance`,
                   `to drop ${ctx[0].label} ${
                     cumulative ? "or fewer " : ""
                   }copies`,

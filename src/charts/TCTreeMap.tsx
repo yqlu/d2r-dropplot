@@ -27,6 +27,7 @@ import {
   REGULAR_COLOR,
   TREEMAP_COLORS,
   TC_GRADIENT,
+  formatPercent,
 } from "./common";
 import Fraction from "fraction.js";
 import { RARITY } from "../engine/itemratio-dict";
@@ -80,8 +81,6 @@ const getData = (playerFormState: PlayerFormState, baseItemName: string) => {
     .flat();
   return { data, tcsContainingItem };
 };
-
-const formatPercent = (num: number) => Math.round(num * 10000) / 100;
 
 export const TreasureClassTreeMap = ({
   playerFormState,
@@ -192,14 +191,14 @@ export const TreasureClassTreeMap = ({
                     const obj = (ctx[0].raw as any)._data as any;
                     // TODO: this should be an expectation
                     return `Chance of ${obj.type} = ${formatPercent(
-                      obj.absoluteChance
+                      obj.absoluteChance * 100
                     )}%`;
                   } else {
                     // `weap12`
                     const obj = (ctx[1].raw as any)._data as any;
                     // TODO: this should be an expectation
                     return `Chance of ${obj.tc} = ${formatPercent(
-                      obj.absoluteChance
+                      obj.absoluteChance * 100
                     )}%`;
                   }
                 }
@@ -214,8 +213,12 @@ export const TreasureClassTreeMap = ({
                   return;
                 }
                 const itemName = Locale(obj["item"]);
-                const tcChance = `${formatPercent(obj.children[0].tcChance)}%`;
-                const absoluteChance = `${formatPercent(obj.absoluteChance)}%`;
+                const tcChance = `${formatPercent(
+                  obj.children[0].tcChance * 100
+                )}%`;
+                const absoluteChance = `${formatPercent(
+                  obj.absoluteChance * 100
+                )}%`;
                 return [
                   `Chance of ${obj.children[0].tc} = ${tcChance}`,
                   `Chance of ${itemName} = ${tcChance} x ${obj.children[0].itemInTcChance} = ${absoluteChance}`,

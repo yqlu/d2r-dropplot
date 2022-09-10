@@ -8,6 +8,7 @@ import { BaseItemProbTuple } from "../engine/resultAggregator";
 import { Locale } from "../engine/locale-dict";
 
 import {
+  formatPercent,
   IDashboardPropType,
   REGULAR_COLOR,
   RUNE_COLOR,
@@ -122,7 +123,7 @@ export const RuneBars = ({
             callbacks: {
               title: (cs: TooltipItem<"bar">[]) => "",
               label: (ctx: TooltipItem<"bar">) => {
-                return `${ctx.label} ${ctx.raw.y}%`;
+                return `${ctx.label} ${formatPercent(ctx.raw.y as number)}%`;
               },
             },
             displayColors: false,
@@ -145,7 +146,7 @@ export const RuneBars = ({
         <span className="font-bold text-rune">{Locale(baseItemName)}</span> drop
         chance
         <div className="chartSubtitle">
-          Filter runes above{" "}
+          Filter to runes above{" "}
           <select
             className="inline-select w-20"
             value={runeFilter}

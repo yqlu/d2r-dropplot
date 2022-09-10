@@ -19,11 +19,10 @@ import {
   RARE_COLOR,
   SET_COLOR,
   UNIQUE_COLOR,
+  formatPercent,
 } from "./common";
 
 Chart.register(SankeyController, Flow);
-
-const formatPercent = (num: number) => Math.round(num * 10000) / 100;
 
 const getData = (results: BaseItemProbTuple[], baseItemName: string) => {
   let result = results.filter((tuple) => tuple[0] == baseItemName);
@@ -205,7 +204,7 @@ export const RarityBreakdownChart = ({
                   } chance if ${item.from} rolled`;
                 }
                 return `${labels[item.to]}: ${formatPercent(
-                  item.flow
+                  item.flow * 100
                 )}% chance if base item rolled`;
               },
             },
