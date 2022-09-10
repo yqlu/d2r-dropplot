@@ -207,18 +207,10 @@ const App = (): JSX.Element => {
     newChance: Fraction
   ) => {
     setScrollPosition(window.scrollY);
-    if (baseItemName !== newBaseItemName) {
-      setBaseItemName(newBaseItemName);
-    }
-    if (itemName !== newItemName) {
-      setItemName(newItemName);
-    }
-    if (rarity !== newRarity) {
-      setRarity(newRarity);
-    }
-    if (selectedChance !== newChance) {
-      setSelectedChance(newChance);
-    }
+    setBaseItemName(newBaseItemName);
+    setItemName(newItemName);
+    setRarity(newRarity);
+    setSelectedChance(newChance);
   };
 
   const sidebarStyle = sidebarOpen ? "sidebar-open" : "sidebar-closed";
