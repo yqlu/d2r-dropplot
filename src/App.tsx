@@ -276,7 +276,7 @@ const App = (): JSX.Element => {
         </div>
       </aside>
       <main className="flex-1 p-10 ml-52">
-        <Card>
+        <Card canExpand={false}>
           <div className="text-xs">
             <MonsterFormInline
               difficulty={monsterFormState.difficulty}

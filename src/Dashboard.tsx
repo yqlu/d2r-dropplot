@@ -43,10 +43,10 @@ export const Dashboard = ({
   let isRune = RUNE_REGEX.test(baseItemName);
   return (
     <div>
-      <div className="grid grid-cols-1  gap-4 place-content-stretch">
+      <div className="grid grid-cols-1 xl:grid-cols-2 gap-4 place-content-stretch">
         {baseItemName && (
           <React.Fragment>
-            <Card>
+            <Card canExpand={true}>
               <RepeatedRunsChart
                 playerFormState={playerFormState}
                 results={results}
@@ -57,7 +57,7 @@ export const Dashboard = ({
                 onSelectItem={onSelectItem}
               />
             </Card>
-            <Card>
+            <Card canExpand={true}>
               <BinomialRunsChart
                 baseItemName={baseItemName}
                 itemName={itemName}
@@ -66,7 +66,7 @@ export const Dashboard = ({
               />
             </Card>
             {magicFindApplicable && (
-              <Card>
+              <Card canExpand={true}>
                 <MagicFindChart
                   playerFormState={playerFormState}
                   results={results}
@@ -79,7 +79,7 @@ export const Dashboard = ({
               </Card>
             )}
             {magicFindApplicable && (
-              <Card>
+              <Card canExpand={true}>
                 <RarityBreakdownChart
                   playerFormState={playerFormState}
                   results={results}
@@ -91,7 +91,7 @@ export const Dashboard = ({
                 />
               </Card>
             )}
-            <Card>
+            <Card canExpand={true}>
               <PartyCountChart
                 playerFormState={playerFormState}
                 results={results}
@@ -102,7 +102,7 @@ export const Dashboard = ({
                 onSelectItem={onSelectItem}
               />
             </Card>
-            <Card>
+            <Card canExpand={true}>
               <NoDropChart
                 playerFormState={playerFormState}
                 results={results}
@@ -114,7 +114,7 @@ export const Dashboard = ({
               />
             </Card>
             {isWeaponOrArmor && (
-              <Card>
+              <Card canExpand={true}>
                 <TreasureClassStackedBars
                   playerFormState={playerFormState}
                   results={results}
@@ -127,7 +127,7 @@ export const Dashboard = ({
               </Card>
             )}
             {isWeaponOrArmor && (
-              <Card>
+              <Card canExpand={true}>
                 <TreasureClassTreeMap
                   playerFormState={playerFormState}
                   results={results}
@@ -140,7 +140,7 @@ export const Dashboard = ({
               </Card>
             )}
             {isRune && (
-              <Card>
+              <Card canExpand={true}>
                 <RuneBars
                   playerFormState={playerFormState}
                   results={results}
