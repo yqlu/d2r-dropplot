@@ -135,7 +135,7 @@ export const Result = ({
     .map((sortTuple) => sortTuple[0]);
   return (
     <React.Fragment>
-      <div className="sidebar-row">
+      <div className="sidebar-row border-t border-gray-800">
         <div className="container px-3 py-3 flex flex-row">
           <div className="relative w-44">
             <div className="flex absolute inset-y-0 left-0 items-center pl-1 pointer-events-none">

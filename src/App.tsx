@@ -21,6 +21,7 @@ import {
   MonsterFormInline,
 } from "./MonsterFormInline";
 import { getRarityMultiplier } from "./engine/rarity";
+import { Navbar } from "./Navbar";
 
 const App = (): JSX.Element => {
   const [monsterFormState, setMonsterFormState] = useState({
@@ -216,14 +217,15 @@ const App = (): JSX.Element => {
   const sidebarStyle = sidebarOpen ? "sidebar-open" : "sidebar-closed";
 
   return (
-    <div className="flex text-gray-200">
+    <div className="text-gray-200 ">
+      <Navbar></Navbar>
       <aside
         className={
-          "flex flex-col fixed left-0 top-0 text-xs h-screen bg-gray-900 border border-gray-800 z-20 rounded shadow " +
+          "flex flex-col fixed left-0 top-12 bottom-0 text-xs bg-gray-900 border-r border-gray-800 z-20 shadow " +
           sidebarStyle
         }
       >
-        <div className="py-3 border border-gray-800 w-52">
+        <div className="py-3 w-52">
           <PlayerForm
             partyCount={playerFormState.partyCount}
             playerCount={playerFormState.playerCount}
@@ -256,7 +258,7 @@ const App = (): JSX.Element => {
           rarity={rarity}
         />
         <div
-          className="px-3 py-1 border border-gray-800 hover:bg-gray-600 select-none cursor-pointer"
+          className="px-3 py-1 border-t border-gray-800 hover:bg-gray-600 select-none cursor-pointer"
           onClick={() => setSidebarOpen(!sidebarOpen)}
         >
           <span>
@@ -267,49 +269,51 @@ const App = (): JSX.Element => {
           </span>
         </div>
       </aside>
-      <main className="flex-1 p-10 ml-52">
-        <Card canExpand={false}>
-          <div className="text-xs">
-            <MonsterFormInline
-              difficulty={monsterFormState.difficulty}
-              monsterType={monsterFormState.monsterType}
-              levelId={monsterFormState.levelId}
-              monster={monsterFormState.monster}
-              superunique={monsterFormState.superunique}
-              boss={monsterFormState.boss}
-              tc={playerFormState.tc}
-              mlvl={playerFormState.mlvl}
-              errors={errors}
-              onPlayerFormChange={onPlayerFormChange}
-              onMonsterFormChange={onMonsterFormChange}
+      <div className="flex relative pt-12">
+        <main className="flex-1 p-10 ml-52">
+          <Card canExpand={false}>
+            <div className="text-xs">
+              <MonsterFormInline
+                difficulty={monsterFormState.difficulty}
+                monsterType={monsterFormState.monsterType}
+                levelId={monsterFormState.levelId}
+                monster={monsterFormState.monster}
+                superunique={monsterFormState.superunique}
+                boss={monsterFormState.boss}
+                tc={playerFormState.tc}
+                mlvl={playerFormState.mlvl}
+                errors={errors}
+                onPlayerFormChange={onPlayerFormChange}
+                onMonsterFormChange={onMonsterFormChange}
+                baseItemName={baseItemName}
+                itemName={itemName}
+                rarity={rarity}
+                selectedChance={selectedChance}
+              />
+            </div>
+          </Card>
+          <div className="pt-4">
+            <Dashboard
+              playerFormState={playerFormState}
+              results={results}
               baseItemName={baseItemName}
               itemName={itemName}
               rarity={rarity}
               selectedChance={selectedChance}
+              onSelectItem={selectItem}
             />
           </div>
-        </Card>
-        <div className="pt-4">
-          <Dashboard
-            playerFormState={playerFormState}
-            results={results}
-            baseItemName={baseItemName}
-            itemName={itemName}
-            rarity={rarity}
-            selectedChance={selectedChance}
-            onSelectItem={selectItem}
-          />
-        </div>
-      </main>
-      <div
-        className={
-          "fixed z-10 top-0 bottom-0 right-0 left-0 bg-neutral-800 transition-[opacity] " +
-          (sidebarOpen ? "opacity-75" : "opacity-0 pointer-events-none")
-        }
-        onClick={() => {
-          setSidebarOpen(false);
-        }}
-      ></div>
+        </main>
+        <div
+          className={
+            "fixed z-10 top-0 bottom-0 right-0 left-0 bg-neutral-800 transition-[opacity] " +
+            (sidebarOpen ? "opacity-75" : "opacity-0 pointer-events-none")
+          }
+          onClick={() => {
+            setSidebarOpen(false);
+          }}
+        ></div>
+      </div>
     </div>
   );
 };
