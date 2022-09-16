@@ -42,6 +42,7 @@ export type IResultListingProps = {
   baseItemName: string;
   itemName: string;
   rarity: RARITY;
+  isDesktop: boolean;
 };
 
 export function tryLocale(name: string) {
@@ -58,6 +59,7 @@ export const ResultListing = ({
   baseItemName,
   itemName,
   rarity,
+  isDesktop,
 }: IResultListingProps): JSX.Element => {
   const textFilterRegex = new RegExp(textFilter);
   const tableRows = filteredResults.map((tcTuple) => {
@@ -84,11 +86,17 @@ export const ResultListing = ({
         >
           <span className="cell row-name pl-3 text-set">{Locale(item[0])}</span>
           <span className="cell row-chance">{formatReciprocal(chance)}</span>
-          <span className="cell row-level">{SetDict[item[0]]?.lvl || "-"}</span>
-          <span className="cell"></span>
-          <span className="cell"></span>
-          <span className="cell"></span>
-          <span className="cell"></span>
+          {isDesktop && (
+            <React.Fragment>
+              <span className="cell row-level">
+                {SetDict[item[0]]?.lvl || "-"}
+              </span>
+              <span className="cell"></span>
+              <span className="cell"></span>
+              <span className="cell"></span>
+              <span className="cell"></span>{" "}
+            </React.Fragment>
+          )}
         </li>
       );
     }
@@ -115,13 +123,17 @@ export const ResultListing = ({
             {Locale(item[0])}
           </span>
           <span className="cell row-chance">{formatReciprocal(chance)}</span>
-          <span className="cell row-level">
-            {UniqueDict[item[0]]?.lvl || "-"}
-          </span>
-          <span className="cell"></span>
-          <span className="cell"></span>
-          <span className="cell"></span>
-          <span className="cell"></span>
+          {isDesktop && (
+            <React.Fragment>
+              <span className="cell row-level">
+                {UniqueDict[item[0]]?.lvl || "-"}
+              </span>
+              <span className="cell"></span>
+              <span className="cell"></span>
+              <span className="cell"></span>
+              <span className="cell"></span>
+            </React.Fragment>
+          )}
         </li>
       );
     }
@@ -143,24 +155,34 @@ export const ResultListing = ({
           <span className="cell row-chance">
             {formatReciprocal(tcTuple[1])}
           </span>
-          <span className="cell row-level">
-            {ItemDict[tcTuple[0]]?.level || "-"}
-          </span>
-          <span className="cell text-magic">
-            {format(tcTuple[2].quality[0])}
-          </span>
-          <span className="cell text-rare">
-            {format(tcTuple[2].quality[1])}
-          </span>
-          <span className="cell text-set">{format(tcTuple[2].quality[2])}</span>
-          <span className="cell text-unique">
-            {format(tcTuple[2].quality[3])}
-          </span>
+          {isDesktop && (
+            <React.Fragment>
+              <span className="cell row-level">
+                {ItemDict[tcTuple[0]]?.level || "-"}
+              </span>
+              <span className="cell text-magic">
+                {format(tcTuple[2].quality[0])}
+              </span>
+              <span className="cell text-rare">
+                {format(tcTuple[2].quality[1])}
+              </span>
+              <span className="cell text-set">
+                {format(tcTuple[2].quality[2])}
+              </span>
+              <span className="cell text-unique">
+                {format(tcTuple[2].quality[3])}
+              </span>
+            </React.Fragment>
+          )}
         </li>
         {children}
       </React.Fragment>
     );
   });
 
-  return <ul className="table-body">{tableRows}</ul>;
+  return (
+    <ul className={"table-body " + (isDesktop ? "desktop" : "")}>
+      {tableRows}
+    </ul>
+  );
 };

@@ -4,7 +4,11 @@ import { groupBy, sortBy, uniq } from "lodash-es";
 import { Difficulty, MonsterDict, MonsterType } from "./engine/monstats-dict";
 import { LevelsDict } from "./engine/levels-dict";
 import { SuperuniqueDict } from "./engine/superunique-dict";
-import { FlatBossDict, getBossHierarchy } from "./engine/boss-dict";
+import {
+  FlatBossDict,
+  getBossHierarchy,
+  categoriesLocale,
+} from "./engine/boss-dict";
 import { Locale } from "./engine/locale-dict";
 import { TCDict } from "./engine/tc-dict";
 

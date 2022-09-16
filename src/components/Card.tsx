@@ -2,21 +2,22 @@ import React, { useEffect, useState } from "react";
 
 export type CardProps = {
   canExpand: boolean;
-  canEdit: boolean;
+  editAction?: () => void;
   children?: JSX.Element | JSX.Element[];
 };
 
 export const Card = (props: CardProps): JSX.Element => {
   const [isExpanded, setExpanded] = useState(false);
   const expandClass = isExpanded ? "xl:col-span-2 " : "";
-  const editClass = props.canEdit ? "hover:bg-gray-800 cursor-pointer" : "";
+  const editClass = props.editAction ? "hover:bg-gray-800 cursor-pointer" : "";
   return (
     <div
       className={
-        "relative block p-6 rounded-lg border bg-gray-900 border-gray-700 " +
+        "relative block p-3 sm:p-6 rounded-lg border bg-gray-900 border-gray-700 " +
         expandClass +
         editClass
       }
+      onClick={props.editAction ? props.editAction : undefined}
     >
       {props.canExpand && (
         <div

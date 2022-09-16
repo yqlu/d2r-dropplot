@@ -76,6 +76,7 @@ const App = (): JSX.Element => {
   const [selectedChance, setSelectedChance] = useState(new Fraction(0));
   const [scrollPosition, setScrollPosition] = useState(null as number | null);
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [mobileFormOpen, setMobileFormOpen] = useState(false);
 
   useEffect(() => {
     const errors = hasPlayerFormErrors(playerFormState, setErrors);
@@ -213,6 +214,9 @@ const App = (): JSX.Element => {
     setItemName(newItemName);
     setRarity(newRarity);
     setSelectedChance(newChance);
+    if (newBaseItemName !== "") {
+      setMobileFormOpen(false);
+    }
   };
 
   const sidebarStyle = sidebarOpen ? "sidebar-open" : "sidebar-closed";
@@ -222,11 +226,11 @@ const App = (): JSX.Element => {
       <Navbar></Navbar>
       <aside
         className={
-          "flex flex-col fixed left-0 top-12 bottom-0 text-xs bg-gray-900 border-r border-gray-800 z-20 shadow invisible sm:visible " +
+          "flex flex-col fixed left-0 top-11 bottom-0 text-xs bg-gray-900 border-r border-gray-800 z-20 shadow invisible sm:visible " +
           sidebarStyle
         }
       >
-        <div className="py-3 w-52">
+        <div className="pt-3 w-52">
           <PlayerForm
             partyCount={playerFormState.partyCount}
             playerCount={playerFormState.playerCount}
@@ -236,21 +240,9 @@ const App = (): JSX.Element => {
             errors={errors}
             onChange={onPlayerFormChange}
           />
-          {/* <MonsterForm
-            difficulty={monsterFormState.difficulty}
-            monsterType={monsterFormState.monsterType}
-            levelId={monsterFormState.levelId}
-            monster={monsterFormState.monster}
-            superunique={monsterFormState.superunique}
-            boss={monsterFormState.boss}
-            tc={playerFormState.tc}
-            mlvl={playerFormState.mlvl}
-            errors={errors}
-            onPlayerFormChange={onPlayerFormChange}
-            onMonsterFormChange={onMonsterFormChange}
-          /> */}
         </div>
         <Result
+          isDesktop={true}
           results={results}
           onSelectItem={selectItem}
           displayFull={sidebarOpen}
@@ -273,7 +265,7 @@ const App = (): JSX.Element => {
       <div className="flex relative pt-12">
         <main className="flex-1 p-2 sm:px-6 lg:px-8 xl:px-10 sm:ml-52">
           <div className="hidden sm:block">
-            <Card canExpand={false} canEdit={false}>
+            <Card canExpand={false}>
               <MonsterFormInline
                 difficulty={monsterFormState.difficulty}
                 monsterType={monsterFormState.monsterType}
@@ -294,7 +286,7 @@ const App = (): JSX.Element => {
             </Card>
           </div>
           <div className="block sm:hidden">
-            <Card canExpand={false} canEdit={true}>
+            <Card canExpand={false} editAction={() => setMobileFormOpen(true)}>
               <MobileInfoCard
                 difficulty={monsterFormState.difficulty}
                 monsterType={monsterFormState.monsterType}
@@ -323,9 +315,65 @@ const App = (): JSX.Element => {
             />
           </div>
         </main>
+        {mobileFormOpen && (
+          <div className="block sm:hidden fixed top-11 left-0 bottom-0 right-0 text-sm bg-gray-900 overflow-y-scroll">
+            <div
+              className="w-full text-left p-3 cursor-pointer bg-gray-900 sticky top-0 hover:bg-gray-800 cursor-pointer"
+              onClick={() => setMobileFormOpen(false)}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                className="bi bi-arrow-left inline-block mb-0.5"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"
+                />
+              </svg>
+              <span className="pl-2">Charts</span>
+            </div>
+            <div className="pb-3 border-b border-gray-800">
+              <PlayerForm
+                partyCount={playerFormState.partyCount}
+                playerCount={playerFormState.playerCount}
+                magicFind={playerFormState.magicFind}
+                tc={playerFormState.tc}
+                mlvl={playerFormState.mlvl}
+                errors={errors}
+                onChange={onPlayerFormChange}
+              />
+              <MonsterForm
+                difficulty={monsterFormState.difficulty}
+                monsterType={monsterFormState.monsterType}
+                levelId={monsterFormState.levelId}
+                monster={monsterFormState.monster}
+                superunique={monsterFormState.superunique}
+                boss={monsterFormState.boss}
+                tc={playerFormState.tc}
+                mlvl={playerFormState.mlvl}
+                errors={errors}
+                onPlayerFormChange={onPlayerFormChange}
+                onMonsterFormChange={onMonsterFormChange}
+              />
+            </div>
+            <Result
+              isDesktop={false}
+              results={results}
+              onSelectItem={selectItem}
+              displayFull={sidebarOpen}
+              baseItemName={baseItemName}
+              itemName={itemName}
+              rarity={rarity}
+            />
+          </div>
+        )}
         <div
           className={
-            "fixed z-10 top-0 bottom-0 right-0 left-0 bg-neutral-800 transition-[opacity] " +
+            "hidden sm:block fixed z-10 top-0 bottom-0 right-0 left-0 bg-neutral-800 transition-[opacity] " +
             (sidebarOpen ? "opacity-75" : "opacity-0 pointer-events-none")
           }
           onClick={() => {

@@ -39,6 +39,12 @@ const displayMonsterType = (monsterType: MonsterType): string => {
 export const MobileInfoCard = (props: MobileInfoCardProps): JSX.Element => {
   const name = props.itemName === "" ? props.baseItemName : props.itemName;
   const styling = colorClassFromRarity(props.baseItemName, props.rarity);
+  let bossStr;
+  if (props.boss.startsWith("quest")) {
+    bossStr = `${Locale(FlatBossDict[props.boss.substring(5)].nameStr)} (Q)`;
+  } else {
+    bossStr = Locale(FlatBossDict[props.boss].nameStr);
+  }
   return (
     <React.Fragment>
       <div className="absolute right-2 top-2 cursor-pointer">
@@ -59,35 +65,52 @@ export const MobileInfoCard = (props: MobileInfoCardProps): JSX.Element => {
       </div>
       <div className="w-full text-sm px-3 text-center">
         {props.monsterType !== MonsterType.TREASURE_CLASS && (
-          <p>
-            Target:{" "}
-            {monsterApplicable(props.monsterType) && (
-              <span>
-                {props.monsterType === MonsterType.MINION ||
-                props.monsterType === MonsterType.CHAMP ||
-                props.monsterType === MonsterType.UNIQUE
-                  ? ` ${displayMonsterType(props.monsterType)} `
-                  : " "}
-                {Locale(MonsterDict[props.monster].nameStr)} from{" "}
-                {Locale(LevelsDict[props.levelId].name)}
-              </span>
-            )}
-            {props.monsterType === MonsterType.SUPERUNIQUE && (
-              <span>{Locale(props.superunique)}</span>
-            )}
-            {props.monsterType === MonsterType.BOSS && (
-              <span>{Locale(FlatBossDict[props.boss].nameStr)}</span>
-            )}
-            <span>
-              {" "}
-              on {["Normal", "Nightmare", "Hell"][props.difficulty]} difficulty
-            </span>
-          </p>
+          <React.Fragment>
+            <p>
+              Target:{" "}
+              {monsterApplicable(props.monsterType) && (
+                <React.Fragment>
+                  <span className="font-bold text-rare">
+                    {props.monsterType === MonsterType.MINION ||
+                    props.monsterType === MonsterType.CHAMP ||
+                    props.monsterType === MonsterType.UNIQUE
+                      ? `${displayMonsterType(props.monsterType)} `
+                      : " "}
+                    {Locale(MonsterDict[props.monster].nameStr)}
+                  </span>{" "}
+                  from{" "}
+                  <span className="font-bold text-rare">
+                    {Locale(LevelsDict[props.levelId].name)}
+                  </span>
+                </React.Fragment>
+              )}
+              {props.monsterType === MonsterType.SUPERUNIQUE && (
+                <span className="font-bold text-rare">
+                  {Locale(props.superunique)}
+                </span>
+              )}
+              {props.monsterType === MonsterType.BOSS && (
+                <span className="font-bold text-rare">{bossStr}</span>
+              )}{" "}
+              on{" "}
+              <span className="font-bold text-rare">
+                {["Normal", "Nightmare", "Hell"][props.difficulty]}
+              </span>{" "}
+              difficulty
+            </p>
+            <p className="text-xs pb-2">
+              Treasure Class: <span className="font-bold">{props.tc}</span>{" "}
+              (mlvl <span className="font-bold">{props.mlvl}</span>)
+            </p>
+          </React.Fragment>
         )}
-        <p className="subtitle">
-          Treasure Class: <b className="font-mono">{props.tc}</b> (mlvl{" "}
-          <b>{props.mlvl})</b>
-        </p>
+        {props.monsterType === MonsterType.TREASURE_CLASS && (
+          <p className="pb-2">
+            Treasure Class:{" "}
+            <span className="font-bold text-rare">{props.tc}</span> (mlvl{" "}
+            <span className="font-bold text-rare">{props.mlvl}</span>)
+          </p>
+        )}{" "}
         {props.baseItemName !== "" && (
           <p>
             Analyzing: <b className={styling}>{Locale(name)}</b> (

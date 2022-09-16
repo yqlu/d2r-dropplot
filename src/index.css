@@ -54,7 +54,7 @@ code {
 
   .textbox {
     @apply appearance-none block w-full bg-gray-200 text-gray-700 border
-      border-gray-400 text-sm rounded text-xs px-2 py-0.5 pr-2 leading-tight focus:outline-none focus:bg-white focus:border-gray-500;
+      border-gray-400 text-sm rounded px-2 py-0.5 pr-2 leading-tight focus:outline-none focus:bg-white focus:border-gray-500;
 
     &.error {
       border: 1px solid red;
@@ -72,7 +72,7 @@ code {
   }
 
   .pill {
-    @apply border border-gray-400 px-2 rounded mx-1 select-none cursor-pointer bg-gray-700 hover:bg-gray-500;
+    @apply border border-gray-400 px-2 rounded mx-1 select-none inline-flex items-center cursor-pointer bg-gray-700 hover:bg-gray-500;
     &.unselected {
       @apply opacity-20;
     }
@@ -94,7 +94,7 @@ code {
     /* Webkit */
     &::-webkit-scrollbar {
       @apply bg-gray-900;
-      width: 10px;
+      width: 9px;
       height: 0px;
     }
     &::-webkit-scrollbar-thumb {
@@ -103,9 +103,8 @@ code {
   }
 
   .table-body {
-    width: 650px;
     .table-row {
-      @apply hover:cursor-pointer hover:bg-gray-500 flex flex-row py-0.5;
+      @apply hover:cursor-pointer hover:bg-gray-500 flex flex-row py-2 sm:py-0.5;
       &.selected {
         @apply bg-gray-700 hover:bg-gray-500;
       }
@@ -118,7 +117,7 @@ code {
         }
       }
       &.title-table-row {
-        @apply border-t border-gray-700 hover:bg-gray-900 font-bold cursor-auto select-none;
+        @apply border-t border-gray-700 hover:bg-gray-900 font-bold cursor-auto select-none py-0 sm:py-0.5 mr-0 sm:mr-[9px];
         .selectable {
           @apply hover:bg-gray-500 cursor-pointer;
         }
@@ -138,10 +137,26 @@ code {
           @apply px-2;
         }
         &.row-name {
-          @apply w-52 basis-52 shrink-0 grow-0;
+          @apply w-52 basis-52 shrink-0;
+          flex-grow: 1;
         }
         &.row-chance {
-          flex-grow: 1;
+          @apply basis-24;
+          flex-grow: 0;
+        }
+      }
+    }
+    &.desktop {
+      width: 650px;
+      .table-row {
+        .cell {
+          &.row-name {
+            @apply w-52 basis-52 shrink-0 grow-0;
+          }
+          &.row-chance {
+            @apply basis-20;
+            flex-grow: 1;
+          }
         }
       }
     }

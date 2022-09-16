@@ -298,9 +298,9 @@ export const MonsterFormInline = (props: MonsterFormProps): JSX.Element => {
         )}
       </p>
       {props.monsterType !== MonsterType.TREASURE_CLASS && (
-        <p className="subtitle">
-          Treasure Class: <b className="font-mono">{props.tc}</b> (mlvl{" "}
-          <b>{props.mlvl})</b>
+        <p className="text-xs pb-2">
+          Treasure Class: <span className="font-bold">{props.tc}</span> (mlvl{" "}
+          <span className="font-bold">{props.mlvl})</span>
         </p>
       )}
       {props.baseItemName !== "" && (
