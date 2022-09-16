@@ -26,12 +26,12 @@ import { MobileInfoCard } from "./MobileInfoCard";
 
 const App = (): JSX.Element => {
   const [monsterFormState, setMonsterFormState] = useState({
-    difficulty: Difficulty.NORMAL,
+    difficulty: Difficulty.HELL,
     monsterType: MonsterType.BOSS,
     levelId: 2, // Blood Moor
     monster: "zombie1",
     superunique: "The Countess",
-    boss: "duriel",
+    boss: "diablo",
   } as MonsterFormState);
 
   let [initTc, initMlvl] = getTcAndMlvlFromMonster(
@@ -56,14 +56,19 @@ const App = (): JSX.Element => {
     compute(playerFormState, "in first useState")
   );
   const [baseItemName, setBaseItemName] = useStateParams(
-    "",
+    "amu",
     "base",
     idFunc,
     idFunc
   );
-  const [itemName, setItemName] = useStateParams("", "itm", idFunc, idFunc);
+  const [itemName, setItemName] = useStateParams(
+    "Mara's Kaleidoscope",
+    "itm",
+    idFunc,
+    idFunc
+  );
   const [rarity, setRarity] = useStateParams(
-    RARITY.WHITE,
+    RARITY.UNIQUE,
     "r",
     (rarity: RARITY) => `${rarity}`,
     (str: string) => {
@@ -214,7 +219,10 @@ const App = (): JSX.Element => {
     setItemName(newItemName);
     setRarity(newRarity);
     setSelectedChance(newChance);
-    if (newBaseItemName !== "") {
+    if (
+      (newBaseItemName !== "" && newBaseItemName !== baseItemName) ||
+      (newItemName !== "" && newItemName !== itemName)
+    ) {
       setMobileFormOpen(false);
     }
   };
