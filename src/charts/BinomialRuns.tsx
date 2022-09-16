@@ -207,7 +207,7 @@ export const BinomialRunsChart = ({
     return () => {
       chart?.destroy();
     };
-  }, [runs, cumulative]);
+  }, [distribution, runs, cumulative]);
 
   const name = itemName === "" ? baseItemName : itemName;
   const styling = colorClassFromRarity(baseItemName, rarity);
