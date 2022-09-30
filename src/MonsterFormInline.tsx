@@ -25,6 +25,8 @@ export type MonsterFormState = {
   boss: string;
   tc: string;
   mlvl: string;
+  terrorZone: boolean;
+  playerLvl: number;
 };
 
 export type MonsterFormProps = MonsterFormState & {
@@ -32,7 +34,9 @@ export type MonsterFormProps = MonsterFormState & {
   onPlayerFormChange: (
     event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => void;
-  onMonsterFormChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
+  onMonsterFormChange: (
+    event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => void;
   baseItemName: string;
   itemName: string;
   rarity: RARITY;
@@ -297,6 +301,27 @@ export const MonsterFormInline = (props: MonsterFormProps): JSX.Element => {
           </span>
         )}
       </p>
+      {props.monsterType !== MonsterType.TREASURE_CLASS && (
+        <p className="pb-2">
+          <input
+            id="terrorZone"
+            type="checkbox"
+            checked={props.terrorZone}
+            onChange={props.onMonsterFormChange}
+          />
+          <span className={"px-1 " + (props.terrorZone ? "text-terror" : "")}>
+            Terrorized with Player Level
+          </span>
+          <input
+            type="text"
+            id="playerLvl"
+            className="w-20 inline-textbox"
+            value={props.playerLvl}
+            onChange={props.onMonsterFormChange}
+            disabled={!props.terrorZone}
+          />
+        </p>
+      )}
       {props.monsterType !== MonsterType.TREASURE_CLASS && (
         <p className="text-xs pb-2">
           Treasure Class: <span className="font-bold">{props.tc}</span> (mlvl{" "}

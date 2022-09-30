@@ -4,7 +4,7 @@ import "./engine/tc";
 
 import { useStateParams, idFunc, compute } from "./helpers";
 import { PlayerForm, PlayerFormState } from "./PlayerForm";
-import { MonsterForm, MonsterFormState } from "./MonsterForm";
+import { MonsterForm } from "./MonsterForm";
 import { Result } from "./Result";
 import { SelectItemType } from "./ResultListing";
 import { Dashboard } from "./Dashboard";
@@ -19,6 +19,7 @@ import {
   getMonsterList,
   monsterApplicable,
   MonsterFormInline,
+  MonsterFormState,
 } from "./MonsterFormInline";
 import { getRarityMultiplier } from "./engine/rarity";
 import { Navbar } from "./Navbar";
@@ -32,6 +33,8 @@ const App = (): JSX.Element => {
     monster: "zombie1",
     superunique: "The Countess",
     boss: "diablo",
+    terrorZone: false,
+    playerLvl: 99,
   } as MonsterFormState);
 
   let [initTc, initMlvl] = getTcAndMlvlFromMonster(
@@ -40,7 +43,9 @@ const App = (): JSX.Element => {
     monsterFormState.levelId,
     monsterFormState.monster,
     monsterFormState.superunique,
-    monsterFormState.boss
+    monsterFormState.boss,
+    monsterFormState.terrorZone,
+    monsterFormState.playerLvl
   );
 
   const [playerFormState, setPlayerFormState] = useState({
@@ -103,7 +108,9 @@ const App = (): JSX.Element => {
       monsterFormState.levelId,
       monsterFormState.monster,
       monsterFormState.superunique,
-      monsterFormState.boss
+      monsterFormState.boss,
+      monsterFormState.terrorZone,
+      monsterFormState.playerLvl
     );
     if (!tc) {
       tc = "None";
@@ -180,11 +187,23 @@ const App = (): JSX.Element => {
     });
   };
 
-  const onMonsterFormChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+  const onMonsterFormChange = (
+    event: React.ChangeEvent<HTMLSelectElement | HTMLInputElement>
+  ) => {
     const name = event.target.id as keyof MonsterFormState;
-    let value: string | number = event.target.value;
-    if (name === "difficulty" || name === "mlvl" || name === "monsterType") {
-      value = parseInt(value);
+    let value: string | number | boolean;
+    if (name === "terrorZone") {
+      value = (event as React.ChangeEvent<HTMLInputElement>).target.checked;
+    } else {
+      value = (event as React.ChangeEvent<HTMLSelectElement>).target.value;
+      if (
+        name === "difficulty" ||
+        name === "mlvl" ||
+        name === "monsterType" ||
+        name === "playerLvl"
+      ) {
+        value = parseInt(value);
+      }
     }
     setMonsterFormState((prevState) => {
       const res = {
@@ -281,6 +300,8 @@ const App = (): JSX.Element => {
                 monster={monsterFormState.monster}
                 superunique={monsterFormState.superunique}
                 boss={monsterFormState.boss}
+                terrorZone={monsterFormState.terrorZone}
+                playerLvl={monsterFormState.playerLvl}
                 tc={playerFormState.tc}
                 mlvl={playerFormState.mlvl}
                 errors={errors}
@@ -302,6 +323,8 @@ const App = (): JSX.Element => {
                 monster={monsterFormState.monster}
                 superunique={monsterFormState.superunique}
                 boss={monsterFormState.boss}
+                terrorZone={monsterFormState.terrorZone}
+                playerLvl={monsterFormState.playerLvl}
                 tc={playerFormState.tc}
                 mlvl={playerFormState.mlvl}
                 baseItemName={baseItemName}
@@ -361,6 +384,8 @@ const App = (): JSX.Element => {
                 monster={monsterFormState.monster}
                 superunique={monsterFormState.superunique}
                 boss={monsterFormState.boss}
+                terrorZone={monsterFormState.terrorZone}
+                playerLvl={monsterFormState.playerLvl}
                 tc={playerFormState.tc}
                 mlvl={playerFormState.mlvl}
                 errors={errors}

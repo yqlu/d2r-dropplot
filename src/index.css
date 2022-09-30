@@ -25,6 +25,9 @@ code {
   .inline-textbox {
     @apply appearance-none inline bg-gray-200 text-gray-700 border
       border-gray-400 rounded px-1 mx-1 py-0 leading-tight focus:outline-none focus:bg-white focus:border-gray-500;
+    &:disabled {
+      @apply bg-gray-400 border-gray-900 text-gray-600 cursor-not-allowed;
+    }
   }
 
   .inline-select {
@@ -58,6 +61,15 @@ code {
 
     &.error {
       border: 1px solid red;
+    }
+  }
+
+  .mobile-inline-textbox {
+    @apply appearance-none flex-grow  bg-gray-200 text-gray-700 border
+      border-gray-400 text-sm rounded px-2 py-0.5 pr-2 leading-tight w-20 focus:outline-none focus:bg-white focus:border-gray-500;
+
+    &:disabled {
+      @apply bg-gray-400 border-gray-900 text-gray-600 cursor-not-allowed;
     }
   }
 

@@ -98,6 +98,11 @@ export const MobileInfoCard = (props: MobileInfoCardProps): JSX.Element => {
               </span>{" "}
               difficulty
             </p>
+            {props.terrorZone && (
+              <p className="text-xs pb-2 text-terror">
+                Terrorized with Player Level {props.playerLvl}
+              </p>
+            )}
             <p className="text-xs pb-2">
               Treasure Class: <span className="font-bold">{props.tc}</span>{" "}
               (mlvl <span className="font-bold">{props.mlvl}</span>)

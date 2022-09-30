@@ -11,17 +11,7 @@ import {
 } from "./engine/boss-dict";
 import { Locale } from "./engine/locale-dict";
 import { TCDict } from "./engine/tc-dict";
-
-export type MonsterFormState = {
-  difficulty: Difficulty;
-  monsterType: MonsterType;
-  levelId: number;
-  monster: string;
-  superunique: string;
-  boss: string;
-  tc: string;
-  mlvl: string;
-};
+import { MonsterFormState } from "./MonsterFormInline";
 
 export type MonsterFormProps = MonsterFormState & {
   errors: any;
@@ -295,6 +285,32 @@ export const MonsterForm = (props: MonsterFormProps): JSX.Element => {
           >
             {bossElements}
           </select>
+        </div>
+      )}
+      {props.monsterType !== MonsterType.TREASURE_CLASS && (
+        <div className="form-group flex flex-row">
+          <input
+            id="terrorZone"
+            type="checkbox"
+            checked={props.terrorZone}
+            onChange={props.onMonsterFormChange}
+          />
+          <span
+            className={
+              "px-2 pt-1 items-center" +
+              (props.terrorZone ? " text-terror" : "")
+            }
+          >
+            Terrorized with Player Level
+          </span>
+          <input
+            type="text"
+            id="playerLvl"
+            className="mobile-inline-textbox"
+            value={props.playerLvl}
+            onChange={props.onMonsterFormChange}
+            disabled={!props.terrorZone}
+          />
         </div>
       )}
     </div>

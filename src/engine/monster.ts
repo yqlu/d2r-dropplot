@@ -12,18 +12,32 @@ export function getTcAndMlvlFromMonster(
   levelId: number,
   monster: string,
   superunique: string,
-  boss: string
+  boss: string,
+  terrorZone: boolean = false,
+  playerLvl: number = 99
 ): [tc: string, mlvl: number] {
   switch (monsterType) {
     case MonsterType.NORMAL:
     case MonsterType.CHAMP:
     case MonsterType.MINION:
     case MonsterType.UNIQUE:
-      return getStandardTCMlvl(difficulty, monsterType, levelId, monster);
+      return getStandardTCMlvl(
+        difficulty,
+        monsterType,
+        levelId,
+        monster,
+        terrorZone,
+        playerLvl
+      );
     case MonsterType.SUPERUNIQUE:
-      return getSuperUniqueTCMlvl(difficulty, superunique);
+      return getSuperUniqueTCMlvl(
+        difficulty,
+        superunique,
+        terrorZone,
+        playerLvl
+      );
     case MonsterType.BOSS:
-      return getBossTCMlvl(difficulty, boss);
+      return getBossTCMlvl(difficulty, boss, terrorZone, playerLvl);
     case MonsterType.TREASURE_CLASS:
       return ["Act 1 (H) Bow A", 94];
   }
@@ -33,9 +47,14 @@ function getStandardTCMlvl(
   difficulty: Difficulty,
   monsterType: MonsterType,
   levelId: number,
-  monster: string
+  monster: string,
+  terrorZone: boolean = false,
+  playerLvl: number = 99
 ): [tc: string, mlvl: number] {
-  const mlvl = getStandardMlvl(difficulty, monsterType, levelId, monster);
+  let mlvl = getStandardMlvl(difficulty, monsterType, levelId, monster);
+  if (terrorZone) {
+    mlvl = modifyByTerrorZone(mlvl, monsterType, difficulty, playerLvl);
+  }
 
   // TC is read from MonsterDict
   const monsterEntry = MonsterDict[monster];
@@ -59,24 +78,36 @@ function getStandardTCMlvl(
 
 function getSuperUniqueTCMlvl(
   difficulty: Difficulty,
-  superunique: string
+  superunique: string,
+  terrorZone: boolean = false,
+  playerLvl: number = 99
 ): [tc: string, mlvl: number] {
   // TC is read from SuperuniqueDict
   const superuniqueEntry = SuperuniqueDict[superunique];
   const tc = superuniqueEntry.tcs[difficulty];
   // mlvl is read from LevelsDict alvl, + 3
-  const mlvl = getStandardMlvl(
+  let mlvl = getStandardMlvl(
     difficulty,
     MonsterType.UNIQUE,
     superuniqueEntry.areaId,
     superuniqueEntry.class
   );
+  if (terrorZone) {
+    mlvl = modifyByTerrorZone(
+      mlvl,
+      MonsterType.SUPERUNIQUE,
+      difficulty,
+      playerLvl
+    );
+  }
   return [tc, mlvl];
 }
 
 function getBossTCMlvl(
   difficulty: Difficulty,
-  boss: string
+  boss: string,
+  terrorZone: boolean = false,
+  playerLvl: number = 99
 ): [tc: string, mlvl: number] {
   let bossName = boss;
   let quest = 0;
@@ -86,7 +117,15 @@ function getBossTCMlvl(
   }
   const bossEntry = FlatBossDict[bossName];
   const tc = bossEntry.tcs[difficulty * 2 + quest];
-  const mlvl = bossEntry.levels[difficulty];
+  let mlvl = bossEntry.levels[difficulty];
+  if (terrorZone) {
+    mlvl = modifyByTerrorZone(
+      mlvl,
+      MonsterType.SUPERUNIQUE,
+      difficulty,
+      playerLvl
+    );
+  }
   return [tc, mlvl];
 }
 
@@ -117,7 +156,7 @@ function getTcOffset(monsterType: MonsterType) {
   return 0;
 }
 
-function getMlvlOffset(monsterType: MonsterType) {
+function getMlvlOffset(monsterType: MonsterType): number {
   if (monsterType === MonsterType.CHAMP) {
     return 2;
   } else if (
@@ -127,4 +166,40 @@ function getMlvlOffset(monsterType: MonsterType) {
     return 3;
   }
   return 0;
+}
+
+function getTerrorZoneMlvlOffset(monsterType: MonsterType): number {
+  if (monsterType === MonsterType.CHAMP) {
+    return 4;
+  } else if (
+    monsterType === MonsterType.MINION ||
+    monsterType === MonsterType.UNIQUE ||
+    monsterType === MonsterType.SUPERUNIQUE ||
+    monsterType === MonsterType.BOSS
+  ) {
+    return 5;
+  }
+  return 2;
+}
+
+function getPlayerLvlMax(difficulty: Difficulty) {
+  switch (difficulty) {
+    case Difficulty.NORMAL:
+      return 43;
+    case Difficulty.NIGHTMARE:
+      return 69;
+    case Difficulty.HELL:
+      return 94;
+  }
+}
+
+export function modifyByTerrorZone(
+  mlvl: number,
+  monsterType: MonsterType,
+  difficulty: Difficulty,
+  playerLvl: number
+): number {
+  const mlvlOffset = getTerrorZoneMlvlOffset(monsterType);
+  const playerLvlMax = getPlayerLvlMax(difficulty);
+  return Math.max(mlvl, Math.min(playerLvl, playerLvlMax) + mlvlOffset);
 }

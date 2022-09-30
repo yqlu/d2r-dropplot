@@ -2,7 +2,7 @@ import { expect } from "chai";
 import { describe, test as it } from "vitest";
 
 import { Difficulty, MonsterType } from "./monstats-dict";
-import { getTcAndMlvlFromMonster } from "./monster";
+import { getTcAndMlvlFromMonster, modifyByTerrorZone } from "./monster";
 
 describe("getTcAndMlvlFromMonster", () => {
   const DEFAULT = {
@@ -383,5 +383,85 @@ describe("getTcAndMlvlFromMonster", () => {
     expect(testBoss(Difficulty.HELL, "summoner")).to.eql(["Summoner (H)", 80]);
     expect(testBoss(Difficulty.HELL, "andariel")).to.eql(["Andarielq (H)", 75]);
     expect(testBoss(Difficulty.HELL, "mephisto")).to.eql(["Mephisto (H)", 87]);
+  });
+});
+
+describe("modifyByTerrorZone", () => {
+  it("should modify terror zone mlvls for normal difficulty", () => {
+    expect(
+      modifyByTerrorZone(1, MonsterType.NORMAL, Difficulty.NORMAL, 30)
+    ).to.eql(32);
+    expect(
+      modifyByTerrorZone(1, MonsterType.CHAMP, Difficulty.NORMAL, 30)
+    ).to.eql(34);
+    expect(
+      modifyByTerrorZone(1, MonsterType.UNIQUE, Difficulty.NORMAL, 30)
+    ).to.eql(35);
+  });
+  it("should cap player lvl when calculating terror zone mlvl for normal", () => {
+    expect(
+      modifyByTerrorZone(1, MonsterType.NORMAL, Difficulty.NORMAL, 99)
+    ).to.eql(45);
+    expect(
+      modifyByTerrorZone(1, MonsterType.CHAMP, Difficulty.NORMAL, 99)
+    ).to.eql(47);
+    expect(
+      modifyByTerrorZone(1, MonsterType.UNIQUE, Difficulty.NORMAL, 99)
+    ).to.eql(48);
+  });
+  it("should modify terror zone mlvls for nightmare difficulty", () => {
+    expect(
+      modifyByTerrorZone(1, MonsterType.NORMAL, Difficulty.NIGHTMARE, 60)
+    ).to.eql(62);
+    expect(
+      modifyByTerrorZone(1, MonsterType.CHAMP, Difficulty.NIGHTMARE, 60)
+    ).to.eql(64);
+    expect(
+      modifyByTerrorZone(1, MonsterType.UNIQUE, Difficulty.NIGHTMARE, 60)
+    ).to.eql(65);
+  });
+  it("should cap player lvl when calculating terror zone mlvl for nightmare", () => {
+    expect(
+      modifyByTerrorZone(1, MonsterType.NORMAL, Difficulty.NIGHTMARE, 99)
+    ).to.eql(71);
+    expect(
+      modifyByTerrorZone(1, MonsterType.CHAMP, Difficulty.NIGHTMARE, 99)
+    ).to.eql(73);
+    expect(
+      modifyByTerrorZone(1, MonsterType.UNIQUE, Difficulty.NIGHTMARE, 99)
+    ).to.eql(74);
+  });
+  it("should modify terror zone mlvls for hell difficulty", () => {
+    expect(
+      modifyByTerrorZone(1, MonsterType.NORMAL, Difficulty.HELL, 80)
+    ).to.eql(82);
+    expect(
+      modifyByTerrorZone(1, MonsterType.CHAMP, Difficulty.HELL, 80)
+    ).to.eql(84);
+    expect(
+      modifyByTerrorZone(1, MonsterType.UNIQUE, Difficulty.HELL, 80)
+    ).to.eql(85);
+  });
+  it("should cap player lvl when calculating terror zone mlvl for hell", () => {
+    expect(
+      modifyByTerrorZone(1, MonsterType.NORMAL, Difficulty.HELL, 99)
+    ).to.eql(96);
+    expect(
+      modifyByTerrorZone(1, MonsterType.CHAMP, Difficulty.HELL, 99)
+    ).to.eql(98);
+    expect(
+      modifyByTerrorZone(1, MonsterType.UNIQUE, Difficulty.HELL, 99)
+    ).to.eql(99);
+  });
+  it("should not modify mlvls if exceeding terror zone calculation", () => {
+    expect(
+      modifyByTerrorZone(40, MonsterType.NORMAL, Difficulty.NORMAL, 30)
+    ).to.eql(40);
+    expect(
+      modifyByTerrorZone(40, MonsterType.CHAMP, Difficulty.NORMAL, 30)
+    ).to.eql(40);
+    expect(
+      modifyByTerrorZone(40, MonsterType.UNIQUE, Difficulty.NORMAL, 30)
+    ).to.eql(40);
   });
 });
