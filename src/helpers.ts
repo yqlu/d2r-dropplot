@@ -50,12 +50,11 @@ export function useStateParams<T>(
 
 export const idFunc = (state: string) => state;
 
+export const isNumeric = (state: string) => /^[0-9]+$/.test(state);
+
 export const compute = (() => {
   const cache = new LRUCache<string, BaseItemProbTuple[]>();
-  return (
-    playerFormState: PlayerFormState,
-    debugContext: string
-  ): BaseItemProbTuple[] => {
+  return (playerFormState: PlayerFormState): BaseItemProbTuple[] => {
     const key = JSON.stringify(playerFormState);
     console.time("compute");
     if (cache.peek(key)) {

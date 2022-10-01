@@ -26,7 +26,7 @@ export type MonsterFormState = {
   tc: string;
   mlvl: string;
   terrorZone: boolean;
-  playerLvl: number;
+  playerLvl: string;
 };
 
 export type MonsterFormProps = MonsterFormState & {
@@ -174,7 +174,6 @@ export const MonsterFormInline = (props: MonsterFormProps): JSX.Element => {
   } else if (props.monsterType == MonsterType.TREASURE_CLASS) {
     tcOptions = makeTcOptions();
   }
-
   const name = props.itemName === "" ? props.baseItemName : props.itemName;
   const styling = colorClassFromRarity(props.baseItemName, props.rarity);
   return (
@@ -315,7 +314,9 @@ export const MonsterFormInline = (props: MonsterFormProps): JSX.Element => {
           <input
             type="text"
             id="playerLvl"
-            className="w-20 inline-textbox"
+            className={
+              (props.errors.playerLvl ? "error " : "") + "w-20 inline-textbox"
+            }
             value={props.playerLvl}
             onChange={props.onMonsterFormChange}
             disabled={!props.terrorZone}

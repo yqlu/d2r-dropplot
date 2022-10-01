@@ -8,6 +8,7 @@ module.exports = {
       gray: colors.gray,
       white: colors.white,
       neutral: colors.neutral,
+      red: colors.red,
       terror: "#A855F7",
       regular: "white",
       magic: "#3B82F6",

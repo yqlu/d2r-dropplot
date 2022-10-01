@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 
 import "./engine/tc";
 
-import { useStateParams, idFunc, compute } from "./helpers";
+import { useStateParams, idFunc, isNumeric, compute } from "./helpers";
 import { PlayerForm, PlayerFormState } from "./PlayerForm";
 import { MonsterForm } from "./MonsterForm";
 import { Result } from "./Result";
@@ -24,8 +24,14 @@ import {
 import { getRarityMultiplier } from "./engine/rarity";
 import { Navbar } from "./Navbar";
 import { MobileInfoCard } from "./MobileInfoCard";
+import {
+  BaseItemDistributionTuple,
+  BaseItemProbTuple,
+} from "./engine/resultAggregator";
 
 const App = (): JSX.Element => {
+  const [errors, setErrors] = useState({} as { [key: string]: boolean });
+
   const [monsterFormState, setMonsterFormState] = useState({
     difficulty: Difficulty.HELL,
     monsterType: MonsterType.BOSS,
@@ -34,32 +40,29 @@ const App = (): JSX.Element => {
     superunique: "The Countess",
     boss: "diablo",
     terrorZone: false,
-    playerLvl: 99,
+    playerLvl: "99",
   } as MonsterFormState);
 
-  let [initTc, initMlvl] = getTcAndMlvlFromMonster(
-    monsterFormState.difficulty,
-    monsterFormState.monsterType,
-    monsterFormState.levelId,
-    monsterFormState.monster,
-    monsterFormState.superunique,
-    monsterFormState.boss,
-    monsterFormState.terrorZone,
-    monsterFormState.playerLvl
-  );
+  // let [initTc, initMlvl] = getTcAndMlvlFromMonster(
+  //   monsterFormState.difficulty,
+  //   monsterFormState.monsterType,
+  //   monsterFormState.levelId,
+  //   monsterFormState.monster,
+  //   monsterFormState.superunique,
+  //   monsterFormState.boss,
+  //   monsterFormState.terrorZone,
+  //   monsterFormState.playerLvl
+  // );
 
   const [playerFormState, setPlayerFormState] = useState({
     partyCount: 1,
     playerCount: 1,
     magicFind: "0",
-    tc: initTc,
-    mlvl: `${initMlvl}`,
+    tc: "Diablo (H)",
+    mlvl: "94",
   } as PlayerFormState);
 
-  const [errors, setErrors] = useState({});
-  const [results, setResults] = useState(
-    compute(playerFormState, "in first useState")
-  );
+  const [results, setResults] = useState([] as BaseItemProbTuple[]);
   const [baseItemName, setBaseItemName] = useStateParams(
     "amu",
     "base",
@@ -87,21 +90,41 @@ const App = (): JSX.Element => {
   const [scrollPosition, setScrollPosition] = useState(null as number | null);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [mobileFormOpen, setMobileFormOpen] = useState(false);
+  const firstUpdate = useRef(true);
 
+  // Listener for playerFormState
   useEffect(() => {
-    const errors = hasPlayerFormErrors(playerFormState, setErrors);
-    if (!errors) {
-      const newResults = compute(playerFormState, "in playerFormUseEffect");
-      if (newResults) {
-        setResults(newResults);
-      }
+    // First, validate changes
+    const newErrors = { ...errors };
+    newErrors.magicFind = !isNumeric(playerFormState.magicFind);
+    newErrors.mlvl = !isNumeric(playerFormState.mlvl);
+    setErrors(newErrors);
+    // If there are validation errors, early exit
+    if (Object.values(newErrors).filter((value) => value).length > 0) {
+      return;
+    }
+    // Compute results from playerFormState
+    const newResults = compute(playerFormState);
+    if (newResults) {
+      setResults(newResults);
     }
   }, [playerFormState]);
 
+  // Listener for monsterFormState
   useEffect(() => {
+    // First, validate changes
+    const newErrors = { ...errors };
+    newErrors.playerLvl = !isNumeric(monsterFormState.playerLvl);
+    setErrors(newErrors);
+    // If there are validation errors, early exit
+    if (Object.values(newErrors).filter((value) => value).length > 0) {
+      return;
+    }
+    // No need to compute if user is picking raw TC
     if (monsterFormState.monsterType === MonsterType.TREASURE_CLASS) {
       return;
     }
+    // Derive tc and mlvl from monsterFormState if there are no validation errors
     let [tc, mlvl] = getTcAndMlvlFromMonster(
       monsterFormState.difficulty,
       monsterFormState.monsterType,
@@ -110,7 +133,7 @@ const App = (): JSX.Element => {
       monsterFormState.superunique,
       monsterFormState.boss,
       monsterFormState.terrorZone,
-      monsterFormState.playerLvl
+      parseInt(monsterFormState.playerLvl)
     );
     if (!tc) {
       tc = "None";
@@ -122,8 +145,15 @@ const App = (): JSX.Element => {
     }));
   }, [monsterFormState]);
 
+  // If item drop table has changed, update selected item
   useEffect(() => {
-    const newResult = results.filter((tuple) => {
+    // On first render, results haven't computed yet, so skip this adjustment
+    if (firstUpdate.current) {
+      firstUpdate.current = false;
+      return;
+    }
+    // Look through results for a result matching baseItemName + itemName
+    const filtered = results.filter((tuple) => {
       if (tuple[0] !== baseItemName) {
         return false;
       } else if (
@@ -141,17 +171,18 @@ const App = (): JSX.Element => {
       }
       return true;
     });
-    if (newResult.length !== 1) {
+    if (filtered.length !== 1) {
       selectItem("", "", RARITY.WHITE, new Fraction(0));
     } else {
-      let chance = newResult[0][1];
+      let chance = filtered[0][1];
       chance = chance.mul(
-        getRarityMultiplier(newResult[0][2], rarity, itemName)
+        getRarityMultiplier(filtered[0][2], rarity, itemName)
       );
       selectItem(baseItemName, itemName, rarity, chance);
     }
   }, [results]);
 
+  // Persist scroll position through redraws
   useEffect(() => {
     if (scrollPosition) {
       window.scrollTo(window.scrollX, scrollPosition);
@@ -162,10 +193,7 @@ const App = (): JSX.Element => {
     event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
     const name = event.target.id;
-    let value: string | number = event.target.value;
-    if (name !== "tc") {
-      value = Number(value);
-    }
+    let value: string = event.target.value;
     setPlayerFormState((prevState) => {
       const newState = {
         ...prevState,
@@ -191,18 +219,13 @@ const App = (): JSX.Element => {
     event: React.ChangeEvent<HTMLSelectElement | HTMLInputElement>
   ) => {
     const name = event.target.id as keyof MonsterFormState;
-    let value: string | number | boolean;
+    let value: string | boolean | number;
     if (name === "terrorZone") {
       value = (event as React.ChangeEvent<HTMLInputElement>).target.checked;
     } else {
       value = (event as React.ChangeEvent<HTMLSelectElement>).target.value;
-      if (
-        name === "difficulty" ||
-        name === "mlvl" ||
-        name === "monsterType" ||
-        name === "playerLvl"
-      ) {
-        value = parseInt(value);
+      if (name === "difficulty" || name === "monsterType") {
+        value = parseInt(value, 10);
       }
     }
     setMonsterFormState((prevState) => {
@@ -416,21 +439,6 @@ const App = (): JSX.Element => {
       </div>
     </div>
   );
-};
-
-const hasPlayerFormErrors = (
-  playerFormState: PlayerFormState,
-  setErrors: React.Dispatch<React.SetStateAction<{}>>
-): boolean => {
-  const errors: { [key: string]: boolean } = {};
-  if (!/^\d+$/.test(playerFormState.magicFind)) {
-    errors.magicFind = true;
-  }
-  if (!/^\d+$/.test(playerFormState.mlvl)) {
-    errors.mlvl = true;
-  }
-  setErrors(errors);
-  return Object.keys(errors).length > 0;
 };
 
 export default App;

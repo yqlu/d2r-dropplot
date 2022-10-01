@@ -152,7 +152,6 @@ export const MonsterForm = (props: MonsterFormProps): JSX.Element => {
   } else if (props.monsterType == MonsterType.TREASURE_CLASS) {
     tcOptions = makeTcOptions();
   }
-
   return (
     <div className="w-full px-3">
       <div className="form-group">
@@ -306,7 +305,9 @@ export const MonsterForm = (props: MonsterFormProps): JSX.Element => {
           <input
             type="text"
             id="playerLvl"
-            className="mobile-inline-textbox"
+            className={
+              (props.errors.playerLvl ? "error " : "") + "mobile-inline-textbox"
+            }
             value={props.playerLvl}
             onChange={props.onMonsterFormChange}
             disabled={!props.terrorZone}
