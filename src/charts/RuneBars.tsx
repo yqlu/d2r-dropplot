@@ -29,6 +29,7 @@ const LocaleShortForm = (rune: string) => Locale(rune).split(" ")[0];
 
 export const RuneBars = ({
   results,
+  selectedChance,
   baseItemName,
   onSelectItem,
 }: IDashboardPropType): JSX.Element => {
@@ -135,7 +136,7 @@ export const RuneBars = ({
     return () => {
       chart?.destroy();
     };
-  }, [results, baseItemName, runeFilter]);
+  }, [selectedChance.valueOf(), baseItemName, runeFilter]);
 
   return (
     <div>

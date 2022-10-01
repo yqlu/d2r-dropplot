@@ -60,12 +60,13 @@ export const getDistribution = (
   rarity: RARITY
 ) => {
   const mlvl = parseInt(playerFormState.mlvl);
+  const magicFind = parseInt(playerFormState.magicFind);
   const tcLookup = makeLookupTcFunction(TCDict, AtomicDict);
   // No need to use more accurate DistributionAggregator
   // Since we are only looking at quality
   const tcCalculator = new TcCalculator(
     tcLookup,
-    () => new BaseItemDistributionAggregator(mlvl)
+    () => new BaseItemDistributionAggregator(mlvl, magicFind)
   );
   let tcs = tcCalculator
     .getAtomicTCs(
@@ -98,7 +99,10 @@ export const RepeatedRunsChart = ({
 }: IDashboardPropType): JSX.Element => {
   const [runs, setRuns] = useState(getXMax(selectedChance.valueOf()));
 
-  useEffect(() => setRuns(getXMax(selectedChance.valueOf())), [selectedChance]);
+  useEffect(
+    () => setRuns(getXMax(selectedChance.valueOf())),
+    [baseItemName, itemName, rarity]
+  );
   useEffect(() => {
     const { xs, ys } = getData(selectedChance, runs);
     let ctx = (
@@ -166,7 +170,7 @@ export const RepeatedRunsChart = ({
     return () => {
       chart?.destroy();
     };
-  }, [playerFormState, results, baseItemName, itemName, rarity, runs]);
+  }, [selectedChance.valueOf(), baseItemName, itemName, rarity, runs]);
 
   return (
     <div>

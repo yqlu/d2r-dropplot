@@ -106,8 +106,7 @@ export const TreasureClassStackedBars = ({
   playerFormState,
   results,
   baseItemName,
-  itemName,
-  rarity,
+  selectedChance,
   onSelectItem,
 }: IDashboardPropType): JSX.Element => {
   useEffect(() => {
@@ -234,7 +233,7 @@ export const TreasureClassStackedBars = ({
     return () => {
       chart?.destroy();
     };
-  }, [playerFormState, results, baseItemName, itemName, rarity]);
+  }, [selectedChance.valueOf(), baseItemName]);
 
   return (
     <div>

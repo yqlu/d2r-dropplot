@@ -100,6 +100,8 @@ const getData = (results: BaseItemProbTuple[], baseItemName: string) => {
 
 export const RarityBreakdownChart = ({
   results,
+  playerFormState,
+  selectedChance,
   baseItemName,
   onSelectItem,
 }: IDashboardPropType): JSX.Element => {
@@ -216,7 +218,7 @@ export const RarityBreakdownChart = ({
     return () => {
       chart?.destroy();
     };
-  }, [results, baseItemName]);
+  }, [selectedChance.valueOf(), playerFormState.magicFind, baseItemName]);
 
   return (
     <div>

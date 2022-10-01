@@ -26,7 +26,7 @@ export const Dashboard = ({
 }: IDashboardPropType): JSX.Element => {
   let distribution: Distribution = Distribution.Atomic(ZERO);
   let atLeastOneChance = selectedChance;
-  if (baseItemName) {
+  if (selectedChance.valueOf() > 0) {
     distribution = getDistribution(
       playerFormState,
       baseItemName,

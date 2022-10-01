@@ -86,8 +86,7 @@ export const TreasureClassTreeMap = ({
   playerFormState,
   results,
   baseItemName,
-  itemName,
-  rarity,
+  selectedChance,
   onSelectItem,
 }: IDashboardPropType): JSX.Element => {
   const [tcGrouped, setTcGrouped] = useState(false);
@@ -235,7 +234,7 @@ export const TreasureClassTreeMap = ({
     return () => {
       chart?.destroy();
     };
-  }, [playerFormState, results, baseItemName, itemName, rarity, tcGrouped]);
+  }, [selectedChance.valueOf(), baseItemName]);
 
   // TODO: explanatory tooltip
   return (

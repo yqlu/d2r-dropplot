@@ -125,7 +125,7 @@ export const BinomialRunsChart = ({
     if (polynomial.expectation().valueOf() > 0) {
       setRuns(getBinomialXMax(polynomial));
     }
-  }, [polynomial]);
+  }, [baseItemName, itemName, rarity]);
   useEffect(() => {
     if (polynomial.eval().expectation().valueOf() <= 0) {
       return;
@@ -206,7 +206,7 @@ export const BinomialRunsChart = ({
     return () => {
       chart?.destroy();
     };
-  }, [distribution, runs, cumulative]);
+  }, [polynomial.expectation().valueOf(), runs, cumulative]);
 
   return (
     <div>
