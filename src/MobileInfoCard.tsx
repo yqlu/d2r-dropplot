@@ -137,8 +137,8 @@ export const MobileInfoCard = (props: MobileInfoCardProps): JSX.Element => {
             </span>
             <span>
               {" "}
-              cannot be dropped by the current settings. Pick a different item
-              to generate graphs.
+              cannot be dropped by the current settings. Select a different item
+              to generate charts.
             </span>
           </p>
         )}

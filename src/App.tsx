@@ -178,7 +178,9 @@ const App = (): JSX.Element => {
       return true;
     });
     if (filtered.length !== 1) {
-      setItemSelectError({ error: true, itemName, baseItemName, rarity });
+      if (!itemSelectError.error) {
+        setItemSelectError({ error: true, itemName, baseItemName, rarity });
+      }
       selectItem("", "", RARITY.WHITE, new Fraction(0));
     } else {
       let chance = filtered[0][1];

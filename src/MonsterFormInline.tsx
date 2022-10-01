@@ -361,7 +361,7 @@ export const MonsterFormInline = (props: MonsterFormProps): JSX.Element => {
           <span>
             {" "}
             cannot be dropped by the current settings. Select a different item
-            to generate graphs.
+            to generate charts.
           </span>
         </p>
       )}
