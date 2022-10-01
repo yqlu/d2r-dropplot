@@ -199,16 +199,20 @@ export class BaseItemResultAggregator
   magicFind: number;
   dict: BaseItemProbDict;
   aggregationStyle: ProbabilityAggregation;
+  canDropSunderCharm: boolean;
 
   constructor(
     mlvl: number,
     magicFind: number = 0,
-    aggregationStyle: ProbabilityAggregation = ProbabilityAggregation.CHANCE_OF_FIRST
+    aggregationStyle: ProbabilityAggregation = ProbabilityAggregation.CHANCE_OF_FIRST,
+    canDropSunderCharm: boolean = false
   ) {
     this.mlvl = mlvl;
     this.magicFind = magicFind;
     this.dict = {};
     this.aggregationStyle = aggregationStyle;
+    this.canDropSunderCharm = canDropSunderCharm;
+    console.log(this.canDropSunderCharm);
   }
 
   add(
@@ -220,7 +224,8 @@ export class BaseItemResultAggregator
       tc,
       this.mlvl,
       this.magicFind,
-      qualityRatios
+      qualityRatios,
+      this.canDropSunderCharm
     );
     if (!this.dict.hasOwnProperty(tc)) {
       this.dict[tc] = [prob, qualityProbObject];
@@ -402,11 +407,17 @@ export class BaseItemDistributionAggregator
   mlvl: number;
   magicFind: number;
   dict: BaseItemDistributionDict;
+  canDropSunderCharm: boolean;
 
-  constructor(mlvl: number, magicFind: number = 0) {
+  constructor(
+    mlvl: number,
+    magicFind: number = 0,
+    canDropSunderCharm: boolean = false
+  ) {
     this.mlvl = mlvl;
     this.magicFind = magicFind;
     this.dict = {};
+    this.canDropSunderCharm = canDropSunderCharm;
   }
 
   add(
@@ -418,7 +429,8 @@ export class BaseItemDistributionAggregator
       tc,
       this.mlvl,
       this.magicFind,
-      qualityRatios
+      qualityRatios,
+      this.canDropSunderCharm
     );
     if (!this.dict.hasOwnProperty(tc)) {
       this.dict[tc] = [Distribution.Atomic(prob), qualityProbObject];

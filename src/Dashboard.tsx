@@ -14,9 +14,11 @@ import { qualityNotApplicable } from "./engine/rarity";
 import { ArmorDict, WeaponsDict } from "./engine/weapon-armor-dict";
 import { Distribution } from "./engine/distribution";
 import { ZERO } from "./engine/polynomialOps";
+import { canDropSunderCharm } from "./helpers";
 
 export const Dashboard = ({
   playerFormState,
+  monsterFormState,
   results,
   baseItemName,
   itemName,
@@ -31,7 +33,8 @@ export const Dashboard = ({
       playerFormState,
       baseItemName,
       itemName,
-      rarity
+      rarity,
+      canDropSunderCharm(monsterFormState)
     );
     atLeastOneChance = distribution.eval().atLeastOneChance();
   }
@@ -49,6 +52,7 @@ export const Dashboard = ({
             <Card canExpand={true}>
               <RepeatedRunsChart
                 playerFormState={playerFormState}
+                monsterFormState={monsterFormState}
                 results={results}
                 baseItemName={baseItemName}
                 itemName={itemName}
@@ -69,6 +73,7 @@ export const Dashboard = ({
               <Card canExpand={true}>
                 <MagicFindChart
                   playerFormState={playerFormState}
+                  monsterFormState={monsterFormState}
                   results={results}
                   baseItemName={baseItemName}
                   itemName={itemName}
@@ -82,6 +87,7 @@ export const Dashboard = ({
               <Card canExpand={true}>
                 <RarityBreakdownChart
                   playerFormState={playerFormState}
+                  monsterFormState={monsterFormState}
                   results={results}
                   baseItemName={baseItemName}
                   itemName={itemName}
@@ -94,6 +100,7 @@ export const Dashboard = ({
             <Card canExpand={true}>
               <PartyCountChart
                 playerFormState={playerFormState}
+                monsterFormState={monsterFormState}
                 results={results}
                 baseItemName={baseItemName}
                 itemName={itemName}
@@ -105,6 +112,7 @@ export const Dashboard = ({
             <Card canExpand={true}>
               <NoDropChart
                 playerFormState={playerFormState}
+                monsterFormState={monsterFormState}
                 results={results}
                 baseItemName={baseItemName}
                 itemName={itemName}
@@ -117,6 +125,7 @@ export const Dashboard = ({
               <Card canExpand={true}>
                 <TreasureClassStackedBars
                   playerFormState={playerFormState}
+                  monsterFormState={monsterFormState}
                   results={results}
                   baseItemName={baseItemName}
                   itemName={itemName}
@@ -130,6 +139,7 @@ export const Dashboard = ({
               <Card canExpand={true}>
                 <TreasureClassTreeMap
                   playerFormState={playerFormState}
+                  monsterFormState={monsterFormState}
                   results={results}
                   baseItemName={baseItemName}
                   itemName={itemName}
@@ -143,6 +153,7 @@ export const Dashboard = ({
               <Card canExpand={true}>
                 <RuneBars
                   playerFormState={playerFormState}
+                  monsterFormState={monsterFormState}
                   results={results}
                   baseItemName={baseItemName}
                   itemName={itemName}

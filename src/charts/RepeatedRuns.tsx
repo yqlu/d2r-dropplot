@@ -57,16 +57,16 @@ export const getDistribution = (
   playerFormState: PlayerFormState,
   baseItemName: string,
   itemName: string,
-  rarity: RARITY
+  rarity: RARITY,
+  canDropSunderCharm: boolean
 ) => {
   const mlvl = parseInt(playerFormState.mlvl);
   const magicFind = parseInt(playerFormState.magicFind);
   const tcLookup = makeLookupTcFunction(TCDict, AtomicDict);
-  // No need to use more accurate DistributionAggregator
-  // Since we are only looking at quality
   const tcCalculator = new TcCalculator(
     tcLookup,
-    () => new BaseItemDistributionAggregator(mlvl, magicFind)
+    () =>
+      new BaseItemDistributionAggregator(mlvl, magicFind, canDropSunderCharm)
   );
   let tcs = tcCalculator
     .getAtomicTCs(

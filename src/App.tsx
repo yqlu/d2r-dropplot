@@ -24,10 +24,7 @@ import {
 import { getRarityMultiplier } from "./engine/rarity";
 import { Navbar } from "./Navbar";
 import { MobileInfoCard } from "./MobileInfoCard";
-import {
-  BaseItemDistributionTuple,
-  BaseItemProbTuple,
-} from "./engine/resultAggregator";
+import { BaseItemProbTuple } from "./engine/resultAggregator";
 
 const App = (): JSX.Element => {
   const [errors, setErrors] = useState({} as { [key: string]: boolean });
@@ -93,7 +90,7 @@ const App = (): JSX.Element => {
       return;
     }
     // Compute results from playerFormState
-    const newResults = compute(playerFormState);
+    const newResults = compute(playerFormState, monsterFormState);
     if (newResults) {
       setResults(newResults);
     }
@@ -344,6 +341,7 @@ const App = (): JSX.Element => {
           <div className="pt-2 sm:pt-4">
             <Dashboard
               playerFormState={playerFormState}
+              monsterFormState={monsterFormState}
               results={results}
               baseItemName={baseItemName}
               itemName={itemName}

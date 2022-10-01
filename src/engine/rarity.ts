@@ -15,6 +15,7 @@ import {
   UniqueBaseLookup,
   SetBaseLookup,
   UniqueSetBaseLookupType,
+  isSunderCharm,
 } from "./unique-set-dict";
 import { KEY_REGEX } from "../charts/common";
 import { ONE } from "./polynomialOps";
@@ -174,14 +175,19 @@ export function computeQualityProbsHelper(
 export function findCandidates(
   itemCode: string,
   ilvl: number,
-  dict: UniqueSetBaseLookupType
+  dict: UniqueSetBaseLookupType,
+  canDropSunderCharm: boolean = true
 ): UniqueSetProbTuple[] {
   if (!dict.hasOwnProperty(itemCode)) {
     return [];
   }
-  const candidates = dict[itemCode].filter(
-    (candidates) => candidates.lvl <= ilvl
-  );
+  let candidates = dict[itemCode].filter((candidate) => candidate.lvl <= ilvl);
+
+  // Special Sunder Charm check
+  if (itemCode === "cm3" && !canDropSunderCharm) {
+    candidates = candidates.filter((candidate) => !isSunderCharm(candidate));
+  }
+
   const denom = sum(map(candidates, (candidate) => candidate.rarity));
   return map(candidates, (candidate) => [
     candidate.index,
@@ -206,7 +212,8 @@ export function computeQualityProbs(
   itemCode: string,
   ilvl: number,
   magicFind: number = 0,
-  qualityFactors: ItemQualityRatios
+  qualityFactors: ItemQualityRatios,
+  canDropSunderCharm = false
 ): QualityProbabilityObject {
   if (qualityNotApplicable(itemCode)) {
     const ZERO = new Fraction(0);
@@ -222,8 +229,18 @@ export function computeQualityProbs(
     magicFind,
     qualityFactors
   );
-  const candidateUniques = findCandidates(itemCode, ilvl, UniqueBaseLookup);
-  const candidateSets = findCandidates(itemCode, ilvl, SetBaseLookup);
+  const candidateUniques = findCandidates(
+    itemCode,
+    ilvl,
+    UniqueBaseLookup,
+    canDropSunderCharm
+  );
+  const candidateSets = findCandidates(
+    itemCode,
+    ilvl,
+    SetBaseLookup,
+    canDropSunderCharm
+  );
 
   // If there are no uniques that can be generated,
   // Generate a triple-durability rare in its place

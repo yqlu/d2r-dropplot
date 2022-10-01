@@ -6,6 +6,7 @@ import { Gradient } from "javascript-color-gradient";
 import Fraction from "fraction.js";
 import { SelectItemType } from "../Result";
 import { stringify } from "querystring";
+import { MonsterFormState } from "../MonsterFormInline";
 
 export const TC_GRADIENT = {
   armo: new Gradient()
@@ -60,6 +61,7 @@ export const TC_GRADIENT = {
 
 export type IDashboardPropType = {
   playerFormState: PlayerFormState;
+  monsterFormState: MonsterFormState;
   results: BaseItemProbTuple[];
   baseItemName: string;
   itemName: string;

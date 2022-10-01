@@ -861,6 +861,42 @@ export const UniqueDict: UniqueSetDictType = {
     lvl: 70,
     code: "cm3",
   },
+  "The Black Cleft": {
+    index: "The Black Cleft",
+    rarity: 1,
+    lvl: 75,
+    code: "cm3",
+  },
+  "The Bone Break": {
+    index: "The Bone Break",
+    rarity: 1,
+    lvl: 75,
+    code: "cm3",
+  },
+  "The Cold Rupture": {
+    index: "The Cold Rupture",
+    rarity: 1,
+    lvl: 75,
+    code: "cm3",
+  },
+  "The Crack of the Heavens": {
+    index: "The Crack of the Heavens",
+    rarity: 1,
+    lvl: 75,
+    code: "cm3",
+  },
+  "The Flame Rift": {
+    index: "The Flame Rift",
+    rarity: 1,
+    lvl: 75,
+    code: "cm3",
+  },
+  "The Rotting Fissure": {
+    index: "The Rotting Fissure",
+    rarity: 1,
+    lvl: 75,
+    code: "cm3",
+  },
   Stormlash: { index: "Stormlash", rarity: 1, lvl: 86, code: "7fl" },
   "Halaberd's Reign": {
     index: "Halaberd's Reign",
@@ -1991,7 +2027,45 @@ export const UniqueBaseLookup: UniqueSetBaseLookupType = {
   uts: [{ index: "Spirit Ward", rarity: 1, lvl: 76, code: "uts" }],
   ci2: [{ index: "Kira's Guardian", rarity: 1, lvl: 85, code: "ci2" }],
   uui: [{ index: "Ormus' Robes", rarity: 1, lvl: 83, code: "uui" }],
-  cm3: [{ index: "Gheed's Fortune", rarity: 1, lvl: 70, code: "cm3" }],
+  cm3: [
+    { index: "Gheed's Fortune", rarity: 1, lvl: 70, code: "cm3" },
+    {
+      index: "The Black Cleft",
+      rarity: 1,
+      lvl: 75,
+      code: "cm3",
+    },
+    {
+      index: "The Bone Break",
+      rarity: 1,
+      lvl: 75,
+      code: "cm3",
+    },
+    {
+      index: "The Cold Rupture",
+      rarity: 1,
+      lvl: 75,
+      code: "cm3",
+    },
+    {
+      index: "The Crack of the Heavens",
+      rarity: 1,
+      lvl: 75,
+      code: "cm3",
+    },
+    {
+      index: "The Flame Rift",
+      rarity: 1,
+      lvl: 75,
+      code: "cm3",
+    },
+    {
+      index: "The Rotting Fissure",
+      rarity: 1,
+      lvl: 75,
+      code: "cm3",
+    },
+  ],
   bae: [{ index: "Halaberd's Reign", rarity: 1, lvl: 85, code: "bae" }],
   upk: [{ index: "Spike Thorn", rarity: 1, lvl: 78, code: "upk" }],
   uvg: [{ index: "Dracul's Grasp", rarity: 1, lvl: 84, code: "uvg" }],
@@ -2189,4 +2263,8 @@ export const SetBaseLookup: UniqueSetBaseLookupType = {
   tbt: [{ index: "Vidala's Fetlock", rarity: 7, lvl: 19, code: "tbt" }],
   xml: [{ index: "Wihtstan's Guard", rarity: 7, lvl: 41, code: "xml" }],
   ztb: [{ index: "Wilhelm's Pride", rarity: 7, lvl: 41, code: "ztb" }],
+};
+
+export const isSunderCharm = (item: UniqueSetDictEntry) => {
+  return item.code === "cm3" && item.index !== "Gheed's Fortune";
 };
