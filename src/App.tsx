@@ -72,7 +72,7 @@ const App = (): JSX.Element => {
       return RARITY.WHITE;
     }
   );
-  const [selectedChance, setSelectedChance] = useState(new Fraction(0));
+  const [selectedChance, setSelectedChance] = useState(new Fraction(1, 7911));
   const [scrollPosition, setScrollPosition] = useState(null as number | null);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [mobileFormOpen, setMobileFormOpen] = useState(false);
@@ -247,7 +247,12 @@ const App = (): JSX.Element => {
     setItemName(newItemName);
     setRarity(newRarity);
     setSelectedChance(newChance);
-    setMobileFormOpen(false);
+    if (
+      (newBaseItemName !== "" && newBaseItemName !== baseItemName) ||
+      (newItemName !== "" && newItemName !== itemName)
+    ) {
+      setMobileFormOpen(false);
+    }
   };
 
   const sidebarStyle = sidebarOpen ? "sidebar-open" : "sidebar-closed";
