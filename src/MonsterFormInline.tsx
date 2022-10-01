@@ -13,8 +13,8 @@ import { Locale } from "./engine/locale-dict";
 import { TCDict } from "./engine/tc-dict";
 import { RARITY } from "./engine/itemratio-dict";
 import Fraction from "fraction.js";
-import { colorClassFromRarity } from "./charts/common";
 import { formatReciprocal } from "./ResultListing";
+import { ItemDisplayName } from "./components/ItemDisplayName";
 
 export type MonsterFormState = {
   difficulty: Difficulty;
@@ -29,6 +29,13 @@ export type MonsterFormState = {
   playerLvl: string;
 };
 
+export type ItemSelectErrorType = {
+  error: boolean;
+  baseItemName: string;
+  itemName: string;
+  rarity: RARITY;
+};
+
 export type MonsterFormProps = MonsterFormState & {
   errors: any;
   onPlayerFormChange: (
@@ -41,6 +48,7 @@ export type MonsterFormProps = MonsterFormState & {
   itemName: string;
   rarity: RARITY;
   selectedChance: Fraction;
+  itemSelectError: ItemSelectErrorType;
 };
 
 const makeLevelOptions = (): JSX.Element[] => {
@@ -174,8 +182,6 @@ export const MonsterFormInline = (props: MonsterFormProps): JSX.Element => {
   } else if (props.monsterType == MonsterType.TREASURE_CLASS) {
     tcOptions = makeTcOptions();
   }
-  const name = props.itemName === "" ? props.baseItemName : props.itemName;
-  const styling = colorClassFromRarity(props.baseItemName, props.rarity);
   return (
     <div className="w-full text-sm px-3 text-center">
       <p className="leading-8">
@@ -329,10 +335,34 @@ export const MonsterFormInline = (props: MonsterFormProps): JSX.Element => {
           <span className="font-bold">{props.mlvl})</span>
         </p>
       )}
-      {props.baseItemName !== "" && (
+      {props.baseItemName !== "" && !props.itemSelectError.error && (
         <p>
-          Analyzing: <b className={styling}>{Locale(name)}</b> (
-          {formatReciprocal(props.selectedChance)} chance)
+          Analyzing:{" "}
+          <span className="font-bold">
+            <ItemDisplayName
+              itemName={props.itemName}
+              baseItemName={props.baseItemName}
+              rarity={props.rarity}
+            ></ItemDisplayName>
+          </span>
+          <span> ({formatReciprocal(props.selectedChance)} chance)</span>
+        </p>
+      )}
+      {props.baseItemName === "" && props.itemSelectError.error && (
+        <p>
+          <span className="text-red-500">Warning: </span>
+          <span className="font-bold">
+            <ItemDisplayName
+              itemName={props.itemSelectError.itemName}
+              baseItemName={props.itemSelectError.baseItemName}
+              rarity={props.itemSelectError.rarity}
+            ></ItemDisplayName>
+          </span>
+          <span>
+            {" "}
+            cannot be dropped by the current settings. Select a different item
+            to generate graphs.
+          </span>
         </p>
       )}
     </div>

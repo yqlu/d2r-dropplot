@@ -5,15 +5,14 @@ import Chart from "chart.js/auto";
 import gaussian from "gaussian";
 import {
   binomialDistributionFunction,
-  colorClassFromRarity,
   formatPercent,
   poissonDistributionFunction,
 } from "./common";
 import { IDashboardPropType, REGULAR_COLOR, colorFromRarity } from "./common";
-import { Locale } from "../engine/locale-dict";
 import { getXMax } from "./RepeatedRuns";
 import { RARITY } from "../engine/itemratio-dict";
 import { Distribution, Polynomial } from "../engine/distribution";
+import { ItemDisplayName } from "../components/ItemDisplayName";
 
 Chart.defaults.font.family =
   "'Noto Sans', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif";
@@ -209,14 +208,18 @@ export const BinomialRunsChart = ({
     };
   }, [distribution, runs, cumulative]);
 
-  const name = itemName === "" ? baseItemName : itemName;
-  const styling = colorClassFromRarity(baseItemName, rarity);
-
   return (
     <div>
       <div className="chartTitle">
         Chance to drop x copies of{" "}
-        <span className={"font-bold " + styling}>{Locale(name)}</span> over{" "}
+        <span className="font-bold">
+          <ItemDisplayName
+            itemName={itemName}
+            baseItemName={baseItemName}
+            rarity={rarity}
+          ></ItemDisplayName>
+        </span>{" "}
+        over{" "}
         <input
           type="text"
           className="inline-textbox w-16"

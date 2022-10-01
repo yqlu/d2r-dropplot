@@ -87,6 +87,12 @@ const App = (): JSX.Element => {
     }
   );
   const [selectedChance, setSelectedChance] = useState(new Fraction(0));
+  const [itemSelectError, setItemSelectError] = useState({
+    error: false,
+    itemName: "",
+    baseItemName: "",
+    rarity: RARITY.WHITE,
+  });
   const [scrollPosition, setScrollPosition] = useState(null as number | null);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [mobileFormOpen, setMobileFormOpen] = useState(false);
@@ -172,6 +178,7 @@ const App = (): JSX.Element => {
       return true;
     });
     if (filtered.length !== 1) {
+      setItemSelectError({ error: true, itemName, baseItemName, rarity });
       selectItem("", "", RARITY.WHITE, new Fraction(0));
     } else {
       let chance = filtered[0][1];
@@ -179,6 +186,10 @@ const App = (): JSX.Element => {
         getRarityMultiplier(filtered[0][2], rarity, itemName)
       );
       selectItem(baseItemName, itemName, rarity, chance);
+      setItemSelectError({
+        ...itemSelectError,
+        error: false,
+      });
     }
   }, [results]);
 
@@ -334,6 +345,7 @@ const App = (): JSX.Element => {
                 itemName={itemName}
                 rarity={rarity}
                 selectedChance={selectedChance}
+                itemSelectError={itemSelectError}
               />
             </Card>
           </div>
@@ -354,6 +366,7 @@ const App = (): JSX.Element => {
                 itemName={itemName}
                 rarity={rarity}
                 selectedChance={selectedChance}
+                itemSelectError={itemSelectError}
               ></MobileInfoCard>
             </Card>
           </div>

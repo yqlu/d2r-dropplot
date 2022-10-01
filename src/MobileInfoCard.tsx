@@ -1,27 +1,25 @@
 import React from "react";
-import { groupBy, sortBy, uniq } from "lodash-es";
 
-import { Difficulty, MonsterDict, MonsterType } from "./engine/monstats-dict";
+import { MonsterDict, MonsterType } from "./engine/monstats-dict";
 import { LevelsDict } from "./engine/levels-dict";
-import { SuperuniqueDict } from "./engine/superunique-dict";
-import {
-  categoriesLocale,
-  FlatBossDict,
-  getBossHierarchy,
-} from "./engine/boss-dict";
+import { FlatBossDict } from "./engine/boss-dict";
 import { Locale } from "./engine/locale-dict";
-import { TCDict } from "./engine/tc-dict";
 import { RARITY } from "./engine/itemratio-dict";
 import Fraction from "fraction.js";
-import { colorClassFromRarity } from "./charts/common";
 import { formatReciprocal } from "./ResultListing";
-import { monsterApplicable, MonsterFormState } from "./MonsterFormInline";
+import {
+  monsterApplicable,
+  MonsterFormState,
+  ItemSelectErrorType,
+} from "./MonsterFormInline";
+import { ItemDisplayName } from "./components/ItemDisplayName";
 
 export type MobileInfoCardProps = MonsterFormState & {
   baseItemName: string;
   itemName: string;
   rarity: RARITY;
   selectedChance: Fraction;
+  itemSelectError: ItemSelectErrorType;
 };
 
 const displayMonsterType = (monsterType: MonsterType): string => {
@@ -37,8 +35,6 @@ const displayMonsterType = (monsterType: MonsterType): string => {
 };
 
 export const MobileInfoCard = (props: MobileInfoCardProps): JSX.Element => {
-  const name = props.itemName === "" ? props.baseItemName : props.itemName;
-  const styling = colorClassFromRarity(props.baseItemName, props.rarity);
   let bossStr;
   if (props.boss.startsWith("quest")) {
     bossStr = `${Locale(FlatBossDict[props.boss.substring(5)].nameStr)} (Q)`;
@@ -116,10 +112,34 @@ export const MobileInfoCard = (props: MobileInfoCardProps): JSX.Element => {
             <span className="font-bold text-rare">{props.mlvl}</span>)
           </p>
         )}{" "}
-        {props.baseItemName !== "" && (
+        {props.baseItemName !== "" && !props.itemSelectError.error && (
           <p>
-            Analyzing: <b className={styling}>{Locale(name)}</b> (
-            {formatReciprocal(props.selectedChance)} chance)
+            Analyzing:{" "}
+            <span className="font-bold">
+              <ItemDisplayName
+                itemName={props.itemName}
+                baseItemName={props.baseItemName}
+                rarity={props.rarity}
+              ></ItemDisplayName>
+            </span>
+            <span> ({formatReciprocal(props.selectedChance)} chance)</span>
+          </p>
+        )}
+        {props.baseItemName === "" && props.itemSelectError.error && (
+          <p>
+            <span className="text-red-500">Warning: </span>
+            <span className="font-bold">
+              <ItemDisplayName
+                itemName={props.itemSelectError.itemName}
+                baseItemName={props.itemSelectError.baseItemName}
+                rarity={props.itemSelectError.rarity}
+              ></ItemDisplayName>
+            </span>
+            <span>
+              {" "}
+              cannot be dropped by the current settings. Pick a different item
+              to generate graphs.
+            </span>
           </p>
         )}
       </div>

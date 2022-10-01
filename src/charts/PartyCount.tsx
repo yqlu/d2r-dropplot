@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { range } from "lodash-es";
 import { ChartTypeRegistry, TooltipItem } from "chart.js";
 import Chart from "chart.js/auto";
-import Fraction from "fraction.js";
 
 import {
   BaseItemDistributionAggregator,
@@ -13,15 +12,14 @@ import { makeLookupTcFunction, TcCalculator } from "../engine/tc";
 import { TCDict } from "../engine/tc-dict";
 import { AtomicDict } from "../engine/atomic-dict";
 import {
-  colorClassFromRarity,
   formatPercent,
   IDashboardPropType,
   REGULAR_COLOR,
   RUNE_COLOR,
 } from "./common";
-import { Locale } from "../engine/locale-dict";
 import { RARITY } from "../engine/itemratio-dict";
 import { ZERO } from "../engine/polynomialOps";
+import { ItemDisplayName } from "../components/ItemDisplayName";
 
 Chart.defaults.borderColor = "rgba(255,255,255,0.2)";
 
@@ -155,11 +153,16 @@ export const PartyCountChart = ({
     };
   }, [playerFormState.tc, playerFormState.mlvl, baseItemName]);
 
-  const styling = colorClassFromRarity(baseItemName, RARITY.WHITE);
   return (
     <div>
       <div className="chartTitle">
-        <span className={"font-bold " + styling}>{Locale(baseItemName)}</span>{" "}
+        <span className="font-bold">
+          <ItemDisplayName
+            itemName={""}
+            baseItemName={baseItemName}
+            rarity={RARITY.WHITE}
+          ></ItemDisplayName>
+        </span>{" "}
         drop chance vs player count
       </div>
       <canvas id="partyCountChart"></canvas>

@@ -3,26 +3,18 @@ import { range } from "lodash-es";
 import { ChartTypeRegistry, InteractionMode, TooltipItem } from "chart.js";
 import Chart from "chart.js/auto";
 
-import {
-  IDashboardPropType,
-  colorFromRarity,
-  colorClassFromRarity,
-  formatPercent,
-} from "./common";
-import { Locale } from "../engine/locale-dict";
+import { IDashboardPropType, colorFromRarity, formatPercent } from "./common";
 import Fraction from "fraction.js";
 import { PlayerFormState } from "../PlayerForm";
 import { RARITY } from "../engine/itemratio-dict";
 import { makeLookupTcFunction, TcCalculator } from "../engine/tc";
 import { TCDict } from "../engine/tc-dict";
 import { AtomicDict } from "../engine/atomic-dict";
-import {
-  BaseItemDistributionAggregator,
-  BaseItemDistributionTuple,
-} from "../engine/resultAggregator";
+import { BaseItemDistributionAggregator } from "../engine/resultAggregator";
 import { getRarityMultiplier } from "../engine/rarity";
 import { Distribution } from "../engine/distribution";
 import { ONE } from "../engine/polynomialOps";
+import { ItemDisplayName } from "../components/ItemDisplayName";
 
 export const getXMax = (
   singleRunChance: number,
@@ -179,13 +171,18 @@ export const RepeatedRunsChart = ({
     };
   }, [playerFormState, results, baseItemName, itemName, rarity, runs]);
 
-  const name = itemName === "" ? baseItemName : itemName;
-  const styling = colorClassFromRarity(baseItemName, rarity);
   return (
     <div>
       <div className="chartTitle">
         Chance to drop at least one{" "}
-        <span className={"font-bold " + styling}>{Locale(name)}</span> over{" "}
+        <span className="font-bold">
+          <ItemDisplayName
+            itemName={itemName}
+            baseItemName={baseItemName}
+            rarity={rarity}
+          ></ItemDisplayName>
+        </span>{" "}
+        over{" "}
         <input
           type="text"
           className="inline-textbox w-16"
