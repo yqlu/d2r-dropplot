@@ -38,7 +38,7 @@ const App = (): JSX.Element => {
     levelId: 2, // Blood Moor
     monster: "zombie1",
     superunique: "The Countess",
-    boss: "diablo",
+    boss: "baalcrab",
     terrorZone: false,
     playerLvl: "99",
   } as MonsterFormState);
@@ -47,8 +47,8 @@ const App = (): JSX.Element => {
     partyCount: 1,
     playerCount: 1,
     magicFind: "0",
-    tc: "Diablo (H)",
-    mlvl: "94",
+    tc: "Baal (H)",
+    mlvl: "99",
   } as PlayerFormState);
 
   const [results, setResults] = useState([] as BaseItemProbTuple[]);
