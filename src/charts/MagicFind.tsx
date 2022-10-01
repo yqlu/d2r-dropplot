@@ -71,10 +71,6 @@ export const MagicFindChart = ({
   rarity,
 }: IDashboardPropType): JSX.Element => {
   useEffect(() => {
-    if (baseItemName == "") {
-      return;
-    }
-
     const tension = 0.3;
     const { xs, ys } = getData(playerFormState, baseItemName);
     const white = {

@@ -29,13 +29,6 @@ export type MonsterFormState = {
   playerLvl: string;
 };
 
-export type ItemSelectErrorType = {
-  error: boolean;
-  baseItemName: string;
-  itemName: string;
-  rarity: RARITY;
-};
-
 export type MonsterFormProps = MonsterFormState & {
   errors: any;
   onPlayerFormChange: (
@@ -48,7 +41,6 @@ export type MonsterFormProps = MonsterFormState & {
   itemName: string;
   rarity: RARITY;
   selectedChance: Fraction;
-  itemSelectError: ItemSelectErrorType;
 };
 
 const makeLevelOptions = (): JSX.Element[] => {
@@ -335,7 +327,7 @@ export const MonsterFormInline = (props: MonsterFormProps): JSX.Element => {
           <span className="font-bold">{props.mlvl})</span>
         </p>
       )}
-      {props.baseItemName !== "" && !props.itemSelectError.error && (
+      {props.selectedChance.valueOf() > 0 && (
         <p>
           Analyzing:{" "}
           <span className="font-bold">
@@ -348,14 +340,14 @@ export const MonsterFormInline = (props: MonsterFormProps): JSX.Element => {
           <span> ({formatReciprocal(props.selectedChance)} chance)</span>
         </p>
       )}
-      {props.baseItemName === "" && props.itemSelectError.error && (
+      {props.selectedChance.valueOf() === 0 && (
         <p>
           <span className="text-red-500">Warning: </span>
           <span className="font-bold">
             <ItemDisplayName
-              itemName={props.itemSelectError.itemName}
-              baseItemName={props.itemSelectError.baseItemName}
-              rarity={props.itemSelectError.rarity}
+              itemName={props.itemName}
+              baseItemName={props.baseItemName}
+              rarity={props.rarity}
             ></ItemDisplayName>
           </span>
           <span>

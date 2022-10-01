@@ -127,7 +127,7 @@ export const BinomialRunsChart = ({
     }
   }, [polynomial]);
   useEffect(() => {
-    if (baseItemName == "" || polynomial.eval().expectation().valueOf() <= 0) {
+    if (polynomial.eval().expectation().valueOf() <= 0) {
       return;
     }
     let { xs, ys } = getData(runs, polynomial);

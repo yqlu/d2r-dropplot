@@ -38,9 +38,6 @@ export const NoDropChart = ({
   rarity,
 }: IDashboardPropType): JSX.Element => {
   useEffect(() => {
-    if (baseItemName == "") {
-      return;
-    }
     let tc = playerFormState.tc;
     if (isDuriel(tc)) {
       tc = TCDict[tc].tcs[1][0];

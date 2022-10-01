@@ -93,9 +93,6 @@ export const TreasureClassTreeMap = ({
   const [tcGrouped, setTcGrouped] = useState(false);
 
   useEffect(() => {
-    if (baseItemName == "") {
-      return;
-    }
     const backgroundColor = (c: TreemapScriptableContext): string => {
       if (!c?.raw?.g) {
         return TREEMAP_COLORS.NEUTRAL.TC.rgbString();

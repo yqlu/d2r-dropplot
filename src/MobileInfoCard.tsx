@@ -7,11 +7,7 @@ import { Locale } from "./engine/locale-dict";
 import { RARITY } from "./engine/itemratio-dict";
 import Fraction from "fraction.js";
 import { formatReciprocal } from "./ResultListing";
-import {
-  monsterApplicable,
-  MonsterFormState,
-  ItemSelectErrorType,
-} from "./MonsterFormInline";
+import { monsterApplicable, MonsterFormState } from "./MonsterFormInline";
 import { ItemDisplayName } from "./components/ItemDisplayName";
 
 export type MobileInfoCardProps = MonsterFormState & {
@@ -19,7 +15,6 @@ export type MobileInfoCardProps = MonsterFormState & {
   itemName: string;
   rarity: RARITY;
   selectedChance: Fraction;
-  itemSelectError: ItemSelectErrorType;
 };
 
 const displayMonsterType = (monsterType: MonsterType): string => {
@@ -112,7 +107,7 @@ export const MobileInfoCard = (props: MobileInfoCardProps): JSX.Element => {
             <span className="font-bold text-rare">{props.mlvl}</span>)
           </p>
         )}{" "}
-        {props.baseItemName !== "" && !props.itemSelectError.error && (
+        {props.selectedChance.valueOf() > 0 && (
           <p>
             Analyzing:{" "}
             <span className="font-bold">
@@ -125,14 +120,14 @@ export const MobileInfoCard = (props: MobileInfoCardProps): JSX.Element => {
             <span> ({formatReciprocal(props.selectedChance)} chance)</span>
           </p>
         )}
-        {props.baseItemName === "" && props.itemSelectError.error && (
+        {props.selectedChance.valueOf() === 0 && (
           <p>
             <span className="text-red-500">Warning: </span>
             <span className="font-bold">
               <ItemDisplayName
-                itemName={props.itemSelectError.itemName}
-                baseItemName={props.itemSelectError.baseItemName}
-                rarity={props.itemSelectError.rarity}
+                itemName={props.itemName}
+                baseItemName={props.baseItemName}
+                rarity={props.rarity}
               ></ItemDisplayName>
             </span>
             <span>

@@ -78,9 +78,6 @@ export const PartyCountChart = ({
   rarity,
 }: IDashboardPropType): JSX.Element => {
   useEffect(() => {
-    if (baseItemName == "") {
-      return;
-    }
     const { xs, ys } = getData(
       playerFormState.tc,
       Number(playerFormState.mlvl),

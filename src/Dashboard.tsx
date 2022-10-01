@@ -44,7 +44,7 @@ export const Dashboard = ({
   return (
     <div>
       <div className="grid grid-cols-1 xl:grid-cols-2 gap-2 sm:gap-4 place-content-stretch">
-        {baseItemName && (
+        {selectedChance.valueOf() > 0 && (
           <React.Fragment>
             <Card canExpand={true}>
               <RepeatedRunsChart

@@ -100,9 +100,6 @@ export const RepeatedRunsChart = ({
 
   useEffect(() => setRuns(getXMax(selectedChance.valueOf())), [selectedChance]);
   useEffect(() => {
-    if (baseItemName == "") {
-      return;
-    }
     const { xs, ys } = getData(selectedChance, runs);
     let ctx = (
       document.getElementById("repeatedRunsChart") as HTMLCanvasElement

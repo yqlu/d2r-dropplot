@@ -43,17 +43,6 @@ const App = (): JSX.Element => {
     playerLvl: "99",
   } as MonsterFormState);
 
-  // let [initTc, initMlvl] = getTcAndMlvlFromMonster(
-  //   monsterFormState.difficulty,
-  //   monsterFormState.monsterType,
-  //   monsterFormState.levelId,
-  //   monsterFormState.monster,
-  //   monsterFormState.superunique,
-  //   monsterFormState.boss,
-  //   monsterFormState.terrorZone,
-  //   monsterFormState.playerLvl
-  // );
-
   const [playerFormState, setPlayerFormState] = useState({
     partyCount: 1,
     playerCount: 1,
@@ -87,12 +76,6 @@ const App = (): JSX.Element => {
     }
   );
   const [selectedChance, setSelectedChance] = useState(new Fraction(0));
-  const [itemSelectError, setItemSelectError] = useState({
-    error: false,
-    itemName: "",
-    baseItemName: "",
-    rarity: RARITY.WHITE,
-  });
   const [scrollPosition, setScrollPosition] = useState(null as number | null);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [mobileFormOpen, setMobileFormOpen] = useState(false);
@@ -178,20 +161,13 @@ const App = (): JSX.Element => {
       return true;
     });
     if (filtered.length !== 1) {
-      if (!itemSelectError.error) {
-        setItemSelectError({ error: true, itemName, baseItemName, rarity });
-      }
-      selectItem("", "", RARITY.WHITE, new Fraction(0));
+      selectItem(baseItemName, itemName, rarity, new Fraction(0));
     } else {
       let chance = filtered[0][1];
       chance = chance.mul(
         getRarityMultiplier(filtered[0][2], rarity, itemName)
       );
       selectItem(baseItemName, itemName, rarity, chance);
-      setItemSelectError({
-        ...itemSelectError,
-        error: false,
-      });
     }
   }, [results]);
 
@@ -274,12 +250,7 @@ const App = (): JSX.Element => {
     setItemName(newItemName);
     setRarity(newRarity);
     setSelectedChance(newChance);
-    if (
-      (newBaseItemName !== "" && newBaseItemName !== baseItemName) ||
-      (newItemName !== "" && newItemName !== itemName)
-    ) {
-      setMobileFormOpen(false);
-    }
+    setMobileFormOpen(false);
   };
 
   const sidebarStyle = sidebarOpen ? "sidebar-open" : "sidebar-closed";
@@ -347,7 +318,6 @@ const App = (): JSX.Element => {
                 itemName={itemName}
                 rarity={rarity}
                 selectedChance={selectedChance}
-                itemSelectError={itemSelectError}
               />
             </Card>
           </div>
@@ -368,7 +338,6 @@ const App = (): JSX.Element => {
                 itemName={itemName}
                 rarity={rarity}
                 selectedChance={selectedChance}
-                itemSelectError={itemSelectError}
               ></MobileInfoCard>
             </Card>
           </div>

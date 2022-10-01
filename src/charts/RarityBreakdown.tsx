@@ -104,9 +104,6 @@ export const RarityBreakdownChart = ({
   onSelectItem,
 }: IDashboardPropType): JSX.Element => {
   useEffect(() => {
-    if (baseItemName == "") {
-      return;
-    }
     let ctx = (
       document.getElementById("rarityBreakdownChart") as HTMLCanvasElement
     )?.getContext("2d");

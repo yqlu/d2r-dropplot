@@ -42,9 +42,6 @@ export const RuneBars = ({
     );
   });
   useEffect(() => {
-    if (baseItemName == "") {
-      return;
-    }
     const tcs = getData(results, baseItemName);
     const filterTcs = tcs.filter(
       (tuple) =>
