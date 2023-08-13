@@ -234,7 +234,7 @@ export const TreasureClassTreeMap = ({
     return () => {
       chart?.destroy();
     };
-  }, [selectedChance.valueOf(), baseItemName]);
+  }, [selectedChance.valueOf(), baseItemName, tcGrouped]);
 
   // TODO: explanatory tooltip
   return (
