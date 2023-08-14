@@ -51,19 +51,27 @@ function getStandardTCMlvl(
   terrorZone: boolean = false,
   playerLvl: number = 99
 ): [tc: string, mlvl: number] {
+  // Mlvl is a standard formula
   let mlvl = getStandardMlvl(difficulty, monsterType, levelId, monster);
-  if (terrorZone) {
-    mlvl = modifyByTerrorZone(mlvl, monsterType, difficulty, playerLvl);
-  }
 
   // TC is read from MonsterDict
   const monsterEntry = MonsterDict[monster];
   const idx = 3 * difficulty + getTcOffset(monsterType);
   let tc = monsterEntry.tcs[idx];
+
+  // Modify both in a TZ
+  if (terrorZone) {
+    const revisedIdx = idx + 9;
+    if (monsterEntry.tcs[revisedIdx]) {
+      tc = monsterEntry.tcs[idx];
+    }
+    mlvl = modifyByTerrorZone(mlvl, monsterType, difficulty, playerLvl);
+  }
   // If this is an invalid TC, just propagate it up and rely on downstream error handling
   if (!tc || !TCDict[tc]) {
     return [tc, mlvl];
   }
+  // Allow for TC upgrade by mlvl if applicable
   if (difficulty !== Difficulty.NORMAL && mlvl > TCDict[tc].level) {
     const tcGroup = TCDict[tc].group;
     if (tcGroup != null && TcGroupDict[tcGroup]) {
@@ -84,7 +92,7 @@ function getSuperUniqueTCMlvl(
 ): [tc: string, mlvl: number] {
   // TC is read from SuperuniqueDict
   const superuniqueEntry = SuperuniqueDict[superunique];
-  const tc = superuniqueEntry.tcs[difficulty];
+  let tc = superuniqueEntry.tcs[difficulty];
   // mlvl is read from LevelsDict alvl, + 3
   let mlvl = getStandardMlvl(
     difficulty,
@@ -92,6 +100,7 @@ function getSuperUniqueTCMlvl(
     superuniqueEntry.areaId,
     superuniqueEntry.class
   );
+  // Modify both in a TZ
   if (terrorZone) {
     mlvl = modifyByTerrorZone(
       mlvl,
@@ -99,6 +108,9 @@ function getSuperUniqueTCMlvl(
       difficulty,
       playerLvl
     );
+    if (superuniqueEntry.tcs[difficulty + 3]) {
+      tc = superuniqueEntry.tcs[difficulty + 3]!;
+    }
   }
   return [tc, mlvl];
 }
@@ -116,7 +128,7 @@ function getBossTCMlvl(
     quest = 1;
   }
   const bossEntry = FlatBossDict[bossName];
-  const tc = bossEntry.tcs[difficulty * 2 + quest];
+  let tc = bossEntry.tcs[difficulty * 2 + quest];
   let mlvl = bossEntry.levels[difficulty];
   if (terrorZone) {
     mlvl = modifyByTerrorZone(
@@ -125,6 +137,9 @@ function getBossTCMlvl(
       difficulty,
       playerLvl
     );
+    if (bossEntry.tcs[5 + difficulty]) {
+      tc = bossEntry.tcs[5 + difficulty]!;
+    }
   }
   return [tc, mlvl];
 }

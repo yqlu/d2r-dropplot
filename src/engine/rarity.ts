@@ -175,16 +175,16 @@ export function computeQualityProbsHelper(
 export function findCandidates(
   itemCode: string,
   ilvl: number,
-  dict: UniqueSetBaseLookupType,
-  canDropSunderCharm: boolean = true
+  dict: UniqueSetBaseLookupType
 ): UniqueSetProbTuple[] {
   if (!dict.hasOwnProperty(itemCode)) {
     return [];
   }
   let candidates = dict[itemCode].filter((candidate) => candidate.lvl <= ilvl);
 
-  // Special Sunder Charm check
-  if (itemCode === "cm3" && !canDropSunderCharm) {
+  // For the purposes of item quality, a grand charm drop always has a 0% chance of being a sunder charm
+  // Sunder charms are its own treasure class and spawned separately
+  if (itemCode === "cm3") {
     candidates = candidates.filter((candidate) => !isSunderCharm(candidate));
   }
 
@@ -212,8 +212,7 @@ export function computeQualityProbs(
   itemCode: string,
   ilvl: number,
   magicFind: number = 0,
-  qualityFactors: ItemQualityRatios,
-  canDropSunderCharm = false
+  qualityFactors: ItemQualityRatios
 ): QualityProbabilityObject {
   if (qualityNotApplicable(itemCode)) {
     const ZERO = new Fraction(0);
@@ -229,18 +228,8 @@ export function computeQualityProbs(
     magicFind,
     qualityFactors
   );
-  const candidateUniques = findCandidates(
-    itemCode,
-    ilvl,
-    UniqueBaseLookup,
-    canDropSunderCharm
-  );
-  const candidateSets = findCandidates(
-    itemCode,
-    ilvl,
-    SetBaseLookup,
-    canDropSunderCharm
-  );
+  const candidateUniques = findCandidates(itemCode, ilvl, UniqueBaseLookup);
+  const candidateSets = findCandidates(itemCode, ilvl, SetBaseLookup);
 
   // If there are no uniques that can be generated,
   // Generate a triple-durability rare in its place

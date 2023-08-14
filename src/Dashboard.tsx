@@ -14,7 +14,6 @@ import { qualityNotApplicable } from "./engine/rarity";
 import { ArmorDict, WeaponsDict } from "./engine/weapon-armor-dict";
 import { Distribution } from "./engine/distribution";
 import { ZERO } from "./engine/polynomialOps";
-import { canDropSunderCharm } from "./helpers";
 
 export const Dashboard = ({
   playerFormState,
@@ -33,8 +32,7 @@ export const Dashboard = ({
       playerFormState,
       baseItemName,
       itemName,
-      rarity,
-      canDropSunderCharm(monsterFormState)
+      rarity
     );
     atLeastOneChance = distribution.eval().atLeastOneChance();
   }
