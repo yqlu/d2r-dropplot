@@ -4,7 +4,7 @@ import { FlatBossDict } from "./boss-dict";
 import { LevelsDict } from "./levels-dict";
 import { TCDict } from "./tc-dict";
 import { TcGroupDict } from "./tcgroup-dict";
-import { max } from "lodash-es";
+import { max, maxBy } from "lodash-es";
 
 export function getTcAndMlvlFromMonster(
   difficulty: Difficulty,
@@ -63,7 +63,7 @@ function getStandardTCMlvl(
   if (terrorZone) {
     const revisedIdx = idx + 9;
     if (monsterEntry.tcs[revisedIdx]) {
-      tc = monsterEntry.tcs[idx];
+      tc = monsterEntry.tcs[revisedIdx];
     }
     mlvl = modifyByTerrorZone(mlvl, monsterType, difficulty, playerLvl);
   }
@@ -110,6 +110,9 @@ function getSuperUniqueTCMlvl(
     );
     if (superuniqueEntry.tcs[difficulty + 3]) {
       tc = superuniqueEntry.tcs[difficulty + 3]!;
+      if (tc.endsWith("Desecrated A")) {
+        tc = upgradeDesecratedTz(tc, mlvl);
+      }
     }
   }
   return [tc, mlvl];
@@ -137,8 +140,11 @@ function getBossTCMlvl(
       difficulty,
       playerLvl
     );
-    if (bossEntry.tcs[5 + difficulty]) {
-      tc = bossEntry.tcs[5 + difficulty]!;
+    if (bossEntry.tcs[6 + difficulty]) {
+      tc = bossEntry.tcs[6 + difficulty]!;
+      if (tc.endsWith("Desecrated A")) {
+        tc = upgradeDesecratedTz(tc, mlvl);
+      }
     }
   }
   return [tc, mlvl];
@@ -217,4 +223,12 @@ export function modifyByTerrorZone(
   const mlvlOffset = getTerrorZoneMlvlOffset(monsterType);
   const playerLvlMax = getPlayerLvlMax(difficulty);
   return Math.max(mlvl, Math.min(playerLvl, playerLvlMax) + mlvlOffset);
+}
+
+export function upgradeDesecratedTz(tc: string, mlvl: number): string {
+  const prefix = tc.slice(0, tc.length - 1);
+  const allEligibleTzs = Object.keys(TCDict).filter((tcKey) => {
+    return tcKey.startsWith(prefix) && TCDict[tcKey].level <= mlvl;
+  });
+  return maxBy(allEligibleTzs, (eligibleTz) => TCDict[eligibleTz].level) ?? tc;
 }

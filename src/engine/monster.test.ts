@@ -384,6 +384,228 @@ describe("getTcAndMlvlFromMonster", () => {
     expect(testBoss(Difficulty.HELL, "andariel")).to.eql(["Andarielq (H)", 75]);
     expect(testBoss(Difficulty.HELL, "mephisto")).to.eql(["Mephisto (H)", 87]);
   });
+
+  describe("terror zones", () => {
+    const testTzMonster = (
+      difficulty: Difficulty,
+      monsterType: MonsterType,
+      levelId: number,
+      monster: string
+    ) => {
+      return getTcAndMlvlFromMonster(
+        difficulty,
+        monsterType,
+        levelId,
+        monster,
+        DEFAULT.superunique,
+        DEFAULT.boss,
+        true,
+        99
+      );
+    };
+
+    const testTzSuperunique = (
+      difficulty: Difficulty,
+      superunique: string,
+      playerLvl: number
+    ) => {
+      return getTcAndMlvlFromMonster(
+        difficulty,
+        MonsterType.SUPERUNIQUE,
+        DEFAULT.levelId,
+        DEFAULT.monster,
+        superunique,
+        DEFAULT.boss,
+        true,
+        playerLvl
+      );
+    };
+
+    const testTzBoss = (
+      difficulty: Difficulty,
+      boss: string,
+      playerLvl: number
+    ) => {
+      return getTcAndMlvlFromMonster(
+        difficulty,
+        MonsterType.BOSS,
+        DEFAULT.levelId,
+        DEFAULT.monster,
+        DEFAULT.superunique,
+        boss,
+        true,
+        playerLvl
+      );
+    };
+
+    it("should not change the TC of monsters in normal or nightmare", () => {
+      expect(
+        testTzMonster(Difficulty.NORMAL, MonsterType.NORMAL, 2, "fallen1")[0]
+      ).to.not.have.string("Desecrated");
+      expect(
+        testTzMonster(Difficulty.NORMAL, MonsterType.NORMAL, 56, "slinger2")[0]
+      ).to.not.have.string("Desecrated");
+      expect(
+        testTzMonster(Difficulty.NORMAL, MonsterType.NORMAL, 82, "cantor3")[0]
+      ).to.not.have.string("Desecrated");
+      expect(
+        testTzMonster(
+          Difficulty.NORMAL,
+          MonsterType.NORMAL,
+          106,
+          "fingermage2"
+        )[0]
+      ).to.not.have.string("Desecrated");
+      expect(
+        testTzMonster(
+          Difficulty.NORMAL,
+          MonsterType.NORMAL,
+          117,
+          "siegebeast2"
+        )[0]
+      ).to.not.have.string("Desecrated");
+    });
+    it("should not change the TC of a standard monster or a minion in hell", () => {
+      expect(
+        testTzMonster(Difficulty.HELL, MonsterType.NORMAL, 2, "fallen1")[0]
+      ).to.not.have.string("Desecrated");
+      expect(
+        testTzMonster(Difficulty.HELL, MonsterType.NORMAL, 56, "slinger2")[0]
+      ).to.not.have.string("Desecrated");
+      expect(
+        testTzMonster(Difficulty.HELL, MonsterType.NORMAL, 82, "cantor3")[0]
+      ).to.not.have.string("Desecrated");
+      expect(
+        testTzMonster(
+          Difficulty.HELL,
+          MonsterType.NORMAL,
+          106,
+          "fingermage2"
+        )[0]
+      ).to.not.have.string("Desecrated");
+      expect(
+        testTzMonster(
+          Difficulty.HELL,
+          MonsterType.NORMAL,
+          117,
+          "siegebeast2"
+        )[0]
+      ).to.not.have.string("Desecrated");
+    });
+    it("should set the TC of a champion monster in hell", () => {
+      expect(
+        testTzMonster(Difficulty.HELL, MonsterType.CHAMP, 2, "fallen1")[0]
+      ).to.equal("Act 1 (H) Champ A Desecrated");
+      expect(
+        testTzMonster(Difficulty.HELL, MonsterType.CHAMP, 56, "slinger2")[0]
+      ).to.equal("Act 2 (H) Champ A Desecrated");
+      expect(
+        testTzMonster(Difficulty.HELL, MonsterType.CHAMP, 82, "cantor3")[0]
+      ).to.equal("Act 3 (H) Champ B Desecrated");
+      expect(
+        testTzMonster(Difficulty.HELL, MonsterType.CHAMP, 106, "fingermage2")[0]
+      ).to.equal("Act 4 (H) Champ B Desecrated");
+      expect(
+        testTzMonster(Difficulty.HELL, MonsterType.CHAMP, 117, "siegebeast2")[0]
+      ).to.equal("Act 5 (H) Champ B Desecrated");
+    });
+    it("should set the TC of a unique monster in hell", () => {
+      expect(
+        testTzMonster(Difficulty.HELL, MonsterType.UNIQUE, 2, "fallen1")[0]
+      ).to.equal("Act 1 (H) Unique A Desecrated");
+      expect(
+        testTzMonster(Difficulty.HELL, MonsterType.UNIQUE, 56, "slinger2")[0]
+      ).to.equal("Act 2 (H) Unique A Desecrated");
+      expect(
+        testTzMonster(Difficulty.HELL, MonsterType.UNIQUE, 82, "cantor3")[0]
+      ).to.equal("Act 3 (H) Unique B Desecrated");
+      expect(
+        testTzMonster(
+          Difficulty.HELL,
+          MonsterType.UNIQUE,
+          106,
+          "fingermage2"
+        )[0]
+      ).to.equal("Act 4 (H) Unique B Desecrated");
+      expect(
+        testTzMonster(
+          Difficulty.HELL,
+          MonsterType.UNIQUE,
+          117,
+          "siegebeast2"
+        )[0]
+      ).to.equal("Act 5 (H) Unique B Desecrated");
+    });
+    it("should set the TC of a superunique in any difficulty", () => {
+      expect(testTzSuperunique(Difficulty.NORMAL, "Rakanishu", 99)[0]).to.eql(
+        "Act 1 Super B"
+      );
+      expect(
+        testTzSuperunique(Difficulty.NIGHTMARE, "Rakanishu", 99)[0]
+      ).to.eql("Act 1 (N) Super B");
+      expect(testTzSuperunique(Difficulty.HELL, "Rakanishu", 99)[0]).to.eql(
+        "Act 1 (H) Super B Desecrated"
+      );
+    });
+    it("should upgrade the TC of a superunique in hell based on playerlvl", () => {
+      for (let playerLvl = 70; playerLvl <= 92; playerLvl++) {
+        const tcResult = testTzSuperunique(
+          Difficulty.HELL,
+          "The Countess",
+          playerLvl
+        )[0];
+        if (playerLvl <= 78) {
+          expect(tcResult).to.equal("Countess (H) Desecrated A");
+        } else if (playerLvl <= 81) {
+          expect(tcResult).to.equal("Countess (H) Desecrated B");
+        } else if (playerLvl <= 84) {
+          expect(tcResult).to.equal("Countess (H) Desecrated C");
+        } else if (playerLvl <= 87) {
+          expect(tcResult).to.equal("Countess (H) Desecrated D");
+        } else if (playerLvl <= 90) {
+          expect(tcResult).to.equal("Countess (H) Desecrated E");
+        } else {
+          expect(tcResult).to.equal("Countess (H) Desecrated F");
+        }
+      }
+    });
+    it("should set the TC of a boss in any difficulty", () => {
+      expect(testTzBoss(Difficulty.NORMAL, "izual", 99)[0]).to.eql(
+        "Izual Desecrated C"
+      );
+      expect(testTzBoss(Difficulty.NIGHTMARE, "izual", 99)[0]).to.eql(
+        "Izual (N) Desecrated C"
+      );
+      expect(testTzBoss(Difficulty.HELL, "izual", 99)[0]).to.eql(
+        "Izual (H) Desecrated D"
+      );
+    });
+    it("should upgrade the TC of a boss in any difficulty based on playerlvl", () => {
+      for (let playerLvl = 70; playerLvl <= 92; playerLvl++) {
+        const tcResult = testTzBoss(
+          Difficulty.HELL,
+          "andariel",
+          playerLvl
+        )[0];
+        if (playerLvl <= 72) {
+        expect(tcResult).to.equal("Andarielq (H) Desecrated A");
+      } else if (playerLvl <= 75) {
+        expect(tcResult).to.equal("Andarielq (H) Desecrated B");
+      } else if (playerLvl <= 78) {
+        expect(tcResult).to.equal("Andarielq (H) Desecrated C");
+      } else if (playerLvl <= 81) {
+        expect(tcResult).to.equal("Andarielq (H) Desecrated D");
+      } else if (playerLvl <= 84) {
+        expect(tcResult).to.equal("Andarielq (H) Desecrated E");
+      } else if (playerLvl <= 87) {
+        expect(tcResult).to.equal("Andarielq (H) Desecrated F");
+      } else if (playerLvl <= 90) {
+        expect(tcResult).to.equal("Andarielq (H) Desecrated G");
+      } else {
+        expect(tcResult).to.equal("Andarielq (H) Desecrated H");
+      }
+    }
+  });
 });
 
 describe("modifyByTerrorZone", () => {
