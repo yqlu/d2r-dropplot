@@ -20,7 +20,7 @@ describe("BossDict structure", () => {
       expect(entry.levels[2]).to.not.be.undefined;
       for (let tc of entry.tcs) {
         if (tc) {
-          expect(TCDict[tc]).to.not.be.undefined;
+          expect(TCDict[tc], mon).to.not.be.undefined;
         }
       }
     }

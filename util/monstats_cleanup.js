@@ -2,7 +2,10 @@ import { range, sum, map, clone } from "lodash-es";
 import { readFile } from "fs/promises";
 const json = JSON.parse(
   await readFile(
-    new URL("../node_modules/d2-data/json/monstats.json", import.meta.url)
+    new URL(
+      "../node_modules/@blizzhackers/d2data/json/monstats.json",
+      import.meta.url
+    )
   )
 );
 
@@ -17,15 +20,24 @@ for (var entry of Object.entries(json)) {
     nameStr: obj.NameStr,
     levels: [obj.Level, obj["Level(N)"], obj["Level(H)"]],
     tcs: [
-      obj.TreasureClass1, // normal
-      obj.TreasureClass2, // champion
-      obj.TreasureClass3, // unique
-      obj["TreasureClass1(N)"],
-      obj["TreasureClass2(N)"],
-      obj["TreasureClass3(N)"],
-      obj["TreasureClass1(H)"],
-      obj["TreasureClass2(H)"],
-      obj["TreasureClass3(H)"],
+      obj.TreasureClass,
+      obj.TreasureClassChamp,
+      obj.TreasureClassUnique,
+      obj["TreasureClass(N)"],
+      obj["TreasureClassChamp(N)"],
+      obj["TreasureClassUnique(N)"],
+      obj["TreasureClass(H)"],
+      obj["TreasureClassChamp(H)"],
+      obj["TreasureClassUnique(H)"],
+      obj["TreasureClassDesecrated"],
+      obj["TreasureClassDesecratedChamp"],
+      obj["TreasureClassDesecratedUnique"],
+      obj["TreasureClassDesecrated(N)"],
+      obj["TreasureClassDesecratedChamp(N)"],
+      obj["TreasureClassDesecratedUnique(N)"],
+      obj["TreasureClassDesecrated(H)"],
+      obj["TreasureClassDesecratedChamp(H)"],
+      obj["TreasureClassDesecratedUnique(H)"],
     ],
   };
   if (cleaned.tcs.filter((e) => e).length > 0 && obj.boss != 1) {
@@ -70,12 +82,15 @@ function populate(container, names) {
       nameStr: obj.NameStr,
       levels: [obj.Level, obj["Level(N)"], obj["Level(H)"]],
       tcs: [
-        obj.TreasureClass1, // normal
-        obj.TreasureClass4, // quest
-        obj["TreasureClass1(N)"],
-        obj["TreasureClass4(N)"],
-        obj["TreasureClass1(H)"],
-        obj["TreasureClass4(H)"],
+        obj.TreasureClass, // normal
+        obj.TreasureClassQuest, // quest
+        obj["TreasureClass(N)"],
+        obj["TreasureClassQuest(N)"],
+        obj["TreasureClass(H)"],
+        obj["TreasureClassQuest(H)"],
+        obj.TreasureClassDesecrated,
+        obj["TreasureClassDesecrated(N)"],
+        obj["TreasureClassDesecrated(H)"],
       ],
     };
   }
@@ -84,4 +99,5 @@ populate(Bosses.minor, minor);
 populate(Bosses.actbosses, actbosses);
 populate(Bosses.pandemonium, pandemonium);
 
+// This becomes src/engine/boss-dict.ts
 console.log(JSON.stringify(Bosses));

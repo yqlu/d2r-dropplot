@@ -1636,12 +1636,12 @@ export const LocaleDict: { [key: string]: string } = {
   Diablo: "Diablo",
   "Baal Crab": "Baal",
   Lilith: "Lilith",
-  "The Black Cleft": "The Black Cleft",
-  "The Bone Break": "The Bone Break",
-  "The Cold Rupture": "The Cold Rupture",
-  "The Crack of the Heavens": "The Crack of the Heavens",
-  "The Flame Rift": "The Flame Rift",
-  "The Rotting Fissure": "The Rotting Fissure",
+  "Black Cleft": "Black Cleft",
+  "Bone Break": "Bone Break",
+  "Cold Rupture": "Cold Rupture",
+  "Crack of the Heavens": "Crack of the Heavens",
+  "Flame Rift": "Flame Rift",
+  "Rotting Fissure": "Rotting Fissure",
 };
 
 export function Locale(id: string): string {

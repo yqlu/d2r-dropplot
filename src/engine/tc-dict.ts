@@ -104,6 +104,17 @@ export const TCDict: TCDictType = {
       ["Act 1 (H) Cpot A", 3],
     ],
   },
+  "Act 1 (H) Champ A Desecrated": {
+    group: 36,
+    level: 63,
+    nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Sunder Charms", 1],
+      ["Act 1 (H) Champ A", 1],
+    ],
+  },
   "Act 1 (H) Champ B": {
     group: 13,
     level: 66,
@@ -115,6 +126,17 @@ export const TCDict: TCDictType = {
       ["Act 1 (H) Cpot B", 3],
     ],
   },
+  "Act 1 (H) Champ B Desecrated": {
+    group: 36,
+    level: 66,
+    nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Sunder Charms", 1],
+      ["Act 1 (H) Champ B", 1],
+    ],
+  },
   "Act 1 (H) Champ C": {
     group: 13,
     level: 68,
@@ -124,6 +146,17 @@ export const TCDict: TCDictType = {
     tcs: [
       ["Act 1 (H) Citem C", 1],
       ["Act 1 (H) Cpot C", 3],
+    ],
+  },
+  "Act 1 (H) Champ C Desecrated": {
+    group: 36,
+    level: 68,
+    nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Sunder Charms", 1],
+      ["Act 1 (H) Champ C", 1],
     ],
   },
   "Act 1 (H) Chest A": {
@@ -349,6 +382,7 @@ export const TCDict: TCDictType = {
     ],
   },
   "Act 1 (H) Junk": {
+    group: -1,
     nodrop: 0,
     picks: 1,
     qualityRatios: [0, 0, 0, 0],
@@ -477,8 +511,19 @@ export const TCDict: TCDictType = {
       ["Act 1 (H) Cpot A", 2],
     ],
   },
+  "Act 1 (H) Super A Desecrated": {
+    group: 38,
+    level: 67,
+    nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Sunder Charms", 1],
+      ["Act 1 (H) Super A", 1],
+    ],
+  },
   "Act 1 (H) Super Ax": {
-    group: 18,
+    group: 19,
     level: 67,
     nodrop: 0,
     picks: -4,
@@ -486,6 +531,17 @@ export const TCDict: TCDictType = {
     tcs: [
       ["Act 1 (H) Uitem A", 2],
       ["Act 1 (H) Cpot A", 2],
+    ],
+  },
+  "Act 1 (H) Super Ax Desecrated": {
+    group: 39,
+    level: 67,
+    nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Sunder Charms", 1],
+      ["Act 1 (H) Super Ax", 1],
     ],
   },
   "Act 1 (H) Super B": {
@@ -499,8 +555,19 @@ export const TCDict: TCDictType = {
       ["Act 1 (H) Cpot B", 2],
     ],
   },
+  "Act 1 (H) Super B Desecrated": {
+    group: 38,
+    level: 67,
+    nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Sunder Charms", 1],
+      ["Act 1 (H) Super B", 1],
+    ],
+  },
   "Act 1 (H) Super Bx": {
-    group: 18,
+    group: 19,
     level: 67,
     nodrop: 0,
     picks: -4,
@@ -508,6 +575,17 @@ export const TCDict: TCDictType = {
     tcs: [
       ["Act 1 (H) Uitem B", 2],
       ["Act 1 (H) Cpot B", 2],
+    ],
+  },
+  "Act 1 (H) Super Bx Desecrated": {
+    group: 39,
+    level: 67,
+    nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Sunder Charms", 1],
+      ["Act 1 (H) Super Bx", 1],
     ],
   },
   "Act 1 (H) Super C": {
@@ -521,8 +599,19 @@ export const TCDict: TCDictType = {
       ["Act 1 (H) Cpot C", 2],
     ],
   },
+  "Act 1 (H) Super C Desecrated": {
+    group: 38,
+    level: 68,
+    nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Sunder Charms", 1],
+      ["Act 1 (H) Super C", 1],
+    ],
+  },
   "Act 1 (H) Super Cx": {
-    group: 18,
+    group: 19,
     level: 68,
     nodrop: 0,
     picks: -4,
@@ -530,6 +619,17 @@ export const TCDict: TCDictType = {
     tcs: [
       ["Act 1 (H) Uitem C", 2],
       ["Act 1 (H) Cpot C", 2],
+    ],
+  },
+  "Act 1 (H) Super Cx Desecrated": {
+    group: 39,
+    level: 68,
+    nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Sunder Charms", 1],
+      ["Act 1 (H) Super Cx", 1],
     ],
   },
   "Act 1 (H) Uitem A": {
@@ -576,6 +676,17 @@ export const TCDict: TCDictType = {
       ["Act 1 (H) Cpot A", 2],
     ],
   },
+  "Act 1 (H) Unique A Desecrated": {
+    group: 37,
+    level: 63,
+    nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Sunder Charms", 1],
+      ["Act 1 (H) Unique A", 1],
+    ],
+  },
   "Act 1 (H) Unique B": {
     group: 15,
     level: 66,
@@ -587,6 +698,17 @@ export const TCDict: TCDictType = {
       ["Act 1 (H) Cpot B", 2],
     ],
   },
+  "Act 1 (H) Unique B Desecrated": {
+    group: 37,
+    level: 66,
+    nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Sunder Charms", 1],
+      ["Act 1 (H) Unique B", 1],
+    ],
+  },
   "Act 1 (H) Unique C": {
     group: 15,
     level: 68,
@@ -596,6 +718,17 @@ export const TCDict: TCDictType = {
     tcs: [
       ["Act 1 (H) Uitem C", 1],
       ["Act 1 (H) Cpot C", 2],
+    ],
+  },
+  "Act 1 (H) Unique C Desecrated": {
+    group: 37,
+    level: 68,
+    nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Sunder Charms", 1],
+      ["Act 1 (H) Unique C", 1],
     ],
   },
   "Act 1 (H) Wraith A": {
@@ -962,6 +1095,7 @@ export const TCDict: TCDictType = {
     ],
   },
   "Act 1 (N) Junk": {
+    group: -1,
     nodrop: 0,
     picks: 1,
     qualityRatios: [0, 0, 0, 0],
@@ -1091,7 +1225,7 @@ export const TCDict: TCDictType = {
     ],
   },
   "Act 1 (N) Super Ax": {
-    group: 18,
+    group: 19,
     level: 40,
     nodrop: 0,
     picks: -4,
@@ -1113,7 +1247,7 @@ export const TCDict: TCDictType = {
     ],
   },
   "Act 1 (N) Super Bx": {
-    group: 18,
+    group: 19,
     level: 41,
     nodrop: 0,
     picks: -4,
@@ -1135,7 +1269,7 @@ export const TCDict: TCDictType = {
     ],
   },
   "Act 1 (N) Super Cx": {
-    group: 18,
+    group: 19,
     level: 42,
     nodrop: 0,
     picks: -4,
@@ -1542,6 +1676,7 @@ export const TCDict: TCDictType = {
     ],
   },
   "Act 1 Junk": {
+    group: -1,
     nodrop: 0,
     picks: 1,
     qualityRatios: [0, 0, 0, 0],
@@ -1687,7 +1822,7 @@ export const TCDict: TCDictType = {
     ],
   },
   "Act 1 Super Ax": {
-    group: 18,
+    group: 19,
     level: 0,
     nodrop: 0,
     picks: -4,
@@ -1709,7 +1844,7 @@ export const TCDict: TCDictType = {
     ],
   },
   "Act 1 Super Bx": {
-    group: 18,
+    group: 19,
     level: 5,
     nodrop: 0,
     picks: -4,
@@ -1731,7 +1866,7 @@ export const TCDict: TCDictType = {
     ],
   },
   "Act 1 Super Cx": {
-    group: 18,
+    group: 19,
     level: 9,
     nodrop: 0,
     picks: -4,
@@ -1929,6 +2064,17 @@ export const TCDict: TCDictType = {
       ["Act 2 (H) Cpot A", 3],
     ],
   },
+  "Act 2 (H) Champ A Desecrated": {
+    group: 36,
+    level: 69,
+    nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Sunder Charms", 1],
+      ["Act 2 (H) Champ A", 1],
+    ],
+  },
   "Act 2 (H) Champ B": {
     group: 13,
     level: 71,
@@ -1940,6 +2086,17 @@ export const TCDict: TCDictType = {
       ["Act 2 (H) Cpot B", 3],
     ],
   },
+  "Act 2 (H) Champ B Desecrated": {
+    group: 36,
+    level: 71,
+    nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Sunder Charms", 1],
+      ["Act 2 (H) Champ B", 1],
+    ],
+  },
   "Act 2 (H) Champ C": {
     group: 13,
     level: 72,
@@ -1949,6 +2106,17 @@ export const TCDict: TCDictType = {
     tcs: [
       ["Act 2 (H) Citem C", 1],
       ["Act 2 (H) Cpot C", 3],
+    ],
+  },
+  "Act 2 (H) Champ C Desecrated": {
+    group: 36,
+    level: 72,
+    nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Sunder Charms", 1],
+      ["Act 2 (H) Champ C", 1],
     ],
   },
   "Act 2 (H) Chest A": {
@@ -2174,6 +2342,7 @@ export const TCDict: TCDictType = {
     ],
   },
   "Act 2 (H) Junk": {
+    group: -1,
     nodrop: 0,
     picks: 1,
     qualityRatios: [0, 0, 0, 0],
@@ -2302,8 +2471,19 @@ export const TCDict: TCDictType = {
       ["Act 2 (H) Cpot A", 2],
     ],
   },
+  "Act 2 (H) Super A Desecrated": {
+    group: 38,
+    level: 68,
+    nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Sunder Charms", 1],
+      ["Act 2 (H) Super A", 1],
+    ],
+  },
   "Act 2 (H) Super Ax": {
-    group: 18,
+    group: 19,
     level: 68,
     nodrop: 0,
     picks: -4,
@@ -2311,6 +2491,17 @@ export const TCDict: TCDictType = {
     tcs: [
       ["Act 2 (H) Uitem A", 2],
       ["Act 2 (H) Cpot A", 2],
+    ],
+  },
+  "Act 2 (H) Super Ax Desecrated": {
+    group: 39,
+    level: 68,
+    nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Sunder Charms", 1],
+      ["Act 2 (H) Super Ax", 1],
     ],
   },
   "Act 2 (H) Super B": {
@@ -2324,8 +2515,19 @@ export const TCDict: TCDictType = {
       ["Act 2 (H) Cpot B", 2],
     ],
   },
+  "Act 2 (H) Super B Desecrated": {
+    group: 38,
+    level: 69,
+    nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Sunder Charms", 1],
+      ["Act 2 (H) Super B", 1],
+    ],
+  },
   "Act 2 (H) Super Bx": {
-    group: 18,
+    group: 19,
     level: 69,
     nodrop: 0,
     picks: -4,
@@ -2333,6 +2535,17 @@ export const TCDict: TCDictType = {
     tcs: [
       ["Act 2 (H) Uitem B", 2],
       ["Act 2 (H) Cpot B", 2],
+    ],
+  },
+  "Act 2 (H) Super Bx Desecrated": {
+    group: 39,
+    level: 69,
+    nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Sunder Charms", 1],
+      ["Act 2 (H) Super Bx", 1],
     ],
   },
   "Act 2 (H) Super C": {
@@ -2346,8 +2559,19 @@ export const TCDict: TCDictType = {
       ["Act 2 (H) Cpot C", 2],
     ],
   },
+  "Act 2 (H) Super C Desecrated": {
+    group: 38,
+    level: 72,
+    nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Sunder Charms", 1],
+      ["Act 2 (H) Super C", 1],
+    ],
+  },
   "Act 2 (H) Super Cx": {
-    group: 18,
+    group: 19,
     level: 72,
     nodrop: 0,
     picks: -4,
@@ -2355,6 +2579,17 @@ export const TCDict: TCDictType = {
     tcs: [
       ["Act 2 (H) Uitem C", 2],
       ["Act 2 (H) Cpot C", 2],
+    ],
+  },
+  "Act 2 (H) Super Cx Desecrated": {
+    group: 39,
+    level: 72,
+    nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Sunder Charms", 1],
+      ["Act 2 (H) Super Cx", 1],
     ],
   },
   "Act 2 (H) Uitem A": {
@@ -2401,6 +2636,17 @@ export const TCDict: TCDictType = {
       ["Act 2 (H) Cpot A", 2],
     ],
   },
+  "Act 2 (H) Unique A Desecrated": {
+    group: 37,
+    level: 69,
+    nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Sunder Charms", 1],
+      ["Act 2 (H) Unique A", 1],
+    ],
+  },
   "Act 2 (H) Unique B": {
     group: 15,
     level: 71,
@@ -2412,6 +2658,17 @@ export const TCDict: TCDictType = {
       ["Act 2 (H) Cpot B", 2],
     ],
   },
+  "Act 2 (H) Unique B Desecrated": {
+    group: 37,
+    level: 71,
+    nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Sunder Charms", 1],
+      ["Act 2 (H) Unique B", 1],
+    ],
+  },
   "Act 2 (H) Unique C": {
     group: 15,
     level: 72,
@@ -2421,6 +2678,17 @@ export const TCDict: TCDictType = {
     tcs: [
       ["Act 2 (H) Uitem C", 1],
       ["Act 2 (H) Cpot C", 2],
+    ],
+  },
+  "Act 2 (H) Unique C Desecrated": {
+    group: 37,
+    level: 72,
+    nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Sunder Charms", 1],
+      ["Act 2 (H) Unique C", 1],
     ],
   },
   "Act 2 (H) Wraith A": {
@@ -2787,6 +3055,7 @@ export const TCDict: TCDictType = {
     ],
   },
   "Act 2 (N) Junk": {
+    group: -1,
     nodrop: 0,
     picks: 1,
     qualityRatios: [0, 0, 0, 0],
@@ -2916,7 +3185,7 @@ export const TCDict: TCDictType = {
     ],
   },
   "Act 2 (N) Super Ax": {
-    group: 18,
+    group: 19,
     level: 44,
     nodrop: 0,
     picks: -4,
@@ -2938,7 +3207,7 @@ export const TCDict: TCDictType = {
     ],
   },
   "Act 2 (N) Super Bx": {
-    group: 18,
+    group: 19,
     level: 45,
     nodrop: 0,
     picks: -4,
@@ -2960,7 +3229,7 @@ export const TCDict: TCDictType = {
     ],
   },
   "Act 2 (N) Super Cx": {
-    group: 18,
+    group: 19,
     level: 46,
     nodrop: 0,
     picks: -4,
@@ -3394,6 +3663,7 @@ export const TCDict: TCDictType = {
     ],
   },
   "Act 2 Junk": {
+    group: -1,
     nodrop: 0,
     picks: 1,
     qualityRatios: [0, 0, 0, 0],
@@ -3557,7 +3827,7 @@ export const TCDict: TCDictType = {
     ],
   },
   "Act 2 Super Ax": {
-    group: 18,
+    group: 19,
     level: 12,
     nodrop: 0,
     picks: -4,
@@ -3579,7 +3849,7 @@ export const TCDict: TCDictType = {
     ],
   },
   "Act 2 Super Bx": {
-    group: 18,
+    group: 19,
     level: 15,
     nodrop: 0,
     picks: -4,
@@ -3601,7 +3871,7 @@ export const TCDict: TCDictType = {
     ],
   },
   "Act 2 Super Cx": {
-    group: 18,
+    group: 19,
     level: 18,
     nodrop: 0,
     picks: -4,
@@ -3799,6 +4069,17 @@ export const TCDict: TCDictType = {
       ["Act 3 (H) Cpot A", 3],
     ],
   },
+  "Act 3 (H) Champ A Desecrated": {
+    group: 36,
+    level: 74,
+    nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Sunder Charms", 1],
+      ["Act 3 (H) Champ A", 1],
+    ],
+  },
   "Act 3 (H) Champ B": {
     group: 13,
     level: 75,
@@ -3810,6 +4091,17 @@ export const TCDict: TCDictType = {
       ["Act 3 (H) Cpot B", 3],
     ],
   },
+  "Act 3 (H) Champ B Desecrated": {
+    group: 36,
+    level: 75,
+    nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Sunder Charms", 1],
+      ["Act 3 (H) Champ B", 1],
+    ],
+  },
   "Act 3 (H) Champ C": {
     group: 13,
     level: 77,
@@ -3819,6 +4111,17 @@ export const TCDict: TCDictType = {
     tcs: [
       ["Act 3 (H) Citem C", 1],
       ["Act 3 (H) Cpot C", 3],
+    ],
+  },
+  "Act 3 (H) Champ C Desecrated": {
+    group: 36,
+    level: 77,
+    nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Sunder Charms", 1],
+      ["Act 3 (H) Champ C", 1],
     ],
   },
   "Act 3 (H) Chest A": {
@@ -4044,6 +4347,7 @@ export const TCDict: TCDictType = {
     ],
   },
   "Act 3 (H) Junk": {
+    group: -1,
     nodrop: 0,
     picks: 1,
     qualityRatios: [0, 0, 0, 0],
@@ -4172,8 +4476,19 @@ export const TCDict: TCDictType = {
       ["Act 3 (H) Cpot A", 2],
     ],
   },
+  "Act 3 (H) Super A Desecrated": {
+    group: 38,
+    level: 73,
+    nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Sunder Charms", 1],
+      ["Act 3 (H) Super A", 1],
+    ],
+  },
   "Act 3 (H) Super Ax": {
-    group: 18,
+    group: 19,
     level: 73,
     nodrop: 0,
     picks: -4,
@@ -4181,6 +4496,17 @@ export const TCDict: TCDictType = {
     tcs: [
       ["Act 3 (H) Uitem A", 2],
       ["Act 3 (H) Cpot A", 2],
+    ],
+  },
+  "Act 3 (H) Super Ax Desecrated": {
+    group: 39,
+    level: 73,
+    nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Sunder Charms", 1],
+      ["Act 3 (H) Super Ax", 1],
     ],
   },
   "Act 3 (H) Super B": {
@@ -4194,8 +4520,19 @@ export const TCDict: TCDictType = {
       ["Act 3 (H) Cpot B", 2],
     ],
   },
+  "Act 3 (H) Super B Desecrated": {
+    group: 38,
+    level: 75,
+    nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Sunder Charms", 1],
+      ["Act 3 (H) Super B", 1],
+    ],
+  },
   "Act 3 (H) Super Bx": {
-    group: 18,
+    group: 19,
     level: 75,
     nodrop: 0,
     picks: -4,
@@ -4203,6 +4540,17 @@ export const TCDict: TCDictType = {
     tcs: [
       ["Act 3 (H) Uitem B", 2],
       ["Act 3 (H) Cpot B", 2],
+    ],
+  },
+  "Act 3 (H) Super Bx Desecrated": {
+    group: 39,
+    level: 75,
+    nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Sunder Charms", 1],
+      ["Act 3 (H) Super Bx", 1],
     ],
   },
   "Act 3 (H) Super C": {
@@ -4216,8 +4564,19 @@ export const TCDict: TCDictType = {
       ["Act 3 (H) Cpot C", 2],
     ],
   },
+  "Act 3 (H) Super C Desecrated": {
+    group: 38,
+    level: 78,
+    nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Sunder Charms", 1],
+      ["Act 3 (H) Super C", 1],
+    ],
+  },
   "Act 3 (H) Super Cx": {
-    group: 18,
+    group: 19,
     level: 78,
     nodrop: 0,
     picks: -4,
@@ -4225,6 +4584,17 @@ export const TCDict: TCDictType = {
     tcs: [
       ["Act 3 (H) Uitem C", 2],
       ["Act 3 (H) Cpot C", 2],
+    ],
+  },
+  "Act 3 (H) Super Cx Desecrated": {
+    group: 39,
+    level: 78,
+    nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Sunder Charms", 1],
+      ["Act 3 (H) Super Cx", 1],
     ],
   },
   "Act 3 (H) Uitem A": {
@@ -4271,6 +4641,17 @@ export const TCDict: TCDictType = {
       ["Act 3 (H) Cpot A", 2],
     ],
   },
+  "Act 3 (H) Unique A Desecrated": {
+    group: 37,
+    level: 74,
+    nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Sunder Charms", 1],
+      ["Act 3 (H) Unique A", 1],
+    ],
+  },
   "Act 3 (H) Unique B": {
     group: 15,
     level: 75,
@@ -4282,6 +4663,17 @@ export const TCDict: TCDictType = {
       ["Act 3 (H) Cpot B", 2],
     ],
   },
+  "Act 3 (H) Unique B Desecrated": {
+    group: 37,
+    level: 75,
+    nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Sunder Charms", 1],
+      ["Act 3 (H) Unique B", 1],
+    ],
+  },
   "Act 3 (H) Unique C": {
     group: 15,
     level: 77,
@@ -4291,6 +4683,17 @@ export const TCDict: TCDictType = {
     tcs: [
       ["Act 3 (H) Uitem C", 1],
       ["Act 3 (H) Cpot C", 2],
+    ],
+  },
+  "Act 3 (H) Unique C Desecrated": {
+    group: 37,
+    level: 77,
+    nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Sunder Charms", 1],
+      ["Act 3 (H) Unique C", 1],
     ],
   },
   "Act 3 (H) Wraith A": {
@@ -4660,6 +5063,7 @@ export const TCDict: TCDictType = {
     ],
   },
   "Act 3 (N) Junk": {
+    group: -1,
     nodrop: 0,
     picks: 1,
     qualityRatios: [0, 0, 0, 0],
@@ -4789,7 +5193,7 @@ export const TCDict: TCDictType = {
     ],
   },
   "Act 3 (N) Super Ax": {
-    group: 18,
+    group: 19,
     level: 48,
     nodrop: 0,
     picks: -4,
@@ -4811,7 +5215,7 @@ export const TCDict: TCDictType = {
     ],
   },
   "Act 3 (N) Super Bx": {
-    group: 18,
+    group: 19,
     level: 50,
     nodrop: 0,
     picks: -4,
@@ -4833,7 +5237,7 @@ export const TCDict: TCDictType = {
     ],
   },
   "Act 3 (N) Super Cx": {
-    group: 18,
+    group: 19,
     level: 51,
     nodrop: 0,
     picks: -4,
@@ -5274,6 +5678,7 @@ export const TCDict: TCDictType = {
     ],
   },
   "Act 3 Junk": {
+    group: -1,
     nodrop: 0,
     picks: 1,
     qualityRatios: [0, 0, 0, 0],
@@ -5435,7 +5840,7 @@ export const TCDict: TCDictType = {
     ],
   },
   "Act 3 Super Ax": {
-    group: 18,
+    group: 19,
     level: 20,
     nodrop: 0,
     picks: -4,
@@ -5457,7 +5862,7 @@ export const TCDict: TCDictType = {
     ],
   },
   "Act 3 Super Bx": {
-    group: 18,
+    group: 19,
     level: 22,
     nodrop: 0,
     picks: -4,
@@ -5479,7 +5884,7 @@ export const TCDict: TCDictType = {
     ],
   },
   "Act 3 Super Cx": {
-    group: 18,
+    group: 19,
     level: 24,
     nodrop: 0,
     picks: -4,
@@ -5663,6 +6068,17 @@ export const TCDict: TCDictType = {
       ["Act 4 (H) Cpot A", 3],
     ],
   },
+  "Act 4 (H) Champ A Desecrated": {
+    group: 36,
+    level: 78,
+    nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Sunder Charms", 1],
+      ["Act 4 (H) Champ A", 1],
+    ],
+  },
   "Act 4 (H) Champ B": {
     group: 13,
     level: 80,
@@ -5672,6 +6088,17 @@ export const TCDict: TCDictType = {
     tcs: [
       ["Act 4 (H) Citem B", 1],
       ["Act 4 (H) Cpot B", 3],
+    ],
+  },
+  "Act 4 (H) Champ B Desecrated": {
+    group: 36,
+    level: 80,
+    nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Sunder Charms", 1],
+      ["Act 4 (H) Champ B", 1],
     ],
   },
   "Act 4 (H) Chest A": {
@@ -5859,6 +6286,7 @@ export const TCDict: TCDictType = {
     ],
   },
   "Act 4 (H) Junk": {
+    group: -1,
     nodrop: 0,
     picks: 1,
     qualityRatios: [0, 0, 0, 0],
@@ -5972,8 +6400,19 @@ export const TCDict: TCDictType = {
       ["Act 4 (H) Cpot A", 2],
     ],
   },
+  "Act 4 (H) Super A Desecrated": {
+    group: 38,
+    level: 81,
+    nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Sunder Charms", 1],
+      ["Act 4 (H) Super A", 1],
+    ],
+  },
   "Act 4 (H) Super Ax": {
-    group: 18,
+    group: 19,
     level: 81,
     nodrop: 0,
     picks: -4,
@@ -5981,6 +6420,17 @@ export const TCDict: TCDictType = {
     tcs: [
       ["Act 4 (H) Uitem A", 2],
       ["Act 4 (H) Cpot A", 2],
+    ],
+  },
+  "Act 4 (H) Super Ax Desecrated": {
+    group: 39,
+    level: 81,
+    nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Sunder Charms", 1],
+      ["Act 4 (H) Super Ax", 1],
     ],
   },
   "Act 4 (H) Super B": {
@@ -5994,8 +6444,19 @@ export const TCDict: TCDictType = {
       ["Act 4 (H) Cpot B", 2],
     ],
   },
+  "Act 4 (H) Super B Desecrated": {
+    group: 38,
+    level: 84,
+    nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Sunder Charms", 1],
+      ["Act 4 (H) Super B", 1],
+    ],
+  },
   "Act 4 (H) Super Bx": {
-    group: 18,
+    group: 19,
     level: 84,
     nodrop: 0,
     picks: -4,
@@ -6003,6 +6464,17 @@ export const TCDict: TCDictType = {
     tcs: [
       ["Act 4 (H) Uitem B", 2],
       ["Act 4 (H) Cpot B", 2],
+    ],
+  },
+  "Act 4 (H) Super Bx Desecrated": {
+    group: 39,
+    level: 84,
+    nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Sunder Charms", 1],
+      ["Act 4 (H) Super Bx", 1],
     ],
   },
   "Act 4 (H) Super C": {
@@ -6016,8 +6488,19 @@ export const TCDict: TCDictType = {
       ["Act 4 (H) Cpot B", 2],
     ],
   },
+  "Act 4 (H) Super C Desecrated": {
+    group: 38,
+    level: 87,
+    nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Sunder Charms", 1],
+      ["Act 4 (H) Super C", 1],
+    ],
+  },
   "Act 4 (H) Super Cx": {
-    group: 18,
+    group: 19,
     level: 87,
     nodrop: 0,
     picks: -4,
@@ -6025,6 +6508,17 @@ export const TCDict: TCDictType = {
     tcs: [
       ["Act 4 (H) Uitem B", 2],
       ["Act 4 (H) Cpot B", 2],
+    ],
+  },
+  "Act 4 (H) Super Cx Desecrated": {
+    group: 39,
+    level: 87,
+    nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Sunder Charms", 1],
+      ["Act 4 (H) Super Cx", 1],
     ],
   },
   "Act 4 (H) Uitem A": {
@@ -6060,6 +6554,17 @@ export const TCDict: TCDictType = {
       ["Act 4 (H) Cpot A", 2],
     ],
   },
+  "Act 4 (H) Unique A Desecrated": {
+    group: 37,
+    level: 78,
+    nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Sunder Charms", 1],
+      ["Act 4 (H) Unique A", 1],
+    ],
+  },
   "Act 4 (H) Unique B": {
     group: 15,
     level: 80,
@@ -6069,6 +6574,17 @@ export const TCDict: TCDictType = {
     tcs: [
       ["Act 4 (H) Uitem B", 1],
       ["Act 4 (H) Cpot B", 2],
+    ],
+  },
+  "Act 4 (H) Unique B Desecrated": {
+    group: 37,
+    level: 80,
+    nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Sunder Charms", 1],
+      ["Act 4 (H) Unique B", 1],
     ],
   },
   "Act 4 (H) Wraith A": {
@@ -6375,6 +6891,7 @@ export const TCDict: TCDictType = {
     ],
   },
   "Act 4 (N) Junk": {
+    group: -1,
     nodrop: 0,
     picks: 1,
     qualityRatios: [0, 0, 0, 0],
@@ -6489,7 +7006,7 @@ export const TCDict: TCDictType = {
     ],
   },
   "Act 4 (N) Super Ax": {
-    group: 18,
+    group: 19,
     level: 54,
     nodrop: 0,
     picks: -4,
@@ -6511,7 +7028,7 @@ export const TCDict: TCDictType = {
     ],
   },
   "Act 4 (N) Super Bx": {
-    group: 18,
+    group: 19,
     level: 57,
     nodrop: 0,
     picks: -4,
@@ -6533,7 +7050,7 @@ export const TCDict: TCDictType = {
     ],
   },
   "Act 4 (N) Super Cx": {
-    group: 18,
+    group: 19,
     level: 60,
     nodrop: 0,
     picks: -4,
@@ -6858,6 +7375,7 @@ export const TCDict: TCDictType = {
     ],
   },
   "Act 4 Junk": {
+    group: -1,
     nodrop: 0,
     picks: 1,
     qualityRatios: [0, 0, 0, 0],
@@ -6973,7 +7491,7 @@ export const TCDict: TCDictType = {
     ],
   },
   "Act 4 Super Ax": {
-    group: 18,
+    group: 19,
     level: 26,
     nodrop: 0,
     picks: -4,
@@ -6995,7 +7513,7 @@ export const TCDict: TCDictType = {
     ],
   },
   "Act 4 Super Bx": {
-    group: 18,
+    group: 19,
     level: 29,
     nodrop: 0,
     picks: -4,
@@ -7017,7 +7535,7 @@ export const TCDict: TCDictType = {
     ],
   },
   "Act 4 Super Cx": {
-    group: 18,
+    group: 19,
     level: 32,
     nodrop: 0,
     picks: -4,
@@ -7200,6 +7718,17 @@ export const TCDict: TCDictType = {
       ["Act 5 (H) Cpot A", 3],
     ],
   },
+  "Act 5 (H) Champ A Desecrated": {
+    group: 36,
+    level: 81,
+    nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Sunder Charms", 1],
+      ["Act 5 (H) Champ A", 1],
+    ],
+  },
   "Act 5 (H) Champ B": {
     group: 13,
     level: 83,
@@ -7211,6 +7740,17 @@ export const TCDict: TCDictType = {
       ["Act 5 (H) Cpot B", 3],
     ],
   },
+  "Act 5 (H) Champ B Desecrated": {
+    group: 36,
+    level: 83,
+    nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Sunder Charms", 1],
+      ["Act 5 (H) Champ B", 1],
+    ],
+  },
   "Act 5 (H) Champ C": {
     group: 13,
     level: 85,
@@ -7220,6 +7760,17 @@ export const TCDict: TCDictType = {
     tcs: [
       ["Act 5 (H) Citem C", 1],
       ["Act 5 (H) Cpot C", 3],
+    ],
+  },
+  "Act 5 (H) Champ C Desecrated": {
+    group: 36,
+    level: 85,
+    nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Sunder Charms", 1],
+      ["Act 5 (H) Champ C", 1],
     ],
   },
   "Act 5 (H) Chest A": {
@@ -7445,6 +7996,7 @@ export const TCDict: TCDictType = {
     ],
   },
   "Act 5 (H) Junk": {
+    group: -1,
     nodrop: 0,
     picks: 1,
     qualityRatios: [0, 0, 0, 0],
@@ -7604,8 +8156,19 @@ export const TCDict: TCDictType = {
       ["Act 5 (H) Cpot A", 2],
     ],
   },
+  "Act 5 (H) Super A Desecrated": {
+    group: 38,
+    level: 90,
+    nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Sunder Charms", 1],
+      ["Act 5 (H) Super A", 1],
+    ],
+  },
   "Act 5 (H) Super Ax": {
-    group: 18,
+    group: 19,
     level: 90,
     nodrop: 0,
     picks: -4,
@@ -7613,6 +8176,17 @@ export const TCDict: TCDictType = {
     tcs: [
       ["Act 5 (H) Uitem A", 2],
       ["Act 5 (H) Cpot A", 2],
+    ],
+  },
+  "Act 5 (H) Super Ax Desecrated": {
+    group: 39,
+    level: 90,
+    nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Sunder Charms", 1],
+      ["Act 5 (H) Super Ax", 1],
     ],
   },
   "Act 5 (H) Super B": {
@@ -7626,8 +8200,19 @@ export const TCDict: TCDictType = {
       ["Act 5 (H) Cpot B", 2],
     ],
   },
+  "Act 5 (H) Super B Desecrated": {
+    group: 38,
+    level: 93,
+    nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Sunder Charms", 1],
+      ["Act 5 (H) Super B", 1],
+    ],
+  },
   "Act 5 (H) Super Bx": {
-    group: 18,
+    group: 19,
     level: 93,
     nodrop: 0,
     picks: -4,
@@ -7635,6 +8220,17 @@ export const TCDict: TCDictType = {
     tcs: [
       ["Act 5 (H) Uitem B", 2],
       ["Act 5 (H) Cpot B", 2],
+    ],
+  },
+  "Act 5 (H) Super Bx Desecrated": {
+    group: 39,
+    level: 93,
+    nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Sunder Charms", 1],
+      ["Act 5 (H) Super Bx", 1],
     ],
   },
   "Act 5 (H) Super C": {
@@ -7648,8 +8244,19 @@ export const TCDict: TCDictType = {
       ["Act 5 (H) Cpot C", 2],
     ],
   },
+  "Act 5 (H) Super C Desecrated": {
+    group: 38,
+    level: 96,
+    nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Sunder Charms", 1],
+      ["Act 5 (H) Super C", 1],
+    ],
+  },
   "Act 5 (H) Super Cx": {
-    group: 18,
+    group: 19,
     level: 96,
     nodrop: 0,
     picks: -4,
@@ -7657,6 +8264,17 @@ export const TCDict: TCDictType = {
     tcs: [
       ["Act 5 (H) Uitem C", 2],
       ["Act 5 (H) Cpot C", 2],
+    ],
+  },
+  "Act 5 (H) Super Cx Desecrated": {
+    group: 39,
+    level: 96,
+    nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Sunder Charms", 1],
+      ["Act 5 (H) Super Cx", 1],
     ],
   },
   "Act 5 (H) Uitem A": {
@@ -7703,6 +8321,17 @@ export const TCDict: TCDictType = {
       ["Act 5 (H) Cpot A", 2],
     ],
   },
+  "Act 5 (H) Unique A Desecrated": {
+    group: 37,
+    level: 81,
+    nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Sunder Charms", 1],
+      ["Act 5 (H) Unique A", 1],
+    ],
+  },
   "Act 5 (H) Unique B": {
     group: 15,
     level: 83,
@@ -7714,6 +8343,17 @@ export const TCDict: TCDictType = {
       ["Act 5 (H) Cpot B", 2],
     ],
   },
+  "Act 5 (H) Unique B Desecrated": {
+    group: 37,
+    level: 83,
+    nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Sunder Charms", 1],
+      ["Act 5 (H) Unique B", 1],
+    ],
+  },
   "Act 5 (H) Unique C": {
     group: 15,
     level: 85,
@@ -7723,6 +8363,17 @@ export const TCDict: TCDictType = {
     tcs: [
       ["Act 5 (H) Uitem C", 1],
       ["Act 5 (H) Cpot C", 2],
+    ],
+  },
+  "Act 5 (H) Unique C Desecrated": {
+    group: 37,
+    level: 85,
+    nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Sunder Charms", 1],
+      ["Act 5 (H) Unique C", 1],
     ],
   },
   "Act 5 (H) Wraith A": {
@@ -8110,6 +8761,7 @@ export const TCDict: TCDictType = {
     ],
   },
   "Act 5 (N) Junk": {
+    group: -1,
     nodrop: 0,
     picks: 1,
     qualityRatios: [0, 0, 0, 0],
@@ -8270,7 +8922,7 @@ export const TCDict: TCDictType = {
     ],
   },
   "Act 5 (N) Super Ax": {
-    group: 18,
+    group: 19,
     level: 62,
     nodrop: 0,
     picks: -4,
@@ -8292,7 +8944,7 @@ export const TCDict: TCDictType = {
     ],
   },
   "Act 5 (N) Super Bx": {
-    group: 18,
+    group: 19,
     level: 63,
     nodrop: 0,
     picks: -4,
@@ -8314,7 +8966,7 @@ export const TCDict: TCDictType = {
     ],
   },
   "Act 5 (N) Super Cx": {
-    group: 18,
+    group: 19,
     level: 66,
     nodrop: 0,
     picks: -4,
@@ -8769,6 +9421,7 @@ export const TCDict: TCDictType = {
     ],
   },
   "Act 5 Junk": {
+    group: -1,
     nodrop: 0,
     picks: 1,
     qualityRatios: [0, 0, 0, 0],
@@ -8929,7 +9582,7 @@ export const TCDict: TCDictType = {
     ],
   },
   "Act 5 Super Ax": {
-    group: 18,
+    group: 19,
     level: 34,
     nodrop: 0,
     picks: -4,
@@ -8951,7 +9604,7 @@ export const TCDict: TCDictType = {
     ],
   },
   "Act 5 Super Bx": {
-    group: 18,
+    group: 19,
     level: 36,
     nodrop: 0,
     picks: -4,
@@ -8973,7 +9626,7 @@ export const TCDict: TCDictType = {
     ],
   },
   "Act 5 Super Cx": {
-    group: 18,
+    group: 19,
     level: 38,
     nodrop: 0,
     picks: -4,
@@ -9083,6 +9736,7 @@ export const TCDict: TCDictType = {
     ],
   },
   Ammo: {
+    group: -1,
     nodrop: 0,
     picks: 1,
     qualityRatios: [0, 0, 0, 0],
@@ -9092,6 +9746,7 @@ export const TCDict: TCDictType = {
     ],
   },
   Andariel: {
+    group: -1,
     nodrop: 19,
     picks: 7,
     qualityRatios: [1024, 983, 983, 983],
@@ -9103,6 +9758,7 @@ export const TCDict: TCDictType = {
     ],
   },
   "Andariel (H)": {
+    group: -1,
     nodrop: 19,
     picks: 7,
     qualityRatios: [1024, 983, 983, 983],
@@ -9115,6 +9771,7 @@ export const TCDict: TCDictType = {
     ],
   },
   "Andariel (N)": {
+    group: -1,
     nodrop: 19,
     picks: 7,
     qualityRatios: [1024, 983, 983, 983],
@@ -9126,6 +9783,7 @@ export const TCDict: TCDictType = {
     ],
   },
   Andarielq: {
+    group: -1,
     nodrop: 19,
     picks: 7,
     qualityRatios: [1024, 1024, 995, 995],
@@ -9135,6 +9793,7 @@ export const TCDict: TCDictType = {
     ],
   },
   "Andarielq (H)": {
+    group: -1,
     nodrop: 19,
     picks: 7,
     qualityRatios: [1024, 1024, 995, 995],
@@ -9144,7 +9803,96 @@ export const TCDict: TCDictType = {
       ["tes", 1],
     ],
   },
+  "Andarielq (H) Desecrated A": {
+    group: 20,
+    level: 74,
+    nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Sunder Charms", 1],
+      ["Andarielq Item (H) Desecrated A", 1],
+    ],
+  },
+  "Andarielq (H) Desecrated B": {
+    group: 20,
+    level: 78,
+    nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Sunder Charms", 1],
+      ["Andarielq Item (H) Desecrated B", 1],
+    ],
+  },
+  "Andarielq (H) Desecrated C": {
+    group: 20,
+    level: 81,
+    nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Sunder Charms", 1],
+      ["Andarielq Item (H) Desecrated C", 1],
+    ],
+  },
+  "Andarielq (H) Desecrated D": {
+    group: 20,
+    level: 84,
+    nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Sunder Charms", 1],
+      ["Andarielq Item (H) Desecrated D", 1],
+    ],
+  },
+  "Andarielq (H) Desecrated E": {
+    group: 20,
+    level: 87,
+    nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Sunder Charms", 1],
+      ["Andarielq Item (H) Desecrated E", 1],
+    ],
+  },
+  "Andarielq (H) Desecrated F": {
+    group: 20,
+    level: 90,
+    nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Sunder Charms", 1],
+      ["Andarielq Item (H) Desecrated F", 1],
+    ],
+  },
+  "Andarielq (H) Desecrated G": {
+    group: 20,
+    level: 93,
+    nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Sunder Charms", 1],
+      ["Andarielq Item (H) Desecrated G", 1],
+    ],
+  },
+  "Andarielq (H) Desecrated H": {
+    group: 20,
+    level: 96,
+    nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Sunder Charms", 1],
+      ["Andarielq Item (H) Desecrated H", 1],
+    ],
+  },
   "Andarielq (N)": {
+    group: -1,
     nodrop: 19,
     picks: 7,
     qualityRatios: [1024, 1024, 995, 995],
@@ -9153,7 +9901,162 @@ export const TCDict: TCDictType = {
       ["Act 2 (N) Good", 3],
     ],
   },
+  "Andarielq (N) Desecrated A": {
+    group: 20,
+    level: 43,
+    nodrop: 19,
+    picks: 7,
+    qualityRatios: [1024, 1024, 995, 995],
+    tcs: [
+      ["Act 2 (N) Equip A", 19],
+      ["Act 2 (N) Good", 3],
+    ],
+  },
+  "Andarielq (N) Desecrated B": {
+    group: 20,
+    level: 57,
+    nodrop: 19,
+    picks: 7,
+    qualityRatios: [1024, 1024, 995, 995],
+    tcs: [
+      ["Act 4 (N) Equip B", 19],
+      ["Act 4 (N) Good", 3],
+    ],
+  },
+  "Andarielq (N) Desecrated C": {
+    group: 20,
+    level: 73,
+    nodrop: 19,
+    picks: 7,
+    qualityRatios: [1024, 1024, 995, 995],
+    tcs: [
+      ["Act 3 (H) Equip A", 19],
+      ["Act 3 (H) Good", 3],
+    ],
+  },
+  "Andarielq Desecrated A": {
+    group: 20,
+    level: 13,
+    nodrop: 19,
+    picks: 7,
+    qualityRatios: [1024, 1024, 995, 995],
+    tcs: [
+      ["Act 2 Equip A", 19],
+      ["Act 2 Good", 3],
+    ],
+  },
+  "Andarielq Desecrated B": {
+    group: 20,
+    level: 32,
+    nodrop: 19,
+    picks: 7,
+    qualityRatios: [1024, 1024, 995, 995],
+    tcs: [
+      ["Act 4 Equip B", 19],
+      ["Act 4 Good", 3],
+    ],
+  },
+  "Andarielq Desecrated C": {
+    group: 20,
+    level: 48,
+    nodrop: 19,
+    picks: 7,
+    qualityRatios: [1024, 1024, 995, 995],
+    tcs: [
+      ["Act 3 (N) Equip A", 19],
+      ["Act 3 (N) Good", 3],
+    ],
+  },
+  "Andarielq Item (H) Desecrated A": {
+    group: -1,
+    nodrop: 19,
+    picks: 7,
+    qualityRatios: [1024, 1024, 995, 995],
+    tcs: [
+      ["Act 3 (H) Equip B", 19],
+      ["Act 3 (H) Good", 3],
+      ["tes", 1],
+    ],
+  },
+  "Andarielq Item (H) Desecrated B": {
+    group: -1,
+    nodrop: 19,
+    picks: 7,
+    qualityRatios: [1024, 1024, 995, 995],
+    tcs: [
+      ["Act 3 (H) Equip C", 19],
+      ["Act 3 (H) Good", 3],
+      ["tes", 1],
+    ],
+  },
+  "Andarielq Item (H) Desecrated C": {
+    group: -1,
+    nodrop: 19,
+    picks: 7,
+    qualityRatios: [1024, 1024, 995, 995],
+    tcs: [
+      ["Act 4 (H) Equip A", 19],
+      ["Act 4 (H) Good", 3],
+      ["tes", 1],
+    ],
+  },
+  "Andarielq Item (H) Desecrated D": {
+    group: -1,
+    nodrop: 19,
+    picks: 7,
+    qualityRatios: [1024, 1024, 995, 995],
+    tcs: [
+      ["Act 4 (H) Equip B", 19],
+      ["Act 4 (H) Good", 3],
+      ["tes", 1],
+    ],
+  },
+  "Andarielq Item (H) Desecrated E": {
+    group: -1,
+    nodrop: 19,
+    picks: 7,
+    qualityRatios: [1024, 1024, 995, 995],
+    tcs: [
+      ["Act 4 (H) Equip C", 19],
+      ["Act 4 (H) Good", 3],
+      ["tes", 1],
+    ],
+  },
+  "Andarielq Item (H) Desecrated F": {
+    group: -1,
+    nodrop: 19,
+    picks: 7,
+    qualityRatios: [1024, 1024, 995, 995],
+    tcs: [
+      ["Act 5 (H) Equip A", 19],
+      ["Act 5 (H) Good", 3],
+      ["tes", 1],
+    ],
+  },
+  "Andarielq Item (H) Desecrated G": {
+    group: -1,
+    nodrop: 19,
+    picks: 7,
+    qualityRatios: [1024, 1024, 995, 995],
+    tcs: [
+      ["Act 5 (H) Equip B", 19],
+      ["Act 5 (H) Good", 3],
+      ["tes", 1],
+    ],
+  },
+  "Andarielq Item (H) Desecrated H": {
+    group: -1,
+    nodrop: 19,
+    picks: 7,
+    qualityRatios: [1024, 1024, 995, 995],
+    tcs: [
+      ["Act 5 (H) Equip C", 19],
+      ["Act 5 (H) Good", 3],
+      ["tes", 1],
+    ],
+  },
   Baal: {
+    group: -1,
     nodrop: 15,
     picks: 7,
     qualityRatios: [1024, 983, 983, 983],
@@ -9165,6 +10068,7 @@ export const TCDict: TCDictType = {
     ],
   },
   "Baal (H)": {
+    group: -1,
     nodrop: 15,
     picks: 7,
     qualityRatios: [1024, 983, 983, 983],
@@ -9176,7 +10080,19 @@ export const TCDict: TCDictType = {
       ["fed", 1],
     ],
   },
+  "Baal (H) Desecrated": {
+    group: 29,
+    level: 99,
+    nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Sunder Charms", 1],
+      ["Baal Item (H) Desecrated", 1],
+    ],
+  },
   "Baal (N)": {
+    group: -1,
     nodrop: 15,
     picks: 7,
     qualityRatios: [1024, 983, 983, 983],
@@ -9187,7 +10103,47 @@ export const TCDict: TCDictType = {
       ["Act 1 (H) Good", 3],
     ],
   },
+  "Baal (N) Desecrated": {
+    group: 29,
+    level: 75,
+    nodrop: 15,
+    picks: 7,
+    qualityRatios: [1024, 983, 983, 983],
+    tcs: [
+      ["gld", 5],
+      ["Act 3 (H) Equip A", 52],
+      ["Act 3 (H) Junk", 5],
+      ["Act 3 (H) Good", 3],
+    ],
+  },
+  "Baal Desecrated": {
+    group: 29,
+    level: 60,
+    nodrop: 15,
+    picks: 7,
+    qualityRatios: [1024, 983, 983, 983],
+    tcs: [
+      ["gld", 5],
+      ["Act 3 (N) Equip A", 52],
+      ["Act 3 (N) Junk", 5],
+      ["Act 3 (N) Good", 3],
+    ],
+  },
+  "Baal Item (H) Desecrated": {
+    group: -1,
+    nodrop: 15,
+    picks: 7,
+    qualityRatios: [1024, 983, 983, 983],
+    tcs: [
+      ["gld", 5],
+      ["Act 5 (H) Equip C", 52],
+      ["Act 5 (H) Junk", 5],
+      ["Act 5 (H) Good", 3],
+      ["fed", 1],
+    ],
+  },
   Baalq: {
+    group: -1,
     nodrop: 15,
     picks: 7,
     qualityRatios: [1024, 1024, 993, 993],
@@ -9197,6 +10153,7 @@ export const TCDict: TCDictType = {
     ],
   },
   "Baalq (H)": {
+    group: -1,
     nodrop: 15,
     picks: 7,
     qualityRatios: [1024, 1024, 993, 993],
@@ -9207,6 +10164,7 @@ export const TCDict: TCDictType = {
     ],
   },
   "Baalq (N)": {
+    group: -1,
     nodrop: 15,
     picks: 7,
     qualityRatios: [1024, 1024, 993, 993],
@@ -9216,6 +10174,7 @@ export const TCDict: TCDictType = {
     ],
   },
   "Blood Raven": {
+    group: -1,
     nodrop: 19,
     picks: 5,
     qualityRatios: [1024, 972, 800, 800],
@@ -9227,6 +10186,7 @@ export const TCDict: TCDictType = {
     ],
   },
   "Blood Raven (H)": {
+    group: -1,
     nodrop: 19,
     picks: 5,
     qualityRatios: [1024, 972, 800, 800],
@@ -9237,7 +10197,52 @@ export const TCDict: TCDictType = {
       ["Act 1 (H) Good", 3],
     ],
   },
+  "Blood Raven (H) Desecrated A": {
+    group: 30,
+    level: 88,
+    nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Sunder Charms", 1],
+      ["Blood Raven Item (H) Desecrated A", 1],
+    ],
+  },
+  "Blood Raven (H) Desecrated B": {
+    group: 30,
+    level: 90,
+    nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Sunder Charms", 1],
+      ["Blood Raven Item (H) Desecrated B", 1],
+    ],
+  },
+  "Blood Raven (H) Desecrated C": {
+    group: 30,
+    level: 93,
+    nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Sunder Charms", 1],
+      ["Blood Raven Item (H) Desecrated C", 1],
+    ],
+  },
+  "Blood Raven (H) Desecrated D": {
+    group: 30,
+    level: 96,
+    nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Sunder Charms", 1],
+      ["Blood Raven Item (H) Desecrated D", 1],
+    ],
+  },
   "Blood Raven (N)": {
+    group: -1,
     nodrop: 19,
     picks: 5,
     qualityRatios: [1024, 972, 800, 800],
@@ -9248,7 +10253,134 @@ export const TCDict: TCDictType = {
       ["Act 1 (N) Good", 3],
     ],
   },
+  "Blood Raven (N) Desecrated A": {
+    group: 30,
+    level: 43,
+    nodrop: 19,
+    picks: 5,
+    qualityRatios: [1024, 972, 800, 800],
+    tcs: [
+      ["gld", 14],
+      ["Act 1 (N) Equip C", 19],
+      ["Act 1 (N) Junk", 5],
+      ["Act 1 (N) Good", 3],
+    ],
+  },
+  "Blood Raven (N) Desecrated B": {
+    group: 30,
+    level: 57,
+    nodrop: 19,
+    picks: 5,
+    qualityRatios: [1024, 972, 800, 800],
+    tcs: [
+      ["gld", 14],
+      ["Act 4 (N) Equip B", 19],
+      ["Act 4 (N) Junk", 5],
+      ["Act 4 (N) Good", 3],
+    ],
+  },
+  "Blood Raven (N) Desecrated C": {
+    group: 30,
+    level: 73,
+    nodrop: 19,
+    picks: 5,
+    qualityRatios: [1024, 972, 800, 800],
+    tcs: [
+      ["gld", 14],
+      ["Act 3 (H) Equip A", 19],
+      ["Act 3 (H) Junk", 5],
+      ["Act 3 (H) Good", 3],
+    ],
+  },
+  "Blood Raven Desecrated A": {
+    group: 30,
+    level: 10,
+    nodrop: 19,
+    picks: 5,
+    qualityRatios: [1024, 972, 800, 800],
+    tcs: [
+      ["gld", 14],
+      ["Act 1 Equip C", 19],
+      ["Act 1 Junk", 5],
+      ["Act 1 Good", 3],
+    ],
+  },
+  "Blood Raven Desecrated B": {
+    group: 30,
+    level: 29,
+    nodrop: 19,
+    picks: 5,
+    qualityRatios: [1024, 972, 800, 800],
+    tcs: [
+      ["gld", 14],
+      ["Act 4 Equip B", 19],
+      ["Act 4 Junk", 5],
+      ["Act 4 Good", 3],
+    ],
+  },
+  "Blood Raven Desecrated C": {
+    group: 30,
+    level: 48,
+    nodrop: 19,
+    picks: 5,
+    qualityRatios: [1024, 972, 800, 800],
+    tcs: [
+      ["gld", 14],
+      ["Act 3 (N) Equip A", 19],
+      ["Act 3 (N) Junk", 5],
+      ["Act 3 (N) Good", 3],
+    ],
+  },
+  "Blood Raven Item (H) Desecrated A": {
+    group: -1,
+    nodrop: 19,
+    picks: 5,
+    qualityRatios: [1024, 972, 800, 800],
+    tcs: [
+      ["gld", 14],
+      ["Act 4 (H) Equip B", 19],
+      ["Act 4 (H) Junk", 5],
+      ["Act 4 (H) Good", 3],
+    ],
+  },
+  "Blood Raven Item (H) Desecrated B": {
+    group: -1,
+    nodrop: 19,
+    picks: 5,
+    qualityRatios: [1024, 972, 800, 800],
+    tcs: [
+      ["gld", 14],
+      ["Act 5 (H) Equip A", 19],
+      ["Act 5 (H) Junk", 5],
+      ["Act 5 (H) Good", 3],
+    ],
+  },
+  "Blood Raven Item (H) Desecrated C": {
+    group: -1,
+    nodrop: 19,
+    picks: 5,
+    qualityRatios: [1024, 972, 800, 800],
+    tcs: [
+      ["gld", 14],
+      ["Act 5 (H) Equip B", 19],
+      ["Act 5 (H) Junk", 5],
+      ["Act 5 (H) Good", 3],
+    ],
+  },
+  "Blood Raven Item (H) Desecrated D": {
+    group: -1,
+    nodrop: 19,
+    picks: 5,
+    qualityRatios: [1024, 972, 800, 800],
+    tcs: [
+      ["gld", 14],
+      ["Act 5 (H) Equip C", 19],
+      ["Act 5 (H) Junk", 5],
+      ["Act 5 (H) Good", 3],
+    ],
+  },
   "Chipped Gem": {
+    group: -1,
     nodrop: 0,
     picks: 1,
     qualityRatios: [0, 0, 0, 0],
@@ -9263,6 +10395,7 @@ export const TCDict: TCDictType = {
     ],
   },
   Council: {
+    group: -1,
     nodrop: 19,
     picks: 3,
     qualityRatios: [1024, 800, 800, 650],
@@ -9275,6 +10408,7 @@ export const TCDict: TCDictType = {
     ],
   },
   "Council (H)": {
+    group: -1,
     nodrop: 19,
     picks: 3,
     qualityRatios: [1024, 800, 800, 650],
@@ -9286,7 +10420,63 @@ export const TCDict: TCDictType = {
       ["Act 4 (H) Magic A", 4],
     ],
   },
+  "Council (H) Desecrated A": {
+    group: 25,
+    level: 85,
+    nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Sunder Charms", 1],
+      ["Council Item (H) Desecrated A", 1],
+    ],
+  },
+  "Council (H) Desecrated B": {
+    group: 25,
+    level: 87,
+    nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Sunder Charms", 1],
+      ["Council Item (H) Desecrated B", 1],
+    ],
+  },
+  "Council (H) Desecrated C": {
+    group: 25,
+    level: 90,
+    nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Sunder Charms", 1],
+      ["Council Item (H) Desecrated C", 1],
+    ],
+  },
+  "Council (H) Desecrated D": {
+    group: 25,
+    level: 93,
+    nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Sunder Charms", 1],
+      ["Council Item (H) Desecrated D", 1],
+    ],
+  },
+  "Council (H) Desecrated E": {
+    group: 25,
+    level: 96,
+    nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Sunder Charms", 1],
+      ["Council Item (H) Desecrated E", 1],
+    ],
+  },
   "Council (N)": {
+    group: -1,
     nodrop: 19,
     picks: 3,
     qualityRatios: [1024, 800, 800, 650],
@@ -9298,7 +10488,157 @@ export const TCDict: TCDictType = {
       ["Act 4 (N) Magic A", 4],
     ],
   },
+  "Council (N) Desecrated A": {
+    group: 25,
+    level: 57,
+    nodrop: 19,
+    picks: 3,
+    qualityRatios: [1024, 800, 800, 650],
+    tcs: [
+      ["gld", 9],
+      ["Act 4 (N) Equip B", 15],
+      ["Act 4 (N) Junk", 5],
+      ["Act 4 (N) Good", 3],
+      ["Act 4 (N) Magic B", 4],
+    ],
+  },
+  "Council (N) Desecrated B": {
+    group: 25,
+    level: 66,
+    nodrop: 19,
+    picks: 3,
+    qualityRatios: [1024, 800, 800, 650],
+    tcs: [
+      ["gld", 9],
+      ["Act 5 (N) Equip C", 15],
+      ["Act 5 (N) Junk", 5],
+      ["Act 5 (N) Good", 3],
+      ["Act 5 (N) Magic C", 4],
+    ],
+  },
+  "Council (N) Desecrated C": {
+    group: 25,
+    level: 73,
+    nodrop: 19,
+    picks: 3,
+    qualityRatios: [1024, 800, 800, 650],
+    tcs: [
+      ["gld", 9],
+      ["Act 3 (H) Equip A", 15],
+      ["Act 3 (H) Junk", 5],
+      ["Act 3 (H) Good", 3],
+      ["Act 3 (H) Magic A", 4],
+    ],
+  },
+  "Council Desecrated A": {
+    group: 25,
+    level: 28,
+    nodrop: 19,
+    picks: 3,
+    qualityRatios: [1024, 800, 800, 650],
+    tcs: [
+      ["gld", 9],
+      ["Act 4 Equip B", 15],
+      ["Act 4 Junk", 5],
+      ["Act 4 Good", 3],
+      ["Act 4 Magic B", 4],
+    ],
+  },
+  "Council Desecrated B": {
+    group: 25,
+    level: 38,
+    nodrop: 19,
+    picks: 3,
+    qualityRatios: [1024, 800, 800, 650],
+    tcs: [
+      ["gld", 9],
+      ["Act 5 Equip C", 15],
+      ["Act 5 Junk", 5],
+      ["Act 5 Good", 3],
+      ["Act 5 Magic C", 4],
+    ],
+  },
+  "Council Desecrated C": {
+    group: 25,
+    level: 48,
+    nodrop: 19,
+    picks: 3,
+    qualityRatios: [1024, 800, 800, 650],
+    tcs: [
+      ["gld", 9],
+      ["Act 3 (N) Equip A", 15],
+      ["Act 3 (N) Junk", 5],
+      ["Act 3 (N) Good", 3],
+      ["Act 3 (N) Magic A", 4],
+    ],
+  },
+  "Council Item (H) Desecrated A": {
+    group: -1,
+    nodrop: 19,
+    picks: 3,
+    qualityRatios: [1024, 800, 800, 650],
+    tcs: [
+      ["gld", 9],
+      ["Act 4 (H) Equip B", 15],
+      ["Act 4 (H) Junk", 5],
+      ["Act 4 (H) Good", 3],
+      ["Act 4 (H) Magic B", 4],
+    ],
+  },
+  "Council Item (H) Desecrated B": {
+    group: -1,
+    nodrop: 19,
+    picks: 3,
+    qualityRatios: [1024, 800, 800, 650],
+    tcs: [
+      ["gld", 9],
+      ["Act 4 (H) Equip C", 15],
+      ["Act 4 (H) Junk", 5],
+      ["Act 4 (H) Good", 3],
+      ["Act 4 (H) Magic B", 4],
+    ],
+  },
+  "Council Item (H) Desecrated C": {
+    group: -1,
+    nodrop: 19,
+    picks: 3,
+    qualityRatios: [1024, 800, 800, 650],
+    tcs: [
+      ["gld", 9],
+      ["Act 5 (H) Equip A", 15],
+      ["Act 5 (H) Junk", 5],
+      ["Act 5 (H) Good", 3],
+      ["Act 5 (H) Magic A", 4],
+    ],
+  },
+  "Council Item (H) Desecrated D": {
+    group: -1,
+    nodrop: 19,
+    picks: 3,
+    qualityRatios: [1024, 800, 800, 650],
+    tcs: [
+      ["gld", 9],
+      ["Act 5 (H) Equip B", 15],
+      ["Act 5 (H) Junk", 5],
+      ["Act 5 (H) Good", 3],
+      ["Act 5 (H) Magic B", 4],
+    ],
+  },
+  "Council Item (H) Desecrated E": {
+    group: -1,
+    nodrop: 19,
+    picks: 3,
+    qualityRatios: [1024, 800, 800, 650],
+    tcs: [
+      ["gld", 9],
+      ["Act 5 (H) Equip C", 15],
+      ["Act 5 (H) Junk", 5],
+      ["Act 5 (H) Good", 3],
+      ["Act 5 (H) Magic C", 4],
+    ],
+  },
   Countess: {
+    group: -1,
     nodrop: 0,
     picks: -2,
     qualityRatios: [1024, 883, 883, 883],
@@ -9308,6 +10648,7 @@ export const TCDict: TCDictType = {
     ],
   },
   "Countess (H)": {
+    group: -1,
     nodrop: 0,
     picks: -2,
     qualityRatios: [1024, 983, 883, 883],
@@ -9316,7 +10657,80 @@ export const TCDict: TCDictType = {
       ["Countess Rune (H)", 1],
     ],
   },
+  "Countess (H) Desecrated A": {
+    group: 35,
+    level: 82,
+    nodrop: 0,
+    picks: -3,
+    qualityRatios: [1024, 983, 883, 883],
+    tcs: [
+      ["Sunder Charms", 1],
+      ["Countess Item (H) Desecrated A", 1],
+      ["Countess Rune (H)", 1],
+    ],
+  },
+  "Countess (H) Desecrated B": {
+    group: 35,
+    level: 84,
+    nodrop: 0,
+    picks: -3,
+    qualityRatios: [1024, 983, 883, 883],
+    tcs: [
+      ["Sunder Charms", 1],
+      ["Countess Item (H) Desecrated B", 1],
+      ["Countess Rune (H)", 1],
+    ],
+  },
+  "Countess (H) Desecrated C": {
+    group: 35,
+    level: 87,
+    nodrop: 0,
+    picks: -3,
+    qualityRatios: [1024, 983, 883, 883],
+    tcs: [
+      ["Sunder Charms", 1],
+      ["Countess Item (H) Desecrated C", 1],
+      ["Countess Rune (H)", 1],
+    ],
+  },
+  "Countess (H) Desecrated D": {
+    group: 35,
+    level: 90,
+    nodrop: 0,
+    picks: -3,
+    qualityRatios: [1024, 983, 883, 883],
+    tcs: [
+      ["Sunder Charms", 1],
+      ["Countess Item (H) Desecrated D", 1],
+      ["Countess Rune (H)", 1],
+    ],
+  },
+  "Countess (H) Desecrated E": {
+    group: 35,
+    level: 93,
+    nodrop: 0,
+    picks: -3,
+    qualityRatios: [1024, 983, 883, 883],
+    tcs: [
+      ["Sunder Charms", 1],
+      ["Countess Item (H) Desecrated E", 1],
+      ["Countess Rune (H)", 1],
+    ],
+  },
+  "Countess (H) Desecrated F": {
+    group: 35,
+    level: 96,
+    nodrop: 0,
+    picks: -3,
+    qualityRatios: [1024, 983, 883, 883],
+    tcs: [
+      ["Sunder Charms", 1],
+      ["Countess Item (H) Desecrated F", 1],
+      ["Countess Rune (H)", 1],
+    ],
+  },
   "Countess (N)": {
+    group: -1,
     nodrop: 0,
     picks: -2,
     qualityRatios: [1024, 983, 883, 883],
@@ -9325,7 +10739,74 @@ export const TCDict: TCDictType = {
       ["Countess Rune (N)", 1],
     ],
   },
+  "Countess (N) Desecrated A": {
+    group: 35,
+    level: 45,
+    nodrop: 0,
+    picks: -2,
+    qualityRatios: [1024, 983, 883, 883],
+    tcs: [
+      ["Countess Item (N) Desecrated A", 1],
+      ["Countess Rune (N)", 1],
+    ],
+  },
+  "Countess (N) Desecrated B": {
+    group: 35,
+    level: 59,
+    nodrop: 0,
+    picks: -2,
+    qualityRatios: [1024, 983, 883, 883],
+    tcs: [
+      ["Countess Item (N) Desecrated B", 1],
+      ["Countess Rune (N)", 1],
+    ],
+  },
+  "Countess (N) Desecrated C": {
+    group: 35,
+    level: 73,
+    nodrop: 0,
+    picks: -2,
+    qualityRatios: [1024, 983, 883, 883],
+    tcs: [
+      ["Countess Item (N) Desecrated C", 1],
+      ["Countess Rune (N)", 1],
+    ],
+  },
+  "Countess Desecrated A": {
+    group: 35,
+    level: 11,
+    nodrop: 0,
+    picks: -2,
+    qualityRatios: [1024, 883, 883, 883],
+    tcs: [
+      ["Countess Item Desecrated A", 1],
+      ["Countess Rune", 1],
+    ],
+  },
+  "Countess Desecrated B": {
+    group: 35,
+    level: 34,
+    nodrop: 0,
+    picks: -2,
+    qualityRatios: [1024, 883, 883, 883],
+    tcs: [
+      ["Countess Item Desecrated B", 1],
+      ["Countess Rune", 1],
+    ],
+  },
+  "Countess Desecrated C": {
+    group: 35,
+    level: 48,
+    nodrop: 0,
+    picks: -2,
+    qualityRatios: [1024, 883, 883, 883],
+    tcs: [
+      ["Countess Item Desecrated C", 1],
+      ["Countess Rune", 1],
+    ],
+  },
   "Countess Item": {
+    group: -1,
     nodrop: 19,
     picks: 5,
     qualityRatios: [0, 0, 0, 0],
@@ -9337,6 +10818,7 @@ export const TCDict: TCDictType = {
     ],
   },
   "Countess Item (H)": {
+    group: -1,
     nodrop: 19,
     picks: 5,
     qualityRatios: [0, 0, 0, 0],
@@ -9348,7 +10830,86 @@ export const TCDict: TCDictType = {
       ["pk1", 1],
     ],
   },
+  "Countess Item (H) Desecrated A": {
+    group: -1,
+    nodrop: 19,
+    picks: 5,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["gld", 11],
+      ["Act 4 (H) Equip A", 19],
+      ["Act 4 (H) Junk", 15],
+      ["Act 4 (H) Good", 3],
+      ["pk1", 1],
+    ],
+  },
+  "Countess Item (H) Desecrated B": {
+    group: -1,
+    nodrop: 19,
+    picks: 5,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["gld", 11],
+      ["Act 4 (H) Equip B", 19],
+      ["Act 4 (H) Junk", 15],
+      ["Act 4 (H) Good", 3],
+      ["pk1", 1],
+    ],
+  },
+  "Countess Item (H) Desecrated C": {
+    group: -1,
+    nodrop: 19,
+    picks: 5,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["gld", 11],
+      ["Act 4 (H) Equip C", 19],
+      ["Act 4 (H) Junk", 15],
+      ["Act 4 (H) Good", 3],
+      ["pk1", 1],
+    ],
+  },
+  "Countess Item (H) Desecrated D": {
+    group: -1,
+    nodrop: 19,
+    picks: 5,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["gld", 11],
+      ["Act 5 (H) Equip A", 19],
+      ["Act 5 (H) Junk", 15],
+      ["Act 5 (H) Good", 3],
+      ["pk1", 1],
+    ],
+  },
+  "Countess Item (H) Desecrated E": {
+    group: -1,
+    nodrop: 19,
+    picks: 5,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["gld", 11],
+      ["Act 5 (H) Equip B", 19],
+      ["Act 5 (H) Junk", 15],
+      ["Act 5 (H) Good", 3],
+      ["pk1", 1],
+    ],
+  },
+  "Countess Item (H) Desecrated F": {
+    group: -1,
+    nodrop: 19,
+    picks: 5,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["gld", 11],
+      ["Act 5 (H) Equip C", 19],
+      ["Act 5 (H) Junk", 15],
+      ["Act 5 (H) Good", 3],
+      ["pk1", 1],
+    ],
+  },
   "Countess Item (N)": {
+    group: -1,
     nodrop: 19,
     picks: 5,
     qualityRatios: [0, 0, 0, 0],
@@ -9359,25 +10920,101 @@ export const TCDict: TCDictType = {
       ["Act 2 (N) Good", 3],
     ],
   },
+  "Countess Item (N) Desecrated A": {
+    group: -1,
+    nodrop: 19,
+    picks: 5,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["gld", 11],
+      ["Act 2 (N) Equip B", 19],
+      ["Act 3 (N) Junk", 15],
+      ["Act 3 (N) Good", 3],
+    ],
+  },
+  "Countess Item (N) Desecrated B": {
+    group: -1,
+    nodrop: 19,
+    picks: 5,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["gld", 11],
+      ["Act 4 (N) Equip B", 19],
+      ["Act 5 (N) Junk", 15],
+      ["Act 5 (N) Good", 3],
+    ],
+  },
+  "Countess Item (N) Desecrated C": {
+    group: -1,
+    nodrop: 19,
+    picks: 5,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["gld", 11],
+      ["Act 3 (H) Equip A", 19],
+      ["Act 4 (H) Junk", 15],
+      ["Act 4 (H) Good", 3],
+    ],
+  },
+  "Countess Item Desecrated A": {
+    group: -1,
+    nodrop: 19,
+    picks: 5,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["gld", 11],
+      ["Act 2 Equip A", 19],
+      ["Act 3 Junk", 15],
+      ["Act 3 Good", 3],
+    ],
+  },
+  "Countess Item Desecrated B": {
+    group: -1,
+    nodrop: 19,
+    picks: 5,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["gld", 11],
+      ["Act 5 Equip A", 19],
+      ["Act 1 (N) Junk", 15],
+      ["Act 1 (N) Good", 3],
+    ],
+  },
+  "Countess Item Desecrated C": {
+    group: -1,
+    nodrop: 19,
+    picks: 5,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["gld", 11],
+      ["Act 3 (N) Equip A", 19],
+      ["Act 4 (N) Junk", 15],
+      ["Act 4 (N) Good", 3],
+    ],
+  },
   "Countess Rune": {
+    group: -1,
     nodrop: 5,
     picks: 3,
     qualityRatios: [0, 0, 0, 0],
     tcs: [["Runes 4", 15]],
   },
   "Countess Rune (H)": {
+    group: -1,
     nodrop: 5,
     picks: 3,
     qualityRatios: [0, 0, 0, 0],
     tcs: [["Runes 12", 15]],
   },
   "Countess Rune (N)": {
+    group: -1,
     nodrop: 5,
     picks: 3,
     qualityRatios: [0, 0, 0, 0],
     tcs: [["Runes 8", 15]],
   },
   Cow: {
+    group: -1,
     nodrop: 100,
     picks: 1,
     qualityRatios: [0, 0, 0, 0],
@@ -9389,6 +11026,7 @@ export const TCDict: TCDictType = {
     ],
   },
   "Cow (H)": {
+    group: -1,
     nodrop: 100,
     picks: 1,
     qualityRatios: [0, 0, 0, 0],
@@ -9400,6 +11038,7 @@ export const TCDict: TCDictType = {
     ],
   },
   "Cow (N)": {
+    group: -1,
     nodrop: 100,
     picks: 1,
     qualityRatios: [0, 0, 0, 0],
@@ -9411,6 +11050,7 @@ export const TCDict: TCDictType = {
     ],
   },
   "Cow King": {
+    group: -1,
     nodrop: 0,
     picks: 5,
     qualityRatios: [1024, 983, 983, 850],
@@ -9420,6 +11060,7 @@ export const TCDict: TCDictType = {
     ],
   },
   "Cow King (H)": {
+    group: -1,
     nodrop: 0,
     picks: 5,
     qualityRatios: [1024, 983, 983, 850],
@@ -9428,7 +11069,52 @@ export const TCDict: TCDictType = {
       ["Act 1 (H) Melee B", 2],
     ],
   },
+  "Cow King (H) Desecrated A": {
+    group: 33,
+    level: 86,
+    nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Sunder Charms", 1],
+      ["Cow King Item (H) Desecrated A", 1],
+    ],
+  },
+  "Cow King (H) Desecrated B": {
+    group: 33,
+    level: 90,
+    nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Sunder Charms", 1],
+      ["Cow King Item (H) Desecrated B", 1],
+    ],
+  },
+  "Cow King (H) Desecrated C": {
+    group: 33,
+    level: 93,
+    nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Sunder Charms", 1],
+      ["Cow King Item (H) Desecrated C", 1],
+    ],
+  },
+  "Cow King (H) Desecrated D": {
+    group: 33,
+    level: 96,
+    nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Sunder Charms", 1],
+      ["Cow King Item (H) Desecrated D", 1],
+    ],
+  },
   "Cow King (N)": {
+    group: -1,
     nodrop: 0,
     picks: 5,
     qualityRatios: [1024, 983, 983, 850],
@@ -9437,7 +11123,103 @@ export const TCDict: TCDictType = {
       ["Act 1 (N) Melee B", 2],
     ],
   },
+  "Cow King (N) Desecrated A": {
+    group: 33,
+    level: 67,
+    nodrop: 0,
+    picks: 5,
+    qualityRatios: [1024, 983, 983, 850],
+    tcs: [
+      ["Act 1 (H) Uitem C", 1],
+      ["Act 1 (H) Melee B", 2],
+    ],
+  },
+  "Cow King (N) Desecrated C": {
+    group: 33,
+    level: 73,
+    nodrop: 0,
+    picks: 5,
+    qualityRatios: [1024, 983, 983, 850],
+    tcs: [
+      ["Act 3 (H) Uitem C", 1],
+      ["Act 3 (H) Melee B", 2],
+    ],
+  },
+  "Cow King Desecrated A": {
+    group: 33,
+    level: 31,
+    nodrop: 0,
+    picks: 5,
+    qualityRatios: [1024, 983, 983, 850],
+    tcs: [
+      ["Act 4 Uitem B", 1],
+      ["Act 4 Melee B", 2],
+    ],
+  },
+  "Cow King Desecrated B": {
+    group: 33,
+    level: 40,
+    nodrop: 0,
+    picks: 5,
+    qualityRatios: [1024, 983, 983, 850],
+    tcs: [
+      ["Act 1 (N) Uitem A", 1],
+      ["Act 1 (N) Melee A", 2],
+    ],
+  },
+  "Cow King Desecrated C": {
+    group: 33,
+    level: 48,
+    nodrop: 0,
+    picks: 5,
+    qualityRatios: [1024, 983, 983, 850],
+    tcs: [
+      ["Act 3 (N) Uitem A", 1],
+      ["Act 3 (N) Melee A", 2],
+    ],
+  },
+  "Cow King Item (H) Desecrated A": {
+    group: -1,
+    nodrop: 0,
+    picks: 5,
+    qualityRatios: [1024, 983, 983, 850],
+    tcs: [
+      ["Act 4 (H) Uitem B", 1],
+      ["Act 4 (H) Melee B", 2],
+    ],
+  },
+  "Cow King Item (H) Desecrated B": {
+    group: -1,
+    nodrop: 0,
+    picks: 5,
+    qualityRatios: [1024, 983, 983, 850],
+    tcs: [
+      ["Act 5 (H) Uitem A", 1],
+      ["Act 5 (H) Melee A", 2],
+    ],
+  },
+  "Cow King Item (H) Desecrated C": {
+    group: -1,
+    nodrop: 0,
+    picks: 5,
+    qualityRatios: [1024, 983, 983, 850],
+    tcs: [
+      ["Act 5 (H) Uitem B", 1],
+      ["Act 5 (H) Melee B", 2],
+    ],
+  },
+  "Cow King Item (H) Desecrated D": {
+    group: -1,
+    nodrop: 0,
+    picks: 5,
+    qualityRatios: [1024, 983, 983, 850],
+    tcs: [
+      ["Act 5 (H) Uitem C", 1],
+      ["Act 5 (H) Melee C", 2],
+    ],
+  },
   Diablo: {
+    group: -1,
     nodrop: 15,
     picks: 7,
     qualityRatios: [1024, 983, 983, 983],
@@ -9449,6 +11231,7 @@ export const TCDict: TCDictType = {
     ],
   },
   "Diablo (H)": {
+    group: -1,
     nodrop: 15,
     picks: 7,
     qualityRatios: [1024, 983, 983, 983],
@@ -9460,7 +11243,30 @@ export const TCDict: TCDictType = {
       ["bet", 1],
     ],
   },
+  "Diablo (H) Desecrated A": {
+    group: 23,
+    level: 94,
+    nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Sunder Charms", 1],
+      ["Diablo Item (H) Desecrated A", 1],
+    ],
+  },
+  "Diablo (H) Desecrated B": {
+    group: 23,
+    level: 96,
+    nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Sunder Charms", 1],
+      ["Diablo Item (H) Desecrated B", 1],
+    ],
+  },
   "Diablo (N)": {
+    group: -1,
     nodrop: 15,
     picks: 7,
     qualityRatios: [1024, 983, 983, 983],
@@ -9471,7 +11277,99 @@ export const TCDict: TCDictType = {
       ["Act 5 (N) Good", 3],
     ],
   },
+  "Diablo (N) Desecrated A": {
+    group: 23,
+    level: 62,
+    nodrop: 15,
+    picks: 7,
+    qualityRatios: [1024, 983, 983, 983],
+    tcs: [
+      ["gld", 5],
+      ["Act 5 (N) Equip A", 52],
+      ["Act 5 (N) Junk", 5],
+      ["Act 5 (N) Good", 3],
+    ],
+  },
+  "Diablo (N) Desecrated B": {
+    group: 23,
+    level: 67,
+    nodrop: 15,
+    picks: 7,
+    qualityRatios: [1024, 983, 983, 983],
+    tcs: [
+      ["gld", 5],
+      ["Act 1 (H) Equip A", 52],
+      ["Act 1 (H) Junk", 5],
+      ["Act 1 (H) Good", 3],
+    ],
+  },
+  "Diablo (N) Desecrated C": {
+    group: 23,
+    level: 73,
+    nodrop: 15,
+    picks: 7,
+    qualityRatios: [1024, 983, 983, 983],
+    tcs: [
+      ["gld", 5],
+      ["Act 3 (H) Equip A", 52],
+      ["Act 3 (H) Junk", 5],
+      ["Act 3 (H) Good", 3],
+    ],
+  },
+  "Diablo Desecrated A": {
+    group: 23,
+    level: 40,
+    nodrop: 15,
+    picks: 7,
+    qualityRatios: [1024, 983, 983, 983],
+    tcs: [
+      ["gld", 5],
+      ["Act 1 (N) Equip A", 52],
+      ["Act 1 (N) Junk", 5],
+      ["Act 1 (N) Good", 3],
+    ],
+  },
+  "Diablo Desecrated B": {
+    group: 23,
+    level: 48,
+    nodrop: 15,
+    picks: 7,
+    qualityRatios: [1024, 983, 983, 983],
+    tcs: [
+      ["gld", 5],
+      ["Act 3 (N) Equip A", 52],
+      ["Act 3 (N) Junk", 5],
+      ["Act 3 (N) Good", 3],
+    ],
+  },
+  "Diablo Item (H) Desecrated A": {
+    group: -1,
+    nodrop: 15,
+    picks: 7,
+    qualityRatios: [1024, 983, 983, 983],
+    tcs: [
+      ["gld", 5],
+      ["Act 5 (H) Equip B", 52],
+      ["Act 5 (H) Junk", 5],
+      ["Act 5 (H) Good", 3],
+      ["bet", 1],
+    ],
+  },
+  "Diablo Item (H) Desecrated B": {
+    group: -1,
+    nodrop: 15,
+    picks: 7,
+    qualityRatios: [1024, 983, 983, 983],
+    tcs: [
+      ["gld", 5],
+      ["Act 5 (H) Equip C", 52],
+      ["Act 5 (H) Junk", 5],
+      ["Act 5 (H) Good", 3],
+      ["bet", 1],
+    ],
+  },
   Diabloq: {
+    group: -1,
     nodrop: 15,
     picks: 7,
     qualityRatios: [1024, 1024, 993, 993],
@@ -9481,6 +11379,7 @@ export const TCDict: TCDictType = {
     ],
   },
   "Diabloq (H)": {
+    group: -1,
     nodrop: 15,
     picks: 7,
     qualityRatios: [1024, 1024, 993, 993],
@@ -9491,6 +11390,7 @@ export const TCDict: TCDictType = {
     ],
   },
   "Diabloq (N)": {
+    group: -1,
     nodrop: 15,
     picks: 7,
     qualityRatios: [1024, 1024, 993, 993],
@@ -9500,6 +11400,7 @@ export const TCDict: TCDictType = {
     ],
   },
   Duriel: {
+    group: -1,
     nodrop: 0,
     picks: 5,
     qualityRatios: [0, 0, 0, 0],
@@ -9509,6 +11410,7 @@ export const TCDict: TCDictType = {
     ],
   },
   "Duriel (H)": {
+    group: -1,
     nodrop: 0,
     picks: 5,
     qualityRatios: [0, 0, 0, 0],
@@ -9518,6 +11420,7 @@ export const TCDict: TCDictType = {
     ],
   },
   "Duriel (H) - Base": {
+    group: -1,
     nodrop: 19,
     picks: 7,
     qualityRatios: [1024, 983, 983, 983],
@@ -9529,7 +11432,144 @@ export const TCDict: TCDictType = {
       ["tes", 2],
     ],
   },
+  "Duriel (H) - Base Desecrated A": {
+    group: -1,
+    nodrop: 19,
+    picks: 7,
+    qualityRatios: [1024, 983, 983, 983],
+    tcs: [
+      ["gld", 11],
+      ["Act 4 (H) Equip B", 19],
+      ["Act 4 (H) Junk", 15],
+      ["Act 4 (H) Good", 3],
+      ["tes", 2],
+    ],
+  },
+  "Duriel (H) - Base Desecrated B": {
+    group: -1,
+    nodrop: 19,
+    picks: 7,
+    qualityRatios: [1024, 983, 983, 983],
+    tcs: [
+      ["gld", 11],
+      ["Act 5 (H) Equip A", 19],
+      ["Act 5 (H) Junk", 15],
+      ["Act 5 (H) Good", 3],
+      ["tes", 2],
+    ],
+  },
+  "Duriel (H) - Base Desecrated C": {
+    group: -1,
+    nodrop: 19,
+    picks: 7,
+    qualityRatios: [1024, 983, 983, 983],
+    tcs: [
+      ["gld", 11],
+      ["Act 5 (H) Equip B", 19],
+      ["Act 5 (H) Junk", 15],
+      ["Act 5 (H) Good", 3],
+      ["tes", 2],
+    ],
+  },
+  "Duriel (H) - Base Desecrated D": {
+    group: -1,
+    nodrop: 19,
+    picks: 7,
+    qualityRatios: [1024, 983, 983, 983],
+    tcs: [
+      ["gld", 11],
+      ["Act 5 (H) Equip C", 19],
+      ["Act 5 (H) Junk", 15],
+      ["Act 5 (H) Good", 3],
+      ["tes", 2],
+    ],
+  },
+  "Duriel (H) Desecrated A": {
+    group: 34,
+    level: 88,
+    nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Sunder Charms", 1],
+      ["Duriel (H) Desecrated Five", 1],
+    ],
+  },
+  "Duriel (H) Desecrated B": {
+    group: 34,
+    level: 90,
+    nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Sunder Charms", 1],
+      ["Duriel (H) Desecrated Town Portal", 1],
+    ],
+  },
+  "Duriel (H) Desecrated C": {
+    group: 34,
+    level: 93,
+    nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Sunder Charms", 1],
+      ["Duriel (H) Desecrated Scrolls", 1],
+    ],
+  },
+  "Duriel (H) Desecrated D": {
+    group: 34,
+    level: 96,
+    nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Sunder Charms", 1],
+      ["Duriel (H) Desecrated Incoming", 1],
+    ],
+  },
+  "Duriel (H) Desecrated Five": {
+    group: -1,
+    nodrop: 0,
+    picks: 5,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["tsc", 1],
+      ["Duriel (H) - Base Desecrated A", 2],
+    ],
+  },
+  "Duriel (H) Desecrated Incoming": {
+    group: -1,
+    nodrop: 0,
+    picks: 5,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["tsc", 1],
+      ["Duriel (H) - Base Desecrated D", 2],
+    ],
+  },
+  "Duriel (H) Desecrated Scrolls": {
+    group: -1,
+    nodrop: 0,
+    picks: 5,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["tsc", 1],
+      ["Duriel (H) - Base Desecrated C", 2],
+    ],
+  },
+  "Duriel (H) Desecrated Town Portal": {
+    group: -1,
+    nodrop: 0,
+    picks: 5,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["tsc", 1],
+      ["Duriel (H) - Base Desecrated B", 2],
+    ],
+  },
   "Duriel (N)": {
+    group: -1,
     nodrop: 0,
     picks: 5,
     qualityRatios: [0, 0, 0, 0],
@@ -9539,6 +11579,7 @@ export const TCDict: TCDictType = {
     ],
   },
   "Duriel (N) - Base": {
+    group: -1,
     nodrop: 19,
     picks: 7,
     qualityRatios: [1024, 983, 983, 983],
@@ -9549,7 +11590,77 @@ export const TCDict: TCDictType = {
       ["Act 3 (N) Good", 3],
     ],
   },
+  "Duriel (N) - Base Desecrated A": {
+    group: -1,
+    nodrop: 19,
+    picks: 7,
+    qualityRatios: [1024, 983, 983, 983],
+    tcs: [
+      ["gld", 11],
+      ["Act 4 (N) Equip A", 19],
+      ["Act 4 (N) Junk", 15],
+      ["Act 4 (N) Good", 3],
+    ],
+  },
+  "Duriel (N) - Base Desecrated B": {
+    group: -1,
+    nodrop: 19,
+    picks: 7,
+    qualityRatios: [1024, 983, 983, 983],
+    tcs: [
+      ["gld", 11],
+      ["Act 5 (N) Equip B", 19],
+      ["Act 5 (N) Junk", 15],
+      ["Act 5 (N) Good", 3],
+    ],
+  },
+  "Duriel (N) - Base Desecrated C": {
+    group: -1,
+    nodrop: 19,
+    picks: 7,
+    qualityRatios: [1024, 983, 983, 983],
+    tcs: [
+      ["gld", 11],
+      ["Act 3 (H) Equip A", 19],
+      ["Act 3 (H) Junk", 15],
+      ["Act 3 (H) Good", 3],
+    ],
+  },
+  "Duriel (N) Desecrated A": {
+    group: 34,
+    level: 55,
+    nodrop: 0,
+    picks: 5,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["tsc", 1],
+      ["Duriel (N) - Base Desecrated A", 2],
+    ],
+  },
+  "Duriel (N) Desecrated B": {
+    group: 34,
+    level: 63,
+    nodrop: 0,
+    picks: 5,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["tsc", 1],
+      ["Duriel (N) - Base Desecrated B", 2],
+    ],
+  },
+  "Duriel (N) Desecrated C": {
+    group: 34,
+    level: 73,
+    nodrop: 0,
+    picks: 5,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["tsc", 1],
+      ["Duriel (N) - Base Desecrated C", 2],
+    ],
+  },
   "Duriel - Base": {
+    group: -1,
     nodrop: 19,
     picks: 7,
     qualityRatios: [1024, 983, 983, 983],
@@ -9560,7 +11671,77 @@ export const TCDict: TCDictType = {
       ["Act 3 Good", 3],
     ],
   },
+  "Duriel - Base Desecrated A": {
+    group: -1,
+    nodrop: 19,
+    picks: 7,
+    qualityRatios: [1024, 983, 983, 983],
+    tcs: [
+      ["gld", 11],
+      ["Act 3 Equip B", 19],
+      ["Act 3 Junk", 15],
+      ["Act 3 Good", 3],
+    ],
+  },
+  "Duriel - Base Desecrated B": {
+    group: -1,
+    nodrop: 19,
+    picks: 7,
+    qualityRatios: [1024, 983, 983, 983],
+    tcs: [
+      ["gld", 11],
+      ["Act 5 Equip B", 19],
+      ["Act 5 Junk", 15],
+      ["Act 5 Good", 3],
+    ],
+  },
+  "Duriel - Base Desecrated C": {
+    group: -1,
+    nodrop: 19,
+    picks: 7,
+    qualityRatios: [1024, 983, 983, 983],
+    tcs: [
+      ["gld", 11],
+      ["Act 3 (N) Equip A", 19],
+      ["Act 3 (N) Junk", 15],
+      ["Act 3 (N) Good", 3],
+    ],
+  },
+  "Duriel Desecrated A": {
+    group: 34,
+    level: 22,
+    nodrop: 0,
+    picks: 5,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["tsc", 1],
+      ["Duriel - Base Desecrated A", 2],
+    ],
+  },
+  "Duriel Desecrated B": {
+    group: 34,
+    level: 36,
+    nodrop: 0,
+    picks: 5,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["tsc", 1],
+      ["Duriel - Base Desecrated B", 2],
+    ],
+  },
+  "Duriel Desecrated C": {
+    group: 34,
+    level: 48,
+    nodrop: 0,
+    picks: 5,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["tsc", 1],
+      ["Duriel - Base Desecrated C", 2],
+    ],
+  },
   Durielq: {
+    group: -1,
     nodrop: 0,
     picks: 5,
     qualityRatios: [0, 0, 0, 0],
@@ -9570,6 +11751,7 @@ export const TCDict: TCDictType = {
     ],
   },
   "Durielq (H)": {
+    group: -1,
     nodrop: 0,
     picks: 5,
     qualityRatios: [0, 0, 0, 0],
@@ -9579,6 +11761,7 @@ export const TCDict: TCDictType = {
     ],
   },
   "Durielq (H) - Base": {
+    group: -1,
     nodrop: 19,
     picks: 7,
     qualityRatios: [1024, 1024, 993, 993],
@@ -9589,6 +11772,7 @@ export const TCDict: TCDictType = {
     ],
   },
   "Durielq (N)": {
+    group: -1,
     nodrop: 0,
     picks: 5,
     qualityRatios: [0, 0, 0, 0],
@@ -9598,6 +11782,7 @@ export const TCDict: TCDictType = {
     ],
   },
   "Durielq (N) - Base": {
+    group: -1,
     nodrop: 19,
     picks: 7,
     qualityRatios: [1024, 1024, 993, 993],
@@ -9607,6 +11792,7 @@ export const TCDict: TCDictType = {
     ],
   },
   "Durielq - Base": {
+    group: -1,
     nodrop: 19,
     picks: 7,
     qualityRatios: [1024, 1024, 993, 993],
@@ -9616,6 +11802,7 @@ export const TCDict: TCDictType = {
     ],
   },
   "Flawed Gem": {
+    group: -1,
     nodrop: 0,
     picks: 1,
     qualityRatios: [0, 0, 0, 0],
@@ -9630,6 +11817,7 @@ export const TCDict: TCDictType = {
     ],
   },
   "Flawless Gem": {
+    group: -1,
     nodrop: 0,
     picks: 1,
     qualityRatios: [0, 0, 0, 0],
@@ -9644,6 +11832,7 @@ export const TCDict: TCDictType = {
     ],
   },
   "Flying Scimitar": {
+    group: -1,
     nodrop: 100,
     picks: 1,
     qualityRatios: [0, 0, 0, 0],
@@ -9653,6 +11842,7 @@ export const TCDict: TCDictType = {
     ],
   },
   "Flying Scimitar (H)": {
+    group: -1,
     nodrop: 100,
     picks: 1,
     qualityRatios: [0, 0, 0, 0],
@@ -9664,6 +11854,7 @@ export const TCDict: TCDictType = {
     ],
   },
   "Flying Scimitar (N)": {
+    group: -1,
     nodrop: 100,
     picks: 1,
     qualityRatios: [0, 0, 0, 0],
@@ -9674,12 +11865,14 @@ export const TCDict: TCDictType = {
     ],
   },
   Gold: {
+    group: -1,
     nodrop: 0,
     picks: 1,
     qualityRatios: [0, 0, 0, 0],
     tcs: [["gld", 1]],
   },
   Griswold: {
+    group: -1,
     nodrop: 0,
     picks: -3,
     qualityRatios: [0, 0, 0, 0],
@@ -9689,6 +11882,7 @@ export const TCDict: TCDictType = {
     ],
   },
   "Griswold (H)": {
+    group: -1,
     nodrop: 0,
     picks: -3,
     qualityRatios: [0, 0, 0, 0],
@@ -9697,7 +11891,56 @@ export const TCDict: TCDictType = {
       ["Act 1 (H) Melee B", 2],
     ],
   },
+  "Griswold (H) Desecrated A": {
+    group: 26,
+    level: 87,
+    nodrop: 0,
+    picks: -4,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Sunder Charms", 1],
+      ["Act 4 (H) Uitem B", 1],
+      ["Act 4 (H) Melee A", 2],
+    ],
+  },
+  "Griswold (H) Desecrated B": {
+    group: 26,
+    level: 90,
+    nodrop: 0,
+    picks: -4,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Sunder Charms", 1],
+      ["Act 5 (H) Uitem A", 1],
+      ["Act 4 (H) Melee B", 2],
+    ],
+  },
+  "Griswold (H) Desecrated C": {
+    group: 26,
+    level: 93,
+    nodrop: 0,
+    picks: -4,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Sunder Charms", 1],
+      ["Act 5 (H) Uitem B", 1],
+      ["Act 5 (H) Melee A", 2],
+    ],
+  },
+  "Griswold (H) Desecrated D": {
+    group: 26,
+    level: 96,
+    nodrop: 0,
+    picks: -4,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Sunder Charms", 1],
+      ["Act 5 (H) Uitem C", 1],
+      ["Act 5 (H) Melee B", 2],
+    ],
+  },
   "Griswold (N)": {
+    group: -1,
     nodrop: 0,
     picks: -3,
     qualityRatios: [0, 0, 0, 0],
@@ -9706,7 +11949,74 @@ export const TCDict: TCDictType = {
       ["Act 1 (N) Melee B", 2],
     ],
   },
+  "Griswold (N) Desecrated A": {
+    group: 26,
+    level: 42,
+    nodrop: 0,
+    picks: -3,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Act 1 (H) Uitem C", 1],
+      ["Act 1 (N) Melee B", 2],
+    ],
+  },
+  "Griswold (N) Desecrated B": {
+    group: 26,
+    level: 57,
+    nodrop: 0,
+    picks: -3,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Act 1 (H) Uitem C", 1],
+      ["Act 3 (N) Melee B", 2],
+    ],
+  },
+  "Griswold (N) Desecrated C": {
+    group: 26,
+    level: 73,
+    nodrop: 0,
+    picks: -3,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Act 3 (H) Uitem C", 1],
+      ["Act 3 (H) Melee B", 2],
+    ],
+  },
+  "Griswold Desecrated A": {
+    group: 26,
+    level: 8,
+    nodrop: 0,
+    picks: -3,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Act 1 Uitem C", 1],
+      ["Act 1 Melee B", 2],
+    ],
+  },
+  "Griswold Desecrated B": {
+    group: 26,
+    level: 29,
+    nodrop: 0,
+    picks: -3,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Act 4 Uitem B", 1],
+      ["Act 4 Melee A", 2],
+    ],
+  },
+  "Griswold Desecrated C": {
+    group: 26,
+    level: 48,
+    nodrop: 0,
+    picks: -3,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Act 3 (N) Uitem A", 1],
+      ["Act 2 (N) Melee B", 2],
+    ],
+  },
   Haphesto: {
+    group: -1,
     nodrop: 19,
     picks: 5,
     qualityRatios: [1024, 900, 800, 800],
@@ -9718,6 +12028,7 @@ export const TCDict: TCDictType = {
     ],
   },
   "Haphesto (H)": {
+    group: -1,
     nodrop: 19,
     picks: 5,
     qualityRatios: [1024, 900, 800, 800],
@@ -9728,7 +12039,41 @@ export const TCDict: TCDictType = {
       ["Act 5 (H) Good", 3],
     ],
   },
+  "Haphesto (H) Desecrated A": {
+    group: 27,
+    level: 88,
+    nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Sunder Charms", 1],
+      ["Haphesto Item (H) Desecrated A", 1],
+    ],
+  },
+  "Haphesto (H) Desecrated B": {
+    group: 27,
+    level: 93,
+    nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Sunder Charms", 1],
+      ["Haphesto Item (H) Desecrated B", 1],
+    ],
+  },
+  "Haphesto (H) Desecrated C": {
+    group: 27,
+    level: 96,
+    nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Sunder Charms", 1],
+      ["Haphesto Item (H) Desecrated C", 1],
+    ],
+  },
   "Haphesto (N)": {
+    group: -1,
     nodrop: 19,
     picks: 5,
     qualityRatios: [1024, 900, 800, 800],
@@ -9739,7 +12084,122 @@ export const TCDict: TCDictType = {
       ["Act 5 (N) Good", 3],
     ],
   },
+  "Haphesto (N) Desecrated A": {
+    group: 27,
+    level: 60,
+    nodrop: 19,
+    picks: 5,
+    qualityRatios: [1024, 900, 800, 800],
+    tcs: [
+      ["gld", 14],
+      ["Act 5 (N) Equip A", 19],
+      ["Act 5 (N) Junk", 5],
+      ["Act 5 (N) Good", 3],
+    ],
+  },
+  "Haphesto (N) Desecrated B": {
+    group: 27,
+    level: 66,
+    nodrop: 19,
+    picks: 5,
+    qualityRatios: [1024, 900, 800, 800],
+    tcs: [
+      ["gld", 14],
+      ["Act 5 (N) Equip C", 19],
+      ["Act 5 (N) Junk", 5],
+      ["Act 5 (N) Good", 3],
+    ],
+  },
+  "Haphesto (N) Desecrated C": {
+    group: 27,
+    level: 73,
+    nodrop: 19,
+    picks: 5,
+    qualityRatios: [1024, 900, 800, 800],
+    tcs: [
+      ["gld", 14],
+      ["Act 3 (H) Equip A", 19],
+      ["Act 3 (H) Junk", 5],
+      ["Act 3 (H) Good", 3],
+    ],
+  },
+  "Haphesto Desecrated A": {
+    group: 27,
+    level: 28,
+    nodrop: 19,
+    picks: 5,
+    qualityRatios: [1024, 900, 800, 800],
+    tcs: [
+      ["gld", 14],
+      ["Act 5 Equip A", 19],
+      ["Act 5 Junk", 5],
+      ["Act 5 Good", 3],
+    ],
+  },
+  "Haphesto Desecrated B": {
+    group: 27,
+    level: 38,
+    nodrop: 19,
+    picks: 5,
+    qualityRatios: [1024, 900, 800, 800],
+    tcs: [
+      ["gld", 14],
+      ["Act 5 Equip C", 19],
+      ["Act 5 Junk", 5],
+      ["Act 5 Good", 3],
+    ],
+  },
+  "Haphesto Desecrated C": {
+    group: 27,
+    level: 48,
+    nodrop: 19,
+    picks: 5,
+    qualityRatios: [1024, 900, 800, 800],
+    tcs: [
+      ["gld", 14],
+      ["Act 3 (N) Equip C", 19],
+      ["Act 3 (N) Junk", 5],
+      ["Act 3 (N) Good", 3],
+    ],
+  },
+  "Haphesto Item (H) Desecrated A": {
+    group: -1,
+    nodrop: 19,
+    picks: 5,
+    qualityRatios: [1024, 900, 800, 800],
+    tcs: [
+      ["gld", 14],
+      ["Act 5 (H) Equip A", 19],
+      ["Act 5 (H) Junk", 5],
+      ["Act 5 (H) Good", 3],
+    ],
+  },
+  "Haphesto Item (H) Desecrated B": {
+    group: -1,
+    nodrop: 19,
+    picks: 5,
+    qualityRatios: [1024, 900, 800, 800],
+    tcs: [
+      ["gld", 14],
+      ["Act 5 (H) Equip B", 19],
+      ["Act 5 (H) Junk", 5],
+      ["Act 5 (H) Good", 3],
+    ],
+  },
+  "Haphesto Item (H) Desecrated C": {
+    group: -1,
+    nodrop: 19,
+    picks: 5,
+    qualityRatios: [1024, 900, 800, 800],
+    tcs: [
+      ["gld", 14],
+      ["Act 5 (H) Equip C", 19],
+      ["Act 5 (H) Junk", 5],
+      ["Act 5 (H) Good", 3],
+    ],
+  },
   "Hpotion 1": {
+    group: -1,
     nodrop: 0,
     picks: 1,
     qualityRatios: [0, 0, 0, 0],
@@ -9752,6 +12212,7 @@ export const TCDict: TCDictType = {
     ],
   },
   "Hpotion 2": {
+    group: -1,
     nodrop: 0,
     picks: 1,
     qualityRatios: [0, 0, 0, 0],
@@ -9765,6 +12226,7 @@ export const TCDict: TCDictType = {
     ],
   },
   "Hpotion 3": {
+    group: -1,
     nodrop: 0,
     picks: 1,
     qualityRatios: [0, 0, 0, 0],
@@ -9778,6 +12240,7 @@ export const TCDict: TCDictType = {
     ],
   },
   "Hpotion 4": {
+    group: -1,
     nodrop: 0,
     picks: 1,
     qualityRatios: [0, 0, 0, 0],
@@ -9791,6 +12254,7 @@ export const TCDict: TCDictType = {
     ],
   },
   "Hpotion 5": {
+    group: -1,
     nodrop: 0,
     picks: 1,
     qualityRatios: [0, 0, 0, 0],
@@ -9803,6 +12267,7 @@ export const TCDict: TCDictType = {
     ],
   },
   "Hpotion 6": {
+    group: -1,
     nodrop: 0,
     picks: 1,
     qualityRatios: [0, 0, 0, 0],
@@ -9815,6 +12280,7 @@ export const TCDict: TCDictType = {
     ],
   },
   Izual: {
+    group: -1,
     nodrop: 19,
     picks: 5,
     qualityRatios: [1024, 972, 800, 800],
@@ -9826,6 +12292,7 @@ export const TCDict: TCDictType = {
     ],
   },
   "Izual (H)": {
+    group: -1,
     nodrop: 19,
     picks: 5,
     qualityRatios: [1024, 972, 800, 800],
@@ -9836,7 +12303,52 @@ export const TCDict: TCDictType = {
       ["Act 4 (H) Good", 3],
     ],
   },
+  "Izual (H) Desecrated A": {
+    group: 32,
+    level: 86,
+    nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Sunder Charms", 1],
+      ["Izual Item (H) Desecrated A", 1],
+    ],
+  },
+  "Izual (H) Desecrated B": {
+    group: 32,
+    level: 90,
+    nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Sunder Charms", 1],
+      ["Izual Item (H) Desecrated B", 1],
+    ],
+  },
+  "Izual (H) Desecrated C": {
+    group: 32,
+    level: 93,
+    nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Sunder Charms", 1],
+      ["Izual Item (H) Desecrated C", 1],
+    ],
+  },
+  "Izual (H) Desecrated D": {
+    group: 32,
+    level: 96,
+    nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Sunder Charms", 1],
+      ["Izual Item (H) Desecrated D", 1],
+    ],
+  },
   "Izual (N)": {
+    group: -1,
     nodrop: 19,
     picks: 5,
     qualityRatios: [1024, 972, 800, 800],
@@ -9847,7 +12359,134 @@ export const TCDict: TCDictType = {
       ["Act 4 (N) Good", 3],
     ],
   },
+  "Izual (N) Desecrated A": {
+    group: 32,
+    level: 60,
+    nodrop: 19,
+    picks: 5,
+    qualityRatios: [1024, 972, 800, 800],
+    tcs: [
+      ["gld", 14],
+      ["Act 4 (N) Equip B", 19],
+      ["Act 4 (N) Junk", 5],
+      ["Act 4 (N) Good", 3],
+    ],
+  },
+  "Izual (N) Desecrated B": {
+    group: 32,
+    level: 66,
+    nodrop: 19,
+    picks: 5,
+    qualityRatios: [1024, 972, 800, 800],
+    tcs: [
+      ["gld", 14],
+      ["Act 5 (N) Equip C", 19],
+      ["Act 5 (N) Junk", 5],
+      ["Act 5 (N) Good", 3],
+    ],
+  },
+  "Izual (N) Desecrated C": {
+    group: 32,
+    level: 73,
+    nodrop: 19,
+    picks: 5,
+    qualityRatios: [1024, 972, 800, 800],
+    tcs: [
+      ["gld", 14],
+      ["Act 3 (H) Equip A", 19],
+      ["Act 3 (H) Junk", 5],
+      ["Act 3 (H) Good", 3],
+    ],
+  },
+  "Izual Desecrated A": {
+    group: 32,
+    level: 29,
+    nodrop: 19,
+    picks: 5,
+    qualityRatios: [1024, 972, 800, 800],
+    tcs: [
+      ["gld", 14],
+      ["Act 4 Equip B", 19],
+      ["Act 4 Junk", 5],
+      ["Act 4 Good", 3],
+    ],
+  },
+  "Izual Desecrated B": {
+    group: 32,
+    level: 38,
+    nodrop: 19,
+    picks: 5,
+    qualityRatios: [1024, 972, 800, 800],
+    tcs: [
+      ["gld", 14],
+      ["Act 5 Equip C", 19],
+      ["Act 5 Junk", 5],
+      ["Act 5 Good", 3],
+    ],
+  },
+  "Izual Desecrated C": {
+    group: 32,
+    level: 48,
+    nodrop: 19,
+    picks: 5,
+    qualityRatios: [1024, 972, 800, 800],
+    tcs: [
+      ["gld", 14],
+      ["Act 3 (N) Equip A", 19],
+      ["Act 3 (N) Junk", 5],
+      ["Act 3 (N) Good", 3],
+    ],
+  },
+  "Izual Item (H) Desecrated A": {
+    group: -1,
+    nodrop: 19,
+    picks: 5,
+    qualityRatios: [1024, 972, 800, 800],
+    tcs: [
+      ["gld", 14],
+      ["Act 4 (H) Equip B", 19],
+      ["Act 4 (H) Junk", 5],
+      ["Act 4 (H) Good", 3],
+    ],
+  },
+  "Izual Item (H) Desecrated B": {
+    group: -1,
+    nodrop: 19,
+    picks: 5,
+    qualityRatios: [1024, 972, 800, 800],
+    tcs: [
+      ["gld", 14],
+      ["Act 5 (H) Equip A", 19],
+      ["Act 5 (H) Junk", 5],
+      ["Act 5 (H) Good", 3],
+    ],
+  },
+  "Izual Item (H) Desecrated C": {
+    group: -1,
+    nodrop: 19,
+    picks: 5,
+    qualityRatios: [1024, 972, 800, 800],
+    tcs: [
+      ["gld", 14],
+      ["Act 5 (H) Equip B", 19],
+      ["Act 5 (H) Junk", 5],
+      ["Act 5 (H) Good", 3],
+    ],
+  },
+  "Izual Item (H) Desecrated D": {
+    group: -1,
+    nodrop: 19,
+    picks: 5,
+    qualityRatios: [1024, 972, 800, 800],
+    tcs: [
+      ["gld", 14],
+      ["Act 5 (H) Equip C", 19],
+      ["Act 5 (H) Junk", 5],
+      ["Act 5 (H) Good", 3],
+    ],
+  },
   "Jewelry A": {
+    group: -1,
     nodrop: 0,
     picks: 1,
     qualityRatios: [0, 0, 0, 0],
@@ -9861,6 +12500,7 @@ export const TCDict: TCDictType = {
     ],
   },
   "Jewelry B": {
+    group: -1,
     nodrop: 0,
     picks: 1,
     qualityRatios: [0, 0, 0, 0],
@@ -9874,6 +12514,7 @@ export const TCDict: TCDictType = {
     ],
   },
   "Jewelry C": {
+    group: -1,
     nodrop: 0,
     picks: 1,
     qualityRatios: [0, 0, 0, 0],
@@ -9887,6 +12528,7 @@ export const TCDict: TCDictType = {
     ],
   },
   Mephisto: {
+    group: -1,
     nodrop: 15,
     picks: 7,
     qualityRatios: [1024, 983, 983, 983],
@@ -9898,6 +12540,7 @@ export const TCDict: TCDictType = {
     ],
   },
   "Mephisto (H)": {
+    group: -1,
     nodrop: 15,
     picks: 7,
     qualityRatios: [1024, 983, 983, 983],
@@ -9909,7 +12552,52 @@ export const TCDict: TCDictType = {
       ["ceh", 1],
     ],
   },
+  "Mephisto (H) Desecrated A": {
+    group: 22,
+    level: 87,
+    nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Sunder Charms", 1],
+      ["Mephisto Item (H) Desecrated A", 1],
+    ],
+  },
+  "Mephisto (H) Desecrated B": {
+    group: 22,
+    level: 90,
+    nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Sunder Charms", 1],
+      ["Mephisto Item (H) Desecrated A", 1],
+    ],
+  },
+  "Mephisto (H) Desecrated C": {
+    group: 22,
+    level: 93,
+    nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Sunder Charms", 1],
+      ["Mephisto Item (H) Desecrated A", 1],
+    ],
+  },
+  "Mephisto (H) Desecrated D": {
+    group: 22,
+    level: 96,
+    nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Sunder Charms", 1],
+      ["Mephisto Item (H) Desecrated A", 1],
+    ],
+  },
   "Mephisto (N)": {
+    group: -1,
     nodrop: 15,
     picks: 7,
     qualityRatios: [1024, 983, 983, 983],
@@ -9920,7 +12608,138 @@ export const TCDict: TCDictType = {
       ["Act 4 (N) Good", 3],
     ],
   },
+  "Mephisto (N) Desecrated A": {
+    group: 22,
+    level: 59,
+    nodrop: 15,
+    picks: 7,
+    qualityRatios: [1024, 983, 983, 983],
+    tcs: [
+      ["gld", 5],
+      ["Act 4 (N) Equip B", 52],
+      ["Act 4 (N) Junk", 5],
+      ["Act 4 (N) Good", 3],
+    ],
+  },
+  "Mephisto (N) Desecrated B": {
+    group: 22,
+    level: 66,
+    nodrop: 15,
+    picks: 7,
+    qualityRatios: [1024, 983, 983, 983],
+    tcs: [
+      ["gld", 5],
+      ["Act 5 (N) Equip C", 52],
+      ["Act 5 (N) Junk", 5],
+      ["Act 5 (N) Good", 3],
+    ],
+  },
+  "Mephisto (N) Desecrated C": {
+    group: 22,
+    level: 73,
+    nodrop: 15,
+    picks: 7,
+    qualityRatios: [1024, 983, 983, 983],
+    tcs: [
+      ["gld", 5],
+      ["Act 3 (H) Equip A", 52],
+      ["Act 3 (H) Junk", 5],
+      ["Act 3 (H) Good", 3],
+    ],
+  },
+  "Mephisto Desecrated A": {
+    group: 22,
+    level: 26,
+    nodrop: 15,
+    picks: 7,
+    qualityRatios: [1024, 983, 983, 983],
+    tcs: [
+      ["gld", 5],
+      ["Act 4 Equip A", 52],
+      ["Act 4 Junk", 5],
+      ["Act 4 Good", 3],
+    ],
+  },
+  "Mephisto Desecrated B": {
+    group: 22,
+    level: 38,
+    nodrop: 15,
+    picks: 7,
+    qualityRatios: [1024, 983, 983, 983],
+    tcs: [
+      ["gld", 5],
+      ["Act 5 Equip C", 52],
+      ["Act 5 Junk", 5],
+      ["Act 5 Good", 3],
+    ],
+  },
+  "Mephisto Desecrated C": {
+    group: 22,
+    level: 48,
+    nodrop: 15,
+    picks: 7,
+    qualityRatios: [1024, 983, 983, 983],
+    tcs: [
+      ["gld", 5],
+      ["Act 3 (N) Equip A", 52],
+      ["Act 3 (N) Junk", 5],
+      ["Act 3 (N) Good", 3],
+    ],
+  },
+  "Mephisto Item (H) Desecrated A": {
+    group: -1,
+    nodrop: 15,
+    picks: 7,
+    qualityRatios: [1024, 983, 983, 983],
+    tcs: [
+      ["gld", 5],
+      ["Act 4 (H) Equip B", 52],
+      ["Act 4 (H) Junk", 5],
+      ["Act 4 (H) Good", 3],
+      ["ceh", 1],
+    ],
+  },
+  "Mephisto Item (H) Desecrated B": {
+    group: -1,
+    nodrop: 15,
+    picks: 7,
+    qualityRatios: [1024, 983, 983, 983],
+    tcs: [
+      ["gld", 5],
+      ["Act 5 (H) Equip A", 52],
+      ["Act 5 (H) Junk", 5],
+      ["Act 5 (H) Good", 3],
+      ["ceh", 1],
+    ],
+  },
+  "Mephisto Item (H) Desecrated C": {
+    group: -1,
+    nodrop: 15,
+    picks: 7,
+    qualityRatios: [1024, 983, 983, 983],
+    tcs: [
+      ["gld", 5],
+      ["Act 5 (H) Equip B", 52],
+      ["Act 5 (H) Junk", 5],
+      ["Act 5 (H) Good", 3],
+      ["ceh", 1],
+    ],
+  },
+  "Mephisto Item (H) Desecrated D": {
+    group: -1,
+    nodrop: 15,
+    picks: 7,
+    qualityRatios: [1024, 983, 983, 983],
+    tcs: [
+      ["gld", 5],
+      ["Act 5 (H) Equip C", 52],
+      ["Act 5 (H) Junk", 5],
+      ["Act 5 (H) Good", 3],
+      ["ceh", 1],
+    ],
+  },
   Mephistoq: {
+    group: -1,
     nodrop: 15,
     picks: 7,
     qualityRatios: [1024, 1024, 993, 993],
@@ -9930,6 +12749,7 @@ export const TCDict: TCDictType = {
     ],
   },
   "Mephistoq (H)": {
+    group: -1,
     nodrop: 15,
     picks: 7,
     qualityRatios: [1024, 1024, 993, 993],
@@ -9940,6 +12760,7 @@ export const TCDict: TCDictType = {
     ],
   },
   "Mephistoq (N)": {
+    group: -1,
     nodrop: 15,
     picks: 7,
     qualityRatios: [1024, 1024, 993, 993],
@@ -9949,6 +12770,7 @@ export const TCDict: TCDictType = {
     ],
   },
   "Misc 0": {
+    group: -1,
     nodrop: 0,
     picks: 1,
     qualityRatios: [0, 0, 0, 0],
@@ -9961,6 +12783,7 @@ export const TCDict: TCDictType = {
     ],
   },
   "Misc 1": {
+    group: -1,
     nodrop: 0,
     picks: 1,
     qualityRatios: [0, 0, 0, 0],
@@ -9973,6 +12796,7 @@ export const TCDict: TCDictType = {
     ],
   },
   "Misc 2": {
+    group: -1,
     nodrop: 0,
     picks: 1,
     qualityRatios: [0, 0, 0, 0],
@@ -9985,6 +12809,7 @@ export const TCDict: TCDictType = {
     ],
   },
   Nihlathak: {
+    group: -1,
     nodrop: 19,
     picks: 5,
     qualityRatios: [1024, 900, 900, 900],
@@ -9996,6 +12821,7 @@ export const TCDict: TCDictType = {
     ],
   },
   "Nihlathak (H)": {
+    group: -1,
     nodrop: 19,
     picks: 5,
     qualityRatios: [1024, 900, 900, 900],
@@ -10007,7 +12833,19 @@ export const TCDict: TCDictType = {
       ["pk3", 1],
     ],
   },
+  "Nihlathak (H) Desecrated": {
+    group: 28,
+    level: 95,
+    nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Sunder Charms", 1],
+      ["Nihlathak Item (H) Desecrated", 1],
+    ],
+  },
   "Nihlathak (N)": {
+    group: -1,
     nodrop: 19,
     picks: 5,
     qualityRatios: [1024, 900, 900, 900],
@@ -10018,7 +12856,47 @@ export const TCDict: TCDictType = {
       ["Act 5 (N) Good", 3],
     ],
   },
+  "Nihlathak (N) Desecrated": {
+    group: 28,
+    level: 73,
+    nodrop: 19,
+    picks: 5,
+    qualityRatios: [1024, 900, 900, 900],
+    tcs: [
+      ["gld", 14],
+      ["Act 3 (H) Equip A", 19],
+      ["Act 3 (H) Junk", 5],
+      ["Act 3 (H) Good", 3],
+    ],
+  },
+  "Nihlathak Desecrated": {
+    group: 28,
+    level: 68,
+    nodrop: 19,
+    picks: 5,
+    qualityRatios: [1024, 900, 900, 900],
+    tcs: [
+      ["gld", 14],
+      ["Act 3 (N) Equip A", 19],
+      ["Act 3 (N) Junk", 5],
+      ["Act 3 (N) Good", 3],
+    ],
+  },
+  "Nihlathak Item (H) Desecrated": {
+    group: -1,
+    nodrop: 19,
+    picks: 5,
+    qualityRatios: [1024, 900, 900, 900],
+    tcs: [
+      ["gld", 14],
+      ["Act 5 (H) Equip C", 19],
+      ["Act 5 (H) Junk", 5],
+      ["Act 5 (H) Good", 3],
+      ["pk3", 1],
+    ],
+  },
   "Normal Gem": {
+    group: -1,
     nodrop: 0,
     picks: 1,
     qualityRatios: [0, 0, 0, 0],
@@ -10033,24 +12911,28 @@ export const TCDict: TCDictType = {
     ],
   },
   "Pandemonium Key A": {
+    group: -1,
     nodrop: 0,
     picks: 1,
     qualityRatios: [0, 0, 0, 1024],
     tcs: [["pk1", 1]],
   },
   "Pandemonium Key B": {
+    group: -1,
     nodrop: 0,
     picks: 1,
     qualityRatios: [0, 0, 0, 1024],
     tcs: [["pk2", 1]],
   },
   "Pandemonium Key C": {
+    group: -1,
     nodrop: 0,
     picks: 1,
     qualityRatios: [0, 0, 0, 1024],
     tcs: [["pk3", 1]],
   },
   "Perfect Gem": {
+    group: -1,
     nodrop: 0,
     picks: 1,
     qualityRatios: [0, 0, 0, 0],
@@ -10065,6 +12947,7 @@ export const TCDict: TCDictType = {
     ],
   },
   "Potion 1": {
+    group: -1,
     nodrop: 0,
     picks: 1,
     qualityRatios: [0, 0, 0, 0],
@@ -10078,6 +12961,7 @@ export const TCDict: TCDictType = {
     ],
   },
   "Potion 2": {
+    group: -1,
     nodrop: 0,
     picks: 1,
     qualityRatios: [0, 0, 0, 0],
@@ -10094,6 +12978,7 @@ export const TCDict: TCDictType = {
     ],
   },
   "Potion 3": {
+    group: -1,
     nodrop: 0,
     picks: 1,
     qualityRatios: [0, 0, 0, 0],
@@ -10110,6 +12995,7 @@ export const TCDict: TCDictType = {
     ],
   },
   "Potion 4": {
+    group: -1,
     nodrop: 0,
     picks: 1,
     qualityRatios: [0, 0, 0, 0],
@@ -10126,6 +13012,7 @@ export const TCDict: TCDictType = {
     ],
   },
   "Potion 5": {
+    group: -1,
     nodrop: 0,
     picks: 1,
     qualityRatios: [0, 0, 0, 0],
@@ -10141,6 +13028,7 @@ export const TCDict: TCDictType = {
     ],
   },
   "Potion 6": {
+    group: -1,
     nodrop: 0,
     picks: 1,
     qualityRatios: [0, 0, 0, 0],
@@ -10332,18 +13220,21 @@ export const TCDict: TCDictType = {
     ],
   },
   ROP: {
+    group: -1,
     nodrop: 0,
     picks: 1,
     qualityRatios: [0, 0, 0, 1024],
     tcs: [["Diablo", 1]],
   },
   "ROP (H)": {
+    group: -1,
     nodrop: 0,
     picks: 1,
     qualityRatios: [0, 0, 0, 1024],
     tcs: [["Annihilus", 1]],
   },
   "ROP (N)": {
+    group: -1,
     nodrop: 0,
     picks: 1,
     qualityRatios: [0, 0, 0, 1024],
@@ -10353,6 +13244,7 @@ export const TCDict: TCDictType = {
     ],
   },
   Radament: {
+    group: -1,
     nodrop: 19,
     picks: 5,
     qualityRatios: [1024, 900, 900, 900],
@@ -10364,6 +13256,7 @@ export const TCDict: TCDictType = {
     ],
   },
   "Radament (H)": {
+    group: -1,
     nodrop: 19,
     picks: 5,
     qualityRatios: [1024, 900, 900, 900],
@@ -10374,7 +13267,52 @@ export const TCDict: TCDictType = {
       ["Act 3 (H) Good", 3],
     ],
   },
+  "Radament (H) Desecrated A": {
+    group: 21,
+    level: 86,
+    nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Sunder Charms", 1],
+      ["Radament Item (H) Desecrated A", 1],
+    ],
+  },
+  "Radament (H) Desecrated B": {
+    group: 21,
+    level: 90,
+    nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Sunder Charms", 1],
+      ["Radament Item (H) Desecrated B", 1],
+    ],
+  },
+  "Radament (H) Desecrated C": {
+    group: 21,
+    level: 93,
+    nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Sunder Charms", 1],
+      ["Radament Item (H) Desecrated C", 1],
+    ],
+  },
+  "Radament (H) Desecrated D": {
+    group: 21,
+    level: 96,
+    nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Sunder Charms", 1],
+      ["Radament Item (H) Desecrated D", 1],
+    ],
+  },
   "Radament (N)": {
+    group: -1,
     nodrop: 19,
     picks: 5,
     qualityRatios: [1024, 900, 900, 900],
@@ -10385,7 +13323,134 @@ export const TCDict: TCDictType = {
       ["Act 3 (N) Good", 3],
     ],
   },
+  "Radament (N) Desecrated A": {
+    group: 21,
+    level: 52,
+    nodrop: 19,
+    picks: 5,
+    qualityRatios: [1024, 900, 900, 900],
+    tcs: [
+      ["gld", 11],
+      ["Act 3 (N) Equip C", 19],
+      ["Act 3 (N) Junk", 15],
+      ["Act 3 (N) Good", 3],
+    ],
+  },
+  "Radament (N) Desecrated B": {
+    group: 21,
+    level: 62,
+    nodrop: 19,
+    picks: 5,
+    qualityRatios: [1024, 900, 900, 900],
+    tcs: [
+      ["gld", 11],
+      ["Act 5 (N) Equip A", 19],
+      ["Act 5 (N) Junk", 15],
+      ["Act 5 (N) Good", 3],
+    ],
+  },
+  "Radament (N) Desecrated C": {
+    group: 21,
+    level: 73,
+    nodrop: 19,
+    picks: 5,
+    qualityRatios: [1024, 900, 900, 900],
+    tcs: [
+      ["gld", 11],
+      ["Act 3 (H) Equip A", 19],
+      ["Act 3 (H) Junk", 15],
+      ["Act 3 (H) Good", 3],
+    ],
+  },
+  "Radament Desecrated A": {
+    group: 21,
+    level: 19,
+    nodrop: 19,
+    picks: 5,
+    qualityRatios: [1024, 900, 900, 900],
+    tcs: [
+      ["gld", 11],
+      ["Act 3 Equip B", 19],
+      ["Act 3 Junk", 15],
+      ["Act 3 Good", 3],
+    ],
+  },
+  "Radament Desecrated B": {
+    group: 21,
+    level: 33,
+    nodrop: 19,
+    picks: 5,
+    qualityRatios: [1024, 900, 900, 900],
+    tcs: [
+      ["gld", 11],
+      ["Act 4 Equip B", 19],
+      ["Act 4 Junk", 15],
+      ["Act 4 Good", 3],
+    ],
+  },
+  "Radament Desecrated C": {
+    group: 21,
+    level: 48,
+    nodrop: 19,
+    picks: 5,
+    qualityRatios: [1024, 900, 900, 900],
+    tcs: [
+      ["gld", 11],
+      ["Act 3 (N) Equip A", 19],
+      ["Act 3 (N) Junk", 15],
+      ["Act 3 (N) Good", 3],
+    ],
+  },
+  "Radament Item (H) Desecrated A": {
+    group: -1,
+    nodrop: 19,
+    picks: 5,
+    qualityRatios: [1024, 900, 900, 900],
+    tcs: [
+      ["gld", 11],
+      ["Act 4 (H) Equip B", 19],
+      ["Act 4 (H) Junk", 15],
+      ["Act 4 (H) Good", 3],
+    ],
+  },
+  "Radament Item (H) Desecrated B": {
+    group: -1,
+    nodrop: 19,
+    picks: 5,
+    qualityRatios: [1024, 900, 900, 900],
+    tcs: [
+      ["gld", 11],
+      ["Act 5 (H) Equip A", 19],
+      ["Act 5 (H) Junk", 15],
+      ["Act 5 (H) Good", 3],
+    ],
+  },
+  "Radament Item (H) Desecrated C": {
+    group: -1,
+    nodrop: 19,
+    picks: 5,
+    qualityRatios: [1024, 900, 900, 900],
+    tcs: [
+      ["gld", 11],
+      ["Act 5 (H) Equip B", 19],
+      ["Act 5 (H) Junk", 15],
+      ["Act 5 (H) Good", 3],
+    ],
+  },
+  "Radament Item (H) Desecrated D": {
+    group: -1,
+    nodrop: 19,
+    picks: 5,
+    qualityRatios: [1024, 900, 900, 900],
+    tcs: [
+      ["gld", 11],
+      ["Act 5 (H) Equip C", 19],
+      ["Act 5 (H) Junk", 15],
+      ["Act 5 (H) Good", 3],
+    ],
+  },
   "Runes 1": {
+    group: -1,
     nodrop: 0,
     picks: 1,
     qualityRatios: [0, 0, 0, 0],
@@ -10395,6 +13460,7 @@ export const TCDict: TCDictType = {
     ],
   },
   "Runes 10": {
+    group: -1,
     nodrop: 0,
     picks: 1,
     qualityRatios: [0, 0, 0, 0],
@@ -10405,6 +13471,7 @@ export const TCDict: TCDictType = {
     ],
   },
   "Runes 11": {
+    group: -1,
     nodrop: 0,
     picks: 1,
     qualityRatios: [0, 0, 0, 0],
@@ -10415,6 +13482,7 @@ export const TCDict: TCDictType = {
     ],
   },
   "Runes 12": {
+    group: -1,
     nodrop: 0,
     picks: 1,
     qualityRatios: [0, 0, 0, 0],
@@ -10425,6 +13493,7 @@ export const TCDict: TCDictType = {
     ],
   },
   "Runes 13": {
+    group: -1,
     nodrop: 0,
     picks: 1,
     qualityRatios: [0, 0, 0, 0],
@@ -10435,6 +13504,7 @@ export const TCDict: TCDictType = {
     ],
   },
   "Runes 14": {
+    group: -1,
     nodrop: 0,
     picks: 1,
     qualityRatios: [0, 0, 0, 0],
@@ -10445,6 +13515,7 @@ export const TCDict: TCDictType = {
     ],
   },
   "Runes 15": {
+    group: -1,
     nodrop: 0,
     picks: 1,
     qualityRatios: [0, 0, 0, 0],
@@ -10455,6 +13526,7 @@ export const TCDict: TCDictType = {
     ],
   },
   "Runes 16": {
+    group: -1,
     nodrop: 0,
     picks: 1,
     qualityRatios: [0, 0, 0, 0],
@@ -10465,6 +13537,7 @@ export const TCDict: TCDictType = {
     ],
   },
   "Runes 17": {
+    group: -1,
     nodrop: 0,
     picks: 1,
     qualityRatios: [0, 0, 0, 0],
@@ -10474,6 +13547,7 @@ export const TCDict: TCDictType = {
     ],
   },
   "Runes 2": {
+    group: -1,
     nodrop: 0,
     picks: 1,
     qualityRatios: [0, 0, 0, 0],
@@ -10484,6 +13558,7 @@ export const TCDict: TCDictType = {
     ],
   },
   "Runes 3": {
+    group: -1,
     nodrop: 0,
     picks: 1,
     qualityRatios: [0, 0, 0, 0],
@@ -10494,6 +13569,7 @@ export const TCDict: TCDictType = {
     ],
   },
   "Runes 4": {
+    group: -1,
     nodrop: 0,
     picks: 1,
     qualityRatios: [0, 0, 0, 0],
@@ -10504,6 +13580,7 @@ export const TCDict: TCDictType = {
     ],
   },
   "Runes 5": {
+    group: -1,
     nodrop: 0,
     picks: 1,
     qualityRatios: [0, 0, 0, 0],
@@ -10514,6 +13591,7 @@ export const TCDict: TCDictType = {
     ],
   },
   "Runes 6": {
+    group: -1,
     nodrop: 0,
     picks: 1,
     qualityRatios: [0, 0, 0, 0],
@@ -10524,6 +13602,7 @@ export const TCDict: TCDictType = {
     ],
   },
   "Runes 7": {
+    group: -1,
     nodrop: 0,
     picks: 1,
     qualityRatios: [0, 0, 0, 0],
@@ -10534,6 +13613,7 @@ export const TCDict: TCDictType = {
     ],
   },
   "Runes 8": {
+    group: -1,
     nodrop: 0,
     picks: 1,
     qualityRatios: [0, 0, 0, 0],
@@ -10544,6 +13624,7 @@ export const TCDict: TCDictType = {
     ],
   },
   "Runes 9": {
+    group: -1,
     nodrop: 0,
     picks: 1,
     qualityRatios: [0, 0, 0, 0],
@@ -10554,6 +13635,7 @@ export const TCDict: TCDictType = {
     ],
   },
   Smith: {
+    group: -1,
     nodrop: 0,
     picks: -3,
     qualityRatios: [0, 0, 0, 0],
@@ -10563,6 +13645,7 @@ export const TCDict: TCDictType = {
     ],
   },
   "Smith (H)": {
+    group: -1,
     nodrop: 0,
     picks: -3,
     qualityRatios: [0, 0, 0, 0],
@@ -10571,7 +13654,116 @@ export const TCDict: TCDictType = {
       ["Act 1 (H) Melee B", 2],
     ],
   },
+  "Smith (H) Desecrated A": {
+    group: 31,
+    level: 73,
+    nodrop: 0,
+    picks: -4,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Sunder Charms", 1],
+      ["Act 3 (H) Uitem A", 1],
+      ["Act 3 (H) Melee A", 2],
+    ],
+  },
+  "Smith (H) Desecrated B": {
+    group: 31,
+    level: 75,
+    nodrop: 0,
+    picks: -4,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Sunder Charms", 1],
+      ["Act 3 (H) Uitem B", 1],
+      ["Act 3 (H) Melee B", 2],
+    ],
+  },
+  "Smith (H) Desecrated C": {
+    group: 31,
+    level: 78,
+    nodrop: 0,
+    picks: -4,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Sunder Charms", 1],
+      ["Act 3 (H) Uitem C", 1],
+      ["Act 3 (H) Melee B", 2],
+    ],
+  },
+  "Smith (H) Desecrated D": {
+    group: 31,
+    level: 81,
+    nodrop: 0,
+    picks: -4,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Sunder Charms", 1],
+      ["Act 4 (H) Uitem A", 1],
+      ["Act 4 (H) Melee A", 2],
+    ],
+  },
+  "Smith (H) Desecrated E": {
+    group: 31,
+    level: 84,
+    nodrop: 0,
+    picks: -4,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Sunder Charms", 1],
+      ["Act 4 (H) Uitem B", 1],
+      ["Act 4 (H) Melee B", 2],
+    ],
+  },
+  "Smith (H) Desecrated F": {
+    group: 31,
+    level: 87,
+    nodrop: 0,
+    picks: -4,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Sunder Charms", 1],
+      ["Act 4 (H) Uitem B", 1],
+      ["Act 4 (H) Melee B", 2],
+    ],
+  },
+  "Smith (H) Desecrated G": {
+    group: 31,
+    level: 90,
+    nodrop: 0,
+    picks: -4,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Sunder Charms", 1],
+      ["Act 5 (H) Uitem A", 1],
+      ["Act 5 (H) Melee A", 2],
+    ],
+  },
+  "Smith (H) Desecrated H": {
+    group: 31,
+    level: 93,
+    nodrop: 0,
+    picks: -4,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Sunder Charms", 1],
+      ["Act 5 (H) Uitem B", 1],
+      ["Act 5 (H) Melee B", 2],
+    ],
+  },
+  "Smith (H) Desecrated I": {
+    group: 31,
+    level: 96,
+    nodrop: 0,
+    picks: -4,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Sunder Charms", 1],
+      ["Act 5 (H) Uitem C", 1],
+      ["Act 5 (H) Melee C", 2],
+    ],
+  },
   "Smith (N)": {
+    group: -1,
     nodrop: 0,
     picks: -3,
     qualityRatios: [0, 0, 0, 0],
@@ -10580,7 +13772,74 @@ export const TCDict: TCDictType = {
       ["Act 1 (N) Melee B", 2],
     ],
   },
+  "Smith (N) Desecrated A": {
+    group: 31,
+    level: 43,
+    nodrop: 0,
+    picks: -3,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Act 2 (N) Uitem A", 1],
+      ["Act 2 (N) Melee A", 2],
+    ],
+  },
+  "Smith (N) Desecrated B": {
+    group: 31,
+    level: 57,
+    nodrop: 0,
+    picks: -3,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Act 4 (N) Uitem B", 1],
+      ["Act 4 (N) Melee B", 2],
+    ],
+  },
+  "Smith (N) Desecrated C": {
+    group: 31,
+    level: 73,
+    nodrop: 0,
+    picks: -3,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Act 3 (H) Uitem A", 1],
+      ["Act 3 (H) Melee A", 2],
+    ],
+  },
+  "Smith Desecrated A": {
+    group: 31,
+    level: 13,
+    nodrop: 0,
+    picks: -3,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Act 2 Uitem A", 1],
+      ["Act 2 Melee A", 2],
+    ],
+  },
+  "Smith Desecrated B": {
+    group: 31,
+    level: 32,
+    nodrop: 0,
+    picks: -3,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Act 4 Uitem B", 1],
+      ["Act 4 Melee B", 2],
+    ],
+  },
+  "Smith Desecrated C": {
+    group: 31,
+    level: 48,
+    nodrop: 0,
+    picks: -3,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Act 3 (N) Uitem A", 1],
+      ["Act 3 (N) Melee A", 2],
+    ],
+  },
   Summoner: {
+    group: -1,
     nodrop: 19,
     picks: 5,
     qualityRatios: [1024, 972, 900, 900],
@@ -10593,6 +13852,7 @@ export const TCDict: TCDictType = {
     ],
   },
   "Summoner (H)": {
+    group: -1,
     nodrop: 19,
     picks: 5,
     qualityRatios: [1024, 972, 900, 900],
@@ -10605,7 +13865,74 @@ export const TCDict: TCDictType = {
       ["pk2", 1],
     ],
   },
+  "Summoner (H) Desecrated A": {
+    group: 24,
+    level: 80,
+    nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Sunder Charms", 1],
+      ["Summoner Item (H) Desecrated A", 1],
+    ],
+  },
+  "Summoner (H) Desecrated B": {
+    group: 24,
+    level: 84,
+    nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Sunder Charms", 1],
+      ["Summoner Item (H) Desecrated B", 1],
+    ],
+  },
+  "Summoner (H) Desecrated C": {
+    group: 24,
+    level: 87,
+    nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Sunder Charms", 1],
+      ["Summoner Item (H) Desecrated C", 1],
+    ],
+  },
+  "Summoner (H) Desecrated D": {
+    group: 24,
+    level: 90,
+    nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Sunder Charms", 1],
+      ["Summoner Item (H) Desecrated D", 1],
+    ],
+  },
+  "Summoner (H) Desecrated E": {
+    group: 24,
+    level: 93,
+    nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Sunder Charms", 1],
+      ["Summoner Item (H) Desecrated E", 1],
+    ],
+  },
+  "Summoner (H) Desecrated F": {
+    group: 24,
+    level: 96,
+    nodrop: 0,
+    picks: -2,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Sunder Charms", 1],
+      ["Summoner Item (H) Desecrated F", 1],
+    ],
+  },
   "Summoner (N)": {
+    group: -1,
     nodrop: 19,
     picks: 5,
     qualityRatios: [1024, 972, 900, 900],
@@ -10615,6 +13942,188 @@ export const TCDict: TCDictType = {
       ["Act 3 (N) Junk", 5],
       ["Act 2 (N) Good", 3],
       ["Act 3 (N) Magic A", 4],
+    ],
+  },
+  "Summoner (N) Desecrated A": {
+    group: 24,
+    level: 55,
+    nodrop: 19,
+    picks: 5,
+    qualityRatios: [1024, 972, 900, 900],
+    tcs: [
+      ["gld", 9],
+      ["Act 4 (N) Equip A", 15],
+      ["Act 5 (N) Junk", 5],
+      ["Act 4 (N) Good", 3],
+      ["Act 5 (N) Magic A", 4],
+    ],
+  },
+  "Summoner (N) Desecrated B": {
+    group: 24,
+    level: 63,
+    nodrop: 19,
+    picks: 5,
+    qualityRatios: [1024, 972, 900, 900],
+    tcs: [
+      ["gld", 9],
+      ["Act 5 (N) Equip A", 15],
+      ["Act 1 (H) Junk", 5],
+      ["Act 5 (N) Good", 3],
+      ["Act 1 (H) Magic A", 4],
+    ],
+  },
+  "Summoner (N) Desecrated C": {
+    group: 24,
+    level: 73,
+    nodrop: 19,
+    picks: 5,
+    qualityRatios: [1024, 972, 900, 900],
+    tcs: [
+      ["gld", 9],
+      ["Act 3 (H) Equip A", 15],
+      ["Act 3 (H) Junk", 5],
+      ["Act 3 (H) Good", 3],
+      ["Act 3 (H) Magic A", 4],
+    ],
+  },
+  "Summoner Desecrated A": {
+    group: 24,
+    level: 18,
+    nodrop: 19,
+    picks: 5,
+    qualityRatios: [1024, 972, 900, 900],
+    tcs: [
+      ["gld", 9],
+      ["Act 2 Equip C", 15],
+      ["Act 3 Junk", 5],
+      ["Act 2 Good", 3],
+      ["Act 3 Magic A", 4],
+    ],
+  },
+  "Summoner Desecrated B": {
+    group: 24,
+    level: 32,
+    nodrop: 19,
+    picks: 5,
+    qualityRatios: [1024, 972, 900, 900],
+    tcs: [
+      ["gld", 9],
+      ["Act 4 Equip B", 15],
+      ["Act 5 Junk", 5],
+      ["Act 4 Good", 3],
+      ["Act 5 Magic A", 4],
+    ],
+  },
+  "Summoner Desecrated C": {
+    group: 24,
+    level: 48,
+    nodrop: 19,
+    picks: 5,
+    qualityRatios: [1024, 972, 900, 900],
+    tcs: [
+      ["gld", 9],
+      ["Act 3 (N) Equip C", 15],
+      ["Act 4 (N) Junk", 5],
+      ["Act 3 (N) Good", 3],
+      ["Act 4 (N) Magic A", 4],
+    ],
+  },
+  "Summoner Item (H) Desecrated A": {
+    group: -1,
+    nodrop: 19,
+    picks: 5,
+    qualityRatios: [1024, 972, 900, 900],
+    tcs: [
+      ["gld", 9],
+      ["Act 4 (H) Equip A", 15],
+      ["Act 5 (H) Junk", 5],
+      ["Act 4 (H) Good", 3],
+      ["Act 5 (H) Magic A", 4],
+      ["pk2", 1],
+    ],
+  },
+  "Summoner Item (H) Desecrated B": {
+    group: -1,
+    nodrop: 19,
+    picks: 5,
+    qualityRatios: [1024, 972, 900, 900],
+    tcs: [
+      ["gld", 9],
+      ["Act 4 (H) Equip B", 15],
+      ["Act 5 (H) Junk", 5],
+      ["Act 4 (H) Good", 3],
+      ["Act 5 (H) Magic B", 4],
+      ["pk2", 1],
+    ],
+  },
+  "Summoner Item (H) Desecrated C": {
+    group: -1,
+    nodrop: 19,
+    picks: 5,
+    qualityRatios: [1024, 972, 900, 900],
+    tcs: [
+      ["gld", 9],
+      ["Act 4 (H) Equip C", 15],
+      ["Act 5 (H) Junk", 5],
+      ["Act 4 (H) Good", 3],
+      ["Act 5 (H) Magic A", 4],
+      ["pk2", 1],
+    ],
+  },
+  "Summoner Item (H) Desecrated D": {
+    group: -1,
+    nodrop: 19,
+    picks: 5,
+    qualityRatios: [1024, 972, 900, 900],
+    tcs: [
+      ["gld", 9],
+      ["Act 5 (H) Equip A", 15],
+      ["Act 5 (H) Junk", 5],
+      ["Act 5 (H) Good", 3],
+      ["Act 5 (H) Magic C", 4],
+      ["pk2", 1],
+    ],
+  },
+  "Summoner Item (H) Desecrated E": {
+    group: -1,
+    nodrop: 19,
+    picks: 5,
+    qualityRatios: [1024, 972, 900, 900],
+    tcs: [
+      ["gld", 9],
+      ["Act 5 (H) Equip B", 15],
+      ["Act 5 (H) Junk", 5],
+      ["Act 5 (H) Good", 3],
+      ["Act 5 (H) Magic C", 4],
+      ["pk2", 1],
+    ],
+  },
+  "Summoner Item (H) Desecrated F": {
+    group: -1,
+    nodrop: 19,
+    picks: 5,
+    qualityRatios: [1024, 972, 900, 900],
+    tcs: [
+      ["gld", 9],
+      ["Act 5 (H) Equip C", 15],
+      ["Act 5 (H) Junk", 5],
+      ["Act 5 (H) Good", 3],
+      ["Act 5 (H) Magic C", 4],
+      ["pk2", 1],
+    ],
+  },
+  "Sunder Charms": {
+    group: -1,
+    nodrop: 23899,
+    picks: 1,
+    qualityRatios: [0, 0, 0, 0],
+    tcs: [
+      ["Cold Rupture", 30],
+      ["Flame Rift", 30],
+      ["Crack of the Heavens", 20],
+      ["Rotting Fissure", 12],
+      ["Bone Break", 6],
+      ["Black Cleft", 3],
     ],
   },
   "Swarm 1": {
@@ -10696,6 +14205,7 @@ export const TCDict: TCDictType = {
     ],
   },
   "Trapped Soul": {
+    group: -1,
     nodrop: 100,
     picks: 1,
     qualityRatios: [0, 0, 0, 0],
@@ -10706,6 +14216,7 @@ export const TCDict: TCDictType = {
     ],
   },
   "Trapped Soul (H)": {
+    group: -1,
     nodrop: 100,
     picks: 1,
     qualityRatios: [0, 0, 0, 0],
@@ -10716,6 +14227,7 @@ export const TCDict: TCDictType = {
     ],
   },
   "Trapped Soul (N)": {
+    group: -1,
     nodrop: 100,
     picks: 1,
     qualityRatios: [0, 0, 0, 0],
@@ -10726,18 +14238,21 @@ export const TCDict: TCDictType = {
     ],
   },
   "Uber Andariel": {
+    group: -1,
     nodrop: 0,
     picks: 1,
     qualityRatios: [0, 0, 0, 1024],
     tcs: [["dhn", 1]],
   },
   "Uber Duriel": {
+    group: -1,
     nodrop: 0,
     picks: 1,
     qualityRatios: [0, 0, 0, 1024],
     tcs: [["bey", 1]],
   },
   "Uber Izual": {
+    group: -1,
     nodrop: 0,
     picks: 1,
     qualityRatios: [0, 0, 0, 1024],

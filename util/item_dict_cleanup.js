@@ -2,7 +2,10 @@ import { range, sum, map, clone } from "lodash-es";
 import { readFile } from "fs/promises";
 const json = JSON.parse(
   await readFile(
-    new URL("../node_modules/d2-data/json/itemtypes.json", import.meta.url)
+    new URL(
+      "../node_modules/@blizzhackers/d2data/json/itemtypes.json",
+      import.meta.url
+    )
   )
 );
 
@@ -29,10 +32,10 @@ for (var entry of Object.entries(json)) {
 }
 
 // This becomes ClassSpecificSet in item-dict.ts
-// console.log(JSON.stringify(ClassSpecificTypes));
+console.log(JSON.stringify(ClassSpecificTypes));
 
 // This becomes OnlyNormalSet in item-dict.ts
-// console.log(JSON.stringify(NormalTypes));
+console.log(JSON.stringify(NormalTypes));
 
 // This becomes AtLeastMagicSet in item-dict.ts
 console.log(JSON.stringify(MagicTypes));

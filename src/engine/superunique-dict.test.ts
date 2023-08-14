@@ -12,9 +12,14 @@ describe("SuperuniqueDict structure", () => {
     for (let [id, entry] of Object.entries(SuperuniqueDict)) {
       expect(LevelsDict[entry.areaId]).to.not.be.undefined;
       expect(MonsterDict[entry.class]).to.not.be.undefined;
-      expect(entry.tcs).to.have.length(3);
-      for (let tc of entry.tcs) {
-        expect(TCDict[tc]).to.not.be.undefined;
+      expect(entry.tcs).to.have.length(6);
+      for (let [idx, tc] of entry.tcs.entries()) {
+        if (tc) {
+          expect(TCDict[tc], tc).to.not.be.undefined;
+        } else {
+          // Only desecrated TCs can be undefined
+          expect(idx).to.be.greaterThan(2);
+        }
       }
       expect(FlatBossDict[entry.class]).to.be.undefined;
     }

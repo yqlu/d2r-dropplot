@@ -3,7 +3,7 @@ import { readFile } from "fs/promises";
 const json = JSON.parse(
   await readFile(
     new URL(
-      "../node_modules/d2-data/json/localestrings-eng.json",
+      "../node_modules/@blizzhackers/d2data/json/localestrings-eng.json",
       import.meta.url
     )
   )
@@ -1850,5 +1850,6 @@ for (var key of keys) {
   }
 }
 
-// This becomes src/item-dict.ts
+// This becomes src/locale-dict.ts
+// NOTE: this import doesn't dedupe Rainbow Facets or include sunder charms; you will need to add those in manually
 console.log(JSON.stringify(LocaleDict));

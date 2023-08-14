@@ -3,7 +3,7 @@ import { readFile } from "fs/promises";
 const json = JSON.parse(
   await readFile(
     new URL(
-      "../node_modules/d2-data/json/treasureclassex.json",
+      "../node_modules/@blizzhackers/d2data/json/treasureclassex.json",
       import.meta.url
     )
   )
@@ -37,4 +37,5 @@ for (var entry of Object.entries(json)) {
   };
 }
 // This becomes src/tc-dict.ts
+// Need to clean up gld multipliers
 console.log(JSON.stringify(TCDICT));

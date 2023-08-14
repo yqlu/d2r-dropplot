@@ -3,7 +3,10 @@ import { readFile } from "fs/promises";
 import Fraction from "fraction.js";
 const json = JSON.parse(
   await readFile(
-    new URL("../node_modules/d2-data/json/atomic.json", import.meta.url)
+    new URL(
+      "../node_modules/@blizzhackers/d2data/json/atomic.json",
+      import.meta.url
+    )
   )
 );
 

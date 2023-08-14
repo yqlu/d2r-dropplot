@@ -66,8 +66,8 @@ describe("TCDict invariants", () => {
   it("Negative TCs always have zero nodrop and two children", () => {
     for (var [tcName, tcObject] of Object.entries(TCDict)) {
       if (tcObject.picks < 0) {
-        expect(tcObject.nodrop).to.equal(0);
-        expect(tcObject.tcs.length).to.equal(2);
+        expect(tcObject.nodrop, tcName).to.equal(0);
+        expect(tcObject.tcs.length, tcName).to.equal(2);
       }
     }
   });
@@ -81,10 +81,10 @@ describe("TCDict invariants", () => {
         // (aka variable number of items can drop from the first TC)
         const firstSubTc = tcObject.tcs[0][0];
         if (TCDict[firstSubTc].nodrop > 0) {
-          expect(tcName.substring(0, 8)).eql("Countess");
+          expect(tcName.substring(0, 8), tcName).eql("Countess");
         }
         if (TCDict[firstSubTc].picks != 1) {
-          expect(tcName.substring(0, 8)).eql("Countess");
+          expect(tcName.substring(0, 8), tcName).eql("Countess");
         }
       }
     }
@@ -98,7 +98,7 @@ describe("TCDict invariants", () => {
           .filter((val) => val);
         for (let subTc of subTcs) {
           if (subTc.nodrop !== 0) {
-            expect(/Countess.*|Duriel*|ROP*/.test(tcName)).to.be.true;
+            expect(/Countess.*|Duriel*|ROP*/.test(tcName), tcName).to.be.true;
           }
         }
       }

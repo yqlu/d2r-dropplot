@@ -2,7 +2,10 @@ import { range, sum, map, clone } from "lodash-es";
 import { readFile } from "fs/promises";
 const json = JSON.parse(
   await readFile(
-    new URL("../node_modules/d2-data/json/levels.json", import.meta.url)
+    new URL(
+      "../node_modules/@blizzhackers/d2data/json/levels.json",
+      import.meta.url
+    )
   )
 );
 
