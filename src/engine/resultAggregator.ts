@@ -1,16 +1,18 @@
 import Fraction from "fraction.js";
-import { reduce, range, map, sum } from "lodash-es";
+import { range, map } from "lodash-es";
 
 import { ItemQualityRatios } from "./tc-dict";
 import {
   computeQualityProbs,
   ItemRarityProb,
   QualityProbabilityObject,
+  SUNDER_CHARM_CANDIDATE_UNIQUES,
+  UniqueSetProbTuple,
 } from "./rarity";
-import { ONE, scalarMultiply, ZERO } from "./polynomialOps";
+import { ONE, ZERO } from "./polynomialOps";
 import { Distribution } from "./distribution";
-import { BinomialRunsChart } from "../charts/BinomialRuns";
 import { propagateMarkov, histogramResult } from "./duriel-markov";
+import { isSunderCharmTc } from "./unique-set-dict";
 
 export enum ProbabilityAggregation {
   EXPECTED_VALUE,
@@ -222,19 +224,25 @@ export class BaseItemResultAggregator
       this.magicFind,
       qualityRatios
     );
+    if (isSunderCharmTc(tc)) {
+      qualityProbObject.quality[3] = ONE;
+      qualityProbObject.uniques = SUNDER_CHARM_CANDIDATE_UNIQUES;
+      tc = "cm3";
+    }
     if (!this.dict.hasOwnProperty(tc)) {
       this.dict[tc] = [prob, qualityProbObject];
     } else {
       // Combine the two
       // Base item prob is additive
       const baseItemProb = this.dict[tc][0].add(prob);
-      // But magic / rare / set / unique prob needs to be individually calculated
+      // Magic / rare / set / unique prob needs to be individually calculated
       const rarityCombined = range(4).map((idx) =>
         qualityProbObject.quality[idx]
           .mul(prob)
           .add(this.dict[tc][1].quality[idx].mul(this.dict[tc][0]))
           .div(baseItemProb)
       ) as ItemRarityProb;
+      // Chance of each set / unique given it rolled set / unique is constant, so just keep the original
       this.dict[tc] = [
         baseItemProb,
         {
@@ -308,12 +316,24 @@ export class BaseItemResultAggregator
             .add(this.dict[key][1].quality[idx].mul(this.dict[key][0]))
             .div(baseItemProb)
         ) as ItemRarityProb;
+        let uniques = this.dict[key][1].uniques;
+        if (
+          key === "cm3" &&
+          this.dict[key][1].uniques.length !== value[1].uniques.length
+        ) {
+          uniques = combineGrandCharmUniques(
+            this.dict[key][0],
+            this.dict[key][1],
+            value[0],
+            value[1]
+          );
+        }
         this.dict[key] = [
           baseItemProb,
           {
             quality: rarityCombined,
             sets: this.dict[key][1].sets,
-            uniques: this.dict[key][1].uniques,
+            uniques,
           },
         ];
       }
@@ -420,6 +440,11 @@ export class BaseItemDistributionAggregator
       this.magicFind,
       qualityRatios
     );
+    if (isSunderCharmTc(tc)) {
+      qualityProbObject.quality[3] = ONE;
+      qualityProbObject.uniques = SUNDER_CHARM_CANDIDATE_UNIQUES;
+      tc = "cm3";
+    }
     if (!this.dict.hasOwnProperty(tc)) {
       this.dict[tc] = [Distribution.Atomic(prob), qualityProbObject];
     } else {
@@ -429,7 +454,7 @@ export class BaseItemDistributionAggregator
         [this.dict[tc][0], ONE],
         [Distribution.Atomic(prob), ONE],
       ]);
-      // But magic / rare / set / unique prob needs to be individually calculated
+      // Magic / rare / set / unique prob needs to be individually calculated
       const rarityCombined = range(4).map((idx) =>
         qualityProbObject.quality[idx]
           .mul(prob)
@@ -440,6 +465,7 @@ export class BaseItemDistributionAggregator
           )
           .div(baseItemDistribution.eval().expectation())
       ) as ItemRarityProb;
+      // Chance of each set / unique given it rolled set / unique is constant, so just keep the original
       this.dict[tc] = [
         baseItemDistribution,
         {
@@ -514,12 +540,24 @@ export class BaseItemDistributionAggregator
             )
             .div(baseItemDistribution.eval().expectation())
         ) as ItemRarityProb;
+        let uniques = this.dict[key][1].uniques;
+        if (
+          key === "cm3" &&
+          this.dict[key][1].uniques.length !== value[1].uniques.length
+        ) {
+          uniques = combineGrandCharmUniques(
+            this.dict[key][0].eval().expectation(),
+            this.dict[key][1],
+            value[0].eval().expectation(),
+            value[1]
+          );
+        }
         this.dict[key] = [
           baseItemDistribution,
           {
             quality: rarityCombined,
             sets: this.dict[key][1].sets,
-            uniques: this.dict[key][1].uniques,
+            uniques: uniques,
           },
         ];
       }
@@ -608,3 +646,34 @@ export class BaseItemDistributionAggregator
     });
   }
 }
+
+const combineGrandCharmUniques = (
+  thisBaseProb: Fraction,
+  thisQPO: QualityProbabilityObject,
+  thatBaseProb: Fraction,
+  thatQPO: QualityProbabilityObject
+): UniqueSetProbTuple[] => {
+  // Assume no overlaps
+  const combinedUniques: UniqueSetProbTuple[] = [
+    ...thisQPO.uniques.map((thisUnique) => {
+      return [
+        thisUnique[0],
+        thisBaseProb.mul(thisQPO.quality[3]).mul(thisUnique[1]),
+      ] as UniqueSetProbTuple;
+    }),
+    ...thatQPO.uniques.map((thatUnique) => {
+      return [
+        thatUnique[0],
+        thatBaseProb.mul(thatQPO.quality[3]).mul(thatUnique[1]),
+      ] as UniqueSetProbTuple;
+    }),
+  ];
+  const normalizationFactor = combinedUniques.reduce(
+    (accum, pair) => accum.add(pair[1]),
+    ZERO
+  );
+  combinedUniques.forEach(
+    (pair) => (pair[1] = pair[1].div(normalizationFactor))
+  );
+  return combinedUniques;
+};

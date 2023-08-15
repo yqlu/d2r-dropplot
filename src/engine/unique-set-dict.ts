@@ -2215,6 +2215,18 @@ export const SetBaseLookup: UniqueSetBaseLookupType = {
   ztb: [{ index: "Wilhelm's Pride", rarity: 7, lvl: 41, code: "ztb" }],
 };
 
-export const isSunderCharm = (item: UniqueSetDictEntry) => {
+export const isSunderCharmDictEntry = (item: UniqueSetDictEntry) => {
   return item.code === "cm3" && item.index !== "Gheed's Fortune";
 };
+
+const SUNDER_CHARM_SET = new Set([
+  "Cold Rupture",
+  "Flame Rift",
+  "Crack of the Heavens",
+  "Rotting Fissure",
+  "Bone Break",
+  "Black Cleft",
+]);
+
+export const isSunderCharmTc = (itemName: string) =>
+  SUNDER_CHARM_SET.has(itemName);

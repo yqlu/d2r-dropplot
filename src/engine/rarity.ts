@@ -15,7 +15,7 @@ import {
   UniqueBaseLookup,
   SetBaseLookup,
   UniqueSetBaseLookupType,
-  isSunderCharm,
+  isSunderCharmDictEntry,
 } from "./unique-set-dict";
 import { KEY_REGEX } from "../charts/common";
 import { ONE } from "./polynomialOps";
@@ -185,7 +185,9 @@ export function findCandidates(
   // For the purposes of item quality, a grand charm drop always has a 0% chance of being a sunder charm
   // Sunder charms are its own treasure class and spawned separately
   if (itemCode === "cm3") {
-    candidates = candidates.filter((candidate) => !isSunderCharm(candidate));
+    candidates = candidates.filter(
+      (candidate) => !isSunderCharmDictEntry(candidate)
+    );
   }
 
   const denom = sum(map(candidates, (candidate) => candidate.rarity));
@@ -257,3 +259,12 @@ export function computeQualityProbs(
     uniques: candidateUniques,
   };
 }
+
+export const SUNDER_CHARM_CANDIDATE_UNIQUES: UniqueSetProbTuple[] = [
+  ["Cold Rupture", new Fraction(30, 101)],
+  ["Flame Rift", new Fraction(30, 101)],
+  ["Crack of the Heavens", new Fraction(20, 101)],
+  ["Rotting Fissure", new Fraction(12, 101)],
+  ["Bone Break", new Fraction(6, 101)],
+  ["Black Cleft", new Fraction(3, 101)],
+];

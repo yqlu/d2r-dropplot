@@ -197,7 +197,9 @@ export const RarityBreakdownChart = ({
               label: (ctx: TooltipItem<"sankey">) => {
                 const item = ctx.dataset.data[ctx.dataIndex];
                 if (setUniqueDisplays[item.to]) {
-                  const fraction = setUniqueDisplays[item.to];
+                  const fraction = (
+                    setUniqueDisplays[item.to] as Fraction
+                  ).simplify(1e-5);
                   return `${labels[item.to]}: ${fraction.n}/${
                     fraction.d
                   } chance if ${item.from} rolled`;

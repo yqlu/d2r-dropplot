@@ -5,9 +5,6 @@ import { ResultAggregator } from "./resultAggregator";
 import { TCDictType, TCObject, ItemQualityRatios, TCDict } from "./tc-dict";
 import { ONE } from "./polynomialOps";
 
-// TODO: handle countess rune rate
-// TODO: handle Duriel drop rate
-
 export type TCLookupFunction = (name: string) => TCObject;
 
 const isCountess = (tcObject: TCObject) => {
@@ -257,9 +254,16 @@ export class TcCalculator<T> {
     cumuProb: Fraction,
     parentAggregator: ResultAggregator<T>
   ): ResultAggregator<T> {
+    // Either there are two child TCs (Item, Rune)
+    // Or there are three child TCs (Sunder Charm, Item, Rune)
+    const countessItemTc =
+      tcObject.tcs.length === 2 ? tcObject.tcs[0] : tcObject.tcs[1];
+    const countessRuneTc =
+      tcObject.tcs.length === 2 ? tcObject.tcs[1] : tcObject.tcs[2];
+
     // First calculate the first TC (Countess Item) normally
     // writing into parentAggregator
-    const itemTc = this.lookupTcFunction(tcObject.tcs[0][0]);
+    const itemTc = this.lookupTcFunction(countessItemTc[0]);
     this._getAtomicTCs(
       itemTc,
       totalPlayers,
@@ -272,7 +276,7 @@ export class TcCalculator<T> {
 
     // Now calculate the second TC (Countess Rune) into runeAggregator
     const runeAggregator = this.aggregatorFactory();
-    const runeTc = this.lookupTcFunction(tcObject.tcs[1][0]);
+    const runeTc = this.lookupTcFunction(countessRuneTc[0]);
     this.getAtomicTCsOnePick(
       runeTc,
       totalPlayers,
@@ -288,6 +292,23 @@ export class TcCalculator<T> {
     const runeDropProb = getTcDropProb(runeTc, totalPlayers, partyCount);
     runeAggregator.adjustCountessRune(itemDropProb, runeDropProb);
     parentAggregator.combineNegativePicks(runeAggregator);
+
+    // If there is a sunder charm TC, aggregate it too
+    if (tcObject.tcs.length === 3) {
+      const sunderCharmAggregator = this.aggregatorFactory();
+      const sunderCharmTc = this.lookupTcFunction(tcObject.tcs[0][0]);
+      this.getAtomicTCsOnePick(
+        sunderCharmTc,
+        totalPlayers,
+        partyCount,
+        filter,
+        cumuProb,
+        tcObject.qualityRatios,
+        sunderCharmAggregator
+      );
+      parentAggregator.combineNegativePicks(sunderCharmAggregator);
+    }
+
     return parentAggregator;
   }
 
