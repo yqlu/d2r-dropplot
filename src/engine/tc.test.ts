@@ -63,23 +63,29 @@ describe("TCDict invariants", () => {
     }
   });
 
-  it("Negative TCs always have zero nodrop and two children", () => {
+  it("Negative TCs always have zero nodrop. Non-desecrated TCs always have two children, TZ TCs can have three.", () => {
     for (var [tcName, tcObject] of Object.entries(TCDict)) {
       if (tcObject.picks < 0) {
         expect(tcObject.nodrop, tcName).to.equal(0);
-        expect(tcObject.tcs.length, tcName).to.equal(2);
+        if (tcObject.tcs.length > 2) {
+          expect(tcObject.tcs.length, tcName).to.equal(3);
+          expect(tcName.indexOf("Desecrated"), tcName).to.greaterThan(-1);
+        }
       }
     }
   });
 
-  it("Countess* are the only <0 pick TCs with variable drops", () => {
+  it("Countess* are the only <0 pick non-TZ TCs with variable drops", () => {
     for (var [tcName, tcObject] of Object.entries(TCDict)) {
       if (tcObject.picks < 0) {
-        // Countess* are the only TCs with negative picks where
+        // Countess* are the only non-TZ TCs with negative picks where
         // - the first TC has a positive number of picks
         // - the first TC has a non-zero nodrop
         // (aka variable number of items can drop from the first TC)
         const firstSubTc = tcObject.tcs[0][0];
+        if (firstSubTc === "Sunder Charms") {
+          continue;
+        }
         if (TCDict[firstSubTc].nodrop > 0) {
           expect(tcName.substring(0, 8), tcName).eql("Countess");
         }
@@ -90,7 +96,7 @@ describe("TCDict invariants", () => {
     }
   });
 
-  it("Countess, Duriel and ROP are only TCs with children with non-zero nodrop", () => {
+  it("Countess, Duriel, ROP and desecrated TZs are only TCs with children with non-zero nodrop", () => {
     for (var [tcName, tcObject] of Object.entries(TCDict)) {
       if (tcObject.nodrop === 0) {
         const subTcs = tcObject.tcs
@@ -98,7 +104,10 @@ describe("TCDict invariants", () => {
           .filter((val) => val);
         for (let subTc of subTcs) {
           if (subTc.nodrop !== 0) {
-            expect(/Countess.*|Duriel*|ROP*/.test(tcName), tcName).to.be.true;
+            expect(
+              /Countess.*|Duriel*|ROP*|.*Desecrated.*/.test(tcName),
+              tcName
+            ).to.be.true;
           }
         }
       }
