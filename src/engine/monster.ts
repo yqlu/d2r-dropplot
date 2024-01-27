@@ -72,13 +72,19 @@ function getStandardTCMlvl(
     return [tc, mlvl];
   }
   // Allow for TC upgrade by mlvl if applicable
-  if (difficulty !== Difficulty.NORMAL && mlvl > TCDict[tc].level) {
+  if (
+    difficulty !== Difficulty.NORMAL &&
+    TCDict[tc].level &&
+    mlvl > TCDict[tc].level
+  ) {
     const tcGroup = TCDict[tc].group;
     if (tcGroup != null && TcGroupDict[tcGroup]) {
       const eligibleKeys = Object.keys(TcGroupDict[tcGroup])
         .map((x) => parseInt(x))
         .filter((x) => x <= mlvl);
-      tc = TcGroupDict[tcGroup][max(eligibleKeys)];
+      if (eligibleKeys.length > 0) {
+        tc = TcGroupDict[tcGroup][max(eligibleKeys)];
+      }
     }
   }
   return [tc, mlvl];
@@ -101,6 +107,7 @@ function getSuperUniqueTCMlvl(
     superuniqueEntry.class
   );
   // Modify both in a TZ
+  let alreadyUpgraded = false;
   if (terrorZone) {
     mlvl = modifyByTerrorZone(
       mlvl,
@@ -112,9 +119,27 @@ function getSuperUniqueTCMlvl(
       tc = superuniqueEntry.tcs[difficulty + 3]!;
       if (tc.endsWith("Desecrated A")) {
         tc = upgradeDesecratedTz(tc, mlvl);
+        alreadyUpgraded = true;
+      }
+    }
+  } // Allow for TC upgrade by mlvl if applicable
+  if (
+    difficulty !== Difficulty.NORMAL &&
+    TCDict[tc].level &&
+    mlvl > TCDict[tc].level &&
+    !alreadyUpgraded
+  ) {
+    const tcGroup = TCDict[tc].group;
+    if (tcGroup != null && TcGroupDict[tcGroup]) {
+      const eligibleKeys = Object.keys(TcGroupDict[tcGroup])
+        .map((x) => parseInt(x))
+        .filter((x) => x <= mlvl);
+      if (eligibleKeys.length > 0) {
+        tc = TcGroupDict[tcGroup][max(eligibleKeys)];
       }
     }
   }
+
   return [tc, mlvl];
 }
 

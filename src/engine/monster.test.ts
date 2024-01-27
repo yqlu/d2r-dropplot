@@ -241,7 +241,7 @@ describe("getTcAndMlvlFromMonster", () => {
       40,
     ]);
     expect(testSuperunique(Difficulty.NIGHTMARE, "Beetleburst")).to.eql([
-      "Act 2 (N) Super B",
+      "Act 3 (N) Super A",
       48,
     ]);
     expect(testSuperunique(Difficulty.NIGHTMARE, "Ismail Vilehand")).to.eql([
@@ -354,11 +354,11 @@ describe("getTcAndMlvlFromMonster", () => {
 
   it("should handle superuniques in hell difficulty", () => {
     expect(testSuperunique(Difficulty.HELL, "Rakanishu")).to.eql([
-      "Act 1 (H) Super B",
+      "Act 2 (H) Super B",
       71,
     ]);
     expect(testSuperunique(Difficulty.HELL, "Beetleburst")).to.eql([
-      "Act 2 (H) Super B",
+      "Act 3 (H) Super C",
       79,
     ]);
     expect(testSuperunique(Difficulty.HELL, "Ismail Vilehand")).to.eql([
@@ -390,7 +390,8 @@ describe("getTcAndMlvlFromMonster", () => {
       difficulty: Difficulty,
       monsterType: MonsterType,
       levelId: number,
-      monster: string
+      monster: string,
+      playerLevel: number = 99
     ) => {
       return getTcAndMlvlFromMonster(
         difficulty,
@@ -400,7 +401,7 @@ describe("getTcAndMlvlFromMonster", () => {
         DEFAULT.superunique,
         DEFAULT.boss,
         true,
-        99
+        playerLevel
       );
     };
 
@@ -493,32 +494,130 @@ describe("getTcAndMlvlFromMonster", () => {
       ).to.not.have.string("Desecrated");
     });
     it("should set the TC of a champion monster in hell", () => {
+      const lowPlayerLevel = 65;
       expect(
-        testTzMonster(Difficulty.HELL, MonsterType.CHAMP, 2, "fallen1")[0]
-      ).to.equal("Act 1 (H) Champ A Desecrated");
-      expect(
-        testTzMonster(Difficulty.HELL, MonsterType.CHAMP, 56, "slinger2")[0]
+        testTzMonster(
+          Difficulty.HELL,
+          MonsterType.CHAMP,
+          2,
+          "fallen1",
+          lowPlayerLevel
+        )[0]
       ).to.equal("Act 2 (H) Champ A Desecrated");
       expect(
-        testTzMonster(Difficulty.HELL, MonsterType.CHAMP, 82, "cantor3")[0]
-      ).to.equal("Act 3 (H) Champ B Desecrated");
+        testTzMonster(
+          Difficulty.HELL,
+          MonsterType.CHAMP,
+          56,
+          "slinger2",
+          lowPlayerLevel
+        )[0]
+      ).to.equal("Act 5 (H) Champ A Desecrated");
       expect(
-        testTzMonster(Difficulty.HELL, MonsterType.CHAMP, 106, "fingermage2")[0]
-      ).to.equal("Act 4 (H) Champ B Desecrated");
+        testTzMonster(
+          Difficulty.HELL,
+          MonsterType.CHAMP,
+          82,
+          "cantor3",
+          lowPlayerLevel
+        )[0]
+      ).to.equal("Act 5 (H) Champ B Desecrated");
       expect(
-        testTzMonster(Difficulty.HELL, MonsterType.CHAMP, 117, "siegebeast2")[0]
+        testTzMonster(
+          Difficulty.HELL,
+          MonsterType.CHAMP,
+          106,
+          "fingermage2",
+          lowPlayerLevel
+        )[0]
+      ).to.equal("Act 5 (H) Champ C Desecrated");
+      expect(
+        testTzMonster(
+          Difficulty.HELL,
+          MonsterType.CHAMP,
+          117,
+          "siegebeast2",
+          lowPlayerLevel
+        )[0]
       ).to.equal("Act 5 (H) Champ B Desecrated");
     });
+    it("should upgrade the TC of a champion monster in hell by player level", () => {
+      // When player level is 99
+      expect(
+        testTzMonster(Difficulty.HELL, MonsterType.CHAMP, 2, "fallen1")[0]
+      ).to.equal("Act 5 (H) Champ C Desecrated");
+      expect(
+        testTzMonster(Difficulty.HELL, MonsterType.CHAMP, 56, "slinger2")[0]
+      ).to.equal("Act 5 (H) Champ C Desecrated");
+      expect(
+        testTzMonster(Difficulty.HELL, MonsterType.CHAMP, 82, "cantor3")[0]
+      ).to.equal("Act 5 (H) Champ C Desecrated");
+      expect(
+        testTzMonster(Difficulty.HELL, MonsterType.CHAMP, 106, "fingermage2")[0]
+      ).to.equal("Act 5 (H) Champ C Desecrated");
+      expect(
+        testTzMonster(Difficulty.HELL, MonsterType.CHAMP, 117, "siegebeast2")[0]
+      ).to.equal("Act 5 (H) Champ C Desecrated");
+    });
     it("should set the TC of a unique monster in hell", () => {
+      const lowPlayerLevel = 65;
       expect(
-        testTzMonster(Difficulty.HELL, MonsterType.UNIQUE, 2, "fallen1")[0]
-      ).to.equal("Act 1 (H) Unique A Desecrated");
-      expect(
-        testTzMonster(Difficulty.HELL, MonsterType.UNIQUE, 56, "slinger2")[0]
+        testTzMonster(
+          Difficulty.HELL,
+          MonsterType.UNIQUE,
+          2,
+          "fallen1",
+          lowPlayerLevel
+        )[0]
       ).to.equal("Act 2 (H) Unique A Desecrated");
       expect(
+        testTzMonster(
+          Difficulty.HELL,
+          MonsterType.UNIQUE,
+          56,
+          "slinger2",
+          lowPlayerLevel
+        )[0]
+      ).to.equal("Act 5 (H) Unique A Desecrated");
+      expect(
+        testTzMonster(
+          Difficulty.HELL,
+          MonsterType.UNIQUE,
+          82,
+          "cantor3",
+          lowPlayerLevel
+        )[0]
+      ).to.equal("Act 5 (H) Unique B Desecrated");
+      expect(
+        testTzMonster(
+          Difficulty.HELL,
+          MonsterType.UNIQUE,
+          106,
+          "fingermage2",
+          lowPlayerLevel
+        )[0]
+      ).to.equal("Act 5 (H) Unique C Desecrated");
+      expect(
+        testTzMonster(
+          Difficulty.HELL,
+          MonsterType.UNIQUE,
+          117,
+          "siegebeast2",
+          lowPlayerLevel
+        )[0]
+      ).to.equal("Act 5 (H) Unique B Desecrated");
+    });
+    it("should upgrade the TC of a unique monster in hell by player level", () => {
+      // When player level is 99
+      expect(
+        testTzMonster(Difficulty.HELL, MonsterType.UNIQUE, 2, "fallen1")[0]
+      ).to.equal("Act 5 (H) Unique C Desecrated");
+      expect(
+        testTzMonster(Difficulty.HELL, MonsterType.UNIQUE, 56, "slinger2")[0]
+      ).to.equal("Act 5 (H) Unique C Desecrated");
+      expect(
         testTzMonster(Difficulty.HELL, MonsterType.UNIQUE, 82, "cantor3")[0]
-      ).to.equal("Act 3 (H) Unique B Desecrated");
+      ).to.equal("Act 5 (H) Unique C Desecrated");
       expect(
         testTzMonster(
           Difficulty.HELL,
@@ -526,7 +625,7 @@ describe("getTcAndMlvlFromMonster", () => {
           106,
           "fingermage2"
         )[0]
-      ).to.equal("Act 4 (H) Unique B Desecrated");
+      ).to.equal("Act 5 (H) Unique C Desecrated");
       expect(
         testTzMonster(
           Difficulty.HELL,
@@ -534,18 +633,21 @@ describe("getTcAndMlvlFromMonster", () => {
           117,
           "siegebeast2"
         )[0]
-      ).to.equal("Act 5 (H) Unique B Desecrated");
+      ).to.equal("Act 5 (H) Unique C Desecrated");
     });
     it("should set the TC of a superunique in any difficulty", () => {
-      expect(testTzSuperunique(Difficulty.NORMAL, "Rakanishu", 99)[0]).to.eql(
-        "Act 1 Super B"
-      );
-      expect(
-        testTzSuperunique(Difficulty.NIGHTMARE, "Rakanishu", 99)[0]
-      ).to.eql("Act 1 (N) Super B");
-      expect(testTzSuperunique(Difficulty.HELL, "Rakanishu", 99)[0]).to.eql(
-        "Act 1 (H) Super B Desecrated"
-      );
+      expect(testTzSuperunique(Difficulty.NORMAL, "Rakanishu", 99)).to.eql([
+        "Act 1 Super B",
+        48,
+      ]);
+      expect(testTzSuperunique(Difficulty.NIGHTMARE, "Rakanishu", 99)).to.eql([
+        "Act 3 (H) Super A",
+        74,
+      ]);
+      expect(testTzSuperunique(Difficulty.HELL, "Rakanishu", 99)).to.eql([
+        "Act 5 (H) Super C Desecrated",
+        99,
+      ]);
     });
     it("should upgrade the TC of a superunique in hell based on playerlvl", () => {
       for (let playerLvl = 70; playerLvl <= 92; playerLvl++) {
@@ -582,108 +684,105 @@ describe("getTcAndMlvlFromMonster", () => {
     });
     it("should upgrade the TC of a boss in any difficulty based on playerlvl", () => {
       for (let playerLvl = 70; playerLvl <= 92; playerLvl++) {
-        const tcResult = testTzBoss(
-          Difficulty.HELL,
-          "andariel",
-          playerLvl
-        )[0];
+        const tcResult = testTzBoss(Difficulty.HELL, "andariel", playerLvl)[0];
         if (playerLvl <= 72) {
-        expect(tcResult).to.equal("Andarielq (H) Desecrated A");
-      } else if (playerLvl <= 75) {
-        expect(tcResult).to.equal("Andarielq (H) Desecrated B");
-      } else if (playerLvl <= 78) {
-        expect(tcResult).to.equal("Andarielq (H) Desecrated C");
-      } else if (playerLvl <= 81) {
-        expect(tcResult).to.equal("Andarielq (H) Desecrated D");
-      } else if (playerLvl <= 84) {
-        expect(tcResult).to.equal("Andarielq (H) Desecrated E");
-      } else if (playerLvl <= 87) {
-        expect(tcResult).to.equal("Andarielq (H) Desecrated F");
-      } else if (playerLvl <= 90) {
-        expect(tcResult).to.equal("Andarielq (H) Desecrated G");
-      } else {
-        expect(tcResult).to.equal("Andarielq (H) Desecrated H");
+          expect(tcResult).to.equal("Andarielq (H) Desecrated A");
+        } else if (playerLvl <= 75) {
+          expect(tcResult).to.equal("Andarielq (H) Desecrated B");
+        } else if (playerLvl <= 78) {
+          expect(tcResult).to.equal("Andarielq (H) Desecrated C");
+        } else if (playerLvl <= 81) {
+          expect(tcResult).to.equal("Andarielq (H) Desecrated D");
+        } else if (playerLvl <= 84) {
+          expect(tcResult).to.equal("Andarielq (H) Desecrated E");
+        } else if (playerLvl <= 87) {
+          expect(tcResult).to.equal("Andarielq (H) Desecrated F");
+        } else if (playerLvl <= 90) {
+          expect(tcResult).to.equal("Andarielq (H) Desecrated G");
+        } else {
+          expect(tcResult).to.equal("Andarielq (H) Desecrated H");
+        }
       }
-    }
+    });
   });
-});
 
-describe("modifyByTerrorZone", () => {
-  it("should modify terror zone mlvls for normal difficulty", () => {
-    expect(
-      modifyByTerrorZone(1, MonsterType.NORMAL, Difficulty.NORMAL, 30)
-    ).to.eql(32);
-    expect(
-      modifyByTerrorZone(1, MonsterType.CHAMP, Difficulty.NORMAL, 30)
-    ).to.eql(34);
-    expect(
-      modifyByTerrorZone(1, MonsterType.UNIQUE, Difficulty.NORMAL, 30)
-    ).to.eql(35);
-  });
-  it("should cap player lvl when calculating terror zone mlvl for normal", () => {
-    expect(
-      modifyByTerrorZone(1, MonsterType.NORMAL, Difficulty.NORMAL, 99)
-    ).to.eql(45);
-    expect(
-      modifyByTerrorZone(1, MonsterType.CHAMP, Difficulty.NORMAL, 99)
-    ).to.eql(47);
-    expect(
-      modifyByTerrorZone(1, MonsterType.UNIQUE, Difficulty.NORMAL, 99)
-    ).to.eql(48);
-  });
-  it("should modify terror zone mlvls for nightmare difficulty", () => {
-    expect(
-      modifyByTerrorZone(1, MonsterType.NORMAL, Difficulty.NIGHTMARE, 60)
-    ).to.eql(62);
-    expect(
-      modifyByTerrorZone(1, MonsterType.CHAMP, Difficulty.NIGHTMARE, 60)
-    ).to.eql(64);
-    expect(
-      modifyByTerrorZone(1, MonsterType.UNIQUE, Difficulty.NIGHTMARE, 60)
-    ).to.eql(65);
-  });
-  it("should cap player lvl when calculating terror zone mlvl for nightmare", () => {
-    expect(
-      modifyByTerrorZone(1, MonsterType.NORMAL, Difficulty.NIGHTMARE, 99)
-    ).to.eql(71);
-    expect(
-      modifyByTerrorZone(1, MonsterType.CHAMP, Difficulty.NIGHTMARE, 99)
-    ).to.eql(73);
-    expect(
-      modifyByTerrorZone(1, MonsterType.UNIQUE, Difficulty.NIGHTMARE, 99)
-    ).to.eql(74);
-  });
-  it("should modify terror zone mlvls for hell difficulty", () => {
-    expect(
-      modifyByTerrorZone(1, MonsterType.NORMAL, Difficulty.HELL, 80)
-    ).to.eql(82);
-    expect(
-      modifyByTerrorZone(1, MonsterType.CHAMP, Difficulty.HELL, 80)
-    ).to.eql(84);
-    expect(
-      modifyByTerrorZone(1, MonsterType.UNIQUE, Difficulty.HELL, 80)
-    ).to.eql(85);
-  });
-  it("should cap player lvl when calculating terror zone mlvl for hell", () => {
-    expect(
-      modifyByTerrorZone(1, MonsterType.NORMAL, Difficulty.HELL, 99)
-    ).to.eql(96);
-    expect(
-      modifyByTerrorZone(1, MonsterType.CHAMP, Difficulty.HELL, 99)
-    ).to.eql(98);
-    expect(
-      modifyByTerrorZone(1, MonsterType.UNIQUE, Difficulty.HELL, 99)
-    ).to.eql(99);
-  });
-  it("should not modify mlvls if exceeding terror zone calculation", () => {
-    expect(
-      modifyByTerrorZone(40, MonsterType.NORMAL, Difficulty.NORMAL, 30)
-    ).to.eql(40);
-    expect(
-      modifyByTerrorZone(40, MonsterType.CHAMP, Difficulty.NORMAL, 30)
-    ).to.eql(40);
-    expect(
-      modifyByTerrorZone(40, MonsterType.UNIQUE, Difficulty.NORMAL, 30)
-    ).to.eql(40);
+  describe("modifyByTerrorZone", () => {
+    it("should modify terror zone mlvls for normal difficulty", () => {
+      expect(
+        modifyByTerrorZone(1, MonsterType.NORMAL, Difficulty.NORMAL, 30)
+      ).to.eql(32);
+      expect(
+        modifyByTerrorZone(1, MonsterType.CHAMP, Difficulty.NORMAL, 30)
+      ).to.eql(34);
+      expect(
+        modifyByTerrorZone(1, MonsterType.UNIQUE, Difficulty.NORMAL, 30)
+      ).to.eql(35);
+    });
+    it("should cap player lvl when calculating terror zone mlvl for normal", () => {
+      expect(
+        modifyByTerrorZone(1, MonsterType.NORMAL, Difficulty.NORMAL, 99)
+      ).to.eql(45);
+      expect(
+        modifyByTerrorZone(1, MonsterType.CHAMP, Difficulty.NORMAL, 99)
+      ).to.eql(47);
+      expect(
+        modifyByTerrorZone(1, MonsterType.UNIQUE, Difficulty.NORMAL, 99)
+      ).to.eql(48);
+    });
+    it("should modify terror zone mlvls for nightmare difficulty", () => {
+      expect(
+        modifyByTerrorZone(1, MonsterType.NORMAL, Difficulty.NIGHTMARE, 60)
+      ).to.eql(62);
+      expect(
+        modifyByTerrorZone(1, MonsterType.CHAMP, Difficulty.NIGHTMARE, 60)
+      ).to.eql(64);
+      expect(
+        modifyByTerrorZone(1, MonsterType.UNIQUE, Difficulty.NIGHTMARE, 60)
+      ).to.eql(65);
+    });
+    it("should cap player lvl when calculating terror zone mlvl for nightmare", () => {
+      expect(
+        modifyByTerrorZone(1, MonsterType.NORMAL, Difficulty.NIGHTMARE, 99)
+      ).to.eql(71);
+      expect(
+        modifyByTerrorZone(1, MonsterType.CHAMP, Difficulty.NIGHTMARE, 99)
+      ).to.eql(73);
+      expect(
+        modifyByTerrorZone(1, MonsterType.UNIQUE, Difficulty.NIGHTMARE, 99)
+      ).to.eql(74);
+    });
+    it("should modify terror zone mlvls for hell difficulty", () => {
+      expect(
+        modifyByTerrorZone(1, MonsterType.NORMAL, Difficulty.HELL, 80)
+      ).to.eql(82);
+      expect(
+        modifyByTerrorZone(1, MonsterType.CHAMP, Difficulty.HELL, 80)
+      ).to.eql(84);
+      expect(
+        modifyByTerrorZone(1, MonsterType.UNIQUE, Difficulty.HELL, 80)
+      ).to.eql(85);
+    });
+    it("should cap player lvl when calculating terror zone mlvl for hell", () => {
+      expect(
+        modifyByTerrorZone(1, MonsterType.NORMAL, Difficulty.HELL, 99)
+      ).to.eql(96);
+      expect(
+        modifyByTerrorZone(1, MonsterType.CHAMP, Difficulty.HELL, 99)
+      ).to.eql(98);
+      expect(
+        modifyByTerrorZone(1, MonsterType.UNIQUE, Difficulty.HELL, 99)
+      ).to.eql(99);
+    });
+    it("should not modify mlvls if exceeding terror zone calculation", () => {
+      expect(
+        modifyByTerrorZone(40, MonsterType.NORMAL, Difficulty.NORMAL, 30)
+      ).to.eql(40);
+      expect(
+        modifyByTerrorZone(40, MonsterType.CHAMP, Difficulty.NORMAL, 30)
+      ).to.eql(40);
+      expect(
+        modifyByTerrorZone(40, MonsterType.UNIQUE, Difficulty.NORMAL, 30)
+      ).to.eql(40);
+    });
   });
 });
