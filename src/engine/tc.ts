@@ -8,11 +8,16 @@ import { ONE } from "./polynomialOps";
 export type TCLookupFunction = (name: string) => TCObject;
 
 const isCountess = (tcObject: TCObject) => {
-  return (
-    tcObject === TCDict["Countess"] ||
-    tcObject === TCDict["Countess (N)"] ||
-    tcObject === TCDict["Countess (H)"]
-  );
+  if (tcObject === null) {
+    return false;
+  }
+  const tcs = tcObject.tcs;
+  // Countess TCs (including terrorized ones, across all difficulties)
+  // always contain 2 or 3 sub TCs, and the final one is "Countess Rune(.+)"
+  if (tcs.length < 2 || tcs.length > 3) {
+    return false;
+  }
+  return tcs[tcs.length - 1][0].startsWith("Countess Rune");
 };
 
 const isDuriel = (tcObject: TCObject) => {
