@@ -12571,7 +12571,7 @@ export const TCDict: TCDictType = {
     qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Sunder Charms", 1],
-      ["Mephisto Item (H) Desecrated A", 1],
+      ["Mephisto Item (H) Desecrated B", 1],
     ],
   },
   "Mephisto (H) Desecrated C": {
@@ -12582,7 +12582,7 @@ export const TCDict: TCDictType = {
     qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Sunder Charms", 1],
-      ["Mephisto Item (H) Desecrated A", 1],
+      ["Mephisto Item (H) Desecrated C", 1],
     ],
   },
   "Mephisto (H) Desecrated D": {
@@ -12593,7 +12593,7 @@ export const TCDict: TCDictType = {
     qualityRatios: [0, 0, 0, 0],
     tcs: [
       ["Sunder Charms", 1],
-      ["Mephisto Item (H) Desecrated A", 1],
+      ["Mephisto Item (H) Desecrated D", 1],
     ],
   },
   "Mephisto (N)": {
